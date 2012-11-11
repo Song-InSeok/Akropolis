@@ -1,0 +1,9 @@
+@CHARSET "UTF-8";
+.navbar form{
+	margin-top: 5px;
+	margin-right: 10px;
+	margin-bottom:0;
+}
+.navbar a img{
+	margin-top:2px;
+}
