@@ -1,43 +1,94 @@
 @CHARSET "UTF-8";
 
-main_topic{
+#main_topic{
+	height:200px;
+	background-color: #aaaaaa;
+}
+
+#debate_border{
+	background-color: #bbbbbb;
+	height: 800px;
 	
 }
 
-debate_border{
-	
+#debate_border_left{
+	background-color: #cccccc;
+	height: 800px;
+	width: 300px;
 }
 
-debate_border_left{
-	
+#debate_border_right{
+	background-color: #dddddd;
+	width: 480px;
+	height: 800px;
 }
 
-debate_border_right{
+#sub_topics{
+	height: 370px;
+	width: 300px;
+}
+#sub_topics>ul{
+	list-style:none;
+}
+#sub_topics>ul>li{
+}
+#similer_topics{
+	height: 370px;
+	width: 300px;
 	
 }
-
-sub_topics{
-	
+#similer_topics>ul{
+	list-style:none;
+}
+#similer_topics>ul>li{
 }
 
-similer_topics{
-	
+#ing_debate{
+	height: 700px;
+}
+#opinions{
+	padding-left: 0px;
+	height: 600px;
+	width: 480px;
+}
+#opinions>ul{
+	margin-left: 0px;
+	padding-left: 0px;
+	list-style: none;
+	float: left;
+}
+#opinions>ul>li{
+	float: left;
+	padding-left:0px;
+	height: 50px;
+	width: 450px;
+}
+#chat_window{
+	background-color: #00aa00;
+	height: 100px;
+	width: 480px;
 }
 
-ing_debate{
-	
-}
-
-chat_window{
-	
-}
-
-.sub_title{
-	
+#sub_title{
+	background-color: #999999;
+	height: 50px;
+	width: 480px;
 }
 .sub_topic{
 	
 }
 .similer_topic{
 	
+}
+.red_opinion{
+	border: 3px #ff0000 solid;
+	margin-left: 20px;
+}
+.blue_opinion{
+	border: 3px #00f solid;
+	margin-left: 10px;
+}
+.mid_opinion{
+	margin-left: 15px;
+	border: 3px #f0f solid;
 }
