@@ -11,4 +11,8 @@
     <decorator name="header" page="header.jsp">
         <pattern>/*</pattern>
     </decorator>
+    
+    <decorator name="mypage" page="mypage.jsp">
+    	<pattern>/mypage/*</pattern>
+    </decorator>
 </decorators>
