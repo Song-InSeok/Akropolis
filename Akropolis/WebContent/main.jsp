@@ -6,74 +6,85 @@
 	<meta charset="UTF-8">
 	<title> Akropolis </title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<script src="http://code.jquery.com/jquery-latest.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src='jquery-1.8.2.min.js'></script>
-	<style type="text/css">
-		#mainLogo{
-			  height: 300px;
-			  background : url('./img/logo2.png') no-repeat left top;
-			  background-size:100% 100%;
-		}
-		#signUpBtn {
-			float : right;
-			margin-top : 200px;
-			margin-right : 20px;
-			width : 350px;
-			height : 70px;
-			background : url('./img/facebook.png') no-repeat left top;
-			background-size:100% 100%;
-		}
-		
-		#signUpBtn:hover{
-			background : url('./img/facebook2.png') no-repeat left top;
-			background-size:100% 100%;
-		}
-		
-		#mainContents{
-			  height: 600px;
-		}
-		#search{
-			margin-left:200px;
-			width: 500px;
-		}
-		.nav li{
-			margin-right:5px;
-		}
-	</style>
+	<link href="css/main.css" rel="stylesheet" type="text/css"> 
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 </head>
 <body>
-	<jsp:include page="share/header.jsp"></jsp:include>
-
 	<div class="container">
 		<div id="mainLogo">
-			<input type="button" id="signUpBtn">
+			<input type="button" id="signUpBtn" onclick="window.open('http://www.facebook.com')">
 		</div>
 		<div id="mainContents">
 			<div id="searchBar">
-			 	<form method="post" action="search.jsp" class="navbar-form">
+			 	<form method="post" action="#" class="navbar-form">
 					<ul class="nav nav-tabs">
-	 					<li class="active">
+	 					<li>
 							 <input type="submit" name="hot" value="Hot" class="btn btn-success">
 						</li>
 						<li>
 							 <input type="submit" name="lately" value="Lately" class="btn btn-success">
 						</li>
 						<li>	
-							 <input type="text" name="serarch" placeholder="Search" class="search-query" id="search">
+							 <input type="text" name="serarch" placeholder="Debate topics" class="search-query span7" id="search">
+							 <button type="submit" class="btn"><i class="icon-search"></i></button>
 						</li>
 					</ul>
 				</form>
 			</div>
 			<div id="searchResult">
-				<div class="content">
+				<ul>
+					<li>
+						<a href="#">topic1</a>
+						<div class="progress">
+							<div class="bar" style="width: 90%;"></div>
+							<div class="bar bar-danger" style="width: 10%;"></div>
+						</div>
+					</li>
+					<li>
+						<a href="#">topic2</a>
+						<div class="progress">
+							<div class="bar" style="width: 50%;"></div>
+							<div class="bar bar-danger" style="width: 50%;"></div>
+						</div>
+					</li>
+					<li>
+						<a href="#">topic3</a>
+						<div class="progress">
+							<div class="bar" style="width: 60%;"></div>
+							<div class="bar bar-danger" style="width: 40%;"></div>
+						</div>
+					</li>
+					<li>
+						<a href="#">topic4</a>
+						<div class="progress">
+							<div class="bar" style="width: 30%;"></div>
+							<div class="bar bar-danger" style="width: 70%;"></div>
+						</div>
+					</li>
+					<li>
+						<a href="#">topic5</a>
+						<div class="progress">
+							<div class="bar" style="width: 45%;"></div>
+							<div class="bar bar-danger" style="width: 55%;"></div>
+						</div>
+					</li>
+					<li>
+						<a href="#">topic6</a>
+						<div class="progress">
+							<div class="bar" style="width: 75%;"></div>
+							<div class="bar bar-danger" style="width: 25%;"></div>
+						</div>
+					</li>
+				</ul>
+				<div class="pagination pagination-centered">
 					<ul>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
+					    <li><a href="#"><i class="icon-chevron-left"></i></a></li>
+					    <li><a href="#">1</a></li>
+					    <li><a href="#">2</a></li>
+					    <li><a href="#">3</a></li>
+					    <li><a href="#">4</a></li>
+					    <li><a href="#">5</a></li>
+				   		<li><a href="#"><i class="icon-chevron-right"></i></a></li>
 					</ul>
 				</div>
 			</div>

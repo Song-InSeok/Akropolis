@@ -1,0 +1,48 @@
+@CHARSET "UTF-8";
+#mainLogo{
+	height: 300px;
+	background : url('/Akropolis/img/logo.png') no-repeat left top;
+	background-size:100% 100%;
+}
+#signUpBtn {
+	float : right;
+	margin-top : 200px;
+	margin-right : 20px;
+	width : 350px;
+	height : 70px;
+	background : url('/Akropolis/img/facebook.png') no-repeat left top;
+	background-size:100% 100%;
+}
+
+#signUpBtn:hover{
+	background : url('/Akropolis/img/facebook2.png') no-repeat left top;
+	background-size:100% 100%;
+}
+
+#mainContents{
+	margin-top: 20px;
+	height: 700px;
+}
+
+#searchBar #search{
+	margin-left:100px;
+}
+.nav li{
+	margin-right:5px;
+}
+#searchResult>ul{
+	list-style:none;
+}
+#searchResult>ul>li{
+	width:350px;
+	height:100px;
+	float:left;
+	margin:20px;
+	padding : 20px;
+	border:1px solid #d7e9f9;
+}
+#searchResult>ul>li>a{
+	line-height:50px;
+	color:black;
+	font-size:20px;
+}
