@@ -5,20 +5,41 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/debate.css" rel="stylesheet">
+<title>Debate Title from DB</title>
 </head>
 <body>
-	<div id="main_topic">
+	<div id="main_topic">asdf
 	</div>
 	
 	<div id="debate_border">
 		<div id="debate_border_left">
-			<div id="sub_topic"></div>
-			<div id="similer_topic"></div>
+			<div id="sub_topics">
+				<ul class="nav nav-list"><li><a href="#">sub topic 1</a></li>
+					<li class="active"><a href="#">sub topic 2</a></li>
+					<li><a href="#">sub topic 3</a></li>
+				</ul>
+			</div>
+			<div id="similer_topics">
+				<ul class="nav nav-list"><li class="active"><a href="#">sim topic 1</a></li>
+					<li><a href="#">sim topic 2</a></li>
+					<li><a href="#">sim topic 3</a></li>
+				</ul>
+			</div>
 		</div>
 		<div id="debate_border_right">
-			<div id="ing_debate"></div>
-			<div id="chat_window"></div>
+			<div id="ing_debate">
+				<div id="sub_title">subtitle get from DB</div>
+				<div id="opinions">
+					<ul>
+						<li class="red_opinion">red opinion</li>
+						<li class="blue_opinion">blue opinion</li>
+						<li class="mid_opinion">mid opinion</li>
+					</ul>
+				</div>
+			</div>
+			<div id="chat_window">chat_window</div>
 		</div>
 	</div>
 
