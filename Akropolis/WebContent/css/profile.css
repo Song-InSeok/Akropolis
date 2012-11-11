@@ -1,0 +1,24 @@
+@CHARSET "UTF-8";
+#profile{
+	float:right;
+	font-size:15px;
+	line-height:25px;
+	margin-bottom:50px;
+}
+#left{
+	float:left;
+	width:200px;
+	height:250px;
+}
+#right{
+	margin-left 10px;
+	width:400px;
+	height:250px;
+}
+span{
+	font-weight:bold;
+	margin-right:10px;
+}
+#bottom{
+	width:600px;
+}
