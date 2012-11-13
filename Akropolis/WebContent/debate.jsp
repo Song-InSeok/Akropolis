@@ -39,7 +39,19 @@
 					</ul>
 				</div>
 			</div>
-			<div id="chat_window">chat_window</div>
+			<div id="chat_window">
+				<div id="chat_top">
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#">blue</a></li>
+						<li><a href="#">red</a></li>
+					</ul></div>
+				<div id="chat_bot">
+					<form class="navbart-form pull-left">
+						<textarea cols="300" rows="1" name="chatarea"></textarea>
+						<button type="submit" class=btn>OK</button>
+					</form>
+				</div>
+			</div>
 		</div>
 	</div>
 

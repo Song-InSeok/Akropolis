@@ -8,19 +8,22 @@
 #debate_border{
 	background-color: #bbbbbb;
 	height: 800px;
-	
+	width: 940px;
+	float: left;
 }
 
 #debate_border_left{
 	background-color: #cccccc;
 	height: 800px;
 	width: 300px;
+	float: left;
 }
 
 #debate_border_right{
 	background-color: #dddddd;
-	width: 480px;
+	width: 640px;
 	height: 800px;
+	float: left;
 }
 
 #sub_topics{
@@ -44,12 +47,14 @@
 }
 
 #ing_debate{
+	width: 940px;
 	height: 700px;
 }
 #opinions{
 	padding-left: 0px;
-	height: 600px;
-	width: 480px;
+	height: 500px;
+	width: 640px;
+
 }
 #opinions>ul{
 	margin-left: 0px;
@@ -61,18 +66,16 @@
 	float: left;
 	padding-left:0px;
 	height: 50px;
-	width: 450px;
 }
 #chat_window{
-	background-color: #00aa00;
 	height: 100px;
-	width: 480px;
+	width: 640px;
 }
 
 #sub_title{
 	background-color: #999999;
 	height: 50px;
-	width: 480px;
+	width: 640px;
 }
 .sub_topic{
 	
@@ -80,15 +83,21 @@
 .similer_topic{
 	
 }
+.opinion{
+	
+}
 .red_opinion{
 	border: 3px #ff0000 solid;
-	margin-left: 20px;
+	margin-left: 14px;
+		width: 620px;
 }
 .blue_opinion{
 	border: 3px #00f solid;
-	margin-left: 10px;
+	margin-left: 0px;
+	width: 620px;
 }
 .mid_opinion{
-	margin-left: 15px;
+	margin-left: 2px;
 	border: 3px #f0f solid;
+	width: 630px;
 }
