@@ -1,1 +1,29 @@
 @CHARSET "UTF-8";
+
+label.name {
+	margin : 4px;
+	display:inline-block;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size:14px;font-weight:normal;line-height:20px;
+}
+
+#contents {
+	margin-left: 3%;
+}
+.order {
+	width : 10px;
+}
+
+#regist{
+	display:block;
+	margin-top : 10px;
+	margin-left:38%;
+}
+
+table {
+	border:0px; border-collapse:collapse; padding:30px; border-spacing:30px;
+}
+th{
+	width : 30px;
+}
+}
