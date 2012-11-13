@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<title> Akropolis </title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link href="css/profile.css" rel="stylesheet" type="text/css"> 
+	<link href="/Akropolis/css/profile.css" rel="stylesheet" type="text/css"> 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 </head>
 <body>
@@ -40,7 +40,6 @@
 			</div>
 		</div>
 	</div>
-	<jsp:include page="share/footer.jsp"></jsp:include>
 </body>
 </html>
 

@@ -1,0 +1,17 @@
+@CHARSET "UTF-8";
+
+#timeline{
+	font-size:15px;
+	line-height:25px;
+	margin-bottom:50px;
+	width:600px;
+}
+
+#timeline>ul{
+	list-style:none;
+}
+#timeline>ul>li{
+	width:500px;
+	padding:20px;
+	border:1px solid #d7e9f9;
+}

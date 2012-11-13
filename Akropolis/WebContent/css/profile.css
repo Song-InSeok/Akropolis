@@ -1,12 +1,10 @@
 @CHARSET "UTF-8";
 #profile{
-	float:right;
 	font-size:15px;
 	line-height:25px;
 	margin-bottom:50px;
 }
 #left{
-	float:left;
 	width:200px;
 	height:250px;
 }
