@@ -60,10 +60,9 @@
 	margin-left: 0px;
 	padding-left: 0px;
 	list-style: none;
-	float: left;
+
 }
 #opinions>ul>li{
-	float: left;
 	padding-left:0px;
 	height: 50px;
 }
@@ -88,16 +87,28 @@
 }
 .red_opinion{
 	border: 3px #ff0000 solid;
-	margin-left: 14px;
-		width: 620px;
+	float: right;
+	margin-right: 2px;
+	max-width: 620px;
+	min-width: 400px;
+	overflow: auto;
 }
 .blue_opinion{
+	float: left;
 	border: 3px #00f solid;
-	margin-left: 0px;
-	width: 620px;
+	margin-left: 2px;
+	min-width: 400px;
+	max-width: 620px;
+	overflow: auto;
 }
 .mid_opinion{
+	float: right;
 	margin-left: 2px;
 	border: 3px #f0f solid;
 	width: 630px;
+}
+.marg_left{
+	margin-left: 10px;
+}
+.submit_btn{
 }

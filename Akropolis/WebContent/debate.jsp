@@ -47,8 +47,8 @@
 					</ul></div>
 				<div id="chat_bot">
 					<form class="navbart-form pull-left">
-						<textarea cols="300" rows="1" name="chatarea"></textarea>
-						<button type="submit" class=btn>OK</button>
+						<textarea class="input-xxlarge marg_left" rows="2" name="chatarea"></textarea>
+						<button type="submit" class="btn btn-primary btn-large submit_btn">OK</button>
 					</form>
 				</div>
 			</div>
