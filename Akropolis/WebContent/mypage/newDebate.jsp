@@ -29,7 +29,7 @@
 	<tr>
 	<!-- 첫셀은 order세줌  -->
 		<th>1</th>
-		<td> Some Text </td>
+		<td> 거북이는 토끼보다 느리다? </td>
 		<td>
 		<button class="btn" onclick="location.href='#'">
 			<img src="/Akropolis/img/penIcon.png" alt="편집">
@@ -39,7 +39,7 @@
 	<tr>
 	<!-- 첫셀은 order세줌  -->
 		<th>2</th>
-		<td> Some Text22 </td>
+		<td> 거북이는 토끼보다 똑똑하다? </td>
 		<td>
 		<button class="btn" onclick="location.href='#'">
 			<img src="/Akropolis/img/penIcon.png" alt="편집">
@@ -54,11 +54,20 @@
 	</tr>
 	</table>
 	<hr>
-	
 </div>
-<pre>	Open :			Close :					
-											OK
-			아직 하는중입니다...</pre>
+<div class="date">
+시작 : <input type="text" name="start" class="short" ><a href="#">
+<img src="/Akropolis/img/calender.PNG" alt="달력"></a>
+</div>
+<div class="date">
+종료 : <input type="text" name="finish" class = "short" ><a href="#">
+<img src="/Akropolis/img/calender.PNG" alt="달력"></a>
+</div>
+		<div id="regist">
+			<a href="#"><button type="submit" class="btn">OK</button></a>
+		</div>
+<pre style="width:60%">	
+		달력,등등	아직 하는중입니다...</pre>
 		<label class="name">참여자초대 :
 		<input type="checkbox"> Yes </label>
 		<div id="regist">
