@@ -21,6 +21,7 @@
 					<li><a href="">참여자 관리</a></li>
 					<li><a href="">지난토론</a></li>
 					<li><a href="">담벼락</a></li>
+					
 				</ul>
 			</div>
 			<div class="vline span1"></div>
