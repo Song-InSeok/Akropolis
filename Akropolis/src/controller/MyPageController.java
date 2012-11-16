@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import bean.BeanTest;
 
 @RootURL("/mypage")
-public class AkroController {
+public class MyPageController {
 	@Mapping(url="/ssss.ap",bean="bean.BeanTest")
 	ModelView deco(HttpServletRequest request,HttpServletResponse response,Object bean){
 		//Model(Bean)
