@@ -7,8 +7,7 @@
 #join,#exit,#user {
 	padding: 10px 10px;
 	display: block;
-	border-style: solid;
-	border: 1;
+	border-bottom: 1px;
 	padding-left: 30px;
 	margin: 5px;
 	height: 220px;
