@@ -27,7 +27,8 @@
 					</div>
 					<div class="PS_inform">
 						<div class="inform">
-							<img src="/Akropolis/WebContent/img/profile.png" title="사진" alt="이미지로드실패">
+							<img src="/Akropolis/WebContent/img/profile.png" title="사진"
+								alt="이미지로드실패">
 							<p>정보들...</p>
 						</div>
 						<div class="decision">
@@ -48,7 +49,8 @@
 					</div>
 					<div class="PS_inform">
 						<div class="inform">
-							<img src="/Akropolis/WebContent/img/profile.png" title="사진" alt="이미지로드실패">
+							<img src="/Akropolis/WebContent/img/profile.png" title="사진"
+								alt="이미지로드실패">
 							<p>정보들...</p>
 						</div>
 						<div class="decision">
@@ -70,7 +72,6 @@
 				</div>
 			</fieldset>
 		</form>
-
 	</div>
 </body>
 </html>
