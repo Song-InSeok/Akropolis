@@ -2,7 +2,7 @@
 <controllers>
 	<control>
 		<control-name>akrocontroller</control-name>
-		<control-class>controller.AkroController</control-class>
+		<control-class>controller.MyPageController</control-class>
 	</control>
 	<control>
 		<control-name>dmdododo</control-name>
