@@ -19,7 +19,7 @@
 				<label class="name">주제 :</label> <input type="text" name="subject">
 				<p>
 					<label class="name">태그 :</label> <input type="text" name="subject">
-				<p>
+				</p>
 				<hr>
 				<label class="name">소주제 :</label>
 				<div id="sub_subject">
@@ -31,8 +31,7 @@
 								<td>거북이는 토끼보다 느리다?</td>
 								<td>
 									<button class="btn" onclick="location.href='#'">
-										<img src="/Akropolis/img/penIcon.png" class="img-rounded "
-											alt="편집">
+										<img src="img/penIcon.png" class="img-rounded " alt="편집">
 									</button>
 								</td>
 							</tr>
@@ -42,7 +41,7 @@
 								<td>거북이는 토끼보다 똑똑하다?</td>
 								<td>
 									<button class="btn" onclick="location.href='#'">
-										<img src="/Akropolis/img/penIcon.png" alt="편집">
+										<img src="img/penIcon.png" alt="편집">
 									</button>
 								</td>
 							</tr>
@@ -58,11 +57,11 @@
 								<td colspan="3">
 									<div class="date">
 										시작 : <input type="text" name="start" class="short"><a
-											href="#"> <img src="/Akropolis/img/calender.PNG" alt="달력"></a>
+											href="#"> <img src="img/calender.PNG" alt="달력"></a>
 									</div>
 									<div class="date">
 										종료 : <input type="text" name="finish" class="short"><a
-											href="#"> <img src="/Akropolis/img/calender.PNG" alt="달력"></a>
+											href="#"> <img src="img/calender.PNG" alt="달력"></a>
 									</div>
 								</td>
 							</tr>
