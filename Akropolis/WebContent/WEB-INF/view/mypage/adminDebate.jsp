@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>new debate</title>
+<title>토론관리</title>
 <link href="/Akropolis/css/admindebate.css" rel="stylesheet"
 	type="text/css">
 </head>
@@ -20,7 +20,7 @@
 					<p id="subject">성형 수술 해도 된다?</p>
 					<br /> <label class="name">태그 :</label>
 					<p>성형, 의학, 외모</p>
-					<a href="#" id="add"><button type="submit" class="btn">
+					<a href="#" id="add"><button type="submit" name="tag" class="btn">
 							<i class="icon-plus"></i>
 						</button></a><br /> <label class="name">소주제 :</label>
 					<div id="sub_subject">
@@ -45,12 +45,12 @@
 
 								<tr>
 									<th>3</th>
-									<td><a href="#">거북이는 발이 3개다</a></td>
+									<td><a href="#">거북이는 발이 3개다?????????</a></td>
 								</tr>
 
 								<tr>
-									<td colspan="2"><hr> <a href="#" id="add"><button
-												type="submit" class="btn">
+									<td colspan="2"><hr><a href="#" id="add"><button
+												type="submit" name="sub_subject" class="btn">
 												<i class="icon-plus"></i>
 											</button></a></td>
 								</tr>

@@ -3,8 +3,8 @@
 label.name {
 	margin : 4px;
 	display:inline-block;
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-size:14px;font-weight:normal;line-height:20px;
+	
+	font-size:14px;font-weight:bold;line-height:20px;
 }
 
 #contents {
@@ -20,7 +20,9 @@ color: red;
 #add {
 	margin-left: 5px;
 }
-
+#sub_subject .btn{
+	width: 200px;
+}
 #finish{
 	display:block;
 	width : 350px;

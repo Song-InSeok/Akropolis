@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>new debate</title>
-<link href="/Akropolis/css/adminPerson.css" rel="stylesheet" type="text/css">
+<link href="/Akropolis/css/adminperson.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div id="container">

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>new debate</title>
+<title>토론열기</title>
 <link href="/Akropolis/css/newdebate.css" rel="stylesheet"
 	type="text/css">
 </head>
@@ -29,7 +29,8 @@
 								<td>거북이는 토끼보다 느리다?</td>
 								<td>
 									<button class="btn" onclick="location.href='#'">
-										<img src="/Akropolis/img/penIcon.png" class="img-rounded " alt="편집">
+										<img src="/Akropolis/img/penIcon.png" class="img-rounded "
+											alt="편집">
 									</button>
 								</td>
 							</tr>
