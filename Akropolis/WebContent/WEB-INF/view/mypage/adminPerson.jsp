@@ -4,12 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>new debate</title>
-<link href="/Akropolis/WebContent/css/bootstrap.min.css"
-	rel="stylesheet">
-<link href="/Akropolis/WebContent/css/adminPerson.css" rel="stylesheet"
+<title>참여자관리</title>
+<link href="/Akropolis/css/adminperson.css" rel="stylesheet"
 	type="text/css">
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 </head>
 <body>
 	<div id="container">
@@ -27,8 +24,7 @@
 					</div>
 					<div class="PS_inform">
 						<div class="inform">
-							<img src="/Akropolis/WebContent/img/profile.png" title="사진"
-								alt="이미지로드실패">
+							<img src="/Akropolis/img/profile.png" title="사진" alt="이미지로드실패">
 							<p>정보들...</p>
 						</div>
 						<div class="decision">
@@ -49,8 +45,7 @@
 					</div>
 					<div class="PS_inform">
 						<div class="inform">
-							<img src="/Akropolis/WebContent/img/profile.png" title="사진"
-								alt="이미지로드실패">
+							<img src="/Akropolis/img/profile.png" title="사진" alt="이미지로드실패">
 							<p>정보들...</p>
 						</div>
 						<div class="decision">

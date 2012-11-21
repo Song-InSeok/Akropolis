@@ -90,7 +90,6 @@
 			</div>
 		</div>
 	</div>
-	<jsp:include page="share/footer.jsp"></jsp:include>
 </body>
 </html>
 

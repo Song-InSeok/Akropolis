@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import bean.BeanTest;
 
+
+
 @RootURL("/mypage")
 public class MyPageController {
 	@Mapping(url="/decotest.ap",bean="bean.BeanTest") //bean 사용 안할시 bean 빼면됨
@@ -16,6 +18,42 @@ public class MyPageController {
 		//Model(Bean)
 		BeanTest bt = (BeanTest)bean; //캐스팅해서 적절히 사용
 		ModelView mv = new ModelView("/mypage/decotest");
+		
+		//request.setAttribute("model",mv); 가 자동으로 등록됨
+		//따라서 꺼낼시에  ((ModelView)request.getAttribute("model")).getModel("id"); 로 꺼낸다
+		mv.setModel("id", "younghak");
+		return mv;
+	}
+	
+	@Mapping(url="/adminDebate.ap",bean="bean.BeanTest") //bean 사용 안할시 bean 빼면됨
+	ModelView adminDebate(HttpServletRequest request,HttpServletResponse response,Object bean){ // bean 사용 안할시 Object bean 빼면됨
+		//Model(Bean)
+		BeanTest bt = (BeanTest)bean; //캐스팅해서 적절히 사용
+		ModelView mv = new ModelView("/mypage/adminDebate");
+		
+		//request.setAttribute("model",mv); 가 자동으로 등록됨
+		//따라서 꺼낼시에  ((ModelView)request.getAttribute("model")).getModel("id"); 로 꺼낸다
+		mv.setModel("id", "younghak");
+		return mv;
+	}
+	
+	@Mapping(url="/adminPerson.ap",bean="bean.BeanTest") //bean 사용 안할시 bean 빼면됨
+	ModelView adminPerson(HttpServletRequest request,HttpServletResponse response,Object bean){ // bean 사용 안할시 Object bean 빼면됨
+		//Model(Bean)
+		BeanTest bt = (BeanTest)bean; //캐스팅해서 적절히 사용
+		ModelView mv = new ModelView("/mypage/adminPerson");
+		
+		//request.setAttribute("model",mv); 가 자동으로 등록됨
+		//따라서 꺼낼시에  ((ModelView)request.getAttribute("model")).getModel("id"); 로 꺼낸다
+		mv.setModel("id", "younghak");
+		return mv;
+	}
+	
+	@Mapping(url="/newDebate.ap",bean="bean.BeanTest") //bean 사용 안할시 bean 빼면됨
+	ModelView newDebate(HttpServletRequest request,HttpServletResponse response,Object bean){ // bean 사용 안할시 Object bean 빼면됨
+		//Model(Bean)
+		BeanTest bt = (BeanTest)bean; //캐스팅해서 적절히 사용
+		ModelView mv = new ModelView("/mypage/newDebate");
 		
 		//request.setAttribute("model",mv); 가 자동으로 등록됨
 		//따라서 꺼낼시에  ((ModelView)request.getAttribute("model")).getModel("id"); 로 꺼낸다
