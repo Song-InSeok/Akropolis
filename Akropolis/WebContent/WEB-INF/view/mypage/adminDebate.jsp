@@ -5,11 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>new debate</title>
-<link href="/Akropolis/WebContent/css/bootstrap.min.css"
-	rel="stylesheet">
-<link href="/Akropolis/WebContent/css/admindebate.css" rel="stylesheet"
+<link href="/Akropolis/css/admindebate.css" rel="stylesheet"
 	type="text/css">
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 </head>
 
 <body>
@@ -41,7 +38,7 @@
 										<div class="date">
 											<input type="text" name="start" class="short"
 												value="12/03/2012"><a href="#"> <img
-												src="img/calender.PNG" alt="달력"></a>
+												src="/Akropolis/img/calender.PNG" alt="달력"></a>
 										</div>
 									</td>
 								</tr>

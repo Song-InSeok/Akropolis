@@ -5,10 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>new debate</title>
-<link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="/Akropolis/css/newdebate.css" rel="stylesheet"
 	type="text/css">
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 </head>
 
 <body>
@@ -31,7 +29,7 @@
 								<td>거북이는 토끼보다 느리다?</td>
 								<td>
 									<button class="btn" onclick="location.href='#'">
-										<img src="img/penIcon.png" class="img-rounded " alt="편집">
+										<img src="/Akropolis/img/penIcon.png" class="img-rounded " alt="편집">
 									</button>
 								</td>
 							</tr>
@@ -41,7 +39,7 @@
 								<td>거북이는 토끼보다 똑똑하다?</td>
 								<td>
 									<button class="btn" onclick="location.href='#'">
-										<img src="img/penIcon.png" alt="편집">
+										<img src="/Akropolis/img/penIcon.png" alt="편집">
 									</button>
 								</td>
 							</tr>
@@ -57,11 +55,11 @@
 								<td colspan="3">
 									<div class="date">
 										시작 : <input type="text" name="start" class="short"><a
-											href="#"> <img src="img/calender.PNG" alt="달력"></a>
+											href="#"> <img src="/Akropolis/img/calender.PNG" alt="달력"></a>
 									</div>
 									<div class="date">
 										종료 : <input type="text" name="finish" class="short"><a
-											href="#"> <img src="img/calender.PNG" alt="달력"></a>
+											href="#"> <img src="/Akropolis/img/calender.PNG" alt="달력"></a>
 									</div>
 								</td>
 							</tr>
