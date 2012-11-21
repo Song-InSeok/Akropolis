@@ -14,7 +14,7 @@
 }
 
 .PS_li {
-	width: 35%;
+	width: 40%;
 	height: 150px;
 	margin: 5px 10px auto;
 	display: inline-block;
@@ -72,10 +72,6 @@
 
 .PS_li ul {
 	list-style: none;
-}
-
-.PS_li li {
-	
 }
 
 .PS_li li a {

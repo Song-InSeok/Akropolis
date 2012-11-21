@@ -4,8 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>new debate</title>
-<link href="/Akropolis/css/adminperson.css" rel="stylesheet" type="text/css">
+<title>참여자관리</title>
+<link href="/Akropolis/css/adminperson.css" rel="stylesheet"
+	type="text/css">
 </head>
 <body>
 	<div id="container">
