@@ -8,8 +8,20 @@
 <link href="/Akropolis/css/profile.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
 $(function() {
+	$("#saveBtn").hide();
+	$("#left>form>textarea").attr("disabled",true);
+	$(".concern").attr("disabled",true);
 	$("#modifyBtn").click(function() {
-		window.alert("Test");
+		$("#modifyBtn").hide();
+		$("#saveBtn").show();
+		$("#left>form>textarea").attr("disabled",false);
+		$(".concern").attr("disabled",false);
+	});
+	$("#saveBtn").click(function() {
+		$("#saveBtn").hide();
+		$("#modifyBtn").show();
+		$("#left>form>textarea").attr("disabled",true);
+		$(".concern").attr("disabled",true);
 	});
 });
 </script>
@@ -18,11 +30,18 @@ $(function() {
 	<div class="container">
 		<div id="profile">
 			<div id="left">
-				<input type="button" class="btn" id="modifyBtn" value="수정">
-				<h1>홍길동</h1>
-				<span>학력</span> 명지대학교 재학<br /> <span>관심사</span> 정치, 과학, 문화 <br />
-				<span>하고 싶은 말</span> <br />
-				<textarea rows="4"></textarea>
+				<form method="POST" action="#">
+					<input type="submit" class="btn" id="saveBtn" value="저장">
+					<input type="button" class="btn" id="modifyBtn" value="수정">
+					<h1>홍길동</h1>
+					<span>학력</span> 명지대학교 재학<br /> 
+					<span>관심사</span>
+					<input type="text" class="concern"> ,
+					<input type="text" class="concern"> ,
+					<input type="text" class="concern"> <br /> 
+					<span>하고 싶은 말</span> <br/>
+					<textarea rows="3" name="memo">재밌는 토론</textarea>
+				</form>
 			</div>
 
 			<div id="right">

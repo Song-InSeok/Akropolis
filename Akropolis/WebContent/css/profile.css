@@ -22,10 +22,16 @@
 	font-weight:bold;
 	margin-right:10px;
 }
+
 #left .btn{
 	float : right;
-	margin: 15px 15px 5px 5px;
+	margin: 15px 10px 5px 5px;
 }
+.concern{
+	width : 70px;
+	margin: 5px;
+}
+
 #right{
 	float : right;
 	width:150px;
