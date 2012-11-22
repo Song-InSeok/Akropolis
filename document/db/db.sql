@@ -43,7 +43,7 @@ CREATE TABLE MainTopic
 	mt_title             VARCHAR(255) NOT NULL,
 	agree                INTEGER NULL DEFAULT 0,
 	disagree             INTEGER NULL DEFAULT 0,
-	TIMESTAMP                 TIMESTAMP NOT NULL DEFAULT now(),
+	date                 TIMESTAMP NOT NULL DEFAULT now(),
 	m_close              CHAR(1) NULL CHECK ( m_close IN ('O', 'C') ),
 	mt_id                INTEGER NOT NULL,
 	e_mail               VARCHAR(50) NOT NULL
