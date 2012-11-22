@@ -20,7 +20,8 @@
 					<p id="subject">성형 수술 해도 된다?</p>
 					<br /> <label class="name">태그 :</label>
 					<p>성형, 의학, 외모</p>
-					<a href="#" id="add"><button type="submit" name="tag" class="btn">
+					<a href="#" id="add"><button type="submit" name="tag"
+							class="btn">
 							<i class="icon-plus"></i>
 						</button></a><br /> <label class="name">소주제 :</label>
 					<div id="sub_subject">
@@ -38,7 +39,8 @@
 										<div class="date">
 											<input type="text" name="start" class="short"
 												value="12/03/2012"><a href="#"> <img
-												src="/Akropolis/img/calender.PNG" alt="달력"></a>
+												src="/Akropolis/img/calender.PNG" alt="달력"></a> <a
+												href="#"> <i class="icon-hdd" id="save"></i></a>
 										</div>
 									</td>
 								</tr>
@@ -49,8 +51,9 @@
 								</tr>
 
 								<tr>
-									<td colspan="2"><hr><a href="#" id="add"><button
-												type="submit" name="sub_subject" class="btn">
+									<td colspan="2"><hr>
+										<a href="#" id="add"><button type="submit"
+												name="sub_subject" class="btn">
 												<i class="icon-plus"></i>
 											</button></a></td>
 								</tr>
