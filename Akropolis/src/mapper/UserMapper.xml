@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.UserMapper">
+  <resultMap type="User" id="userResultMap">
+  	<id column="e_mail" property="email"/>
+  </resultMap>
+  <select id="selectUser" parameterType="String" resultMap="userResultMap">
+    select * from User where e_mail = #{email}
+  </select>
+</mapper>
