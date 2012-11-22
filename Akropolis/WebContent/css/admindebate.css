@@ -60,8 +60,7 @@ th{
 	width: 100px;
 	text-align: center;
 }
-a {
-	color: #000;
+#sub_subject a {
 	text-decoration: none;
 }
 .now{
