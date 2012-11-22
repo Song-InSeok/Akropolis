@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-	<properties resource="database.properties"/>
+	<properties resource="mybatis/config/database.properties"/>
 	<typeAliases>
 		<package name="bean"/>
 	</typeAliases>
@@ -19,6 +19,6 @@
 		</environment>
 	</environments>
 	<mappers>
-		<mapper resource="org/mybatis/example/BlogMapper.xml" />
+		<mapper resource="mapper/UserMapper.xml" />
 	</mappers>
 </configuration>

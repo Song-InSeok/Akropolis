@@ -7,25 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-Test합니다<br/>
-Test합니다<br/>
-Test합니다<br/>
-Test합니다<br/>
-Test합니다<br/>
-Test합니다<br/>
-Test합니다<br/>
-Test합니다<br/>
-Test합니다<br/>
-Test합니다<br/>
-Test합니다<br/>
-Test합니다<br/>
-Test합니다<br/>
-Test합니다<br/>
-Test합니다<br/>
-Test합니다<br/>
-Test합니다<br/>
-Test합니다<br/>
-Test합니다<br/>
-Test합니다<br/>
+${model.user.email }<br/>
+${model.user.say }<br/>
+${model.user.name }<br/>
+${model.user.photo }
 </body>
 </html>

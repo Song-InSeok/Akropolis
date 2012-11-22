@@ -43,8 +43,8 @@ CREATE TABLE MainTopic
 	mt_title             VARCHAR(255) NOT NULL,
 	agree                INTEGER NULL DEFAULT 0,
 	disagree             INTEGER NULL DEFAULT 0,
-	date                 DATE NOT NULL DEFAULT now(),
-	close                CHAR(1) NULL CONSTRAINT O_C CHECK ( close IN ('O', 'C') ),
+	TIMESTAMP                 TIMESTAMP NOT NULL DEFAULT now(),
+	m_close              CHAR(1) NULL CHECK ( m_close IN ('O', 'C') ),
 	mt_id                INTEGER NOT NULL,
 	e_mail               VARCHAR(50) NOT NULL
 );
@@ -73,7 +73,7 @@ CREATE TABLE memo_list
 (
 	memo                 TEXT NULL,
 	e_mail               VARCHAR(50) NOT NULL,
-	o_mail               VARCHAR(50) NOT NULL CONSTRAINT mail_not_equal CHECK ( e_mail != o_mail )
+	o_mail               VARCHAR(50) NOT NULL CHECK ( e_mail != o_mail )
 );
 
 
@@ -86,7 +86,6 @@ ADD PRIMARY KEY (e_mail,o_mail);
 CREATE TABLE Opinion
 (
 	content              TEXT NULL,
-	binary               BLOB NULL,
 	mt_id                INTEGER NOT NULL,
 	sub_id               INTEGER NOT NULL,
 	opinion_id           INTEGER NOT NULL,
@@ -103,11 +102,11 @@ ADD PRIMARY KEY (mt_id,sub_id,opinion_id);
 
 CREATE TABLE Participant
 (
-	request              CHAR(1) NOT NULL CONSTRAINT Y_D CHECK ( request IN ('Y', 'D') ),
+	request              CHAR(1) NOT NULL CHECK ( request IN ('Y', 'D') ),
 	report               INTEGER NULL DEFAULT 0,
 	mt_id                INTEGER NOT NULL,
 	e_mail               VARCHAR(50) NOT NULL,
-	flag                 CHAR(1) NULL CONSTRAINT Y_N_C_NULL CHECK ( flag IN ('Y', 'N', 'C', 'NULL') )
+	flag                 CHAR(1) NULL CHECK ( flag IN ('Y', 'N', 'C', 'NULL') )
 );
 
 
@@ -119,11 +118,11 @@ ADD PRIMARY KEY (mt_id,e_mail);
 
 CREATE TABLE SubTopic
 (
-	sub_title            VARCHAR() NOT NULL,
-	start_time           DATE NULL DEFAULT now(),
-	end_time             DATE NULL CONSTRAINT end_bigger_start CHECK ( end_time > start_time ),
+	sub_title            VARCHAR(255) NOT NULL,
+	start_time           TIMESTAMP NULL DEFAULT now(),
+	end_time             TIMESTAMP NULL CHECK ( end_time > start_time ),
 	sub_id               INTEGER NOT NULL,
-	sub_close            CHAR(1) NULL CONSTRAINT O_C CHECK ( sub_close IN ('O', 'C') ),
+	sub_close            CHAR(1) NULL CHECK ( sub_close IN ('O', 'C') ),
 	mt_id                INTEGER NOT NULL
 );
 

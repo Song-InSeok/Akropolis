@@ -12,7 +12,7 @@ public class MyBatisManager {
 	public static SqlSessionFactory getInstance(){
 		if(sqlMapper == null){
 			try{
-				String resource = "mybatis-config.xml";
+				String resource = "mybatis/config/mybatis-config.xml";
 				Reader reader = Resources.getResourceAsReader(resource);
 				sqlMapper = new SqlSessionFactoryBuilder().build(reader);
 				reader.close();
