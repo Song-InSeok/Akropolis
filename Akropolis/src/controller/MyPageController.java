@@ -24,7 +24,7 @@ public class MyPageController {
 		
 		//Mybatis 사용예제
 		UserDAO dao = new UserDAO();
-		User user = dao.getUser("Leeyounghak@gmail.com");
+		User user = dao.getUser("younghak@gmail.com");
 		mv.setModel("user", user);
 		
 		//request.setAttribute("model",mv); 가 자동으로 등록됨
