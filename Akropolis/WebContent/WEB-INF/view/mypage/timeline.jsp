@@ -4,10 +4,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title> Akropolis </title>
-	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="/Akropolis/css/timeline.css" rel="stylesheet" type="text/css"> 
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 </head>
 <body>
 	<div class="container">

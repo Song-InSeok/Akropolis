@@ -13,6 +13,7 @@ import bean.BeanTest;
 
 @RootURL("/mypage")
 public class MyPageController {
+
 	@Mapping(url="/decotest.ap",bean="bean.BeanTest") //bean 사용 안할시 bean 빼면됨
 	ModelView deco(HttpServletRequest request,HttpServletResponse response,Object bean){ // bean 사용 안할시 Object bean 빼면됨
 		//Model(Bean)
@@ -58,6 +59,19 @@ public class MyPageController {
 		//request.setAttribute("model",mv); 가 자동으로 등록됨
 		//따라서 꺼낼시에  ((ModelView)request.getAttribute("model")).getModel("id"); 로 꺼낸다
 		mv.setModel("id", "younghak");
+		return mv;
+	}
+	
+	@Mapping(url="/profile.ap")
+	ModelView profile(HttpServletRequest request,HttpServletResponse response){
+		//Model(Bean)
+		ModelView mv = new ModelView("/mypage/profile");
+		return mv;
+	}
+	@Mapping(url="/timeline.ap")
+	ModelView timeline(HttpServletRequest request,HttpServletResponse response){
+		//Model(Bean)
+		ModelView mv = new ModelView("/mypage/timeline");
 		return mv;
 	}
 	

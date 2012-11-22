@@ -1,22 +1,53 @@
 @CHARSET "UTF-8";
+
 #profile{
 	font-size:15px;
 	line-height:25px;
 	margin-bottom:50px;
+	width:600px;
 }
+
 #left{
-	width:200px;
-	height:250px;
-}
-#right{
-	margin-left 10px;
+	float:left;
 	width:400px;
 	height:250px;
+	padding:5px 10px;
+	border:1px solid #d7e9f9;
 }
-span{
+#left textarea {
+	width:300px;
+	margin:5px;
+}
+#left span{
 	font-weight:bold;
 	margin-right:10px;
 }
+#left .btn{
+	float : right;
+	margin: 15px 15px 5px 5px;
+}
+#right{
+	float : right;
+	width:150px;
+	height:250px;
+	padding:5px 10px;
+	border:1px solid #d7e9f9;
+}
+
 #bottom{
-	width:600px;
+	margin-top:10px;
+	padding:25px;
+	float:left;
+	width:550px;
+	border:1px solid #d7e9f9;
+}
+
+#bottom span{
+	margin-bottom:10px,5px;
+	font-size:15px;
+	line-height:25px;
+	font-weight:bold;
+}
+#Follower .input-prepend{
+	margin-top:20px;
 }
