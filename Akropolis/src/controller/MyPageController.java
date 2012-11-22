@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bean.BeanTest;
+import bean.User;
+import dao.UserDAO;
 
 
 
@@ -19,6 +21,11 @@ public class MyPageController {
 		//Model(Bean)
 		BeanTest bt = (BeanTest)bean; //캐스팅해서 적절히 사용
 		ModelView mv = new ModelView("/mypage/decotest");
+		
+		//Mybatis 사용예제
+		UserDAO dao = new UserDAO();
+		User user = dao.getUser("younghak@gmail.com");
+		mv.setModel("user", user);
 		
 		//request.setAttribute("model",mv); 가 자동으로 등록됨
 		//따라서 꺼낼시에  ((ModelView)request.getAttribute("model")).getModel("id"); 로 꺼낸다
