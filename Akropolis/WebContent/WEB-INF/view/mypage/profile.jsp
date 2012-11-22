@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,18 +11,18 @@
 	<div class="container">
 		<div id="profile">
 			<div id="left">
-				<button class="btn" onclick="location.href='#'"> 수정</button>
+				<input type="button" class="btn" id="modifyBtn" value="수정">
 				<h1>홍길동</h1>
-				<span>학력</span> 명지대학교 재학<br>
-				<span>관심사</span> 정치, 과학, 문화 <br>
-				<span>하고 싶은 말</span> <br> 
+				<span>학력</span> 명지대학교 재학<br/>
+				<span>관심사</span> 정치, 과학, 문화 <br/>
+				<span>하고 싶은 말</span> <br/> 
 				<textarea rows="4"></textarea>
 			</div>
 			
 			<div id="right">
-				<img src="/Akropolis/img/profile.png" alt="profile photo"><br>
-				<span>참여한 토론</span> 52<br>
-				<span>내가 쓴 글</span> 162 <br>
+				<img src="/Akropolis/img/profile.png" alt="profile photo"><br/><br/>
+				<span>참여한 토론</span> 52<br/>
+				<span>내가 쓴 글</span> 162 <br/>
 			</div>
 
 			<div id="bottom">
@@ -53,4 +54,14 @@
 	</div>
 </body>
 </html>
+<script type="text/javascript">
+
+$(function() {
+	$("#btn1").click(function() {
+		$(this).css("background", "#f12a3sf");
+	});
+});
+</script>
+
+
 

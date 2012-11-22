@@ -33,6 +33,9 @@
 	padding:5px 10px;
 	border:1px solid #d7e9f9;
 }
+#right span{
+	font-weight:bold;
+}
 
 #bottom{
 	margin-top:10px;

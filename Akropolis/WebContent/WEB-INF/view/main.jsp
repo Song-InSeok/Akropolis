@@ -13,7 +13,7 @@
 		</div>
 		<div id="mainContents">
 			<div id="searchBar">
-			 	<form method="post" action="#" class="navbar-form">
+			 	<form method="POST" action="http://localhost:8081/Akropolis/main.ap" class="navbar-form">
 					<ul class="nav nav-tabs">
 	 					<li>
 							 <input type="submit" name="hot" value="Hot" class="btn btn-success">
