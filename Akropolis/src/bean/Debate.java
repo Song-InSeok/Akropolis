@@ -6,7 +6,8 @@ import java.util.ArrayList;
 public class Debate implements Serializable{
 	// subject arraylist
 	private ArrayList<Subject> subs = new ArrayList<Subject>();
-	private int uid; // user id or email i dont know yet
+	private int did;
+	private String user; // Make User Email
 	private String title;
 	private int date;
 	private int agree;
@@ -18,9 +19,9 @@ public class Debate implements Serializable{
 	
 	}
 	public Debate makeDebate(int did,int subNum){
-		//did debate 가져옴
-		//거기에 소주제 채움
-		//그 거시기에 의견 채움
+		//find debate by did
+		//가져온 debate의 소주제 가져옴
+		// 필요한 소주제에 의견채움;
 		return this;
 	}
 	public ArrayList<Subject> getSubs() {
@@ -31,22 +32,12 @@ public class Debate implements Serializable{
 		this.subs = subs;
 	}
 
-	public int getUid() {
-		return uid;
-	}
-
-	public void setUid(int uid) {
-		this.uid = uid;
-	}
-
 	public String getTitle() {
 		return title;
 	}
-
-	public void setTitle(String title) {
+	public void setTitle(String title){
 		this.title = title;
 	}
-
 	public int getDate() {
 		return date;
 	}
@@ -85,5 +76,17 @@ public class Debate implements Serializable{
 
 	public void setCu_sub(int cu_sub) {
 		this.cu_sub = cu_sub;
+	}
+	public int getDid() {
+		return did;
+	}
+	public void setDid(int did) {
+		this.did = did;
+	}
+	public String getUser() {
+		return user;
+	}
+	public void setUser(String user) {
+		this.user = user;
 	}
 }

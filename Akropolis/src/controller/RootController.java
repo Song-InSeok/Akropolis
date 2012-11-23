@@ -24,4 +24,10 @@ public class RootController {
 		ModelView mv = new ModelView("/decotest");
 		return mv;
 	}
+	
+	@Mapping(url="/debate.ap")
+	ModelView debate(HttpServletRequest request,HttpServletResponse response){
+		ModelView mv = new ModelView("/debate");
+		return mv;
+	}
 }
