@@ -26,7 +26,6 @@
 					<li class="${pageId == 'adminPerson'?'activate':'' }"><a href="adminPerson.ap">참여자 관리</a></li>
 					<li class=""><a href="#">지난토론</a></li>
 					<li class="${pageId == 'timeline'?'activate':'' }"><a href="timeline.ap">담벼락</a></li>
-					
 				</ul>
 			</div>
 			<div class="vline span1"></div>

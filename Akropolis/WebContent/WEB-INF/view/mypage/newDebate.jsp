@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="page" content="newDebate" />
 <meta charset="UTF-8">
 <title>토론열기</title>
 <link href="/Akropolis/css/newdebate.css" rel="stylesheet"
