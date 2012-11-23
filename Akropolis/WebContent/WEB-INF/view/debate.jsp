@@ -33,9 +33,24 @@
 				<div id="sub_title">subtitle get from DB</div>
 				<div id="opinions">
 					<ul>
-						<li class="red_opinion">red opinion</li>
-						<li class="blue_opinion">blue opinion</li>
-						<li class="mid_opinion">mid opinion</li>
+						<li class="alert-error red_opinion">red opinion</li>
+						<li class="alert-info blue_opinion">blue opinion</li>
+						<li class="alert-success mid_opinion">mid opinion</li>
+						<li class="alert-error red_opinion">red opinion</li>
+						<li class="alert-info blue_opinion">blue opinion</li>
+						<li class="alert-success mid_opinion">mid opinion</li>
+						<li class="alert-error red_opinion">red opinion</li>
+						<li class="alert-info blue_opinion">blue opinion</li>
+						<li class="alert-success mid_opinion">mid opinion</li>
+						<li class="alert-error red_opinion">red opinion</li>
+						<li class="alert-info blue_opinion">blue opinion</li>
+						<li class="alert-success mid_opinion">mid opinion</li>
+						<li class="alert-error red_opinion">red opinion</li>
+						<li class="alert-info blue_opinion">blue opinion</li>
+						<li class="alert-success mid_opinion">mid opinion</li>
+						<li class="alert-error red_opinion">red opinion</li>
+						<li class="alert-info blue_opinion">blue opinion</li>
+						<li class="alert-success mid_opinion">mid opinion</li>
 					</ul>
 				</div>
 			</div>
