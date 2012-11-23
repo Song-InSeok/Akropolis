@@ -1,10 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	int pageNo = 1; 		// 페이지 설정
+	
+	try {
+		pageNo = Integer.parseInt(request.getParameter("page"));
+	} catch (NumberFormatException ex) {}
+	
+	int numInPage = 6;							// 한페이지에 출력할 아이템 개수
+	int startPos = (pageNo - 1) * numInPage; 	// 몇 번째 아이템 부터 이 페이지에?
+	int numItems, numPages;
+%> 
+
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<link href="/Akropolis/css/main.css" rel="stylesheet" type="text/css"> 
+	<script type="text/javascript">
+		$(function() {
+			$("#searchBar").find("li").eq(0).click(function() {
+				alert("Hot page");
+				<%System.out.println("asdasd");%>
+			});
+			$("#searchBar").find("li").eq(1).click(function() {
+				alert("Lately page");
+			});
+			$("#searchBar").find("li").eq(2).click(function() {
+				alert("Search result page");
+			});
+		});
+	</script>
 </head>
 <body>
 	<div class="container">
@@ -13,20 +39,18 @@
 		</div>
 		<div id="mainContents">
 			<div id="searchBar">
-			 	<form method="POST" action="http://localhost:8081/Akropolis/main.ap" class="navbar-form">
-					<ul class="nav nav-tabs">
-	 					<li>
-							 <input type="submit" name="hot" value="Hot" class="btn btn-success">
-						</li>
-						<li>
-							 <input type="submit" name="lately" value="Lately" class="btn btn-success">
-						</li>
-						<li>	
-							 <input type="text" name="serarch" placeholder="Debate topics" class="search-query span7" id="search">
-							 <button type="submit" class="btn"><i class="icon-search"></i></button>
-						</li>
-					</ul>
-				</form>
+				<ul class="nav nav-tabs">
+	 				<li>
+						<input type="button" name="hot" value="Hot" class="btn btn-success">
+					</li>
+					<li>
+						<input type="button" name="lately" value="Lately" class="btn btn-success">
+					</li>
+					<li>	
+						<input type="text" name="serarch" placeholder="Debate topics" class="search-query span7" id="search">
+						<button type="button" class="btn"><i class="icon-search"></i></button>
+					</li>
+				</ul>
 			</div>
 			<div id="searchResult">
 				<ul>

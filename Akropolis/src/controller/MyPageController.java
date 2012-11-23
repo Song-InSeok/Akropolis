@@ -76,6 +76,13 @@ public class MyPageController {
 		ModelView mv = new ModelView("/mypage/profile");
 		return mv;
 	}
+	
+	@Mapping(url="/profile.ap", method="POST")
+	ModelView profile_post(HttpServletRequest request,HttpServletResponse response){
+		//Model(Bean)
+		ModelView mv = new ModelView("/mypage/profile");
+		return mv;
+	}
 	@Mapping(url="/timeline.ap")
 	ModelView timeline(HttpServletRequest request,HttpServletResponse response){
 		//Model(Bean)
