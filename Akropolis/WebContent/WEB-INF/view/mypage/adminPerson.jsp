@@ -6,7 +6,7 @@
 <meta name="page" content="adminPerson" />
 <meta charset="UTF-8">
 <title>참여자관리</title>
-<link href="/Akropolis/css/adminperson.css" rel="stylesheet"
+<link href="/Akropolis/css/adminPerson.css" rel="stylesheet"
 	type="text/css">
 </head>
 <body>
