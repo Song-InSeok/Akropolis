@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import mapper.UserMapper;
 import mybatis.config.MyBatisManager;
 
@@ -23,5 +25,12 @@ public class UserDAO {
 			session.close();
 		}
 		return user;
+	}
+	
+	public List<User> getUserList(){
+		SqlSession session = sqlSessionFactory.openSession();
+		UserMapper mapper = session.getMapper(UserMapper.class);
+		List<User> list = mapper.selectAllUser();
+		return list;
 	}
 }
