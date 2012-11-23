@@ -7,9 +7,9 @@
   	<id column="e_mail" property="email"/>
   </resultMap>
   <select id="selectUser" parameterType="String" resultMap="userResultMap">
-   select * from user natural join user_education_list natural join education_list where e_mail = #{email}
+   select * from User natural join User_Education_list natural join Education_list where e_mail = #{email}
   </select>
-  <select id="selectUserConcern" resultMap="userResultMap">
-  	select * from user natural join user_education_list natural join education_list where e_mail = #{email}
+  <select id="selectAllUser" resultMap="userResultMap">
+  
   </select>
 </mapper>

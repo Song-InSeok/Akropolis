@@ -75,7 +75,7 @@ public class MyPageController {
 		//Model(Bean)
 		User user = (User)bean;
 		UserDAO dao = new UserDAO();
-		user = dao.getUser("f2dg@asdf");
+		user = dao.getUser("pooingx2@gmail.com");
 		ModelView mv = new ModelView("/mypage/profile");
 		mv.setModel("user", user);
 		return mv;
@@ -88,7 +88,7 @@ public class MyPageController {
 		ModelView mv = new ModelView("/mypage/profile");
 		//Mybatis 사용예제
 		UserDAO dao = new UserDAO();
-		user = dao.getUser("f2dg@asdf");
+		user = dao.getUser("pooingx2@gmail.com");
 		mv.setModel("user", user);						//  ${model.user.name}
 		//request.setAttribute("user", new User());		//  ${user.id}
 		return mv;

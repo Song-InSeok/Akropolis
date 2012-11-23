@@ -10,7 +10,7 @@ public class User {
 	private int honor;
 	private int dishonor;
 	private String education;
-	private List<String> concern;
+	private List<String> interests;
 	
 	public String getEducation() {
 		return education;
@@ -18,11 +18,11 @@ public class User {
 	public void setEducation(String education) {
 		this.education = education;
 	}
-	public List<String> getConcern() {
-		return concern;
+	public List<String> getInterests() {
+		return interests;
 	}
-	public void setConcern(List<String> concern) {
-		this.concern = concern;
+	public void setInterests(List<String> interests) {
+		this.interests = interests;
 	}
 	public String getEmail() {
 		return email;
