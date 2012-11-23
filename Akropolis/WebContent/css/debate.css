@@ -89,16 +89,18 @@
 	border: 3px #ff0000 solid;
 	float: right;
 	margin-right: 2px;
-	max-width: 620px;
-	min-width: 400px;
+	width: 600px;
+	/*max-width: 620px;
+	min-width: 400px;*/
 	overflow: auto;
 }
 .blue_opinion{
 	float: left;
 	border: 3px #00f solid;
 	margin-left: 2px;
-	min-width: 400px;
-	max-width: 620px;
+	width: 600px;
+	/*min-width: 400px;
+	max-width: 620px;*/
 	overflow: auto;
 }
 .mid_opinion{
