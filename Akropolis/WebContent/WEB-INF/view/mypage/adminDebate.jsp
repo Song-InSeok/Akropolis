@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="page" content="adminDebate" />
 <meta charset="UTF-8">
 <title>토론관리</title>
 <link href="/Akropolis/css/admindebate.css" rel="stylesheet"
