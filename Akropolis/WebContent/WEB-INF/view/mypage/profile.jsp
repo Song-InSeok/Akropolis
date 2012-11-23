@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	//String[] concerns = request.getParameterValues("favorites");
-	//String say = request.getParameter("pwd");
-	
 	// test value -> DB에서 값 가져오기
 	String name="홍길동";
 	String school="명지대학교 재학";
@@ -19,6 +16,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<meta name="page" content="profile"/>
 	<link href="/Akropolis/css/profile.css" rel="stylesheet" type="text/css">
 	<script type="text/javascript">
 		$(function() {
