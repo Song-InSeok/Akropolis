@@ -26,7 +26,7 @@ public class MyPageController {
 		UserDAO dao = new UserDAO();
 		User user = dao.getUser("younghak@gmail.com");
 		mv.setModel("user", user);
-		
+		request.setAttribute("user", new User());
 		//request.setAttribute("model",mv); 가 자동으로 등록됨
 		//따라서 꺼낼시에  ((ModelView)request.getAttribute("model")).getModel("id"); 로 꺼낸다
 		mv.setModel("id", "younghak");

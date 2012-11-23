@@ -29,6 +29,7 @@
 #sub_topics{
 	height: 370px;
 	width: 300px;
+	overflow: auto;
 }
 #sub_topics>ul{
 	list-style:none;
@@ -38,7 +39,7 @@
 #similer_topics{
 	height: 370px;
 	width: 300px;
-	
+	overflow: auto;
 }
 #similer_topics>ul{
 	list-style:none;
@@ -47,13 +48,14 @@
 }
 
 #ing_debate{
-	width: 940px;
-	height: 700px;
+	width: 640px;
+	height: 650px;
 }
 #opinions{
 	padding-left: 0px;
-	height: 500px;
+	height: 600px;
 	width: 640px;
+	overflow: auto;
 
 }
 #opinions>ul{
@@ -67,10 +69,13 @@
 	height: 50px;
 }
 #chat_window{
+	height: 150px;
+	width: 640px;
+}
+#chat_bot{
 	height: 100px;
 	width: 640px;
 }
-
 #sub_title{
 	background-color: #999999;
 	height: 50px;
@@ -82,13 +87,10 @@
 .similer_topic{
 	
 }
-.opinion{
-	
-}
+
 .red_opinion{
-	border: 3px #ff0000 solid;
+	/*border: 3px #ff0000 solid;*/
 	float: right;
-	margin-right: 2px;
 	width: 600px;
 	/*max-width: 620px;
 	min-width: 400px;*/
@@ -96,21 +98,47 @@
 }
 .blue_opinion{
 	float: left;
-	border: 3px #00f solid;
-	margin-left: 2px;
+	/*border: 3px #00f solid;*/
 	width: 600px;
 	/*min-width: 400px;
 	max-width: 620px;*/
 	overflow: auto;
 }
+.opinion{
+	width: 530px;
+	padding-left: 10px;
+	text-align: left;	
+}
+.opinion>h1{
+		
+}
+
+.op_prof{
+	width: 70px;
+	min-height: 80px;
+}
+.prof_btn{
+	width: 70px;
+	height: 20px;
+	float: left;
+}
+.prof_mini{
+	width : 70px;
+	height : 0.75em;
+  	background-image: url("../img/prof_none.png");
+  	background-position: 10px 0.1em;
+}
 .mid_opinion{
-	float: right;
-	margin-left: 2px;
-	border: 3px #f0f solid;
-	width: 630px;
+	float: left;
+	/*border: 3px #f0f solid;*/
+	width: 640px;
+	vertical-align: middle;
+	text-align: center;
 }
 .marg_left{
 	margin-left: 10px;
 }
 .submit_btn{
+	margin-top: 1em;
+	margin-left: 0.5em;
 }
