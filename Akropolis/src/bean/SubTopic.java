@@ -3,7 +3,7 @@ package bean;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Subject implements Serializable {
+public class SubTopic implements Serializable {
 	//opinions
 	private ArrayList<Opinion> ops = new ArrayList<Opinion>();
 	private int sid;
@@ -11,7 +11,7 @@ public class Subject implements Serializable {
 	private String startTime;
 	private String endTime;
 	private int cu_op; // current opinion number for get opinion
-	public Subject(){
+	public SubTopic(){
 		
 	}
 	public ArrayList<Opinion> getOps() {
