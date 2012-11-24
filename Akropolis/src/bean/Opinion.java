@@ -3,35 +3,61 @@ package bean;
 import java.io.Serializable;
 
 public class Opinion implements Serializable {
-	private String user; // user id or Email for finding users info
-	private String text; // opinion body
-	private int likeIt;
-	private int report;
+	private int mt_id;
+	private int sub_id;
+	private int opinion_id;
+	private String content;
+	private int honor;
+	private String e_mail;
+	
+	private String request;
+	
 	public Opinion(){
 		
 	}
-	public String getText() {
-		return text;
+
+	public int getMt_id() {
+		return mt_id;
 	}
-	public void setText(String text) {
-		this.text = text;
+	public void setMt_id(int mt_id) {
+		this.mt_id = mt_id;
 	}
-	public int getLikeIt() {
-		return likeIt;
+	public int getSub_id() {
+		return sub_id;
 	}
-	public void setLikeIt(int likeIt) {
-		this.likeIt = likeIt;
+	public void setSub_id(int sub_id) {
+		this.sub_id = sub_id;
 	}
-	public int getReport() {
-		return report;
+	public int getOpinion_id() {
+		return opinion_id;
 	}
-	public void setReport(int report) {
-		this.report = report;
+	public void setOpinion_id(int opinion_id) {
+		this.opinion_id = opinion_id;
 	}
-	public String getUser() {
-		return user;
+	public String getContent() {
+		return content;
 	}
-	public void setUser(String user) {
-		this.user = user;
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public int getHonor() {
+		return honor;
+	}
+	public void setHonor(int honor) {
+		this.honor = honor;
+	}
+	public String getE_mail() {
+		return e_mail;
+	}
+	public void setE_mail(String e_mail) {
+		this.e_mail = e_mail;
+	}
+
+	public String getRequest() {
+		return request;
+	}
+
+	public void setRequest(String request) {
+		this.request = request;
 	}
 }
