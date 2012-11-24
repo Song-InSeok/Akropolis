@@ -15,6 +15,10 @@ import dao.MainTopicDAO;
 import dao.OpinionDAO;
 import dao.SubTopicDAO;
 
+//import dao.MainTopicDAO;
+//import dao.OpinionDAO;
+//import dao.SubTopicDAO;
+
 
 
 @RootURL("/")
@@ -50,8 +54,6 @@ public class RootController {
 		System.out.println(mt.getMt_title());
 		System.out.println(mt.getSubs().size());
 		System.out.println(opinion_list.size());
-		
-		
 		
 		ModelView mv = new ModelView("/debate");
 		return mv;

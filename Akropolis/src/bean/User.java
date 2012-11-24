@@ -1,12 +1,31 @@
 package bean;
 
-public class User {
+import java.io.Serializable;
+import java.util.List;
+
+public class User implements Serializable{
 	private String email;
 	private String name;
 	private String say;
 	private String photo;
 	private int honor;
 	private int dishonor;
+
+	private String education;
+	private List<String> interestList;
+	
+	public String getEducation() {
+		return education;
+	}
+	public void setEducation(String education) {
+		this.education = education;
+	}
+	public List<String> getInterestList() {
+		return interestList;
+	}
+	public void setInterestList(List<String> interestList) {
+		this.interestList = interestList;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -43,5 +62,6 @@ public class User {
 	public void setDishonor(int dishonor) {
 		this.dishonor = dishonor;
 	}
+
 	
 }

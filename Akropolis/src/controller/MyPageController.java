@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+
 import hello.annotation.Mapping;
 import hello.annotation.RootURL;
 import hello.mv.ModelView;
@@ -70,17 +72,30 @@ public class MyPageController {
 		return mv;
 	}
 	
-	@Mapping(url="/profile.ap")
-	ModelView profile(HttpServletRequest request,HttpServletResponse response){
+	@Mapping(url="/profile.ap",bean="bean.User")
+	ModelView profile(HttpServletRequest request,HttpServletResponse response,Object bean){
 		//Model(Bean)
+		User user = (User)bean;
+		UserDAO userDao = new UserDAO();
+		user = userDao.getUser("pooingx2@gmail.com");
+
 		ModelView mv = new ModelView("/mypage/profile");
+		mv.setModel("user", user);
 		return mv;
 	}
 	
-	@Mapping(url="/profile.ap", method="POST")
-	ModelView profile_post(HttpServletRequest request,HttpServletResponse response){
+	@Mapping(url="/profile.ap", bean="bean.User", method="POST")
+	ModelView profile_post(HttpServletRequest request,HttpServletResponse response,Object bean){
 		//Model(Bean)
+		User user = (User)bean;
 		ModelView mv = new ModelView("/mypage/profile");
+		System.out.println(request.getParameter("say"));
+		System.out.println(request.getParameter("interest"));
+		//Mybatis 사용예제
+		UserDAO dao = new UserDAO();
+		user = dao.getUser("pooingx2@gmail.com");
+		mv.setModel("user", user);						//  ${model.user.name}
+		//request.setAttribute("user", new User());		//  ${user.id}
 		return mv;
 	}
 	@Mapping(url="/timeline.ap")
