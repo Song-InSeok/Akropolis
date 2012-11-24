@@ -11,6 +11,10 @@ import dao.MainTopicDAO;
 import dao.OpinionDAO;
 import dao.SubTopicDAO;
 
+//import dao.MainTopicDAO;
+//import dao.OpinionDAO;
+//import dao.SubTopicDAO;
+
 
 
 @RootURL("/")
@@ -36,7 +40,7 @@ public class RootController {
 		OpinionDAO odao = new OpinionDAO();
 		
 		System.out.println(mdao.getMainTopic(2).getMt_title());
-//		System.out.println(sdao.getSubTopics(2).size());
+		System.out.println(sdao.getSubTopics(2).size());
 		System.out.println(odao.getOpinions(2, 2).size());
 		
 		

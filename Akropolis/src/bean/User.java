@@ -10,6 +10,7 @@ public class User implements Serializable{
 	private String photo;
 	private int honor;
 	private int dishonor;
+
 	private String education;
 	private List<String> interestList;
 	

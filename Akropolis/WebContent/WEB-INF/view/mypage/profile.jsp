@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%
 	// test value -> DB에서 값 가져오기
-	String[] interests={"정치","과학","문화"};
 	String photo="/Akropolis/img/profile.png";
 	int debateNum=52;
 	int opinionNum=150;
@@ -41,7 +40,7 @@
 	<div class="container">
 		<div id="profile">
 			<div id="left">
-				<form method="POST">
+				<form method="POST" action="/Akropolis/mypage/profile.ap">
 					<input type="submit" class="btn" id="saveBtn" value="저장">
 					<input type="button" class="btn" id="modifyBtn" value="수정">
 					<h1>${model.user.name}</h1>

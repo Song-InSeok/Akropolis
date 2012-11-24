@@ -19,7 +19,6 @@
   </select>
   
   <select id="selectUserInterest" resultType="String">
-  	<!--  select * from User natural join User_Interest_list natural join Interest_list where e_mail = #{email}; -->
   	select interest, e_mail from User_Interest_list natural join Interest_list 
 	where e_mail = #{email}
   </select>

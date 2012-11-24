@@ -77,11 +77,7 @@ public class MyPageController {
 		//Model(Bean)
 		User user = (User)bean;
 		UserDAO userDao = new UserDAO();
-		user = userDao.getUser("pooingx2@gmail.com");	//유저와 학교를 조인한 테이블
-		
-		System.out.println(user.getInterestList().get(0));
-		System.out.println(user.getInterestList().get(1));
-		System.out.println(user.getInterestList().get(2));
+		user = userDao.getUser("pooingx2@gmail.com");
 
 		ModelView mv = new ModelView("/mypage/profile");
 		mv.setModel("user", user);
@@ -93,6 +89,8 @@ public class MyPageController {
 		//Model(Bean)
 		User user = (User)bean;
 		ModelView mv = new ModelView("/mypage/profile");
+		System.out.println(request.getParameter("say"));
+		System.out.println(request.getParameter("interest"));
 		//Mybatis 사용예제
 		UserDAO dao = new UserDAO();
 		user = dao.getUser("pooingx2@gmail.com");
