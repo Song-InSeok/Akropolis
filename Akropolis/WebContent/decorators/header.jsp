@@ -24,7 +24,7 @@
 				<c:url value="https://www.facebook.com/dialog/oauth" var="login_url" scope="request">
 					<c:param name="client_id">${initParam.appID}</c:param>
 					<c:param name="redirect_uri">${initParam.callback }</c:param>
-					<c:param name="state">user_education_history</c:param>
+					<c:param name="scope">user_education_history</c:param>
 				</c:url>
 				<a href="${login_url }" class="pull-right"><img src="/Akropolis/img/facebook-logo.png" alt="Facebook" /></a>
 				<form action="" method="post" class="form-search nav-search pull-right">
