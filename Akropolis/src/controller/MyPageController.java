@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+
 import hello.annotation.Mapping;
 import hello.annotation.RootURL;
 import hello.mv.ModelView;
@@ -74,8 +76,13 @@ public class MyPageController {
 	ModelView profile(HttpServletRequest request,HttpServletResponse response,Object bean){
 		//Model(Bean)
 		User user = (User)bean;
-		UserDAO dao = new UserDAO();
-		user = dao.getUser("pooingx2@gmail.com");
+		UserDAO userDao = new UserDAO();
+		user = userDao.getUser("pooingx2@gmail.com");	//유저와 학교를 조인한 테이블
+		
+		System.out.println(user.getInterestList().get(0));
+		System.out.println(user.getInterestList().get(1));
+		System.out.println(user.getInterestList().get(2));
+
 		ModelView mv = new ModelView("/mypage/profile");
 		mv.setModel("user", user);
 		return mv;

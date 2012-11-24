@@ -1,8 +1,9 @@
 package bean;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class User {
+public class User implements Serializable{
 	private String email;
 	private String name;
 	private String say;
@@ -10,7 +11,7 @@ public class User {
 	private int honor;
 	private int dishonor;
 	private String education;
-	private List<String> interests;
+	private List<String> interestList;
 	
 	public String getEducation() {
 		return education;
@@ -18,11 +19,11 @@ public class User {
 	public void setEducation(String education) {
 		this.education = education;
 	}
-	public List<String> getInterests() {
-		return interests;
+	public List<String> getInterestList() {
+		return interestList;
 	}
-	public void setInterests(List<String> interests) {
-		this.interests = interests;
+	public void setInterestList(List<String> interestList) {
+		this.interestList = interestList;
 	}
 	public String getEmail() {
 		return email;
@@ -60,5 +61,6 @@ public class User {
 	public void setDishonor(int dishonor) {
 		this.dishonor = dishonor;
 	}
+
 	
 }

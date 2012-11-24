@@ -15,6 +15,9 @@
 	<link href="/Akropolis/css/profile.css" rel="stylesheet" type="text/css">
 	<script type="text/javascript">
 		$(function() {
+			$("#left").find(".concern").eq(0).val("${model.user.interestList.get(0)}");
+			$("#left").find(".concern").eq(1).val("${model.user.interestList.get(1)}");
+			$("#left").find(".concern").eq(2).val("${model.user.interestList.get(2)}");
 			$("#saveBtn").hide();
 			$("#left>form>textarea").attr("disabled",true);
 			$(".concern").attr("disabled",true);
@@ -44,9 +47,9 @@
 					<h1>${model.user.name}</h1>
 					<span>학력</span> ${model.user.education}<br /> 
 					<span>관심사</span>
-					<input type="text" name="interest" class="concern" value=<%=interests[0]%>> ,
-					<input type="text" name="interest" class="concern" value=<%=interests[1]%>> ,
-					<input type="text" name="interest" class="concern" value=<%=interests[2]%>> <br /> 
+					<input type="text" name="interest" class="concern"> ,
+					<input type="text" name="interest" class="concern"> ,
+					<input type="text" name="interest" class="concern"> <br /> 
 					<span>하고 싶은 말</span> <br/>
 					<textarea rows="3" name="say">${model.user.say}</textarea>
 				</form>

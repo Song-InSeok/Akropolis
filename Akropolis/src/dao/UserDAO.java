@@ -26,7 +26,6 @@ public class UserDAO {
 		}
 		return user;
 	}
-	
 	public List<User> getUserList(){
 		SqlSession session = sqlSessionFactory.openSession();
 		UserMapper mapper = session.getMapper(UserMapper.class);
