@@ -16,7 +16,6 @@ public class SubTopicDAO {
 
 	public List<SubTopic> getSubTopics(int mt_id){
 		SqlSession session = sqlSessionFactory.openSession();
-		MainTopic main = null;
 		List<SubTopic> list = null;
 		try{
 			SubTopicMapper mapper = session.getMapper(SubTopicMapper.class);

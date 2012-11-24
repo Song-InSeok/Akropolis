@@ -21,7 +21,7 @@
 	<mappers>
 		<mapper resource="mapper/UserMapper.xml" />
 		<mapper resource="mapper/MainTopicMapper.xml"/>
-		<mapper resource="mapper/SubTopicMapper.xml"/>
 		<mapper resource="mapper/OpinionMapper.xml"/>
+		<mapper resource="mapper/SubTopicMapper.xml"/>
 	</mappers>
 </configuration>
