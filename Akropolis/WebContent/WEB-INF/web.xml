@@ -1,6 +1,25 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
 
-<web-app xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+	<welcome-file-list>
+		<welcome-file>main.ap</welcome-file>
+	</welcome-file-list>
+	
+	
+	<context-param>
+		<param-name>appID</param-name>
+		<param-value>300000683435344</param-value>
+	</context-param>
+	<context-param>
+		<param-name>appSecret</param-name>
+		<param-value>9f3316ad5903d5caaabcea39a432c26f</param-value>
+	</context-param>
+	<context-param>
+		<param-name>callback</param-name>
+		<param-value>http://younghak.iptime.org:8080/Akropolis/main.ap</param-value>
+	</context-param>
+	
 	<filter>
 		<filter-name>sitemesh</filter-name>
 		<filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter</filter-class>
