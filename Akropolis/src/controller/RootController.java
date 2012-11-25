@@ -7,8 +7,14 @@ import hello.mv.ModelView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+<<<<<<< HEAD
 import bean.DebateManager;
 import bean.User;
+=======
+import bean.FaceBook;
+import bean.MainTopic;
+import bean.Opinion;
+>>>>>>> cab23c714f8c7db312b3a42ccd7fa24922a4bf57
 import dao.MainTopicDAO;
 import dao.OpinionDAO;
 import dao.SubTopicDAO;
@@ -27,6 +33,13 @@ public class RootController {
 	ModelView main(HttpServletRequest request,HttpServletResponse response){
 		//Model(Bean)
 		ModelView mv = new ModelView("/main");
+		return mv;
+	}
+	
+	@Mapping(url="/login.ap",bean="bean.FaceBook")
+	ModelView login(HttpServletRequest request,HttpServletResponse response,Object bean){
+		ModelView mv = new ModelView("/main");
+		FaceBook fb = (FaceBook)bean;
 		return mv;
 	}
 	
