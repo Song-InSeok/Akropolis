@@ -17,7 +17,7 @@
 	</context-param>
 	<context-param>
 		<param-name>callback</param-name>
-		<param-value>http://younghak.iptime.org:8080/Akropolis/main.ap</param-value>
+		<param-value>http://www.alsquare.com:8080/Akropolis/login.ap</param-value>
 	</context-param>
 	
 	<filter>

@@ -9,6 +9,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.FaceBook;
 import bean.MainTopic;
 import bean.Opinion;
 import dao.MainTopicDAO;
@@ -28,6 +29,13 @@ public class RootController {
 	ModelView main(HttpServletRequest request,HttpServletResponse response){
 		//Model(Bean)
 		ModelView mv = new ModelView("/main");
+		return mv;
+	}
+	
+	@Mapping(url="/login.ap",bean="bean.FaceBook")
+	ModelView login(HttpServletRequest request,HttpServletResponse response,Object bean){
+		ModelView mv = new ModelView("/main");
+		FaceBook fb = (FaceBook)bean;
 		return mv;
 	}
 	
