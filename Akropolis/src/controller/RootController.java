@@ -63,12 +63,9 @@ public class RootController {
 		mt_id=st_id=0;
 		
 		try{
-
 			if(request.getParameter("mt")!=null) 	mt_id = Integer.parseInt(request.getParameter("mt"));
 			if(request.getParameter("st")!=null) st_id = Integer.parseInt(request.getParameter("st"));
-
 			loginUser = (User)request.getSession().getAttribute("user");
-
 			System.out.println(mt_id+" "+st_id+" "+loginUser);
 			
 			if(mt_id==0){
@@ -87,12 +84,6 @@ public class RootController {
 				st_id=dm.getStList().size();
 			}
 			dm.setOpList(odao.getOpinions(mt_id, st_id));
-//			MainTopic mt = mdao.getMainTopic(mt_id);
-//			mt.setSubs(sdao.getSubTopics(mt_id));
-//			List<Opinion> opinion_list = odao.getOpinions(mt_id, st_id);
-			//System.out.println(mdao.getMainTopic(2).getMt_title());
-			//System.out.println(sdao.getSubTopics(2));
-			//System.out.println(odao.getOpinions(2, 2).size());			
 			System.out.println(dm.getMt().getMt_title());
 			System.out.println(dm.getStList().size());
 			System.out.println(dm.getOpList().size());
