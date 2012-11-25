@@ -6,4 +6,5 @@ import bean.User;
 public interface UserMapper {
 	User selectUser(String email);
 	List<User> selectAllUser();
+	int getUsersDebate(String email);
 }
