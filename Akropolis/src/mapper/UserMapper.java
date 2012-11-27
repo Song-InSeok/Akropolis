@@ -5,5 +5,6 @@ import bean.User;
 
 public interface UserMapper {
 	User selectUser(String email);
+	void updateUser(User user);
 	List<User> selectAllUser();
 }

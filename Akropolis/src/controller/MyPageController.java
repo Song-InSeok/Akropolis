@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bean.BeanTest;
+import bean.Interest;
 import bean.User;
+import dao.InterestDAO;
 import dao.UserDAO;
 
 
@@ -79,37 +81,40 @@ public class MyPageController {
 		User user = (User)bean;
 		UserDAO userDao = new UserDAO();
 		user = userDao.getUser("pooingx2@gmail.com");
-
+		
+		InterestDAO interestDao = new InterestDAO();
+		List<Interest> list = interestDao.getInterestList();
+		
 		ModelView mv = new ModelView("/mypage/profile");
+		mv.setModel("interestList", list);
 		mv.setModel("user", user);
 		return mv;
 	}
 	
 	@Mapping(url="/profile.ap", bean="bean.User", method="POST")
 	ModelView profile_post(HttpServletRequest request,HttpServletResponse response,Object bean){
-
-		User user = (User)bean;
-		UserDAO dao = new UserDAO();
-		
-		String say = request.getParameter("say");
 		List<String> interestList;
+		String say;
 		
 		interestList = new ArrayList<String>();
-		interestList.add(request.getParameter("interest[0]"));
-		interestList.add(request.getParameter("interest[1]"));
-		interestList.add(request.getParameter("interest[2]"));
-
-		System.out.println(say);
-		System.out.println(interestList.get(0));
-		System.out.println(interestList.get(1));
-		System.out.println(interestList.get(2));
+		interestList.add(request.getParameter("interest1"));
+		interestList.add(request.getParameter("interest2"));
+		interestList.add(request.getParameter("interest3"));
+		say=request.getParameter("say");
 		
-		// 해당 유저 디비 변경 (say, interest)
-//		setUser("pooingx2@gmail.com",say,interestList);
-		
-		user = dao.getUser("pooingx2@gmail.com");
+		User user = (User)bean;
+		UserDAO userDao = new UserDAO();
+		user = userDao.getUser("pooingx2@gmail.com");
+		user.setInterestList(interestList);
+		user.setSay(say);
+		userDao.SetUser(user);
 
+		InterestDAO interestDao = new InterestDAO();
+		List<Interest> list = interestDao.getInterestList();
+		
 		ModelView mv = new ModelView("/mypage/profile");
+		
+		mv.setModel("interestList", list);
 		mv.setModel("user", user);
 		
 		return mv;

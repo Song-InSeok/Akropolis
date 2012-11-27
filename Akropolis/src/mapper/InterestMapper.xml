@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.InterestMapper">
+
+	<resultMap type="Interest" id="interestResultMap">
+		<id column="interest_id" property="id" />
+	</resultMap>
+	
+	<select id="selectAll" resultMap="interestResultMap">
+		select * from Interest_list
+	</select>
+</mapper>

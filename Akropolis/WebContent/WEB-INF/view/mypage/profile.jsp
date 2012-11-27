@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	// test value -> DB에서 값 가져오기
 	String photo="/Akropolis/img/profile.png";
@@ -39,11 +40,29 @@
 					<input type="button" class="btn" id="modifyBtn" value="수정">
 					<h1>${model.user.name}</h1>
 					<span>( ${model.user.email} )</span><br /> 
-					<span>학력</span> ${model.user.education}<br /> 
+					<span>학력</span> ${model.user.education} <br /> 
 					<span>관심사</span>
-					<input type="text" name="interest[0]" class="concern"> ,
-					<input type="text" name="interest[1]" class="concern"> ,
-					<input type="text" name="interest[2]" class="concern"> <br /> 
+					<select name="interest1" class="concern span3">
+						<c:forEach var="interest" items="${model.interestList}">
+							<option>
+								${interest.interest}
+							</option>
+						</c:forEach>
+					</select> ,
+					<select name="interest2" class="concern span3">
+						<c:forEach var="interest" items="${model.interestList}">
+							<option>
+								${interest.interest}
+							</option>
+						</c:forEach>
+					</select> ,
+					<select name="interest3" class="concern span3">
+						<c:forEach var="interest" items="${model.interestList}">
+							<option>
+								${interest.interest}
+							</option>
+						</c:forEach>
+					</select> <br /> 
 					<span>하고 싶은 말</span> <br/>
 					<textarea rows="2" name="say">${model.user.say}</textarea>
 				</form>

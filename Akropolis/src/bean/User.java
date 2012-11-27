@@ -14,6 +14,7 @@ public class User implements Serializable{
 	private String education;
 	private List<String> interestList;
 	
+	public User(){}
 	public String getEducation() {
 		return education;
 	}
