@@ -20,12 +20,12 @@
 		<div class="row-fluid">
 			<div id="leftMenu" class="span2">
 				<ul class="nav nav-list well">
-					<li class="${pageId == 'profile'?'activate':'' }"><a href="profile.ap">프로필</a></li>
+					<li class="${pageId == 'profile'?'active':'' }"><a href="profile.ap">프로필</a></li>
 					<li class=""><a href="#">참여중인 토론</a></li>
-					<li class="${pageId == 'adminDebate'?'activate':'' }"><a href="adminDebate.ap">주제 관리</a></li>
-					<li class="${pageId == 'adminPerson'?'activate':'' }"><a href="adminPerson.ap">참여자 관리</a></li>
+					<li class="${pageId == 'adminDebate'?'active':'' }"><a href="adminDebate.ap">주제 관리</a></li>
+					<li class="${pageId == 'adminPerson'?'active':'' }"><a href="adminPerson.ap">참여자 관리</a></li>
 					<li class=""><a href="#">지난토론</a></li>
-					<li class="${pageId == 'timeline'?'activate':'' }"><a href="timeline.ap">담벼락</a></li>
+					<li class="${pageId == 'timeline'?'active':'' }"><a href="timeline.ap">담벼락</a></li>
 				</ul>
 			</div>
 			<div class="vline span1"></div>

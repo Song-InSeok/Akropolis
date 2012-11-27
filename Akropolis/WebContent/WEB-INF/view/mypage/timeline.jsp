@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<meta name="page" content="profile"/>
+	<meta name="page" content="timeline"/>
 	<link href="/Akropolis/css/timeline.css" rel="stylesheet" type="text/css"> 
 </head>
 <body>

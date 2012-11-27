@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator" %>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/page" prefix="page" %>
+<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +21,12 @@
 					<li><a href="/Akropolis/mypage/profile.ap">My Page</a></li>
 					<li><a href="#">About</a></li>
 				</ul>
-				<a href="#" class="pull-right"><img src="/Akropolis/img/facebook-logo.png" alt="Facebook" /></a>
+				<c:url value="https://www.facebook.com/dialog/oauth" var="login_url" scope="request">
+					<c:param name="client_id">${initParam.appID}</c:param>
+					<c:param name="redirect_uri">${initParam.callback }</c:param>
+					<c:param name="scope">user_education_history</c:param>
+				</c:url>
+				<a href="${login_url }" class="pull-right"><img src="/Akropolis/img/facebook-logo.png" alt="Facebook" /></a>
 				<form action="" method="post" class="form-search nav-search pull-right">
 					<div class="input-prepend">
 						<button type="submit" class="btn"><i class="icon-search"></i></button>

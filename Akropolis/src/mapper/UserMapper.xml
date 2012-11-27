@@ -23,6 +23,7 @@
 		select * from User
 	</select>
 
+<<<<<<< HEAD
 	<update id="updateUser" parameterType="bean.User">
 		update User set
 		e_mail = #{email},
@@ -34,4 +35,17 @@
 		where e_mail = #{email}
 	</update>
 
+=======
+ <select id="selectAllUser" resultMap="userResultMap">
+  	select * from User
+  </select>
+  
+  <select id="selectUserInterest" resultType="String">
+  	select interest, e_mail from User_Interest_list natural join Interest_list 
+	where e_mail = #{email}
+  </select>
+  <select id="getUsersDebate" resultType="int">
+	select MainTopic.mt_id from MainTopic join User on User.e_mail = MainTopic.e_mail where MainTopic.m_close = "n" and MainTopic.e_mail = #{e_mail}
+  </select>
+>>>>>>> ba0c5b55b65402c4ad37d8d13579217033e7a321
 </mapper>

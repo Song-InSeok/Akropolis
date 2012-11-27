@@ -26,6 +26,7 @@ public class UserDAO {
 		}
 		return user;
 	}
+<<<<<<< HEAD
 	public void SetUser(User user) {
 		SqlSession session = sqlSessionFactory.openSession();
 		try{
@@ -38,6 +39,21 @@ public class UserDAO {
 		}finally{
 			session.close();
 		}
+=======
+	public int getUsersDebate(String email){
+		int ret = 0;
+		SqlSession session = sqlSessionFactory.openSession();
+		try{
+			UserMapper mapper = session.getMapper(UserMapper.class);
+			ret = mapper.getUsersDebate(email);
+		}catch(Exception e){
+			e.printStackTrace();
+			ret = 0;
+		}finally{
+			session.close();
+		}
+		return ret;
+>>>>>>> ba0c5b55b65402c4ad37d8d13579217033e7a321
 	}
 	public List<User> getUserList(){
 		SqlSession session = sqlSessionFactory.openSession();

@@ -21,8 +21,11 @@
 	<mappers>
 		<mapper resource="mapper/UserMapper.xml" />
 		<mapper resource="mapper/MainTopicMapper.xml"/>
-		<mapper resource="mapper/SubTopicMapper.xml"/>
 		<mapper resource="mapper/OpinionMapper.xml"/>
+<<<<<<< HEAD
 		<mapper resource="mapper/InterestMapper.xml"/>
+=======
+		<mapper resource="mapper/SubTopicMapper.xml"/>
+>>>>>>> ba0c5b55b65402c4ad37d8d13579217033e7a321
 	</mappers>
 </configuration>
