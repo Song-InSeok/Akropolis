@@ -12,6 +12,12 @@ public class FaceBook {
 	private String state;
 	private String accessToken;
 	private String expires;
+	public boolean isLogin(){
+		if(this.code != null || this.accessToken != null){
+			return true;
+		}
+		return false;
+	}
 	public String getCode() {
 		return code;
 	}
