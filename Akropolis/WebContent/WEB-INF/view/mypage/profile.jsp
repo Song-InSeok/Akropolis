@@ -27,12 +27,6 @@
 				$("#left>form>textarea").attr("disabled",false);
 				$(".concern").attr("disabled",false);
 			});
-			$("#saveBtn").click(function() {
-				$("#saveBtn").hide();
-				$("#modifyBtn").show();
-				$("#left>form>textarea").attr("disabled",true);
-				$(".concern").attr("disabled",true);
-			});
 		});
 	</script>
 </head>
@@ -40,17 +34,18 @@
 	<div class="container">
 		<div id="profile">
 			<div id="left">
-				<form method="POST" action="/Akropolis/mypage/profile.ap">
+				<form method="POST">
 					<input type="submit" class="btn" id="saveBtn" value="저장">
 					<input type="button" class="btn" id="modifyBtn" value="수정">
 					<h1>${model.user.name}</h1>
+					<span>( ${model.user.email} )</span><br /> 
 					<span>학력</span> ${model.user.education}<br /> 
 					<span>관심사</span>
-					<input type="text" name="interest" class="concern"> ,
-					<input type="text" name="interest" class="concern"> ,
-					<input type="text" name="interest" class="concern"> <br /> 
+					<input type="text" name="interest[0]" class="concern"> ,
+					<input type="text" name="interest[1]" class="concern"> ,
+					<input type="text" name="interest[2]" class="concern"> <br /> 
 					<span>하고 싶은 말</span> <br/>
-					<textarea rows="3" name="say">${model.user.say}</textarea>
+					<textarea rows="2" name="say">${model.user.say}</textarea>
 				</form>
 			</div>
 

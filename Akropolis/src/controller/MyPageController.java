@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import hello.annotation.Mapping;
@@ -74,7 +75,7 @@ public class MyPageController {
 	
 	@Mapping(url="/profile.ap",bean="bean.User")
 	ModelView profile(HttpServletRequest request,HttpServletResponse response,Object bean){
-		//Model(Bean)
+
 		User user = (User)bean;
 		UserDAO userDao = new UserDAO();
 		user = userDao.getUser("pooingx2@gmail.com");
@@ -86,16 +87,31 @@ public class MyPageController {
 	
 	@Mapping(url="/profile.ap", bean="bean.User", method="POST")
 	ModelView profile_post(HttpServletRequest request,HttpServletResponse response,Object bean){
-		//Model(Bean)
+
 		User user = (User)bean;
-		ModelView mv = new ModelView("/mypage/profile");
-		System.out.println(request.getParameter("say"));
-		System.out.println(request.getParameter("interest"));
-		//Mybatis 사용예제
 		UserDAO dao = new UserDAO();
+		
+		String say = request.getParameter("say");
+		List<String> interestList;
+		
+		interestList = new ArrayList<String>();
+		interestList.add(request.getParameter("interest[0]"));
+		interestList.add(request.getParameter("interest[1]"));
+		interestList.add(request.getParameter("interest[2]"));
+
+		System.out.println(say);
+		System.out.println(interestList.get(0));
+		System.out.println(interestList.get(1));
+		System.out.println(interestList.get(2));
+		
+		// 해당 유저 디비 변경 (say, interest)
+//		setUser("pooingx2@gmail.com",say,interestList);
+		
 		user = dao.getUser("pooingx2@gmail.com");
-		mv.setModel("user", user);						//  ${model.user.name}
-		//request.setAttribute("user", new User());		//  ${user.id}
+
+		ModelView mv = new ModelView("/mypage/profile");
+		mv.setModel("user", user);
+		
 		return mv;
 	}
 	@Mapping(url="/timeline.ap")
