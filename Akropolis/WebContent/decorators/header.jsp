@@ -26,6 +26,7 @@
 	</script>
 	<link rel="stylesheet" type="text/css" href="/Akropolis/css/bootstrap.min.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="/Akropolis/css/header.css" media="all" />
+	<link rel="shortcut icon" href="/Akropolis/img/favicon.ico" />
 	<decorator:head />
 </head>
 <body>
