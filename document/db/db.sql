@@ -2,7 +2,8 @@
 CREATE TABLE Education_list
 (
 	education            VARCHAR(20) NULL,
-	education_id         INTEGER PRIMARY KEY AUTO_INCREMENT
+	education_id         INTEGER NOT NULL AUTO_INCREMENT,
+	PRIMARY KEY (education_id)
 );
 
 
@@ -28,7 +29,8 @@ ADD PRIMARY KEY (e_mail,following);
 CREATE TABLE Interest_list
 (
 	interest             VARCHAR(20) NULL,
-	interest_id          INTEGER PRIMARY KEY AUTO_INCREMENT
+	interest_id          INTEGER NOT NULL AUTO_INCREMENT,
+	PRIMARY KEY(interest_id)
 );
 
 
@@ -45,8 +47,9 @@ CREATE TABLE MainTopic
 	disagree             INTEGER NULL DEFAULT 0,
 	date                 TIMESTAMP NOT NULL DEFAULT now(),
 	m_close              CHAR(1) NULL CHECK ( m_close IN ('O', 'C') ),
-	mt_id                INTEGER PRIMARY KEY AUTO_INCREMENT,
-	e_mail               VARCHAR(50) NOT NULL
+	mt_id                INTEGER NOT NULL AUTO_INCREMENT,
+	e_mail               VARCHAR(50) NOT NULL,
+	PRIMARY KEY(mt_id)
 );
 
 
@@ -88,9 +91,10 @@ CREATE TABLE Opinion
 	content              TEXT NULL,
 	mt_id                INTEGER NOT NULL,
 	sub_id               INTEGER NOT NULL,
-	opinion_id           INTEGER PRIMARY KEY AUTO_INCREMENT,
+	opinion_id           INTEGER NOT NULL AUTO_INCREMENT,
 	e_mail               VARCHAR(50) NOT NULL,
-	honor                INTEGER NULL DEFAULT 0
+	honor                INTEGER NULL DEFAULT 0,
+	PRIMARY KEY(opinion_id,mt_id,sub_id)
 );
 
 
@@ -121,9 +125,10 @@ CREATE TABLE SubTopic
 	sub_title            VARCHAR(255) NOT NULL,
 	start_time           TIMESTAMP NULL DEFAULT now(),
 	end_time             TIMESTAMP NULL CHECK ( end_time > start_time ),
-	sub_id               INTEGER PRIMARY KEY AUTO_INCREMENT,
+	sub_id               INTEGER NOT NULL AUTO_INCREMENT,
 	sub_close            CHAR(1) NULL CHECK ( sub_close IN ('O', 'C') ),
-	mt_id                INTEGER NOT NULL
+	mt_id                INTEGER NOT NULL,
+	PRIMARY KEY(sub_id,mt_id)
 );
 
 
@@ -136,7 +141,8 @@ CREATE TABLE SubTopic
 CREATE TABLE TopicTag
 (
 	tag                  VARCHAR(20) NULL,
-	tag_id               INTEGER PRIMARY KEY AUTO_INCREMENT
+	tag_id               INTEGER NOT NULL AUTO_INCREMENT,
+	PRIMARY KEY(tag_id)
 );
 
 
