@@ -7,4 +7,5 @@ public interface UserMapper {
 	User selectUser(String email);
 	List<User> selectAllUser();
 	int getUsersDebate(String email);
+	List<User> getDebateUsers(int mt_id);
 }

@@ -1,8 +1,21 @@
 @CHARSET "UTF-8";
 
 #main_topic{
-	height:200px;
-	background-color: #aaaaaa;
+	height: 200px;
+	width: 940px;
+}
+
+#main_topic_top{
+	height: 120px;
+	width: 940px;
+	text-align: center;
+	text-decoration: underline;
+	text-shadow: gray;
+	background-color: #fff;
+}
+#main_topic_bot{
+	height: 80px;
+	width: 940px;
 }
 
 #debate_border{
