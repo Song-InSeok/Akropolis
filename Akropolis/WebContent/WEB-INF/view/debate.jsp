@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> --%>
 <!DOCTYPE html>
 <html>
@@ -16,21 +17,28 @@
 	<div id="debate_border">
 		<div id="debate_border_left">
 			<div id="sub_topics">
-				<ul class="nav nav-list"><li><a href="#">sub topic 1</a></li>
+				<ul class="nav nav-list">
+					<li><a href="#">sub topic 1</a></li>
 					<li class="active"><a href="#">sub topic 2</a></li>
 					<li><a href="#">sub topic 3</a></li>
+					<c:forEach var="SubTopic" items="${debatemanager.stList }">
+						<li>
+						<a href="http://localhost:8080/Akropolis/debate.ap?mt=${param.mt }&st=${SubTopic.sub_id}">${SubTopic.sub_title}</a>
+						</li>
+					</c:forEach>
 				</ul>
 			</div>
 			<div id="similer_topics">
 				<ul class="nav nav-list"><li class="active"><a href="#">sim topic 1</a></li>
 					<li><a href="#">sim topic 2</a></li>
 					<li><a href="#">sim topic 3</a></li>
+					<li><a href="#">${debatemanager.stList[param.st-1].sub_title }</a></li>
 				</ul>
 			</div>
 		</div>
 		<div id="debate_border_right">
 			<div id="ing_debate">
-				<div id="sub_title">subtitle get from DB</div>
+				<div id="sub_title">${debatemanager.stList[param.st-1].sub_title }</div>
 				<div id="opinions">
 					<ul>
 						<li class="alert-error red_opinion">red opinion</li>
@@ -69,6 +77,5 @@
 			</div>
 		</div>
 	</div>
-
 </body>
 </html>

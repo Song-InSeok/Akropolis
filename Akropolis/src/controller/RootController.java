@@ -8,14 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bean.DebateManager;
-import bean.User;
-<<<<<<< HEAD
-=======
-
->>>>>>> 69e89a1fde2ffdac8c03ffeeed5128cda6e828f2
 import bean.FaceBook;
-import bean.MainTopic;
-import bean.Opinion;
+import bean.User;
 import dao.MainTopicDAO;
 import dao.OpinionDAO;
 import dao.SubTopicDAO;
@@ -91,6 +85,7 @@ public class RootController {
 			System.out.println(dm.getMt().getMt_title());
 			System.out.println(dm.getStList().size());
 			System.out.println(dm.getOpList().size());
+			request.setAttribute("debatemanager", dm);
 			mv = new ModelView("/debate");
 			return mv;
 		}catch(Exception e){
