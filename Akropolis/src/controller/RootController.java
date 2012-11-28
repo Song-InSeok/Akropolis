@@ -18,15 +18,17 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONValue;
 
 import bean.DebateManager;
+<<<<<<< HEAD
+=======
 import bean.FaceBook;
 import bean.User;
 
 
 import com.mysql.jdbc.StringUtils;
 
+>>>>>>> 8fa9ff1fa244c4a78e1ff9abe2c5208e6b6b9125
 import bean.FaceBook;
-import bean.MainTopic;
-import bean.Opinion;
+import bean.User;
 import dao.MainTopicDAO;
 import dao.OpinionDAO;
 import dao.SubTopicDAO;
@@ -156,6 +158,7 @@ public class RootController {
 			System.out.println(dm.getMt().getMt_title());
 			System.out.println(dm.getStList().size());
 			System.out.println(dm.getOpList().size());
+			request.setAttribute("debatemanager", dm);
 			mv = new ModelView("/debate");
 			return mv;
 		}catch(Exception e){
