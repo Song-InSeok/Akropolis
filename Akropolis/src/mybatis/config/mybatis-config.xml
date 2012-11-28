@@ -23,6 +23,7 @@
 		<mapper resource="mapper/MainTopicMapper.xml"/>
 		<mapper resource="mapper/OpinionMapper.xml"/>
 		<mapper resource="mapper/SubTopicMapper.xml"/>
+		<mapper resource="mapper/EducationListMapper.xml"/>
 		<mapper resource="mapper/ParticipantMapper.xml"/>
 	</mappers>
 </configuration>
