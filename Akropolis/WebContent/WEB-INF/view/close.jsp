@@ -8,7 +8,7 @@
 </head>
 <body>
 	<script type="text/javascript">
-		window.parent.location.replace("/Akropolis/main.ap");
+		window.opener.location.replace("/Akropolis/main.ap");
 		window.close();
 	</script>
 </body>

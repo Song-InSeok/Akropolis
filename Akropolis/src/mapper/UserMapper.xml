@@ -10,8 +10,7 @@
   </resultMap>
 
   <select id="selectUser" parameterType="String" resultMap="userResultMap">
-   select * from User natural join User_Education_list natural join Education_list 
-   where e_mail = #{email}
+   select * from User where e_mail = #{email}
   </select>
 
  <select id="selectAllUser" resultMap="userResultMap">
@@ -28,4 +27,8 @@
   <select id="getDebateUsers" parameterType="int" resultMap="userResultMap">
       select * from User join Participant on User.e_mail = Participant.e_mail and Participant.mt_id = #{mt_id};
   </select>
+  
+  <insert id="insertUser" parameterType="User">
+  	insert into User(e_mail,name,say,photo,honor,dishonor) values(#{email},#{name},#{say},#{photo},#{honor},#{dishonor})
+  </insert>
 </mapper>

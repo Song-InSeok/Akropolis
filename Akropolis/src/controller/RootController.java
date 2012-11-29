@@ -4,22 +4,20 @@ import hello.annotation.Mapping;
 import hello.annotation.RootURL;
 import hello.mv.ModelView;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import util.FaceBookAuth;
 import bean.DebateManager;
 import bean.FaceBook;
-import bean.SubTopic;
 import bean.User;
+import bean.SubTopic;
 
 import com.mysql.jdbc.StringUtils;
 
@@ -48,58 +46,35 @@ public class RootController {
 	ModelView login(HttpServletRequest request,HttpServletResponse response,Object bean){
 		ModelView mv = new ModelView("/close");
 		FaceBook fb = (FaceBook)bean;
+		FaceBookAuth fba = new FaceBookAuth();
 		HttpSession session = request.getSession();
-		if(!StringUtils.isNullOrEmpty(fb.getCode())){
-			URL url;
-			BufferedReader br;
-			HttpURLConnection conn;
-			try {
-				url = new URL("https://graph.facebook.com/oauth/access_token?client_id="+
-						request.getServletContext().getInitParameter("appID")+"&redirect_uri="+
-						request.getServletContext().getInitParameter("callback")+"&client_secret="+
-						request.getServletContext().getInitParameter("appSecret")+
-						"&code="+fb.getCode());
-				conn = (HttpURLConnection)url.openConnection();
-				if (conn != null) {
-					conn.setConnectTimeout(10000);
-					conn.setUseCaches(false);
-					if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
-						br = new BufferedReader(
-								new InputStreamReader(conn.getInputStream()));
-						for (;;) {
-							String line = br.readLine();
-							if (line == null) break;
-							session.setAttribute("accessToken", line.substring(line.indexOf("=")+1, line.indexOf("&")));
-							session.setAttribute("expires",line.substring(line.lastIndexOf("=")+1));
-						}
-						br.close();
-					}
-					conn.disconnect();
+		UserDAO udao = new UserDAO();
+		User user = null;
+		List<String> list = null;
+		
+		if(session.getAttribute("accessToken") == null){
+			list = fba.getAuth(fb, request.getServletContext().getInitParameter("appID"), request.getServletContext().getInitParameter("callback"), request.getServletContext().getInitParameter("appSecret"));
+			if(list == null){
+				mv.setView("/fail");
+			}else{
+				session.setAttribute("accessToken", list.get(0));
+			}
+		}
+		if(session.getAttribute("email") == null){
+			JSONObject json = fba.getInfo((String)session.getAttribute("accessToken"));
+			if(json == null){
+				mv.setView("/fail");
+			}else{
+				user = udao.getUser((String)json.get("email"));
+				if(user == null){
+					user = fba.JSONUserMapper(json);
+					udao.setUser(user);
+				}else{
+					JSONArray array = (JSONArray)json.get("education");
+					JSONObject obj = (JSONObject)array.get(array.size()-1);
+					user.setEducation((String)((JSONObject)obj.get("school")).get("name"));
 				}
-				
-				url = new URL("https://graph.facebook.com/me?access_token="+session.getAttribute("accessToken"));
-				System.out.println("https://graph.facebook.com/me?access_token="+session.getAttribute("accessToken"));
-				conn = (HttpURLConnection) url.openConnection();
-				if(conn != null){
-					conn.setConnectTimeout(10000);
-					conn.setUseCaches(false);
-					if(conn.getResponseCode() == HttpURLConnection.HTTP_OK){
-						br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-						for (;;) {
-							String line = br.readLine();
-							if (line == null) break;
-//							session.setAttribute("fInfo", JSONValue.parse(line));
-						}
-						br.close();
-					}
-					conn.disconnect();
-				}
-			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				session.setAttribute("user",user);
 			}
 		}
 		return mv;
@@ -108,6 +83,13 @@ public class RootController {
 	@Mapping(url="/decotest.ap")
 	ModelView deco(HttpServletRequest request,HttpServletResponse response){
 		ModelView mv = new ModelView("/decotest");
+		UserDAO dao = new UserDAO();
+		User user = dao.getUser("oojoo2n@naver.com");
+		if(user == null){
+			System.out.println("null");
+		}else{
+			System.out.println("not null");
+		}
 		return mv;
 	}
 	
