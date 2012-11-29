@@ -22,7 +22,10 @@
 	where e_mail = #{email}
   </select>
   <select id="getUsersDebate" resultType="int">
-	select MainTopic.mt_id from MainTopic join User on User.e_mail = MainTopic.e_mail where MainTopic.m_close = "n" and MainTopic.e_mail = #{e_mail}
+	select MainTopic.mt_id from MainTopic join User on User.e_mail = MainTopic.e_mail where MainTopic.m_close = "O" and MainTopic.e_mail = #{e_mail}
+  </select>
+  <select id="getDebateUsers" parameterType="int" resultMap="userResultMap">
+      select * from User join Participant on User.e_mail = Participant.e_mail and Participant.mt_id = #{mt_id};
   </select>
   
   <insert id="insertUser" parameterType="User">

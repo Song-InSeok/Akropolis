@@ -5,26 +5,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link href="css/debate.css" rel="stylesheet">
-<title>Debate Title from DB</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link href="/Akropolis/css/debate.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript">
+		$(function() {
+		});
+	</script>
+	<title>Debate Title from DB</title>
 </head>
 <body>
-	<div id="main_topic">asdf
+	 
+	<div id="main_topic">
+		<div id="main_topic_top">${debatemanager.mt.mt_title }</div>
+		<div id="main_topic_bot">a</div>
 	</div>
 	
 	<div id="debate_border">
 		<div id="debate_border_left">
 			<div id="sub_topics">
 				<ul class="nav nav-list">
-					<li><a href="#">sub topic 1</a></li>
-					<li class="active"><a href="#">sub topic 2</a></li>
-					<li><a href="#">sub topic 3</a></li>
 					<c:forEach var="SubTopic" items="${debatemanager.stList }">
-						<li>
-						<a href="http://localhost:8080/Akropolis/debate.ap?mt=${param.mt }&st=${SubTopic.sub_id}">${SubTopic.sub_title}</a>
-						</li>
+						<c:choose>
+							<c:when test="${debatemanager.st==SubTopic.sub_id }">
+								<li class="active"><a href="http://localhost:8080/Akropolis/debate.ap?mt=${param.mt }&st=${SubTopic.sub_id}">${SubTopic.sub_title}</a></li>
+							</c:when>
+							<c:otherwise>
+								<li><a href="http://localhost:8080/Akropolis/debate.ap?mt=${param.mt }&st=${SubTopic.sub_id}">${SubTopic.sub_title}</a></li>
+							</c:otherwise>
+						</c:choose>
 					</c:forEach>
 				</ul>
 			</div>
@@ -38,7 +46,11 @@
 		</div>
 		<div id="debate_border_right">
 			<div id="ing_debate">
-				<div id="sub_title">${debatemanager.stList[param.st-1].sub_title }</div>
+				<div id="sub_title">
+				<c:forEach var="SubTopic" items="${debatemanager.stList }">
+					<c:if test="${debatemanager.st==SubTopic.sub_id }">${SubTopic.sub_title }</c:if>
+				</c:forEach>
+				</div>
 				<div id="opinions">
 					<ul>
 						<li class="alert-error red_opinion">red opinion</li>
@@ -71,7 +83,7 @@
 				<div id="chat_bot">
 					<form class="navbart-form pull-left">
 						<textarea class="input-xxlarge marg_left" rows="2" name="chatarea"></textarea>
-						<button type="submit" class="btn btn-primary btn-large submit_btn">OK</button>
+						<button id = "submit_button"type="submit" class="btn btn-primary btn-large submit_btn">OK</button>
 					</form>
 				</div>
 			</div>

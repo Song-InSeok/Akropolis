@@ -62,4 +62,18 @@ public class UserDAO {
 		List<User> list = mapper.selectAllUser();
 		return list;
 	}
+	
+	public List<User> getDebateUsers(int mt_id){
+		List<User> ret=null;
+		SqlSession session = sqlSessionFactory.openSession();
+		try{
+			UserMapper mapper = session.getMapper(UserMapper.class);
+			ret = mapper.getDebateUsers(mt_id);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return ret;
+	}
 }

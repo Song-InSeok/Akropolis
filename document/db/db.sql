@@ -1,18 +1,3 @@
-
-CREATE TABLE Education_list
-(
-	education            VARCHAR(20) NULL,
-	education_id         INTEGER NOT NULL AUTO_INCREMENT,
-	PRIMARY KEY (education_id)
-);
-
-
-
--- ALTER TABLE Education_list
--- ADD PRIMARY KEY (education_id);
-
-
-
 CREATE TABLE Following_list
 (
 	e_mail               VARCHAR(50) NOT NULL,
@@ -168,20 +153,6 @@ ALTER TABLE User
 ADD PRIMARY KEY (e_mail);
 
 
-
-CREATE TABLE User_Education_list
-(
-	e_mail               VARCHAR(50) NOT NULL,
-	education_id         INTEGER NOT NULL
-);
-
-
-
-ALTER TABLE User_Education_list
-ADD PRIMARY KEY (e_mail,education_id);
-
-
-
 CREATE TABLE User_Interest_list
 (
 	e_mail               VARCHAR(50) NOT NULL,
@@ -252,17 +223,6 @@ ADD FOREIGN KEY R_14 (e_mail) REFERENCES User (e_mail);
 
 ALTER TABLE SubTopic
 ADD FOREIGN KEY R_9 (mt_id) REFERENCES MainTopic (mt_id);
-
-
-
-ALTER TABLE User_Education_list
-ADD FOREIGN KEY R_30 (e_mail) REFERENCES User (e_mail);
-
-
-
-ALTER TABLE User_Education_list
-ADD FOREIGN KEY R_41 (education_id) REFERENCES Education_list (education_id);
-
 
 
 ALTER TABLE User_Interest_list

@@ -17,6 +17,10 @@ import util.FaceBookAuth;
 import bean.DebateManager;
 import bean.FaceBook;
 import bean.User;
+import bean.SubTopic;
+
+import com.mysql.jdbc.StringUtils;
+
 import dao.MainTopicDAO;
 import dao.OpinionDAO;
 import dao.SubTopicDAO;
@@ -101,9 +105,11 @@ public class RootController {
 		MainTopicDAO mdao = new MainTopicDAO();
 		SubTopicDAO sdao = new SubTopicDAO();
 		OpinionDAO odao = new OpinionDAO();
-		int mt_id,st_id;
+		UserDAO udao = new UserDAO();
+		int mt_id,st_id,st_O,st_L;
+		boolean flag=false;
 		ModelView mv = null;
-		mt_id=st_id=0;
+		mt_id=st_id=st_O=st_L=0;
 		
 		try{
 			if(request.getParameter("mt")!=null) 	mt_id = Integer.parseInt(request.getParameter("mt"));
@@ -123,9 +129,20 @@ public class RootController {
 			DebateManager dm = new DebateManager();
 			dm.setMt(mdao.getMainTopic(mt_id));
 			dm.setStList(sdao.getSubTopics(mt_id));
-			if(st_id==0){
-				st_id=dm.getStList().size();
+			dm.setUserList(udao.getDebateUsers(mt_id));
+			
+			
+			List<SubTopic> slist = dm.getStList();
+			for(int i=0;i<slist.size();i++){
+				if((st_L=slist.get(i).getSub_id())==st_id) flag=true;
+				if(slist.get(i).getSub_close().equals("O")) st_O = slist.get(i).getSub_id();
 			}
+			if(flag) dm.setSt(st_id);
+			else if(!flag&&st_O!=0) dm.setSt(st_O);
+			else dm.setSt(st_L);
+			
+			System.out.println(st_id+" "+st_O+" "+st_L+" "+dm.getSt()+" flag = "+dm.getUserList().get(0).getFlag());
+			
 			dm.setOpList(odao.getOpinions(mt_id, st_id));
 			System.out.println(dm.getMt().getMt_title());
 			System.out.println(dm.getStList().size());

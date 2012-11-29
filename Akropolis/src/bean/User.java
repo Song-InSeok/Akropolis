@@ -10,6 +10,8 @@ public class User implements Serializable{
 	private String photo;
 	private int honor;
 	private int dishonor;
+	
+	private String flag;
 
 	private String education;
 	private List<String> interestList;
@@ -61,6 +63,12 @@ public class User implements Serializable{
 	}
 	public void setDishonor(int dishonor) {
 		this.dishonor = dishonor;
+	}
+	public String getFlag() {
+		return flag;
+	}
+	public void setFlag(String flag) {
+		this.flag = flag;
 	}
 
 	
