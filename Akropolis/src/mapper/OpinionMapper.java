@@ -6,4 +6,5 @@ import bean.Opinion;
 
 public interface OpinionMapper {
 	List<Opinion> getOpinions(Opinion opinion);
+	List<Opinion> getOPs(Opinion opinion);
 }

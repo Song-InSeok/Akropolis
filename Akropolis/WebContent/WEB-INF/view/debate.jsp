@@ -16,8 +16,13 @@
 <body>
 	 
 	<div id="main_topic">
-		<div id="main_topic_top">${debatemanager.mt.mt_title }</div>
-		<div id="main_topic_bot">a</div>
+		<div id="main_topic_top"><h6>${debatemanager.mt.mt_title }</h6></div>
+		<div id="main_topic_bot">
+			<div class="progress">
+				<div class="bar progress-info" style="width: ${100*debatemanager.mt.agree/(debatemanager.mt.agree+debatemanager.mt.disagree)}%;"></div>
+				<div class="bar bar-danger" style="width: ${100*debatemanager.mt.disagree/(debatemanager.mt.agree+debatemanager.mt.disagree)}%;"></div>
+			</div>
+		</div>
 	</div>
 	
 	<div id="debate_border">
@@ -74,13 +79,13 @@
 					</ul>
 				</div>
 			</div>
-			<div id="chat_window">
+			<div id="chat_window" >
 				<div id="chat_top">
 					<ul class="nav nav-tabs">
 						<li class="active"><a href="#">blue</a></li>
 						<li><a href="#">red</a></li>
 					</ul></div>
-				<div id="chat_bot">
+				<div id="chat_bot" class="back_red">
 					<form class="navbart-form pull-left">
 						<textarea class="input-xxlarge marg_left" rows="2" name="chatarea"></textarea>
 						<button id = "submit_button"type="submit" class="btn btn-primary btn-large submit_btn">OK</button>
