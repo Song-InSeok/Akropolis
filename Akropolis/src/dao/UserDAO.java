@@ -26,6 +26,22 @@ public class UserDAO {
 		}
 		return user;
 	}
+	
+	public int setUser(User user){
+		SqlSession session = sqlSessionFactory.openSession();
+		int row = 0;
+		try{
+			UserMapper mapper = session.getMapper(UserMapper.class);
+			row = mapper.insertUser(user);
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return row; 
+	}
+	
 	public int getUsersDebate(String email){
 		int ret = 0;
 		SqlSession session = sqlSessionFactory.openSession();

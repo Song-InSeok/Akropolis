@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator" %>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/page" prefix="page" %>
-<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +15,7 @@
 	</c:url>
 	<title><decorator:title default="Akropolis"/></title>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+	<script src="/Akropolis/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/Akropolis/js/header.js"></script>
 	<script type="text/javascript">
 		$(function(){
@@ -38,7 +39,14 @@
 					<li><a href="/Akropolis/mypage/profile.ap">My Page</a></li>
 					<li><a href="">About</a></li>
 				</ul>
-				<a href="${login_url }" class="pull-right" target="_blank"><img src="/Akropolis/img/facebook-logo.png" alt="Facebook" /></a>
+				<c:choose>
+					<c:when test="${empty email}">
+						<a href="${login_url }" class="pull-right" target="_blank"><img src="/Akropolis/img/facebook-logo.png" alt="Facebook" /></a>
+					</c:when>
+					<c:otherwise>
+						<a href="#" class="pull-right" target="_blank">${name }<img src="${photo }" alt="Profile Photo" width="30" height="30"/></a>
+					</c:otherwise>
+				</c:choose>
 				<form action="" method="post" class="form-search nav-search pull-right">
 					<div class="input-prepend">
 						<button type="submit" class="btn"><i class="icon-search"></i></button>
