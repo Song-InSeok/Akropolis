@@ -159,9 +159,17 @@ public class RootController {
 			else if(!flag&&st_O!=0) dm.setSt(st_O);
 			else dm.setSt(st_L);
 			
-			System.out.println(st_id+" "+st_O+" "+st_L+" "+dm.getSt()+" flag = "+dm.getUserList().get(0).getFlag());
 			
-			dm.setOpList(odao.getOpinions(mt_id, st_id));
+			dm.setOpList(odao.getOPs(mt_id, dm.getSt()));
+			
+			System.out.println(dm.getSt()+" "+st_O+" "+st_L+" "+dm.getSt()+" flag = "+dm.getUserList().get(0).getFlag());
+			if(dm.getOpList().size()>0){
+				System.out.println(dm.getOpList().get(0).getFlag()+" " +dm.getOpList().get(0).getPhoto()+" " +dm.getOpList().get(0).getE_mail());
+			}else{
+				System.out.println("size = "+dm.getOpList().size());
+			}
+
+			
 			System.out.println(dm.getMt().getMt_title());
 			System.out.println(dm.getStList().size());
 			System.out.println(dm.getOpList().size());
