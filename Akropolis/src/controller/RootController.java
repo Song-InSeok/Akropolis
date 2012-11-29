@@ -80,6 +80,13 @@ public class RootController {
 		return mv;
 	}
 	
+	@Mapping(url="/logout.ap")
+	ModelView logout(HttpServletRequest request,HttpServletResponse response){
+		ModelView mv = new ModelView("redirect:/Akropolis/main.ap");
+		request.getSession().invalidate();
+		return mv;
+	}
+	
 	@Mapping(url="/decotest.ap")
 	ModelView deco(HttpServletRequest request,HttpServletResponse response){
 		ModelView mv = new ModelView("/decotest");

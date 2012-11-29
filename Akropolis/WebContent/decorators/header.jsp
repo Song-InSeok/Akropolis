@@ -32,28 +32,47 @@
 </head>
 <body>
 	<div class="container">
-		<div class="navbar">
+		<div class="navbar navbar-fixed-top">
 			<div class="navbar-inner">
-				<ul class="nav">
-					<li><a href="/Akropolis/main.ap">Home</a></li>
-					<li><a href="/Akropolis/mypage/profile.ap">My Page</a></li>
-					<li><a href="">About</a></li>
-				</ul>
-				<c:choose>
-					<c:when test="${empty email}">
-						<a href="${login_url }" class="pull-right" target="_blank"><img src="/Akropolis/img/facebook-logo.png" alt="Facebook" /></a>
-					</c:when>
-					<c:otherwise>
-						<a href="#" class="pull-right" target="_blank">${name }<img src="${photo }" alt="Profile Photo" width="30" height="30"/></a>
-					</c:otherwise>
-				</c:choose>
-				<form action="" method="post" class="form-search nav-search pull-right">
-					<div class="input-prepend">
-						<button type="submit" class="btn"><i class="icon-search"></i></button>
-						<input type="text" name="search" id="search"
-							placeholder="Search Text..." class="input-large search-query" />
-					</div>
-				</form>
+				<div class="container">
+					<ul class="nav">
+						<li><a href="/Akropolis/main.ap">Home</a></li>
+						<li><a href="/Akropolis/mypage/profile.ap">My Page</a></li>
+						<li><a href="">About</a></li>
+					</ul>
+					<ul class="nav pull-right header-right">
+						<li>
+							<form action="" method="post"
+								class="form-search nav-search pull-right">
+								<div class="input-prepend">
+									<button type="submit" class="btn">
+										<i class="icon-search"></i>
+									</button>
+									<input type="text" name="search" id="search"
+										placeholder="Search Text..." class="input-large search-query" />
+								</div>
+							</form>
+						</li>
+						<c:choose>
+							<c:when test="${empty user}">
+								<li>
+									<a href="${login_url }" target="_blank"><img src="/Akropolis/img/facebook-logo.png" alt="Facebook" /></a>
+								</li>
+							</c:when>
+							<c:otherwise>
+								<li class="dropdown"><a class="dropdown-toggle" id="dLabel"
+									role="button" data-toggle="dropdown" href="#">이영학 <img
+										src="http://graph.facebook.com/F2eet/picture"
+										class="img-rounded" alt="profile" width="30" height="30" />
+								</a>
+									<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+										<li><a href="/Akropolis/logout.ap" tabindex="-1">로그아웃</a></li>
+									</ul>
+								</li>
+							</c:otherwise>
+						</c:choose>
+					</ul>
+				</div>
 			</div>
 		</div>
 		<hr/>
