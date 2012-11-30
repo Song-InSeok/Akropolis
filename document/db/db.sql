@@ -1,17 +1,3 @@
-
-CREATE TABLE Education_list
-(
-	education            VARCHAR(20) NULL,
-	education_id         INTEGER NOT NULL
-);
-
-
-
-ALTER TABLE Education_list
-ADD PRIMARY KEY (education_id);
-
-
-
 CREATE TABLE Following_list
 (
 	e_mail               VARCHAR(50) NOT NULL,
@@ -28,13 +14,14 @@ ADD PRIMARY KEY (e_mail,following);
 CREATE TABLE Interest_list
 (
 	interest             VARCHAR(20) NULL,
-	interest_id          INTEGER NOT NULL
+	interest_id          INTEGER NOT NULL AUTO_INCREMENT,
+	PRIMARY KEY(interest_id)
 );
 
 
 
-ALTER TABLE Interest_list
-ADD PRIMARY KEY (interest_id);
+-- ALTER TABLE Interest_list
+-- ADD PRIMARY KEY (interest_id);
 
 
 
@@ -45,14 +32,15 @@ CREATE TABLE MainTopic
 	disagree             INTEGER NULL DEFAULT 0,
 	date                 TIMESTAMP NOT NULL DEFAULT now(),
 	m_close              CHAR(1) NULL CHECK ( m_close IN ('O', 'C') ),
-	mt_id                INTEGER NOT NULL,
-	e_mail               VARCHAR(50) NOT NULL
+	mt_id                INTEGER NOT NULL AUTO_INCREMENT,
+	e_mail               VARCHAR(50) NOT NULL,
+	PRIMARY KEY(mt_id)
 );
 
 
 
-ALTER TABLE MainTopic
-ADD PRIMARY KEY (mt_id);
+-- ALTER TABLE MainTopic
+-- ADD PRIMARY KEY (mt_id);
 
 
 
@@ -88,15 +76,16 @@ CREATE TABLE Opinion
 	content              TEXT NULL,
 	mt_id                INTEGER NOT NULL,
 	sub_id               INTEGER NOT NULL,
-	opinion_id           INTEGER NOT NULL,
+	opinion_id           INTEGER NOT NULL AUTO_INCREMENT,
 	e_mail               VARCHAR(50) NOT NULL,
-	honor                INTEGER NULL DEFAULT 0
+	honor                INTEGER NULL DEFAULT 0,
+	PRIMARY KEY(opinion_id,mt_id,sub_id)
 );
 
 
 
-ALTER TABLE Opinion
-ADD PRIMARY KEY (mt_id,sub_id,opinion_id);
+-- ALTER TABLE Opinion
+-- ADD PRIMARY KEY (mt_id,sub_id,opinion_id);
 
 
 
@@ -121,28 +110,30 @@ CREATE TABLE SubTopic
 	sub_title            VARCHAR(255) NOT NULL,
 	start_time           TIMESTAMP NULL DEFAULT now(),
 	end_time             TIMESTAMP NULL CHECK ( end_time > start_time ),
-	sub_id               INTEGER NOT NULL,
+	sub_id               INTEGER NOT NULL AUTO_INCREMENT,
 	sub_close            CHAR(1) NULL CHECK ( sub_close IN ('O', 'C') ),
-	mt_id                INTEGER NOT NULL
+	mt_id                INTEGER NOT NULL,
+	PRIMARY KEY(sub_id,mt_id)
 );
 
 
 
-ALTER TABLE SubTopic
-ADD PRIMARY KEY (sub_id,mt_id);
+-- ALTER TABLE SubTopic
+-- ADD PRIMARY KEY (sub_id,mt_id);
 
 
 
 CREATE TABLE TopicTag
 (
 	tag                  VARCHAR(20) NULL,
-	tag_id               INTEGER NOT NULL
+	tag_id               INTEGER NOT NULL AUTO_INCREMENT,
+	PRIMARY KEY(tag_id)
 );
 
 
 
-ALTER TABLE TopicTag
-ADD PRIMARY KEY (tag_id);
+-- ALTER TABLE TopicTag
+-- ADD PRIMARY KEY (tag_id);
 
 
 
@@ -160,20 +151,6 @@ CREATE TABLE User
 
 ALTER TABLE User
 ADD PRIMARY KEY (e_mail);
-
-
-
-CREATE TABLE User_Education_list
-(
-	e_mail               VARCHAR(50) NOT NULL,
-	education_id         INTEGER NOT NULL
-);
-
-
-
-ALTER TABLE User_Education_list
-ADD PRIMARY KEY (e_mail,education_id);
-
 
 
 CREATE TABLE User_Interest_list
@@ -246,17 +223,6 @@ ADD FOREIGN KEY R_14 (e_mail) REFERENCES User (e_mail);
 
 ALTER TABLE SubTopic
 ADD FOREIGN KEY R_9 (mt_id) REFERENCES MainTopic (mt_id);
-
-
-
-ALTER TABLE User_Education_list
-ADD FOREIGN KEY R_30 (e_mail) REFERENCES User (e_mail);
-
-
-
-ALTER TABLE User_Education_list
-ADD FOREIGN KEY R_41 (education_id) REFERENCES Education_list (education_id);
-
 
 
 ALTER TABLE User_Interest_list

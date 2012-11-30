@@ -1,12 +1,27 @@
 @CHARSET "UTF-8";
 
 #main_topic{
-	height:200px;
-	background-color: #aaaaaa;
+	height: 180px;
+	width: 940px;
+}
+
+#main_topic_top{
+	height: 120px;
+	width: 940px;
+	text-align: center;
+	text-decoration: underline;
+	text-shadow: gray;
+}
+
+#main_topic_bot{
+	height: 60px;
+	width: 940px;
+}
+#main_topic_bot>.progress{
+	margin: 20px 50px;
 }
 
 #debate_border{
-	background-color: #bbbbbb;
 	height: 800px;
 	width: 940px;
 	float: left;
@@ -20,7 +35,6 @@
 }
 
 #debate_border_right{
-	background-color: #dddddd;
 	width: 640px;
 	height: 800px;
 	float: left;
@@ -35,6 +49,7 @@
 	list-style:none;
 }
 #sub_topics>ul>li{
+	border-radius: 10px;
 }
 #similer_topics{
 	height: 370px;
@@ -52,7 +67,8 @@
 	height: 650px;
 }
 #opinions{
-	padding-left: 0px;
+	padding-left: 5px;
+	padding-right: 5px;
 	height: 600px;
 	width: 640px;
 	overflow: auto;
@@ -75,6 +91,13 @@
 #chat_bot{
 	height: 100px;
 	width: 640px;
+	padding-top: 10px;
+	margin-top: -2px;
+}
+#chat_top{
+	height: 40px;
+	width: 640px;
+	margin-bottom: 0px;
 }
 #sub_title{
 	background-color: #999999;
@@ -90,11 +113,15 @@
 
 .red_opinion{
 	/*border: 3px #ff0000 solid;*/
-	float: right;
+	margin-left: 20px;
+	float: left;
+	
 	width: 600px;
 	/*max-width: 620px;
 	min-width: 400px;*/
 	overflow: auto;
+	border-radius: 5px;
+	 
 }
 .blue_opinion{
 	float: left;
@@ -103,6 +130,16 @@
 	/*min-width: 400px;
 	max-width: 620px;*/
 	overflow: auto;
+		border-radius: 5px;
+	
+}
+.mid_opinion{
+	float: left;
+	/*border: 3px #f0f solid;*/
+	width: 620px;
+	vertical-align: middle;
+	text-align: center;
+	border-radius: 5px;
 }
 .opinion{
 	width: 530px;
@@ -128,17 +165,19 @@
   	background-image: url("../img/prof_none.png");
   	background-position: 10px 0.1em;
 }
-.mid_opinion{
-	float: left;
-	/*border: 3px #f0f solid;*/
-	width: 640px;
-	vertical-align: middle;
-	text-align: center;
-}
+
 .marg_left{
 	margin-left: 10px;
+	margin-bottom: 0px;
+	padding-bottom: 10px;
 }
 .submit_btn{
 	margin-top: 1em;
 	margin-left: 0.5em;
+}
+.back_red{
+	background-color: #f2dede;
+}
+.back_blue{
+	background-color: #d9edf7;
 }

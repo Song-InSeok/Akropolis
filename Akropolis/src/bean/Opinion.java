@@ -9,6 +9,9 @@ public class Opinion implements Serializable {
 	private String content;
 	private int honor;
 	private String e_mail;
+	private String photo;
+	private String name;
+	private String flag;
 	
 	private String request;
 	
@@ -59,5 +62,29 @@ public class Opinion implements Serializable {
 
 	public void setRequest(String request) {
 		this.request = request;
+	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getFlag() {
+		return flag;
+	}
+
+	public void setFlag(String flag) {
+		this.flag = flag;
 	}
 }

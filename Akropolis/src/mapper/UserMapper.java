@@ -9,4 +9,6 @@ public interface UserMapper {
 	void updateUserInterest(int id);
 	List<User> selectAllUser();
 	int getUsersDebate(String email);
+	int insertUser(User user);
+	List<User> getDebateUsers(int mt_id);
 }

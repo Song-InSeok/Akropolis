@@ -12,6 +12,10 @@
 		<param-value>300000683435344</param-value>
 	</context-param>
 	<context-param>
+		<param-name>scope</param-name>
+		<param-value>user_education_history,email</param-value>
+	</context-param>
+	<context-param>
 		<param-name>appSecret</param-name>
 		<param-value>9f3316ad5903d5caaabcea39a432c26f</param-value>
 	</context-param>

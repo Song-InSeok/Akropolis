@@ -24,5 +24,6 @@
 		<mapper resource="mapper/OpinionMapper.xml"/>
 		<mapper resource="mapper/InterestMapper.xml"/>
 		<mapper resource="mapper/SubTopicMapper.xml"/>
+		<mapper resource="mapper/ParticipantMapper.xml"/>
 	</mappers>
 </configuration>

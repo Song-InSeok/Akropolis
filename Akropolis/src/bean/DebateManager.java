@@ -5,11 +5,12 @@ import java.util.List;
 
 public class DebateManager implements Serializable {
 	private MainTopic mt;
+	private int st;
 	private List<SubTopic> stList;
 	private List<Opinion>	opList;
 	private List<User>	userList;
 	private List<Participant>	ptList;
-	
+	private String flag;
 	public DebateManager(){
 		
 	}
@@ -52,5 +53,21 @@ public class DebateManager implements Serializable {
 
 	public void setPtList(List<Participant> ptList) {
 		this.ptList = ptList;
+	}
+
+	public int getSt() {
+		return st;
+	}
+
+	public void setSt(int st) {
+		this.st = st;
+	}
+
+	public String getFlag() {
+		return flag;
+	}
+
+	public void setFlag(String flag) {
+		this.flag = flag;
 	}
 }
