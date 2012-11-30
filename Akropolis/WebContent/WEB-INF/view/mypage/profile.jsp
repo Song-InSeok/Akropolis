@@ -11,7 +11,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<meta name="page" content="profile"/>
+	<meta name="page" content="profile">
 	<link href="/Akropolis/css/profile.css" rel="stylesheet" type="text/css">
 	<script type="text/javascript">
 		$(function() {

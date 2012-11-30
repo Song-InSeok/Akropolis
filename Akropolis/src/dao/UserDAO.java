@@ -83,9 +83,11 @@ public class UserDAO {
 		SqlSession session = sqlSessionFactory.openSession();
 		try{
 			UserMapper mapper = session.getMapper(UserMapper.class);
-			for(Interest interest : user.getInterestList()) {
-				mapper.updateUserInterest(interest.getId());
-			}
+			mapper.deleteInterests(user);
+			System.out.println(user.getEmail());
+//			for(Interest interest : user.getInterestList()) {
+//				mapper.insertInterest(interest);
+//			}
 			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
@@ -99,6 +101,9 @@ public class UserDAO {
 		try{
 			UserMapper mapper = session.getMapper(UserMapper.class);
 			mapper.updateUserSay(user);
+			System.out.println("test!!s");
+			System.out.println(user.getEmail());
+			System.out.println(user.getSay());
 			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
