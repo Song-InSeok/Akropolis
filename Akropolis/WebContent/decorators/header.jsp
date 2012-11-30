@@ -61,8 +61,8 @@
 							</c:when>
 							<c:otherwise>
 								<li class="dropdown"><a class="dropdown-toggle" id="dLabel"
-									role="button" data-toggle="dropdown" href="#">이영학 <img
-										src="http://graph.facebook.com/F2eet/picture"
+									role="button" data-toggle="dropdown" href="#">${user.name } <img
+										src="${user.photo }"
 										class="img-rounded" alt="profile" width="30" height="30" />
 								</a>
 									<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
