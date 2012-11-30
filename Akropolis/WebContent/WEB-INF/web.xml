@@ -21,7 +21,7 @@
 	</context-param>
 	<context-param>
 		<param-name>callback</param-name>
-		<param-value>http://www.alsquare.com:8080/Akropolis/login.ap</param-value>
+		<param-value>http://localhost:8080/Akropolis/login.ap</param-value>
 	</context-param>
 	
 	<filter>
