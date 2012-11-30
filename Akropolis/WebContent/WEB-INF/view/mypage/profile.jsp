@@ -1,12 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-	// test value -> DB에서 값 가져오기
-	String photo="/Akropolis/img/profile.png";
-	int debateNum=52;
-	int opinionNum=150;
-%>    
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,9 +64,8 @@
 				</form>
 			</div>
 			<div id="right">
-				<img src="${model.user.photo}" alt="profile photo"><br /><br /> 
-				<span>참여한 토론</span> <%=debateNum%><br /> 
-				<span>내가 쓴 글</span> <%=opinionNum%><br />
+				<h5>프로필사진</h5>
+				<img src="${model.user.photo}" class="img-polaroid" alt="profile photo" width="135px" height="135px" >
 			</div>
 
 			<div id="bottom">

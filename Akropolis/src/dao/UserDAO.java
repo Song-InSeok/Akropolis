@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import mapper.UserMapper;
@@ -83,12 +84,15 @@ public class UserDAO {
 		SqlSession session = sqlSessionFactory.openSession();
 		try{
 			UserMapper mapper = session.getMapper(UserMapper.class);
+//			HashMap hm= new HashMap();
+			
 			mapper.deleteInterests(user);
 			System.out.println(user.getEmail());
 //			for(Interest interest : user.getInterestList()) {
-//				mapper.insertInterest(interest);
+//				hm.put(user.getEmail(), interest.getId());
+//				mapper.insertInterest(hm);
 //			}
-			session.commit();
+//			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
@@ -101,9 +105,6 @@ public class UserDAO {
 		try{
 			UserMapper mapper = session.getMapper(UserMapper.class);
 			mapper.updateUserSay(user);
-			System.out.println("test!!s");
-			System.out.println(user.getEmail());
-			System.out.println(user.getSay());
 			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();

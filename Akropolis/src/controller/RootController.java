@@ -4,8 +4,10 @@ import hello.annotation.Mapping;
 import hello.annotation.RootURL;
 import hello.mv.ModelView;
 
+import java.sql.SQLException;
 import java.util.List;
 
+import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,21 +17,13 @@ import org.json.simple.JSONObject;
 
 import util.DebatePageManager;
 import util.FaceBookAuth;
-import bean.DebateManager;
 import bean.FaceBook;
+import bean.MainTopic;
+import bean.PageResult;
 import bean.User;
-import bean.SubTopic;
-
-import com.mysql.jdbc.StringUtils;
-
+import dao.InterestDAO;
 import dao.MainTopicDAO;
-import dao.OpinionDAO;
-import dao.SubTopicDAO;
 import dao.UserDAO;
-
-//import dao.MainTopicDAO;
-//import dao.OpinionDAO;
-//import dao.SubTopicDAO;
 
 
 
@@ -38,8 +32,27 @@ public class RootController {
 
 	@Mapping(url="/main.ap")
 	ModelView main(HttpServletRequest request,HttpServletResponse response){
-		//Model(Bean)
+
+		int page;
+		PageResult<MainTopic> result=null;
+		String option = request.getParameter("option");
+		MainTopicDAO mainTopicDao = new MainTopicDAO();
+		
+		if(request.getParameter("page")!=null){
+			page = Integer.parseInt((request.getParameter("page")));
+		}
+		else page=1;
+
+		if (option == null || option.equals("") || option.equals("hot")) {
+			result = mainTopicDao.getHotPage(page);	
+			
+		} else if (option.equals("lately")) {
+			result = mainTopicDao.getLately(page);
+		}	
+		
 		ModelView mv = new ModelView("/main");
+		mv.setModel("option", option);
+		mv.setModel("result", result);
 		return mv;
 	}
 	

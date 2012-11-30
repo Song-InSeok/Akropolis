@@ -1,24 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<link href="/Akropolis/css/main.css" rel="stylesheet" type="text/css"> 
-	<script type="text/javascript">
-		$(function() {
-			$("#searchBar").find("li").eq(0).click(function() {
-				alert("Hot page");
-			});
-			$("#searchBar").find("li").eq(1).click(function() {
-				alert("Lately page");
-			});
-			$("#searchBar").find("li").eq(2).click(function() {
-				alert("Search result page");
-			});
-		});
-	</script>
 </head>
 <body>
 	<div class="container">
@@ -28,74 +16,71 @@
 		<div id="mainContents">
 			<div id="searchBar">
 				<ul class="nav nav-tabs">
-	 				<li>
-						<input type="button" name="hot" value="Hot" class="btn btn-success">
-					</li>
-					<li>
-						<input type="button" name="lately" value="Lately" class="btn btn-success">
-					</li>
-					<li>	
-						<input type="text" name="serarch" placeholder="Debate topics" class="search-query span7" id="search">
-						<button type="button" class="btn"><i class="icon-search"></i></button>
-					</li>
+					<c:if test="${model.option=='hot' or empty model.option}">
+						<li class="active">
+					    	<a href="/Akropolis/main.ap?option=hot&page=1" id="hot">Hot</a>
+					  	</li>
+					  	<li>
+					  		<a href="/Akropolis/main.ap?option=lately&page=1" id="lately">Lately</a>
+					  	</li>
+				  	</c:if>
+				  	<c:if test="${model.option=='lately'}">
+						<li>
+					    	<a href="/Akropolis/main.ap?option=hot&page=1" id="hot">Hot</a>
+					  	</li>
+					  	<li class="active">
+					  		<a href="/Akropolis/main.ap?option=lately&page=1" id="lately">Lately</a>
+					  	</li>
+				  	</c:if>
 				</ul>
+					
 			</div>
 			<div id="searchResult">
 				<ul>
+				<c:forEach var="debate" items="${model.result.topicList}">
 					<li>
-						<a href="#">topic1</a>
+						<c:set var="agree" value="${debate.agree/(debate.disagree+debate.agree)*100}"></c:set> 
+						<c:set var="disagree" value="${debate.disagree/(debate.disagree+debate.agree)*100}"></c:set> 
+						<p class="lead" id="topic"><a href="#">${debate.mt_title}</a></p>
 						<div class="progress">
-							<div class="bar" style="width: 90%;"></div>
-							<div class="bar bar-danger" style="width: 10%;"></div>
+							<div class="bar" style="width: ${agree}%;">${debate.agree}</div>
+							<div class="bar bar-danger" style="width: ${disagree}%;">${debate.disagree}</div>
 						</div>
+						<span class = "pull-left">${debate.e_mail}</span>
+						<span class = "pull-right">${debate.date}</span>
 					</li>
-					<li>
-						<a href="#">topic2</a>
-						<div class="progress">
-							<div class="bar" style="width: 50%;"></div>
-							<div class="bar bar-danger" style="width: 50%;"></div>
-						</div>
-					</li>
-					<li>
-						<a href="#">topic3</a>
-						<div class="progress">
-							<div class="bar" style="width: 60%;"></div>
-							<div class="bar bar-danger" style="width: 40%;"></div>
-						</div>
-					</li>
-					<li>
-						<a href="#">topic4</a>
-						<div class="progress">
-							<div class="bar" style="width: 30%;"></div>
-							<div class="bar bar-danger" style="width: 70%;"></div>
-						</div>
-					</li>
-					<li>
-						<a href="#">topic5</a>
-						<div class="progress">
-							<div class="bar" style="width: 45%;"></div>
-							<div class="bar bar-danger" style="width: 55%;"></div>
-						</div>
-					</li>
-					<li>
-						<a href="#">topic6</a>
-						<div class="progress">
-							<div class="bar" style="width: 75%;"></div>
-							<div class="bar bar-danger" style="width: 25%;"></div>
-						</div>
-					</li>
+				</c:forEach>	
 				</ul>
-				<div class="pagination pagination-centered">
-					<ul>
-					    <li><a href="#"><i class="icon-chevron-left"></i></a></li>
-					    <li><a href="#">1</a></li>
-					    <li><a href="#">2</a></li>
-					    <li><a href="#">3</a></li>
-					    <li><a href="#">4</a></li>
-					    <li><a href="#">5</a></li>
-				   		<li><a href="#"><i class="icon-chevron-right"></i></a></li>
-					</ul>
-				</div>
+			</div>
+			<div class="pagination pagination-centered">
+				<ul>
+					<c:if test="${model.result.currentPage != 1}">
+					    <li>
+						    <a href="/Akropolis/main.ap?option=${model.option}&page=${model.result.currentPage-1}">
+						    	<i class="icon-chevron-left"></i>
+						    </a>
+					    </li>
+				    </c:if>
+				    <c:forEach var="i" begin="${model.result.startPage}"  end="${model.result.endPage}">
+					    <c:if test="${i == model.result.currentPage}">
+				        	<li class="active">
+				        		<a href="/Akropolis/main.ap?option=${model.option}&page=${i}">${i}</a>
+				        	</li>
+				      	</c:if>
+				     	<c:if test="${i != model.result.currentPage}">
+          					<li>
+          						<a href="/Akropolis/main.ap?option=${model.option}&page=${i}">${i}</a>
+          					</li>
+	      				</c:if>
+				   	</c:forEach>
+				   	<c:if test="${model.result.currentPage != model.result.maxPage}">
+				   		<li>
+				   			<a href="/Akropolis/main.ap?option=${model.option}&page=${model.result.currentPage+1}">
+				   				<i class="icon-chevron-right"></i>
+				   			</a>
+				   		</li>
+				   	</c:if>
+				</ul>
 			</div>
 		</div>
 	</div>

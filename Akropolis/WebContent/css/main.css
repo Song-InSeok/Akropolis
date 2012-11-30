@@ -32,12 +32,15 @@
 	list-style:none;
 }
 #searchResult>ul>li{
-	width:350px;
-	height:100px;
+	width:380px;
+	height:130px;
 	float:left;
-	margin:20px;
+	margin:10px;
 	padding : 20px;
 	border:1px solid #d7e9f9;
+}
+#searchResult #topic{
+	height:60px;
 }
 #searchResult>ul>li>a{
 	line-height:50px;

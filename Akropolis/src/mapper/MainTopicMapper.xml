@@ -3,9 +3,25 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.MainTopicMapper">
-    <resultMap type="MainTopic" id="mtResultMap">
-    </resultMap>
-    <select id="getMainTopic" parameterType="int" resultType="MainTopic">
-        select * from MainTopic where mt_id = #{mt_id}
-    </select>
+	<resultMap type="MainTopic" id="mtResultMap">
+	</resultMap>
+	<select id="getMainTopic" parameterType="int" resultType="MainTopic">
+		select * from MainTopic where mt_id = #{mt_id}
+	</select>
+
+	<select id="getTotal" resultType="int">
+		SELECT COUNT(*) FROM MainTopic
+	</select>
+	
+	<select id="getHotTopics" parameterType="int" resultType="MainTopic">
+		SELECT * FROM MainTopic 
+		ORDER BY (agree+disagree) DESC
+		LIMIT #{to}, #{number}
+	</select>
+	
+	<select id="getLatelyTopics" parameterType="int" resultType="MainTopic">
+		SELECT * FROM MainTopic 
+		ORDER BY date DESC
+		LIMIT #{to}, #{number}
+	</select>
 </mapper>

@@ -51,9 +51,7 @@
 		WHERE e_mail = #{email}
 	</delete>
 	
-	<insert id="deleteInterests" parameterType="User">
-		DELETE FROM User_Interest_list 
-		WHERE e_mail = #{email}
+	<insert id="insertInterest" parameterType="String">
 	</insert>
 	
 </mapper>
