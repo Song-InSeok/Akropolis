@@ -13,12 +13,10 @@
 	background : url('/Akropolis/img/facebook.png') no-repeat left top;
 	background-size:100% 100%;
 }
-
 #signUpBtn:hover{
 	background : url('/Akropolis/img/facebook2.png') no-repeat left top;
 	background-size:100% 100%;
 }
-
 #mainContents{
 	margin-top: 20px;
 	height: 700px;
@@ -27,7 +25,7 @@
 #searchBar #search{
 	margin-left:100px;
 }
-.nav li{
+#searchBar .nav li{
 	margin-right:5px;
 }
 #searchResult>ul{

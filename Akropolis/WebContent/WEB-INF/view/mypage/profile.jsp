@@ -30,6 +30,7 @@
 			});
 		});
 	</script>
+	<%System.out.println("test"); %>
 </head>
 <body>
 	<div class="container">
@@ -67,9 +68,8 @@
 					<textarea rows="2" name="say">${model.user.say}</textarea>
 				</form>
 			</div>
-
 			<div id="right">
-				<img src=<%=photo%> alt="profile photo"><br /><br /> 
+				<img src="${model.user.photo}" alt="profile photo"><br /><br /> 
 				<span>참여한 토론</span> <%=debateNum%><br /> 
 				<span>내가 쓴 글</span> <%=opinionNum%><br />
 			</div>

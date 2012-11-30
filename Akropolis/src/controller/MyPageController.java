@@ -9,6 +9,7 @@ import hello.mv.ModelView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import bean.BeanTest;
 import bean.Interest;
@@ -79,15 +80,28 @@ public class MyPageController {
 	ModelView profile(HttpServletRequest request,HttpServletResponse response,Object bean){
 
 		User user = (User)bean;
-		UserDAO userDao = new UserDAO();
-		user = userDao.getUser("pooingx2@gmail.com");
-		
+		List<Interest> interestList;		// user interestList
+		String say;
+
+		HttpSession session = request.getSession();
+		user = (User)session.getAttribute("user");
+
 		InterestDAO interestDao = new InterestDAO();
-		List<Interest> list = interestDao.getInterestList();
+
+		say=request.getParameter("say");
+		interestList = new ArrayList<Interest>();
+		interestList.add(new Interest(request.getParameter("interest1")));
+		interestList.add(new Interest(request.getParameter("interest2")));
+		interestList.add(new Interest(request.getParameter("interest3")));	
+		user.setInterestList(interestList);
+		
+		user.setSay(say);
+		interestList = interestDao.getInterestList();		// select all interest
 		
 		ModelView mv = new ModelView("/mypage/profile");
-		mv.setModel("interestList", list);
+		mv.setModel("interestList", interestList);
 		mv.setModel("user", user);
+
 		return mv;
 	}
 	
@@ -96,12 +110,13 @@ public class MyPageController {
 
 		String say;
 		List<Interest> interestList;		// user interestList
-
+		
 		User user = (User)bean;
 		UserDAO userDao = new UserDAO();
 		InterestDAO interestDao = new InterestDAO();
 		
-		user = userDao.getUser("pooingx2@gmail.com");
+		HttpSession session = request.getSession();
+		user = (User)session.getAttribute("user");
 		
 		say=request.getParameter("say");
 		interestList = new ArrayList<Interest>();
@@ -112,15 +127,12 @@ public class MyPageController {
 		interestList.get(0).setId(interestDao.getInterestID(interestList.get(0).getInterest()));
 		interestList.get(1).setId(interestDao.getInterestID(interestList.get(1).getInterest()));
 		interestList.get(2).setId(interestDao.getInterestID(interestList.get(2).getInterest()));	
-
-		System.out.println(interestList.get(0).getId());
-		System.out.println(interestList.get(1).getId());
-		System.out.println(interestList.get(2).getId());
 		
 		user.setSay(say);
 		user.setInterestList(interestList);
-		userDao.SetUser(user);
-		userDao.SetInterest(interestList.get(0).getId());
+		
+		userDao.setSay(user);
+		userDao.setInterest(user);
 		
 		interestList = interestDao.getInterestList();		// select all interest
 		

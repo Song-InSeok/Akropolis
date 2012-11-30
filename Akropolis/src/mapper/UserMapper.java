@@ -5,10 +5,11 @@ import bean.User;
 
 public interface UserMapper {
 	User selectUser(String email);
-	void updateUser(User user);
-	void updateUserInterest(int id);
+	//void updateUser(User user);
 	List<User> selectAllUser();
 	int getUsersDebate(String email);
 	int insertUser(User user);
 	List<User> getDebateUsers(int mt_id);
+	void updateUserInterest(int id);
+	void updateUserSay(User user);
 }

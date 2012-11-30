@@ -10,7 +10,6 @@
 		$(function() {
 			$("#searchBar").find("li").eq(0).click(function() {
 				alert("Hot page");
-				<%System.out.println("asdasd");%>
 			});
 			$("#searchBar").find("li").eq(1).click(function() {
 				alert("Lately page");

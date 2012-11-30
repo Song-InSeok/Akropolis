@@ -8,6 +8,7 @@ import mybatis.config.MyBatisManager;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import bean.Interest;
 import bean.User;
 
 public class UserDAO {
@@ -78,8 +79,31 @@ public class UserDAO {
 	}
 	//수정한척
 
-	public void setInterest(int id) {
-		// TODO Auto-generated method stub
-		
+	public void setInterest(User user) {
+		SqlSession session = sqlSessionFactory.openSession();
+		try{
+			UserMapper mapper = session.getMapper(UserMapper.class);
+			for(Interest interest : user.getInterestList()) {
+				mapper.updateUserInterest(interest.getId());
+			}
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+	}
+	
+	public void setSay(User user) {
+		SqlSession session = sqlSessionFactory.openSession();
+		try{
+			UserMapper mapper = session.getMapper(UserMapper.class);
+			mapper.updateUserSay(user);
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
 	}
 }
