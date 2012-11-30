@@ -11,4 +11,8 @@
 	<select id="selectAll" resultMap="interestResultMap">
 		select * from Interest_list
 	</select>
+	
+	<select id="selectID" parameterType="String" resultType="int">
+		select interest_id from Interest_list where interest= #{interest}
+	</select>
 </mapper>

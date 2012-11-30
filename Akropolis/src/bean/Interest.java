@@ -8,6 +8,9 @@ public class Interest implements Serializable{
 	private String interest;
 	
 	public Interest(){}
+	public Interest(String interest){
+		this.interest=interest;
+	}
 	public int getId() {
 		return id;
 	}

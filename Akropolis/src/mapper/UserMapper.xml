@@ -7,7 +7,7 @@
 	<resultMap type="User" id="userResultMap">
 		<id column="e_mail" property="email" />
 		<collection property="interestList" javaType="ArrayList"
-			column="e_mail" ofType="String" select="selectUserInterest" />
+			column="e_mail" ofType="Interest" select="selectUserInterest" />
 	</resultMap>
 
 	<select id="selectUser" parameterType="String" resultMap="userResultMap">
@@ -15,7 +15,7 @@
 		Education_list
 		where e_mail = #{email}
 	</select>
-	<select id="selectUserInterest" resultType="String">
+	<select id="selectUserInterest" resultType="Interest">
 		select interest, e_mail from User_Interest_list natural join Interest_list
 		where e_mail = #{email}
 	</select>
@@ -23,8 +23,7 @@
 		select * from User
 	</select>
 
-<<<<<<< HEAD
-	<update id="updateUser" parameterType="bean.User">
+	<update id="updateUser" parameterType="User">
 		update User set
 		e_mail = #{email},
 		name = #{name},
@@ -34,18 +33,13 @@
 		dishonor = #{dishonor}
 		where e_mail = #{email}
 	</update>
-
-=======
- <select id="selectAllUser" resultMap="userResultMap">
-  	select * from User
-  </select>
-  
-  <select id="selectUserInterest" resultType="String">
-  	select interest, e_mail from User_Interest_list natural join Interest_list 
-	where e_mail = #{email}
-  </select>
-  <select id="getUsersDebate" resultType="int">
-	select MainTopic.mt_id from MainTopic join User on User.e_mail = MainTopic.e_mail where MainTopic.m_close = "n" and MainTopic.e_mail = #{e_mail}
-  </select>
->>>>>>> ba0c5b55b65402c4ad37d8d13579217033e7a321
+	
+	<update id="updateUserInterest" parameterType="int">
+		<!--  update User_Interest_list interest_id set ...-->
+	</update>
+	
+	<select id="getUsersDebate" resultType="int">
+		select MainTopic.mt_id from MainTopic join User on User.e_mail = MainTopic.e_mail where MainTopic.m_close = "n" and MainTopic.e_mail = #{e_mail}
+	</select>
+	
 </mapper>

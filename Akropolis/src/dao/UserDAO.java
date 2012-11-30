@@ -26,11 +26,10 @@ public class UserDAO {
 		}
 		return user;
 	}
-<<<<<<< HEAD
+
 	public void SetUser(User user) {
 		SqlSession session = sqlSessionFactory.openSession();
 		try{
-			System.out.println("test!!"+user.getEmail());
 			UserMapper mapper = session.getMapper(UserMapper.class);
 			mapper.updateUser(user);
 			session.commit();
@@ -39,7 +38,8 @@ public class UserDAO {
 		}finally{
 			session.close();
 		}
-=======
+	}
+
 	public int getUsersDebate(String email){
 		int ret = 0;
 		SqlSession session = sqlSessionFactory.openSession();
@@ -53,7 +53,6 @@ public class UserDAO {
 			session.close();
 		}
 		return ret;
->>>>>>> ba0c5b55b65402c4ad37d8d13579217033e7a321
 	}
 	public List<User> getUserList(){
 		SqlSession session = sqlSessionFactory.openSession();
@@ -61,5 +60,17 @@ public class UserDAO {
 		List<User> list = mapper.selectAllUser();
 		return list;
 	}
-	
+
+	public void SetInterest(int id) {
+		SqlSession session = sqlSessionFactory.openSession();
+		try{
+			UserMapper mapper = session.getMapper(UserMapper.class);
+			mapper.updateUserInterest(id);
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+	}
 }

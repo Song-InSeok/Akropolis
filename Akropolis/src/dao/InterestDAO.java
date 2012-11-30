@@ -30,4 +30,18 @@ public class InterestDAO {
 		return list;
 		
 	}
+
+	public int getInterestID(String interest) {
+		SqlSession session = sqlSessionFactory.openSession();
+		int id = 0;
+		try{
+			InterestMapper mapper = session.getMapper(InterestMapper.class);
+			id = mapper.selectID(interest);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return id;
+	}
 }

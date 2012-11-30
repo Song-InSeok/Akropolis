@@ -93,28 +93,40 @@ public class MyPageController {
 	
 	@Mapping(url="/profile.ap", bean="bean.User", method="POST")
 	ModelView profile_post(HttpServletRequest request,HttpServletResponse response,Object bean){
-		List<String> interestList;
+
 		String say;
-		
-		interestList = new ArrayList<String>();
-		interestList.add(request.getParameter("interest1"));
-		interestList.add(request.getParameter("interest2"));
-		interestList.add(request.getParameter("interest3"));
-		say=request.getParameter("say");
-		
+		List<Interest> interestList;		// user interestList
+
 		User user = (User)bean;
 		UserDAO userDao = new UserDAO();
-		user = userDao.getUser("pooingx2@gmail.com");
-		user.setInterestList(interestList);
-		user.setSay(say);
-		userDao.SetUser(user);
-
 		InterestDAO interestDao = new InterestDAO();
-		List<Interest> list = interestDao.getInterestList();
+		
+		user = userDao.getUser("pooingx2@gmail.com");
+		
+		say=request.getParameter("say");
+		interestList = new ArrayList<Interest>();
+		interestList.add(new Interest(request.getParameter("interest1")));
+		interestList.add(new Interest(request.getParameter("interest2")));
+		interestList.add(new Interest(request.getParameter("interest3")));
+		
+		interestList.get(0).setId(interestDao.getInterestID(interestList.get(0).getInterest()));
+		interestList.get(1).setId(interestDao.getInterestID(interestList.get(1).getInterest()));
+		interestList.get(2).setId(interestDao.getInterestID(interestList.get(2).getInterest()));	
+
+		System.out.println(interestList.get(0).getId());
+		System.out.println(interestList.get(1).getId());
+		System.out.println(interestList.get(2).getId());
+		
+		user.setSay(say);
+		user.setInterestList(interestList);
+		userDao.SetUser(user);
+		userDao.SetInterest(interestList.get(0).getId());
+		
+		interestList = interestDao.getInterestList();		// select all interest
 		
 		ModelView mv = new ModelView("/mypage/profile");
-		
-		mv.setModel("interestList", list);
+	
+		mv.setModel("interestList", interestList);
 		mv.setModel("user", user);
 		
 		return mv;

@@ -15,9 +15,9 @@
 	<link href="/Akropolis/css/profile.css" rel="stylesheet" type="text/css">
 	<script type="text/javascript">
 		$(function() {
-			$("#left").find(".concern").eq(0).val("${model.user.interestList.get(0)}");
-			$("#left").find(".concern").eq(1).val("${model.user.interestList.get(1)}");
-			$("#left").find(".concern").eq(2).val("${model.user.interestList.get(2)}");
+			$("#left").find(".concern").eq(0).val("${model.user.interestList.get(0).interest}");
+			$("#left").find(".concern").eq(1).val("${model.user.interestList.get(1).interest}");
+			$("#left").find(".concern").eq(2).val("${model.user.interestList.get(2).interest}");
 			$("#saveBtn").hide();
 			$("#left>form>textarea").attr("disabled",true);
 			$(".concern").attr("disabled",true);

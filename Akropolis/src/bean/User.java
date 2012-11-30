@@ -12,7 +12,7 @@ public class User implements Serializable{
 	private int dishonor;
 
 	private String education;
-	private List<String> interestList;
+	private List<Interest> interestList;
 	
 	public User(){}
 	public String getEducation() {
@@ -21,10 +21,10 @@ public class User implements Serializable{
 	public void setEducation(String education) {
 		this.education = education;
 	}
-	public List<String> getInterestList() {
+	public List<Interest> getInterestList() {
 		return interestList;
 	}
-	public void setInterestList(List<String> interestList) {
+	public void setInterestList(List<Interest> interestList) {
 		this.interestList = interestList;
 	}
 	public String getEmail() {

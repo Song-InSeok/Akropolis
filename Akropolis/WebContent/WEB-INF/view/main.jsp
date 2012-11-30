@@ -1,16 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-	int pageNo = 1; 		// 페이지 설정
-	
-	try {
-		pageNo = Integer.parseInt(request.getParameter("page"));
-	} catch (NumberFormatException ex) {}
-	
-	int numInPage = 6;							// 한페이지에 출력할 아이템 개수
-	int startPos = (pageNo - 1) * numInPage; 	// 몇 번째 아이템 부터 이 페이지에?
-	int numItems, numPages;
-%> 
 
 <!DOCTYPE html>
 <html>

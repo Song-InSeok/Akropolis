@@ -9,10 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import bean.DebateManager;
 import bean.User;
-<<<<<<< HEAD
-=======
 
->>>>>>> 69e89a1fde2ffdac8c03ffeeed5128cda6e828f2
 import bean.FaceBook;
 import bean.MainTopic;
 import bean.Opinion;
