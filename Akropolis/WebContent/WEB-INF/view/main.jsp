@@ -32,6 +32,14 @@
 					  		<a href="/Akropolis/main.ap?option=lately&page=1" id="lately">Lately</a>
 					  	</li>
 				  	</c:if>
+				  	<li class="pull-right">
+					  	<form class="form-search">
+						  <div class="input-append">
+						    <input type="text" class="span5 search-query"placeholder="Input topic">
+						    <button type="submit" class="btn">Search</button>
+						  </div>
+						</form>
+					</li>
 				</ul>
 					
 			</div>

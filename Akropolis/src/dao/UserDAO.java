@@ -84,15 +84,14 @@ public class UserDAO {
 		SqlSession session = sqlSessionFactory.openSession();
 		try{
 			UserMapper mapper = session.getMapper(UserMapper.class);
-//			HashMap hm= new HashMap();
 			
 			mapper.deleteInterests(user);
 			System.out.println(user.getEmail());
-//			for(Interest interest : user.getInterestList()) {
-//				hm.put(user.getEmail(), interest.getId());
-//				mapper.insertInterest(hm);
-//			}
-//			session.commit();
+			System.out.println(user.getInterestList().get(0).getId());
+			for(Interest interest : user.getInterestList()) {
+				mapper.insertInterest(user.getEmail(), interest.getId());
+			}
+			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{

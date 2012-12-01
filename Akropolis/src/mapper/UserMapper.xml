@@ -51,7 +51,9 @@
 		WHERE e_mail = #{email}
 	</delete>
 	
-	<insert id="insertInterest" parameterType="String">
+	<insert id="insertInterest">
+		INSERT INTO User_Interest_list(e_mail,interest_id)
+		VALUES(#{e_mail},#{interest_id})
 	</insert>
 	
 </mapper>

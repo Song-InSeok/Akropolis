@@ -25,7 +25,6 @@
 			});
 		});
 	</script>
-	<%System.out.println("test"); %>
 </head>
 <body>
 	<div class="container">

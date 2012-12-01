@@ -79,17 +79,17 @@ public class MyPageController {
 	@Mapping(url="/profile.ap",bean="bean.User")
 	ModelView profile(HttpServletRequest request,HttpServletResponse response,Object bean){
 
-		List<Interest> interestList;		// user interestList
+		List<Interest> interestList;
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute("user");
+		String email = user.getEmail();
+		String education = user.getEducation();
 		
-		InterestDAO interestDao = new InterestDAO();
-		interestList = new ArrayList<Interest>();
-		interestList.add(new Interest(request.getParameter("interest1")));
-		interestList.add(new Interest(request.getParameter("interest2")));
-		interestList.add(new Interest(request.getParameter("interest3")));	
-		user.setInterestList(interestList);
+		UserDAO userDao = new UserDAO();
+		user = userDao.getUser(email);
+		user.setEducation(education);
 
+		InterestDAO interestDao = new InterestDAO();
 		interestList = interestDao.getInterestList();		// select all interest
 		
 		ModelView mv = new ModelView("/mypage/profile");
