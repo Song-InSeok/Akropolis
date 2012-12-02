@@ -9,14 +9,14 @@
 		<collection property="interestList" javaType="ArrayList"
 			column="e_mail" ofType="Interest" select="selectUserInterest" />
 	</resultMap>
+	
+	<resultMap type="User" id="followerResultMap">
+		<id column="e_mail" property="email" />
+	</resultMap>
 
 	<select id="selectUser" parameterType="String" resultMap="userResultMap">
 		SELECT * FROM User 
 		WHERE e_mail = #{email}
-	</select>
-
-	<select id="selectAllUser" resultMap="userResultMap">
-		SELECT * FROM User
 	</select>
 
 	<select id="selectUserInterest" resultType="Interest">
@@ -24,6 +24,12 @@
 		FROM User_Interest_list NATURAL JOIN Interest_list
 		WHERE e_mail = #{email}
 	</select>
+	
+	
+	<select id="selectAllUser" resultMap="userResultMap">
+		SELECT * FROM User
+	</select>
+	
 	<select id="getUsersDebate" resultType="int">
 		select MainTopic.mt_id
 		from MainTopic join User on User.e_mail =
@@ -48,12 +54,27 @@
 	
 	<delete id="deleteInterests" parameterType="User">
 		DELETE FROM User_Interest_list 
-		WHERE e_mail = #{email}
+		WHERE e_mail = #{e_mail}
 	</delete>
 	
 	<insert id="insertInterest">
 		INSERT INTO User_Interest_list(e_mail,interest_id)
 		VALUES(#{e_mail},#{interest_id})
 	</insert>
+	
+	<select id="getFollowerList" parameterType="String" resultMap="followerResultMap">
+		SELECT u.e_mail, u.name, u.photo FROM User u, Following_list f
+		WHERE  u.e_mail = f.e_mail and f.following = #{email} 
+	</select>
+	
+	<insert id="insertFollower">
+		INSERT INTO Following_list(e_mail,following)
+		VALUES(#{e_mail},#{following})
+	</insert>
+	
+	<delete id="deleteFollower">
+		DELETE FROM Following_list 
+		WHERE e_mail = #{e_mail} and following = #{following}
+	</delete>
 	
 </mapper>

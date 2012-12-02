@@ -77,30 +77,40 @@ public class MyPageController {
 	}
 	
 	@Mapping(url="/profile.ap",bean="bean.User")
-	ModelView profile(HttpServletRequest request,HttpServletResponse response,Object bean){
-
+	ModelView getProfile(HttpServletRequest request,HttpServletResponse response,Object bean){	
+		
 		List<Interest> interestList;
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute("user");
+		String follower=null;
 		String email = user.getEmail();
 		String education = user.getEducation();
 		
 		UserDAO userDao = new UserDAO();
 		user = userDao.getUser(email);
 		user.setEducation(education);
-
+		
 		InterestDAO interestDao = new InterestDAO();
 		interestList = interestDao.getInterestList();		// select all interest
 		
 		ModelView mv = new ModelView("/mypage/profile");
-		mv.setModel("interestList", interestList);
-		mv.setModel("user", user);
+		
+		follower=request.getParameter("follower");
+		if(follower!=null && !(follower.equals(""))) {
+			userDao.deleteFollower(follower, email);
+			mv.setModel("msg", "Success : Deletion");
+		}
 
+		List<User> followerList=userDao.getFollowerList(user.getEmail());
+
+		mv.setModel("user", user);
+		mv.setModel("followerList",followerList);
+		mv.setModel("interestList", interestList);
 		return mv;
 	}
 	
 	@Mapping(url="/profile.ap", bean="bean.User", method="POST")
-	ModelView profile_post(HttpServletRequest request,HttpServletResponse response,Object bean){
+	ModelView postProfile(HttpServletRequest request,HttpServletResponse response,Object bean){
 
 		String say;
 		List<Interest> interestList;		// user interestList
@@ -113,25 +123,60 @@ public class MyPageController {
 		user = (User)session.getAttribute("user");
 		
 		say=request.getParameter("say");
+		String interests[] = new String[3];
+		interests[0] = request.getParameter("interest1");
+		interests[1] = request.getParameter("interest2");
+		interests[2] = request.getParameter("interest3");
+		
 		interestList = new ArrayList<Interest>();
-		interestList.add(new Interest(request.getParameter("interest1")));
-		interestList.add(new Interest(request.getParameter("interest2")));
-		interestList.add(new Interest(request.getParameter("interest3")));
-		interestList.get(0).setId(interestDao.getInterestID(interestList.get(0).getInterest()));
-		interestList.get(1).setId(interestDao.getInterestID(interestList.get(1).getInterest()));
-		interestList.get(2).setId(interestDao.getInterestID(interestList.get(2).getInterest()));	
+		
+		for(int i=0;i<3;i++){
+			boolean flag=true;
+			for(int j=0;j<i;j++){
+				if(i!=j && interests[i].equals(interests[j])){
+					flag=false;
+				}
+			}
+			if(flag){
+				interestList.add(new Interest(interests[i]));
+				interestList.get(interestList.size()-1).setId(interestDao.getInterestID(interests[i]));
+			}
+		}
 		
 		user.setSay(say);
 		user.setInterestList(interestList);
 		userDao.setSay(user);
 		userDao.setInterest(user);
 		
-		ModelView mv = new ModelView("/mypage/profile");
-		
+		List<User> followerList=userDao.getFollowerList(user.getEmail());
 		interestList = interestDao.getInterestList();		// select all interest
-		mv.setModel("interestList", interestList);
+		
+		ModelView mv = new ModelView("/mypage/profile");
 		mv.setModel("user", user);
+		mv.setModel("followerList",followerList);
+		mv.setModel("interestList", interestList);
+		return mv;
+	}
+	@Mapping(url="/addFollower.ap", bean="bean.User", method="POST")
+	ModelView addFollower(HttpServletRequest request,HttpServletResponse response,Object bean){
+		User user = (User)bean;
+		HttpSession session = request.getSession();
+		user = (User)session.getAttribute("user");
+		
+		String msg = null;
+		String following = user.getEmail();
+		String follower = null;
+		follower = request.getParameter("followerEmail");
 
+		if(follower!=null && !(follower.equals("")) && !(follower.equals(following))) {
+			UserDAO userDao = new UserDAO();
+			msg = userDao.insertFollower(follower, following);
+		}
+		if(follower.equals(following)){
+			msg="You never can be your follower";
+		}
+		ModelView mv = getProfile(request, response, bean);
+		mv.setModel("msg", msg);
 		return mv;
 	}
 	@Mapping(url="/timeline.ap")

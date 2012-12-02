@@ -7,7 +7,10 @@ public class Interest implements Serializable{
 	private int id;
 	private String interest;
 	
-	public Interest(){}
+	public Interest(){
+		id=-1;
+		interest=null;
+	}
 	public Interest(String interest){
 		this.interest=interest;
 	}
