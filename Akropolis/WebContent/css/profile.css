@@ -63,6 +63,29 @@
 	line-height:25px;
 	font-weight:bold;
 }
-#Follower .input-prepend{
+#Follower{
+	float:left;
 	margin-top:20px;
+}
+#Follower .input-prepend{
+	float:left;
+	margin:20px 5px;
+	width:300px;
+}
+#Follower .miniPorofile{
+	float:left;
+	margin:5px;
+	width:310px;
+	height:50px;
+	border:1px solid #d7e9f9;
+}
+#Follower .miniPorofile .miniPhoto{
+	float : left;
+	width:50px;
+	height:50px;
+}
+#Follower .miniPorofile .inform{
+	float : left;
+	margin-left:15px;
+	height:50px;
 }

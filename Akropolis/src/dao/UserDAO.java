@@ -43,6 +43,7 @@ public class UserDAO {
 		}
 		return row; 
 	}
+
 	
 	public int getUsersDebate(String email){
 		int ret = 0;
@@ -58,10 +59,18 @@ public class UserDAO {
 		}
 		return ret;
 	}
-	public List<User> getUserList(){
+	public List<User> getUserList(){	
 		SqlSession session = sqlSessionFactory.openSession();
-		UserMapper mapper = session.getMapper(UserMapper.class);
-		List<User> list = mapper.selectAllUser();
+		List<User> list=null;
+		
+		try{
+			UserMapper mapper = session.getMapper(UserMapper.class);
+			list = mapper.selectAllUser();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
 		return list;
 	}
 	
@@ -78,16 +87,12 @@ public class UserDAO {
 		}
 		return ret;
 	}
-	//수정한척
 
 	public void setInterest(User user) {
 		SqlSession session = sqlSessionFactory.openSession();
 		try{
-			UserMapper mapper = session.getMapper(UserMapper.class);
-			
+			UserMapper mapper = session.getMapper(UserMapper.class);	
 			mapper.deleteInterests(user);
-			System.out.println(user.getEmail());
-			System.out.println(user.getInterestList().get(0).getId());
 			for(Interest interest : user.getInterestList()) {
 				mapper.insertInterest(user.getEmail(), interest.getId());
 			}
@@ -104,6 +109,61 @@ public class UserDAO {
 		try{
 			UserMapper mapper = session.getMapper(UserMapper.class);
 			mapper.updateUserSay(user);
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+	}
+
+	public List<User> getFollowerList(String email){
+		SqlSession session = sqlSessionFactory.openSession();
+		List<User> list=null;
+		
+		try{
+			UserMapper mapper = session.getMapper(UserMapper.class);
+			list = mapper.getFollowerList(email);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return list;
+	}
+	
+	public String insertFollower(String follower, String following){
+		SqlSession session = sqlSessionFactory.openSession();
+		List<User> list = null;
+		boolean isUser=false;
+		list = getFollowerList(following);
+		for(User user : list) {
+			if(user.getEmail().equals(follower)) return "Registered Follower";
+		}
+		list = getUserList();
+		for(User user : list) {
+			if(user.getEmail().equals(follower)) {
+				isUser=true;
+			}
+		}
+		if(!isUser) return "Not user";
+
+		try{
+			UserMapper mapper = session.getMapper(UserMapper.class);	
+			mapper.insertFollower(follower, following);
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return "Success";
+	}
+	public void deleteFollower(String follower, String following){
+		SqlSession session = sqlSessionFactory.openSession();
+		try{
+			UserMapper mapper = session.getMapper(UserMapper.class);
+			mapper.deleteFollower(follower, following);
 			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();

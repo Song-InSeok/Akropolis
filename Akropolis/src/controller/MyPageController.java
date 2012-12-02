@@ -77,7 +77,7 @@ public class MyPageController {
 	}
 	
 	@Mapping(url="/profile.ap",bean="bean.User")
-	ModelView profile(HttpServletRequest request,HttpServletResponse response,Object bean){
+	ModelView getProfile(HttpServletRequest request,HttpServletResponse response,Object bean){
 
 		List<Interest> interestList;
 		HttpSession session = request.getSession();
@@ -88,19 +88,26 @@ public class MyPageController {
 		UserDAO userDao = new UserDAO();
 		user = userDao.getUser(email);
 		user.setEducation(education);
-
+		List<User> followerList=userDao.getFollowerList(user.getEmail());
+		
 		InterestDAO interestDao = new InterestDAO();
 		interestList = interestDao.getInterestList();		// select all interest
 		
 		ModelView mv = new ModelView("/mypage/profile");
-		mv.setModel("interestList", interestList);
 		mv.setModel("user", user);
+		mv.setModel("followerList",followerList);
+		mv.setModel("interestList", interestList);
+		
+		email=request.getParameter("email");
+		if(email!=null) {
+			System.out.println("delete : " + email);
+		}
 
 		return mv;
 	}
 	
 	@Mapping(url="/profile.ap", bean="bean.User", method="POST")
-	ModelView profile_post(HttpServletRequest request,HttpServletResponse response,Object bean){
+	ModelView postProfile(HttpServletRequest request,HttpServletResponse response,Object bean){
 
 		String say;
 		List<Interest> interestList;		// user interestList
@@ -131,7 +138,31 @@ public class MyPageController {
 		interestList = interestDao.getInterestList();		// select all interest
 		mv.setModel("interestList", interestList);
 		mv.setModel("user", user);
+		
+		return mv;
+	}
+	@Mapping(url="/addFollower.ap", bean="bean.User", method="POST")
+	ModelView addFollower(HttpServletRequest request,HttpServletResponse response,Object bean){
+		User user = (User)bean;
+		HttpSession session = request.getSession();
+		user = (User)session.getAttribute("user");
+		
+		String msg = null;
+		String following = user.getEmail();
+		String follower = null;
+		follower = request.getParameter("followerEmail");
 
+		if(follower!=null && !(follower.equals("")) && !(follower.equals(following))) {
+			UserDAO userDao = new UserDAO();
+			msg = userDao.insertFollower(follower, following);
+		}
+		if(follower.equals(following)){
+			msg="You never can be your follower";
+		}
+		System.out.println(msg);
+		
+		ModelView mv = getProfile( request, response, bean);
+		mv.setModel("msg", msg);
 		return mv;
 	}
 	@Mapping(url="/timeline.ap")

@@ -18,4 +18,7 @@ public interface UserMapper {
 	void updateUserSay(User user);
 	void deleteInterests(User user);
 	void insertInterest(@Param("e_mail")String email, @Param("interest_id")int id);
+	List<User> getFollowerList(String email);
+	void insertFollower(@Param("e_mail")String follower, @Param("following")String following);
+	void deleteFollower(@Param("e_mail")String follower, @Param("following")String following);
 }
