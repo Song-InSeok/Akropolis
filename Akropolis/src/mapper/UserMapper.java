@@ -10,13 +10,12 @@ import bean.User;
 
 public interface UserMapper {
 	User selectUser(String email);
-	//void updateUser(User user);
 	List<User> selectAllUser();
 	int getUsersDebate(String email);
 	int insertUser(User user);
 	List<User> getDebateUsers(int mt_id);
 	void updateUserSay(User user);
-	void deleteInterests(User user);
+	void deleteInterests(@Param("e_mail")String email);
 	void insertInterest(@Param("e_mail")String email, @Param("interest_id")int id);
 	List<User> getFollowerList(String email);
 	void insertFollower(@Param("e_mail")String follower, @Param("following")String following);

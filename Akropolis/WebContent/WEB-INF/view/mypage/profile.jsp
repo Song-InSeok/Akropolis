@@ -33,7 +33,7 @@
 				$(".concern").attr("disabled",false);
 			});
 		});
-	</script>
+</script>
 </head>
 <body>
 	<div class="container">
@@ -90,17 +90,18 @@
 				</div>
 				<div id="Follower" >
 					<span>Follower</span>
-
-					<form method="POST" action="addFollower.ap">
-						<div class="input-prepend">
-							<span class="add-on" >@</span> 
-							<input type="text"  name="followerEmail" placeholder="Input e-mail">
-							<input type="submit" class="btn" id="insert" value="추가">
-						</div>
-					</form>
-					<span class="alert alert-info span6 pull-right">
-						<i class="icon-bullhorn"></i> ${model.msg}
-					</span>
+					<div id="information">
+						<span class="alert alert-info span6 pull-right">
+							<i class="icon-bullhorn"></i> ${model.msg}
+						</span>
+						<form method="POST" action="addFollower.ap">
+							<div class="input-prepend">
+								<span class="add-on" >@</span> 
+								<input type="text"  name="followerEmail" placeholder="Input e-mail">
+								<input type="submit" class="btn" id="insert" value="추가">
+							</div>
+						</form>
+					</div>
 					<c:forEach var="follower" items="${model.followerList}">
 						<div class="miniPorofile">
 							<div class=miniPhoto>
@@ -111,7 +112,7 @@
 								( ${follower.email} )
 							</div>
 							<div class="form-action">
-								<a href="/Akropolis/mypage/profile.ap?email=${follower.email}" class="btn pull-right">
+								<a href="/Akropolis/mypage/profile.ap?follower=${follower.email}" class="btn pull-right">
 									<i class="icon-remove"></i>
 								</a>
 							</div>

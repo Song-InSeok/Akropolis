@@ -1,6 +1,5 @@
 package dao;
 
-import java.util.HashMap;
 import java.util.List;
 
 import mapper.UserMapper;
@@ -17,7 +16,7 @@ public class UserDAO {
 	
 	public User getUser(String email){
 		SqlSession session = sqlSessionFactory.openSession();
-		User user = null;
+		User user = new User();
 		try{
 			UserMapper mapper = session.getMapper(UserMapper.class);
 			user = mapper.selectUser(email);
@@ -26,6 +25,22 @@ public class UserDAO {
 		}finally{
 			session.close();
 		}
+
+		switch(user.getInterestList().size()){
+		case 0 : 
+			user.getInterestList().add(new Interest()); 
+			user.getInterestList().add(new Interest()); 
+			user.getInterestList().add(new Interest()); 
+			break;
+		case 1 : 
+			user.getInterestList().add(new Interest()); 
+			user.getInterestList().add(new Interest()); 
+			break;
+		case 2 : 
+			user.getInterestList().add(new Interest()); 
+			break;
+		}
+		
 		return user;
 	}
 	
@@ -92,7 +107,7 @@ public class UserDAO {
 		SqlSession session = sqlSessionFactory.openSession();
 		try{
 			UserMapper mapper = session.getMapper(UserMapper.class);	
-			mapper.deleteInterests(user);
+			mapper.deleteInterests(user.getEmail());
 			for(Interest interest : user.getInterestList()) {
 				mapper.insertInterest(user.getEmail(), interest.getId());
 			}
@@ -101,6 +116,20 @@ public class UserDAO {
 			e.printStackTrace();
 		}finally{
 			session.close();
+		}
+		switch(user.getInterestList().size()){
+		case 0 : 
+			user.getInterestList().add(new Interest()); 
+			user.getInterestList().add(new Interest()); 
+			user.getInterestList().add(new Interest()); 
+			break;
+		case 1 : 
+			user.getInterestList().add(new Interest()); 
+			user.getInterestList().add(new Interest()); 
+			break;
+		case 2 : 
+			user.getInterestList().add(new Interest()); 
+			break;
 		}
 	}
 	
@@ -157,7 +186,7 @@ public class UserDAO {
 		}finally{
 			session.close();
 		}
-		return "Success";
+		return "Success : Insertion";
 	}
 	public void deleteFollower(String follower, String following){
 		SqlSession session = sqlSessionFactory.openSession();

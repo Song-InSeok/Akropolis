@@ -18,16 +18,18 @@
 		SELECT * FROM User 
 		WHERE e_mail = #{email}
 	</select>
-	
-	<select id="selectAllUser" resultMap="userResultMap">
-		SELECT * FROM User
-	</select>
 
 	<select id="selectUserInterest" resultType="Interest">
 		SELECT interest,e_mail 
 		FROM User_Interest_list NATURAL JOIN Interest_list
 		WHERE e_mail = #{email}
 	</select>
+	
+	
+	<select id="selectAllUser" resultMap="userResultMap">
+		SELECT * FROM User
+	</select>
+	
 	<select id="getUsersDebate" resultType="int">
 		select MainTopic.mt_id
 		from MainTopic join User on User.e_mail =
@@ -52,7 +54,7 @@
 	
 	<delete id="deleteInterests" parameterType="User">
 		DELETE FROM User_Interest_list 
-		WHERE e_mail = #{email}
+		WHERE e_mail = #{e_mail}
 	</delete>
 	
 	<insert id="insertInterest">
@@ -72,7 +74,7 @@
 	
 	<delete id="deleteFollower">
 		DELETE FROM Following_list 
-		WHERE e_mail = #{follower} and following = #{email}
+		WHERE e_mail = #{e_mail} and following = #{following}
 	</delete>
 	
 </mapper>

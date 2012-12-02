@@ -1,6 +1,7 @@
 package bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class User implements Serializable{
@@ -16,7 +17,12 @@ public class User implements Serializable{
 	private String education;
 	private List<Interest> interestList;
 	
-	public User(){}
+	public User(){
+		interestList = new ArrayList<Interest>();
+		interestList.add(new Interest());
+		interestList.add(new Interest());
+		interestList.add(new Interest());	
+	}
 	public String getEducation() {
 		return education;
 	}
