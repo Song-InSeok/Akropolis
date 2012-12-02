@@ -11,8 +11,12 @@
 	text-align: center;
 	text-decoration: underline;
 	text-shadow: gray;
+	vertical-align: middle;
 }
-
+#main_topic_top>h3{
+	text-indent: 1em;
+	font-size: 2.5em;
+}
 #main_topic_bot{
 	height: 60px;
 	width: 940px;
@@ -72,7 +76,6 @@
 	height: 600px;
 	width: 640px;
 	overflow: auto;
-
 }
 #opinions>ul{
 	margin-left: 0px;
@@ -85,6 +88,8 @@
 	height: 50px;
 }
 #chat_window{
+	outline-width: 2px;
+	outline-color: #000;
 	height: 150px;
 	width: 640px;
 }
@@ -100,10 +105,22 @@
 	margin-bottom: 0px;
 }
 #sub_title{
-	background-color: #999999;
+	background-color: #ffe540;
 	height: 50px;
 	width: 640px;
+	border-radius: 5px;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 50px;
 }
+#sub_title>a{
+	margin-top: 10px;
+	text-indent: 30px;
+	font-size: 2em;
+	vertical-align: middle;
+	
+}
+
 .sub_topic{
 	
 }
@@ -130,7 +147,7 @@
 	/*min-width: 400px;
 	max-width: 620px;*/
 	overflow: auto;
-		border-radius: 5px;
+	border-radius: 5px;
 	
 }
 .mid_opinion{
@@ -142,17 +159,51 @@
 	border-radius: 5px;
 }
 .opinion{
-	width: 530px;
+	float: left;
+	overflow: auto;
+	width: 520px;
 	padding-left: 10px;
 	text-align: left;	
 }
-.opinion>h1{
-		
+.blue_opinion>.opinion>.name{
+	color: #00f;
+	float: left;
+	padding-left: 20px;
 }
-
+.red_opinion>.opinion>.name{
+	padding-right: 20px;
+	color: #f00;
+	float: right;
+	
+}
+.blue_opinion>.opinion>.id{
+	color: #ccc;
+	padding-left: 10px;
+	float: left;
+}
+.red_opinion>.opinion>.id{
+	color: #ccc;
+	padding-right: 10px;
+	float: right;
+	
+}
+.blue_opinion>.opinion>a{
+	float: left;
+	padding-left: 10px;
+	color: #111;
+}
+.red_opinion>.opinion>a{
+	float: right;
+	padding-right: 10px;
+	color: #111;
+	
+}
 .op_prof{
+	float: left;
 	width: 70px;
 	min-height: 80px;
+		overflow: auto;
+	
 }
 .prof_btn{
 	width: 70px;
