@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import mapper.UserMapper;
@@ -25,22 +26,6 @@ public class UserDAO {
 		}finally{
 			session.close();
 		}
-
-		switch(user.getInterestList().size()){
-		case 0 : 
-			user.getInterestList().add(new Interest()); 
-			user.getInterestList().add(new Interest()); 
-			user.getInterestList().add(new Interest()); 
-			break;
-		case 1 : 
-			user.getInterestList().add(new Interest()); 
-			user.getInterestList().add(new Interest()); 
-			break;
-		case 2 : 
-			user.getInterestList().add(new Interest()); 
-			break;
-		}
-		
 		return user;
 	}
 	
@@ -116,20 +101,6 @@ public class UserDAO {
 			e.printStackTrace();
 		}finally{
 			session.close();
-		}
-		switch(user.getInterestList().size()){
-		case 0 : 
-			user.getInterestList().add(new Interest()); 
-			user.getInterestList().add(new Interest()); 
-			user.getInterestList().add(new Interest()); 
-			break;
-		case 1 : 
-			user.getInterestList().add(new Interest()); 
-			user.getInterestList().add(new Interest()); 
-			break;
-		case 2 : 
-			user.getInterestList().add(new Interest()); 
-			break;
 		}
 	}
 	

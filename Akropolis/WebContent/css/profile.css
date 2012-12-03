@@ -10,17 +10,21 @@
 #left{
 	float:left;
 	width:500px;
-	height:250px;
+	height:300px;
 	padding:5px 10px;
 	border:1px solid #ddd;
 }
 #left textarea {
 	width:470px;
-	height:45px;
+	height:70px;
 	margin:5px;
 }
-#left .concern {
-	margin-top:10px;
+#left .concern1 {
+	margin-top:15px;
+	width:135px;
+}
+#left .concern2 {
+	margin-top:15px;
 	width:135px;
 }
 #left span{
@@ -36,7 +40,7 @@
 #right{
 	float : left;
 	width:150px;
-	height:250px;
+	height:300px;
 	padding:5px 10px;
 	margin-left:5px;
 	border:1px solid #d7e9f9;
