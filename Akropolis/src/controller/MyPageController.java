@@ -110,6 +110,8 @@ public class MyPageController {
 		String education = user.getEducation();
 		
 		UserDAO userDao = new UserDAO();
+		interestList = new ArrayList<Interest>();
+		user.setInterestList(interestList);
 		user = userDao.getUser(email);
 		user.setEducation(education);
 		
