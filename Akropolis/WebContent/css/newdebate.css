@@ -20,10 +20,10 @@ label.name {
 	margin-left:55%;
 }
 
-table {
+#sub_subject table {
 	border:0px; border-collapse:collapse; padding:30px; border-spacing:30px;
 }
-th{
+#sub_subject th{
 	width : 30px;
 }
 .date{
