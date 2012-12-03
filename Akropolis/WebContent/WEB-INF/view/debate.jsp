@@ -9,6 +9,12 @@
 	<link href="/Akropolis/css/debate.css" rel="stylesheet" type="text/css">
 	<script type="text/javascript">
 		$(function() {
+			$(".progess").find(".bar").eq(0).click(function(){
+				alert("");
+			});
+			$(".progress").find(".bar").eq(1).click(function(){
+				alert("반");
+			});
 		});
 	</script>
 	<title>Debate Title from DB</title>
@@ -16,11 +22,11 @@
 <body>
 	 
 	<div id="main_topic">
-		<div id="main_topic_top"><h6>${debatemanager.mt.mt_title }</h6></div>
+		<div id="main_topic_top"><h3>${debatemanager.mt.mt_title }</h3></div>
 		<div id="main_topic_bot">
 			<div class="progress">
-				<div class="bar progress-info" style="width: ${100*debatemanager.mt.agree/(debatemanager.mt.agree+debatemanager.mt.disagree)}%;"></div>
-				<div class="bar bar-danger" style="width: ${100*debatemanager.mt.disagree/(debatemanager.mt.agree+debatemanager.mt.disagree)}%;"></div>
+				<div class="bar progress-info flag_bar1" style="width: ${100*debatemanager.mt.agree/(debatemanager.mt.agree+debatemanager.mt.disagree)}%;"></div>
+				<div class="bar bar-danger flag_bar2" style="width: ${100*debatemanager.mt.disagree/(debatemanager.mt.agree+debatemanager.mt.disagree)}%;"></div>
 			</div>
 		</div>
 	</div>
@@ -32,10 +38,10 @@
 					<c:forEach var="SubTopic" items="${debatemanager.stList }">
 						<c:choose>
 							<c:when test="${debatemanager.st==SubTopic.sub_id }">
-								<li class="active"><a href="http://localhost:8080/Akropolis/debate.ap?mt=${param.mt }&st=${SubTopic.sub_id}">${SubTopic.sub_title}</a></li>
+								<li class="active"><a href="http://localhost:8080/Akropolis/debate.ap?mt=${SubTopic.mt_id }&st=${SubTopic.sub_id}">${SubTopic.sub_title}</a></li>
 							</c:when>
 							<c:otherwise>
-								<li><a href="http://localhost:8080/Akropolis/debate.ap?mt=${param.mt }&st=${SubTopic.sub_id}">${SubTopic.sub_title}</a></li>
+								<li><a href="http://localhost:8080/Akropolis/debate.ap?mt=${SubTopic.mt_id }&st=${SubTopic.sub_id}">${SubTopic.sub_title}</a></li>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
@@ -53,12 +59,21 @@
 			<div id="ing_debate">
 				<div id="sub_title">
 				<c:forEach var="SubTopic" items="${debatemanager.stList }">
-					<c:if test="${debatemanager.st==SubTopic.sub_id }">${SubTopic.sub_title }</c:if>
+					<c:if test="${debatemanager.st==SubTopic.sub_id }"><a>${SubTopic.sub_title }</a></c:if>
 				</c:forEach>
 				</div>
 				<div id="opinions">
 					<ul>
-						<li class="alert-error red_opinion">red opinion</li>
+						<li class="alert-error red_opinion">
+						<div class="opinion"><a class="name">USER</a><a class="id">@asdf.com</a></br><a>red Opinion</a></div>
+						<div class="op_prof"></div></li>
+						<li><div class="alert-error red_opinion"><div class="opinion"><a class="name">USER</a><a class="id">@asdf.com</a></br><a>red Opinion</a></div>
+						<div class="op_prof"></div>
+						</div></li>
+						<li><div class="alert-info blue_opinion"><div class="op_prof"></div>
+						<div class="opinion"><a class="name">USER</a>
+						<a class="id">@asdf.com</a></br><a>Blue Opinion</a></div></div>
+						</li>
 						<li class="alert-info blue_opinion">blue opinion</li>
 						<li class="alert-success mid_opinion">mid opinion</li>
 						<li class="alert-error red_opinion">red opinion</li>
