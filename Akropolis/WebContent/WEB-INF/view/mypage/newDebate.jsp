@@ -15,6 +15,7 @@
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+	<%int count=1; %>
 <script language="javascript" type="text/javascript">
 	$(document)
 			.ready(
@@ -38,12 +39,33 @@
 							showOn : "both", //엘리먼트와 이미지 동시 사용(both,button)
 							yearRange : '1990:2020' //1990년부터 2020년까지
 						};
-						$("#fromDt").datepicker(clareCalendar);
-						$("#toDt").datepicker(clareCalendar);
+						$("#fD").datepicker(clareCalendar);
+						$("#tD").datepicker(clareCalendar);
 						$("img.ui-datepicker-trigger")
 								.attr("style",
 										"margin-left:5px; vertical-align:middle; cursor:pointer;"); //이미지버튼 style적용
+
 						$("#ui-datepicker-div").hide(); //자동으로 생성되는 div객체 숨김  
+						//****************************************  끝  ***********************************
+
+						$(function() {
+							//태그클릭시 칸추가
+							$("#add_tag").click(
+									function() {
+										$("body").find(".tags").append(
+												$("body").find("#hidetag")
+														.html());
+									});
+							
+							$("body").find("#ok").click(
+									function() {
+										$("#real").find("#tD").attr("id","x");
+										$("#real").find("#fD").attr("id","xx");
+										$("#real").find("tbody").append($("#secret").find("tbody").html());
+										});
+
+						});
+
 					});
 </script>
 </head>
@@ -53,177 +75,125 @@
 		<form action="newDebate.ap" method="post">
 			<fieldset>
 				<legend>토론열기</legend>
-				<label class="name">주제 :</label> <input type="text" name="mTopic">
+				<label class="name">주제 :</label> <input type="text" name="mTopic"><br />
+				<label class="name">태그 :</label>
 				<div class="tags">
-					<label class="name">태그 :</label> <input type="text" class="tag"
-						name="tag"> <input type="text" class="tag" name="tag">
-					<input type="text" class="tag" name="tag"> <br /><label class="name">태그추가</label> 
-					<button name="add_tag" class="btn">
-						<i class="icon-plus"></i>
-					</button>
+					<% for(int i=0; i<3 ; i++){ %>
+					<input type="text" class="tag" name="tag">
+					<%} %>
+
 				</div>
+				<br />
+				<label class="name">태그추가</label>
+				<div id=hidetag style="display: none;">
+					<input type="text" class="tag" name="tag">
+				</div>
+				<button type="button" id="add_tag">
+					<i class="icon-plus"></i>
+				</button>
 
 				<hr>
 				<label class="name">소주제 :</label>
 				<div id="sub_subject">
-					<table>
-						<tbody>
-							<tr>
-								<th>1</th>
-								<td>거북이는 토끼보다 느리다?</td>
-								<td>
-									<button class="btn" onclick="location.href='#'">
-										<img src="/Akropolis/img/penIcon.png" class="img-rounded "
-											alt="편집">
-									</button>
-								</td>
-							</tr>
+					<table id="real">
+						<thead></thead>
 
-							<tr>
-								<td></td>
-								<td colspan="2">
-									<div class="date">
-										시작 : <input name="sDate" class="short" type="text" id="fromDt"
-											size="8" maxlength="5" title="시작일자">
-											H :
-											<select class="tag" name="sHour">
-											<% for(int i=0; i<24;i++) {%>
-											<option><%if(i<10){%>
-												0<%}%><%=i%></option>
-											<%}%>
-											</select> 
-											M : <select class="tag" name="sMin">
-											<% for(int i=0; i<60;i++) {%>
-											<option><%if(i<10){%>
-												0<%}%><%=i%></option>
-											<%}%>
-											</select> 
-											<br /> 종료 : <input
-											name="eDate" class="short" type="text" id="toDt" size="8"
-											maxlength="8" title="종료일자">
-											H :
-											<select class="tag" name="eHour">
-											<% for(int i=0; i<24;i++) {%>
-											<option><%if(i<10){%>
-												0<%}%><%=i%></option>
-											<%}%>
-											</select> 
-											M : <select class="tag" name="eMin">
-											<% for(int i=0; i<60;i++) {%>
-											<option><%if(i<10){%>
-												0<%}%><%=i%></option>
-											<%}%>
-											</select> 
-									</div>
-								</td>
-							</tr>
-							
-							<tr>
-								<th>2</th>
-								<td>거북이는 토끼보다 똑똑하다?</td>
-								<td>
-									<button class="btn" onclick="location.href='#'">
-										<img src="/Akropolis/img/penIcon.png" alt="편집">
-									</button>
-								</td>
-							</tr>
-							<tr>
-								<td></td>
-								<td colspan="2">
-									<div class="date">
-										시작 : <input name="sDate" class="short" type="text" id="fromDt"
-											size="8" maxlength="5" title="시작일자">
-											H :
-											<select class="tag" name="sHour">
-											<% for(int i=0; i<24;i++) {%>
-											<option><%if(i<10){%>
-												0<%}%><%=i%></option>
-											<%}%>
-											</select> 
-											M : <select class="tag" name="sMin">
-											<% for(int i=0; i<60;i++) {%>
-											<option><%if(i<10){%>
-												0<%}%><%=i%></option>
-											<%}%>
-											</select> 
-											<br /> 종료 : <input
-											name="eDate" class="short" type="text" id="toDt" size="8"
-											maxlength="8" title="종료일자">
-											H :
-											<select class="tag" name="eHour">
-											<% for(int i=0; i<24;i++) {%>
-											<option><%if(i<10){%>
-												0<%}%><%=i%></option>
-											<%}%>
-											</select> 
-											M : <select class="tag" name="eMin">
-											<% for(int i=0; i<60;i++) {%>
-											<option><%if(i<10){%>
-												0<%}%><%=i%></option>
-											<%}%>
-											</select> 
-									</div>
-								</td>
-							</tr>
-							
+						<tbody>
 						</tbody>
+
 						<tfoot id="add">
 							<tr>
-								<th>3</th>
-								<td colspan="2"><input type='text' size='50' class='sub'>
-								</td>
+								<th>1</th>
+								<td><input type='text' size='50' class='sub'></td>
 							</tr>
 							<tr>
-								<td></td>
 								<td colspan="2">
 									<div class="date">
-										시작 : <input name="sDate" class="short" type="text" id="fromDt"
-											size="8" maxlength="5" title="시작일자">
-											H :
-											<select class="tag" name="sHour">
+										시작 : <input name="sDate" class="short" type="text" id="fD"
+											size="8" maxlength="5" title="시작일자"> H : <select
+											class="tag" name="sHour">
 											<% for(int i=0; i<24;i++) {%>
-											<option><%if(i<10){%>
+											<option>
+												<%if(i<10){%>
 												0<%}%><%=i%></option>
 											<%}%>
-											</select> 
-											M : <select class="tag" name="sMin">
+										</select> M : <select class="tag" name="sMin">
 											<% for(int i=0; i<60;i++) {%>
-											<option><%if(i<10){%>
+											<option>
+												<%if(i<10){%>
 												0<%}%><%=i%></option>
 											<%}%>
-											</select> 
-											<br /> 종료 : <input
-											name="eDate" class="short" type="text" id="toDt" size="8"
-											maxlength="8" title="종료일자">
-											H :
-											<select class="tag" name="eHour">
+										</select> <br /> 종료 : <input name="eDate" class="short" type="text"
+											id="tD" size="8" maxlength="8" title="종료일자"> H : <select
+											class="tag" name="eHour">
 											<% for(int i=0; i<24;i++) {%>
-											<option><%if(i<10){%>
+											<option>
+												<%if(i<10){%>
 												0<%}%><%=i%></option>
 											<%}%>
-											</select> 
-											M : <select class="tag" name="eMin">
+										</select> M : <select class="tag" name="eMin">
 											<% for(int i=0; i<60;i++) {%>
-											<option><%if(i<10){%>
+											<option>
+												<%if(i<10){%>
 												0<%}%><%=i%></option>
 											<%}%>
-											</select> 
+										</select>
 									</div>
 								</td>
 							</tr>
-							<tr>
-								<td></td>
-								<td></td>
-								<td><button class="btn" onclick="location.href='#'">OK</button></td>
-							</tr>
-						</tfoot>
 
+						</tfoot>
 					</table>
+					<input type="button" id="ok" class="btn" value="OK">
 					<hr>
 				</div>
 
-				<label class="name">참여자초대 : <input type="checkbox" name="check">
-					 Yes
+				<table id="secret" style="display: none;">
+					<tbody>
+						<tr>
+							<th>1</th>
+							<td><input type='text' size='50' class='sub'></td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<div class="date">
+									시작 : <input name="sDate" class="short" type="text" size="8"
+										id="fD" maxlength="5" title="시작일자"> H : <select class="tag"
+										name="sHour">
+										<% for(int i=0; i<24;i++) {%>
+										<option>
+											<%if(i<10){%>
+											0<%}%><%=i%></option>
+										<%}%>
+									</select> M : <select class="tag" name="sMin">
+										<% for(int i=0; i<60;i++) {%>
+										<option>
+											<%if(i<10){%>
+											0<%}%><%=i%></option>
+										<%}%>
+									</select> <br /> 종료 : <input name="eDate" class="short" type="text"
+										id="tD" size="8" maxlength="8" title="종료일자"> H : <select
+										class="tag" name="eHour">
+										<% for(int i=0; i<24;i++) {%>
+										<option>
+											<%if(i<10){%>
+											0<%}%><%=i%></option>
+										<%}%>
+									</select> M : <select class="tag" name="eMin">
+										<% for(int i=0; i<60;i++) {%>
+										<option>
+											<%if(i<10){%>
+											0<%}%><%=i%></option>
+										<%}%>
+									</select>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<label class="name">참여자초대 : <input type="checkbox"
+					name="check"> Yes
 				</label>
 				<div id="regist">
 					<a href="#"><button type="submit" class="btn">등록</button></a>

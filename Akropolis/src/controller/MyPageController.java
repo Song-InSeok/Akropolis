@@ -109,8 +109,7 @@ public class MyPageController {
 		newDebate.setEmail(email);
 		
 		newDebate.setMt(request.getParameter("mTopic"));
-		newDebate.setTag(tag)
-		
+//여기수정하는중		
 		ModelView mv = new ModelView("/mypage/adminDebate");
 		System.out.printf("success");
 		//request.setAttribute("model",mv); 가 자동으로 등록됨
