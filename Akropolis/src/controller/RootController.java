@@ -4,6 +4,7 @@ import hello.annotation.Mapping;
 import hello.annotation.RootURL;
 import hello.mv.ModelView;
 
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -29,26 +30,6 @@ import dao.UserDAO;
 
 @RootURL("/")
 public class RootController {
-	@Mapping(url="/main.ap", method="Post")
-	ModelView getPost(HttpServletRequest request,HttpServletResponse response){
-
-		int page = 1;
-		PageResult<MainTopic> result=null;
-		MainTopicDAO mainTopicDao = new MainTopicDAO();
-		String searchOption = request.getParameter("searchOption");
-		String searchText = request.getParameter("searchText");
-
-		System.out.println(searchOption);
-		System.out.println(searchText);
-		if(searchOption.equals("Title")){
-			result = mainTopicDao.getTitleSearch(page, searchText);
-		}
-		
-		ModelView mv = new ModelView("/main");
-		mv.setModel("option", searchOption);
-		mv.setModel("result", result);
-		return mv;
-	}
 	
 	@Mapping(url="/main.ap", method="GET")
 	ModelView getMain(HttpServletRequest request,HttpServletResponse response){
@@ -75,6 +56,32 @@ public class RootController {
 		return mv;
 	}
 	
+	@Mapping(url="/main.ap", method="POST")
+	ModelView getPost(HttpServletRequest request,HttpServletResponse response){
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		int page = 1;
+		PageResult<MainTopic> result=null;
+		MainTopicDAO mainTopicDao = new MainTopicDAO();
+		String searchOption = request.getParameter("searchOption");
+		String searchText = request.getParameter("searchText");
+
+		System.out.println(searchOption);
+		System.out.println(searchText);
+		if(searchOption.equals("Title")){
+			result = mainTopicDao.getTitleSearch(page, searchText);
+		}
+		
+		ModelView mv = new ModelView("/main");
+		mv.setModel("option", searchOption);
+		mv.setModel("result", result);
+		return mv;
+	}
+
 	@Mapping(url="/login.ap",bean="bean.FaceBook")
 	ModelView login(HttpServletRequest request,HttpServletResponse response,Object bean){
 		ModelView mv = new ModelView("/close");

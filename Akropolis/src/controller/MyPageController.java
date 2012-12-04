@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -154,7 +155,11 @@ public class MyPageController {
 	
 	@Mapping(url="/profile.ap", bean="bean.User", method="POST")
 	ModelView postProfile(HttpServletRequest request,HttpServletResponse response,Object bean){
-
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 		String say;
 		List<Interest> interestList;		// user interestList
 		
@@ -170,7 +175,7 @@ public class MyPageController {
 		interests[0] = request.getParameter("interest1");
 		interests[1] = request.getParameter("interest2");
 		interests[2] = request.getParameter("interest3");
-		
+		System.out.println(say);
 		interestList = new ArrayList<Interest>();
 		
 		for(int i=0;i<3;i++){
