@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,6 @@ import javax.servlet.http.HttpSession;
 
 import bean.BeanTest;
 import bean.Interest;
-import bean.NewDebate;
 import bean.User;
 import dao.InterestDAO;
 import dao.UserDAO;
@@ -105,11 +105,17 @@ public class MyPageController {
 		User user = (User)session.getAttribute("user");
 		String email = user.getEmail();
 		
-		NewDebate newDebate = new NewDebate();
-		newDebate.setEmail(email);
+//		NewDebate newDebate = new NewDebate();
+//		newDebate.setEmail(email);
 		
+<<<<<<< HEAD
 		newDebate.setMt(request.getParameter("mTopic"));
 //여기수정하는중		
+=======
+//		newDebate.setMt(request.getParameter("mTopic"));
+//		newDebate.setTag(tag)
+		
+>>>>>>> 8dc012bffcfce5fcefaf38cc4d3b7a9a0dd4c2d8
 		ModelView mv = new ModelView("/mypage/adminDebate");
 		System.out.printf("success");
 		//request.setAttribute("model",mv); 가 자동으로 등록됨
@@ -154,7 +160,11 @@ public class MyPageController {
 	
 	@Mapping(url="/profile.ap", bean="bean.User", method="POST")
 	ModelView postProfile(HttpServletRequest request,HttpServletResponse response,Object bean){
-
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 		String say;
 		List<Interest> interestList;		// user interestList
 		
@@ -170,7 +180,7 @@ public class MyPageController {
 		interests[0] = request.getParameter("interest1");
 		interests[1] = request.getParameter("interest2");
 		interests[2] = request.getParameter("interest3");
-		
+		System.out.println(say);
 		interestList = new ArrayList<Interest>();
 		
 		for(int i=0;i<3;i++){

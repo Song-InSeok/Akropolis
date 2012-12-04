@@ -1,12 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
-	<link href="/Akropolis/css/main.css" rel="stylesheet" type="text/css"> 
+	<link href="/Akropolis/css/main.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript">
+		$(function() {
+			
+		});
+		
+	</script>
 </head>
 <body>
 	<div class="container">
@@ -17,31 +22,30 @@
 			<div id="searchBar">
 				<ul class="nav nav-tabs">
 					<c:if test="${model.option=='hot' or empty model.option}">
-						<li class="active">
-					    	<a href="/Akropolis/main.ap?option=hot&page=1" id="hot">Hot</a>
-					  	</li>
-					  	<li>
-					  		<a href="/Akropolis/main.ap?option=lately&page=1" id="lately">Lately</a>
-					  	</li>
+						<li class="active"> <a href="/Akropolis/main.ap?option=hot&page=1" id="hot">Hot</a> </li>
+					  	<li> <a href="/Akropolis/main.ap?option=lately&page=1" id="lately">Lately</a> </li>
 				  	</c:if>
 				  	<c:if test="${model.option=='lately'}">
-						<li>
-					    	<a href="/Akropolis/main.ap?option=hot&page=1" id="hot">Hot</a>
-					  	</li>
-					  	<li class="active">
-					  		<a href="/Akropolis/main.ap?option=lately&page=1" id="lately">Lately</a>
-					  	</li>
+						<li> <a href="/Akropolis/main.ap?option=hot&page=1" id="hot">Hot</a> </li>
+					  	<li class="active"> <a href="/Akropolis/main.ap?option=lately&page=1" id="lately">Lately</a> </li>
 				  	</c:if>
-				  	<li class="pull-right">
-					  	<form class="form-search">
-						  <div class="input-append">
-						    <input type="text" class="span5 search-query"placeholder="Input topic">
-						    <button type="submit" class="btn">Search</button>
+			  		<c:if test="${model.option=='Title' or model.option=='Tag'}">
+						<li> <a href="/Akropolis/main.ap?option=hot&page=1" id="hot">Hot</a> </li>
+					  	<li> <a href="/Akropolis/main.ap?option=lately&page=1" id="lately">Lately</a> </li>
+				  	</c:if>
+					<li class="pull-right">
+					  	<form method="POST">
+						  <div class="input-prepend input-append">
+								<select class="span2" name="searchOption">
+									<option value="Title">Title</option>
+									<option value="Tag">Tag</option>
+								</select>
+								<input type="text" name="searchText" class="span5"placeholder="Input topic">
+							<input type="submit" class="btn" value="Search">
 						  </div>
 						</form>
 					</li>
-				</ul>
-					
+				</ul>					
 			</div>
 			<div id="searchResult">
 				<ul>
@@ -60,11 +64,11 @@
 				</c:forEach>	
 				</ul>
 			</div>
-			<div class="pagination pagination-centered">
+			<div class="pagination pagination-centered" id="pagenation">
 				<ul>
 					<c:if test="${model.result.currentPage != 1}">
 					    <li>
-						    <a href="/Akropolis/main.ap?option=${model.option}&page=${model.result.currentPage-1}">
+						    <a href="/Akropolis/main.ap?option=${model.option}&page=${model.result.currentPage-1}&text=${model.text}">
 						    	<i class="icon-chevron-left"></i>
 						    </a>
 					    </li>
@@ -72,18 +76,18 @@
 				    <c:forEach var="i" begin="${model.result.startPage}"  end="${model.result.endPage}">
 					    <c:if test="${i == model.result.currentPage}">
 				        	<li class="active">
-				        		<a href="/Akropolis/main.ap?option=${model.option}&page=${i}">${i}</a>
+				        		<a href="/Akropolis/main.ap?option=${model.option}&page=${i}&text=${model.text}">${i}</a>
 				        	</li>
 				      	</c:if>
 				     	<c:if test="${i != model.result.currentPage}">
           					<li>
-          						<a href="/Akropolis/main.ap?option=${model.option}&page=${i}">${i}</a>
+          						<a href="/Akropolis/main.ap?option=${model.option}&page=${i}&text=${model.text}">${i}</a>
           					</li>
 	      				</c:if>
 				   	</c:forEach>
 				   	<c:if test="${model.result.currentPage != model.result.maxPage}">
 				   		<li>
-				   			<a href="/Akropolis/main.ap?option=${model.option}&page=${model.result.currentPage+1}">
+				   			<a href="/Akropolis/main.ap?option=${model.option}&page=${model.result.currentPage+1}&text=${model.text}">
 				   				<i class="icon-chevron-right"></i>
 				   			</a>
 				   		</li>
