@@ -68,7 +68,7 @@
 				<ul>
 					<c:if test="${model.result.currentPage != 1}">
 					    <li>
-						    <a href="/Akropolis/main.ap?option=${model.option}&page=${model.result.currentPage-1}">
+						    <a href="/Akropolis/main.ap?option=${model.option}&page=${model.result.currentPage-1}&text=${model.text}">
 						    	<i class="icon-chevron-left"></i>
 						    </a>
 					    </li>
@@ -76,18 +76,18 @@
 				    <c:forEach var="i" begin="${model.result.startPage}"  end="${model.result.endPage}">
 					    <c:if test="${i == model.result.currentPage}">
 				        	<li class="active">
-				        		<a href="/Akropolis/main.ap?option=${model.option}&page=${i}">${i}</a>
+				        		<a href="/Akropolis/main.ap?option=${model.option}&page=${i}&text=${model.text}">${i}</a>
 				        	</li>
 				      	</c:if>
 				     	<c:if test="${i != model.result.currentPage}">
           					<li>
-          						<a href="/Akropolis/main.ap?option=${model.option}&page=${i}">${i}</a>
+          						<a href="/Akropolis/main.ap?option=${model.option}&page=${i}&text=${model.text}">${i}</a>
           					</li>
 	      				</c:if>
 				   	</c:forEach>
 				   	<c:if test="${model.result.currentPage != model.result.maxPage}">
 				   		<li>
-				   			<a href="/Akropolis/main.ap?option=${model.option}&page=${model.result.currentPage+1}">
+				   			<a href="/Akropolis/main.ap?option=${model.option}&page=${model.result.currentPage+1}&text=${model.text}">
 				   				<i class="icon-chevron-right"></i>
 				   			</a>
 				   		</li>

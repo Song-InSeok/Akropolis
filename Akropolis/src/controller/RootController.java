@@ -37,6 +37,7 @@ public class RootController {
 		int page;
 		PageResult<MainTopic> result=null;
 		String option = request.getParameter("option");
+		String text = request.getParameter("text");
 		MainTopicDAO mainTopicDao = new MainTopicDAO();
 		if(request.getParameter("page")!=null){
 			page = Integer.parseInt((request.getParameter("page")));
@@ -48,10 +49,13 @@ public class RootController {
 			
 		} else if (option.equals("lately")) {
 			result = mainTopicDao.getLately(page);
-		}	
+		} else if(option.equals("Title")){
+			result = mainTopicDao.getTitleSearch(page, text);
+		}
 		
 		ModelView mv = new ModelView("/main");
 		mv.setModel("option", option);
+		mv.setModel("text", text);
 		mv.setModel("result", result);
 		return mv;
 	}
@@ -70,14 +74,13 @@ public class RootController {
 		String searchOption = request.getParameter("searchOption");
 		String searchText = request.getParameter("searchText");
 
-		System.out.println(searchOption);
-		System.out.println(searchText);
 		if(searchOption.equals("Title")){
 			result = mainTopicDao.getTitleSearch(page, searchText);
 		}
 		
 		ModelView mv = new ModelView("/main");
 		mv.setModel("option", searchOption);
+		mv.setModel("text", searchText);
 		mv.setModel("result", result);
 		return mv;
 	}
