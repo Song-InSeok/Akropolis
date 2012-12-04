@@ -9,11 +9,12 @@ public class NewDebate implements Serializable {
 	private String email;
 	private String mt;
 	private int st;
-	private List<String> tag;
+	private List<tagList> tag;
 	private List<SubTopic> stList;
 	private Date sDate;
 	private Date eDate;
-	private boolean invite;
+	private String invite;
+	private boolean isinvite; 
 
 	public NewDebate() {
 
@@ -43,13 +44,7 @@ public class NewDebate implements Serializable {
 		this.st = st;
 	}
 
-	public List<String> getTag() {
-		return tag;
-	}
-
-	public void setTag(String tag) {
-		this.tag.add(tag);
-	}
+		
 
 	public List<SubTopic> getStList() {
 		return stList;
@@ -75,12 +70,35 @@ public class NewDebate implements Serializable {
 		this.eDate = eDate;
 	}
 
-	public boolean isInvite() {
+
+	public void setInvite(String invite) {
+		this.invite = invite;
+		this.setIsinvite(invite);
+	}
+
+	
+	public String getInvite() {
 		return invite;
 	}
 
-	public void setInvite(boolean invite) {
-		this.invite = invite;
+	public boolean isIsinvite() {
+		return isinvite;
+	}
+
+	public void setIsinvite(String invite) {
+		if(invite.equals("yes")){
+			this.isinvite = true;
+		}else{
+			this.isinvite = false;
+		}
+	}
+
+	public List<tagList> getTag() {
+		return tag;
+	}
+
+	public void setTag(List<tagList> tag) {
+		this.tag = tag;
 	}
 
 }

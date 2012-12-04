@@ -1,12 +1,12 @@
 package controller;
 
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
-
 import hello.annotation.Mapping;
 import hello.annotation.RootURL;
 import hello.mv.ModelView;
+
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +16,7 @@ import bean.BeanTest;
 import bean.Interest;
 import bean.NewDebate;
 import bean.User;
+import bean.tagList;
 import dao.InterestDAO;
 import dao.UserDAO;
 
@@ -102,17 +103,44 @@ public class MyPageController {
 	@Mapping(url="/newDebate.ap",bean="bean.NewDebate",method="POST") //bean 사용 안할시 bean 빼면됨
 	ModelView newPostDebate(HttpServletRequest request,HttpServletResponse response,Object bean){ // bean 사용 안할시 Object bean 빼면됨
 		//Model(Bean)
+		System.out.printf("success0");
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute("user");
-		String email = user.getEmail();
 		
+		System.out.printf("success1");
+		String email = user.getEmail();   //로그인된유저로 넘오온 이메일
+		String mT = request.getParameter("mTopic");   //메인토픽
+		String tagL[] = request.getParameterValues("tag");  //토픽리스트
+		String spL[] = request.getParameterValues("subtopic");
+		String sDate = request.getParameter("sDate");
+		String eDate = request.getParameter("eDate");
+		String sHour = request.getParameter("sHour");
+		String sMin = request.getParameter("sMin");
+		String eHour = request.getParameter("eHour");
+		String eMin = request.getParameter("eMin");
+		String invite = request.getParameter("invite");  //사용은 isinvite로
+		
+		System.out.printf("success2");
 		NewDebate newDebate = new NewDebate();
-		newDebate.setEmail(email);
-		
 
-		newDebate.setMt(request.getParameter("mTopic"));
+		//sets attribute
+		newDebate.setEmail(email);
+		newDebate.setMt(mT);
+		
+		//tag처리
+		 List<tagList> tagList = new ArrayList<tagList>();
+		for(String tag : tagL){  //태그수만큼
+			tagList tags = new tagList();  //태그리스트객체를만들고
+			tags.setTag(tag);  // 추가하고 (아이디는 자동카운팅이라니까신경안써도됨)
+			tagList.add(tags);  //tagListArray에 계속 넣기
+		}
+		//태그입력테스트
+		for(tagList tag : tagList){
+			System.out.println(tag.getTag());
+		}
+		newDebate.setTag(tagList); // 최종어레이를 newdebate bean에다가 줌
+		
 //여기수정하는중		
-		newDebate.setTag("tag");
 		
 
 		ModelView mv = new ModelView("/mypage/adminDebate");

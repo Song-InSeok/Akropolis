@@ -14,14 +14,11 @@ label.name {
 #regist{
 	display:block;
 	margin-top : 10px;
-	margin-left:55%;
+	margin-left:50%;
 }
 
 #sub_subject table {
 	border:0px; border-collapse:collapse; padding:30px; border-spacing:30px;
-}
-#sub_subject th{
-	width : 30px;
 }
 .dateinform{
 	padding-top: 40px;
@@ -30,6 +27,9 @@ label.name {
 	margin-right : 10px;
 	padding-left : 10px;
 	display: inline-block;
+}
+.tags {
+	width: 500px;
 }
 .short{
 	width: 80px;
