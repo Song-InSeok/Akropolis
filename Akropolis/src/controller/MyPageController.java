@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 
 import bean.BeanTest;
 import bean.Interest;
-import bean.NewDebate;
 import bean.User;
 import dao.InterestDAO;
 import dao.UserDAO;
@@ -105,11 +104,11 @@ public class MyPageController {
 		User user = (User)session.getAttribute("user");
 		String email = user.getEmail();
 		
-		NewDebate newDebate = new NewDebate();
-		newDebate.setEmail(email);
+//		NewDebate newDebate = new NewDebate();
+//		newDebate.setEmail(email);
 		
-		newDebate.setMt(request.getParameter("mTopic"));
-		newDebate.setTag(tag)
+//		newDebate.setMt(request.getParameter("mTopic"));
+//		newDebate.setTag(tag)
 		
 		ModelView mv = new ModelView("/mypage/adminDebate");
 		System.out.printf("success");

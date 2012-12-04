@@ -29,15 +29,34 @@ import dao.UserDAO;
 
 @RootURL("/")
 public class RootController {
+	@Mapping(url="/main.ap", method="Post")
+	ModelView getPost(HttpServletRequest request,HttpServletResponse response){
 
-	@Mapping(url="/main.ap")
-	ModelView main(HttpServletRequest request,HttpServletResponse response){
+		int page = 1;
+		PageResult<MainTopic> result=null;
+		MainTopicDAO mainTopicDao = new MainTopicDAO();
+		String searchOption = request.getParameter("searchOption");
+		String searchText = request.getParameter("searchText");
+
+		System.out.println(searchOption);
+		System.out.println(searchText);
+		if(searchOption.equals("Title")){
+			result = mainTopicDao.getTitleSearch(page, searchText);
+		}
+		
+		ModelView mv = new ModelView("/main");
+		mv.setModel("option", searchOption);
+		mv.setModel("result", result);
+		return mv;
+	}
+	
+	@Mapping(url="/main.ap", method="GET")
+	ModelView getMain(HttpServletRequest request,HttpServletResponse response){
 
 		int page;
 		PageResult<MainTopic> result=null;
 		String option = request.getParameter("option");
 		MainTopicDAO mainTopicDao = new MainTopicDAO();
-		
 		if(request.getParameter("page")!=null){
 			page = Integer.parseInt((request.getParameter("page")));
 		}

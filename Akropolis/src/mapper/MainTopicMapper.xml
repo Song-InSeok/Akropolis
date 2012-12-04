@@ -13,15 +13,29 @@
 		SELECT COUNT(*) FROM MainTopic
 	</select>
 	
-	<select id="getHotTopics" parameterType="int" resultType="MainTopic">
+	<select id="getHotTopics" resultType="MainTopic">
 		SELECT * FROM MainTopic 
 		ORDER BY (agree+disagree) DESC
 		LIMIT #{to}, #{number}
 	</select>
 	
-	<select id="getLatelyTopics" parameterType="int" resultType="MainTopic">
+	<select id="getLatelyTopics" resultType="MainTopic">
 		SELECT * FROM MainTopic 
 		ORDER BY date DESC
 		LIMIT #{to}, #{number}
 	</select>
+		
+	<select id="getSearchTotal" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM MainTopic
+		<!-- WHERE mt_title LIKE '%'#{searchText}'%' -->
+		WHERE mt_title LIKE CONCAT('%',#{searchText},'%')
+	</select>
+	
+	<select id="getTitleSearchTopics" resultType="MainTopic">
+		SELECT * FROM MainTopic 
+		WHERE mt_title LIKE CONCAT('%',#{searchText},'%')
+		LIMIT #{to}, #{number}
+	</select>
+
+	
 </mapper>

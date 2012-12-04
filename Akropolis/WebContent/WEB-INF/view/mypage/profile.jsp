@@ -25,7 +25,7 @@
 				$(".concern").attr("disabled",false);
 			});
 		});
-</script>
+	</script>
 </head>
 <body>
 	<div class="container">
@@ -44,23 +44,17 @@
 					</c:forEach>
 					<select name="interest1" class="concern2 span3">
 						<c:forEach var="interest" items="${model.interestList}">
-							<option>
-								${interest.interest}
-							</option>
+							<option> ${interest.interest} </option>
 						</c:forEach>
 					</select>
 					<select name="interest2" class="concern2 span3">
 						<c:forEach var="interest" items="${model.interestList}">
-							<option>
-								${interest.interest}
-							</option>
+							<option> ${interest.interest} </option>
 						</c:forEach>
 					</select>
 					<select name="interest3" class="concern2 span3">
 						<c:forEach var="interest" items="${model.interestList}">
-							<option>
-								${interest.interest}
-							</option>
+							<option> ${interest.interest} </option>
 						</c:forEach>
 					</select> <br /> 
 					<span>하고 싶은 말</span> <br/>
