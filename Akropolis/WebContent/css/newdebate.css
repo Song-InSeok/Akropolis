@@ -10,9 +10,6 @@ label.name {
 #contents {
 	margin-left: 3%;
 }
-.order {
-	width : 10px;
-}
 
 #regist{
 	display:block;
@@ -26,11 +23,17 @@ label.name {
 #sub_subject th{
 	width : 30px;
 }
+.dateinform{
+	padding-top: 40px;
+}
 .date{
 	margin-right : 10px;
 	padding-left : 10px;
 	display: inline-block;
 }
 .short{
-	width: 100px;
+	width: 80px;
+}
+.tag{
+	width: 57px;
 }

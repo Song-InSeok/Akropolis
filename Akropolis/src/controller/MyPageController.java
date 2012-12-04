@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import bean.BeanTest;
 import bean.Interest;
+import bean.NewDebate;
 import bean.User;
 import dao.InterestDAO;
 import dao.UserDAO;
@@ -64,7 +65,7 @@ public class MyPageController {
 		return mv;
 	}
 	
-	@Mapping(url="/nowDebate.ap",bean="bean.BeanTest") //bean 사용 안할시 bean 빼면됨
+	@Mapping(url="/nowDebate.ap",bean="bean.BeanTest" ) //bean 사용 안할시 bean 빼면됨
 	ModelView nowDebate(HttpServletRequest request,HttpServletResponse response,Object bean){ // bean 사용 안할시 Object bean 빼면됨
 		//Model(Bean)
 		BeanTest bt = (BeanTest)bean; //캐스팅해서 적절히 사용
@@ -86,19 +87,37 @@ public class MyPageController {
 		mv.setModel("id", "younghak");
 		return mv;
 	}
-	
-	@Mapping(url="/newDebate.ap",bean="bean.BeanTest") //bean 사용 안할시 bean 빼면됨
+	@Mapping(url="/newDebate.ap",bean="bean.NewDebate") //bean 사용 안할시 bean 빼면됨
 	ModelView newDebate(HttpServletRequest request,HttpServletResponse response,Object bean){ // bean 사용 안할시 Object bean 빼면됨
 		//Model(Bean)
-		BeanTest bt = (BeanTest)bean; //캐스팅해서 적절히 사용
-		ModelView mv = new ModelView("/mypage/newDebate");
 		
+		ModelView mv = new ModelView("/mypage/newDebate");
+
 		//request.setAttribute("model",mv); 가 자동으로 등록됨
 		//따라서 꺼낼시에  ((ModelView)request.getAttribute("model")).getModel("id"); 로 꺼낸다
 		mv.setModel("id", "younghak");
 		return mv;
 	}
-	
+	@Mapping(url="/newDebate.ap",bean="bean.NewDebate",method="POST") //bean 사용 안할시 bean 빼면됨
+	ModelView newPostDebate(HttpServletRequest request,HttpServletResponse response,Object bean){ // bean 사용 안할시 Object bean 빼면됨
+		//Model(Bean)
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("user");
+		String email = user.getEmail();
+		
+		NewDebate newDebate = new NewDebate();
+		newDebate.setEmail(email);
+		
+		newDebate.setMt(request.getParameter("mTopic"));
+		newDebate.setTag(tag)
+		
+		ModelView mv = new ModelView("/mypage/adminDebate");
+		System.out.printf("success");
+		//request.setAttribute("model",mv); 가 자동으로 등록됨
+		//따라서 꺼낼시에  ((ModelView)request.getAttribute("model")).getModel("id"); 로 꺼낸다
+		mv.setModel("id", "younghak");
+		return mv;
+	}
 	@Mapping(url="/profile.ap",bean="bean.User")
 	ModelView getProfile(HttpServletRequest request,HttpServletResponse response,Object bean){	
 		
