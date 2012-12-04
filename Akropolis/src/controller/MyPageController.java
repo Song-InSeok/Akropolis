@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import bean.BeanTest;
 import bean.Interest;
+import bean.NewDebate;
 import bean.User;
 import dao.InterestDAO;
 import dao.UserDAO;
@@ -105,17 +106,15 @@ public class MyPageController {
 		User user = (User)session.getAttribute("user");
 		String email = user.getEmail();
 		
-//		NewDebate newDebate = new NewDebate();
-//		newDebate.setEmail(email);
+		NewDebate newDebate = new NewDebate();
+		newDebate.setEmail(email);
 		
-<<<<<<< HEAD
+
 		newDebate.setMt(request.getParameter("mTopic"));
 //여기수정하는중		
-=======
-//		newDebate.setMt(request.getParameter("mTopic"));
-//		newDebate.setTag(tag)
+		newDebate.setTag("tag");
 		
->>>>>>> 8dc012bffcfce5fcefaf38cc4d3b7a9a0dd4c2d8
+
 		ModelView mv = new ModelView("/mypage/adminDebate");
 		System.out.printf("success");
 		//request.setAttribute("model",mv); 가 자동으로 등록됨

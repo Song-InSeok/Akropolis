@@ -76,8 +76,9 @@ public class RootController {
 
 		if(searchOption.equals("Title")){
 			result = mainTopicDao.getTitleSearch(page, searchText);
+		}else if(searchOption.equals("Tag")){
+			result = mainTopicDao.getTagSearch(page, searchText);
 		}
-		
 		ModelView mv = new ModelView("/main");
 		mv.setModel("option", searchOption);
 		mv.setModel("text", searchText);

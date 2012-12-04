@@ -93,7 +93,7 @@ public class MainTopicDAO {
 		}
 		try{
 			MainTopicMapper mapper = session.getMapper(MainTopicMapper.class);
-			total = mapper.getSearchTotal(searchText);
+			total = mapper.getTitleSearchTotal(searchText);
 			result.setTotal(total);
 			result.setPageNation();
 			from = page*result.getItemNumber()-result.getItemNumber();
@@ -106,5 +106,31 @@ public class MainTopicDAO {
 			session.close();
 		}
 		return result;	
+	}
+
+	public PageResult<MainTopic> getTagSearch(int page, String searchText) {
+		SqlSession session = sqlSessionFactory.openSession();
+		PageResult<MainTopic> result = new PageResult<MainTopic>(page);
+		int total=0;
+		int from=0;
+		int number=0;	
+		if (page <= 0) {
+			page = 1;
+		}
+		try{
+			MainTopicMapper mapper = session.getMapper(MainTopicMapper.class);
+			total = mapper.getTagSearchTotal(searchText);
+			result.setTotal(total);
+			result.setPageNation();
+			from = page*result.getItemNumber()-result.getItemNumber();
+			number = result.getItemNumber();
+			List<MainTopic> topics = mapper.getTagSearchTopics(from, number, searchText);
+			result.setTopicList(topics);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return result;
 	}
 }

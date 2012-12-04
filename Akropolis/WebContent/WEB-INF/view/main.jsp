@@ -1,17 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<% String option=request.getParameter("text"); 
+System.out.println(option);
+System.out.println(option);
+%>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<link href="/Akropolis/css/main.css" rel="stylesheet" type="text/css">
-	<script type="text/javascript">
-		$(function() {
-			
-		});
-		
-	</script>
 </head>
 <body>
 	<div class="container">
@@ -36,7 +34,7 @@
 					<li class="pull-right">
 					  	<form method="POST">
 						  <div class="input-prepend input-append">
-								<select class="span2" name="searchOption">
+								<select class="span2" name="searchOption" id="test3">
 									<option value="Title">Title</option>
 									<option value="Tag">Tag</option>
 								</select>
@@ -48,6 +46,11 @@
 				</ul>					
 			</div>
 			<div id="searchResult">
+				<p class="alert alert-info pull-right span10">
+					<span class="span3"> <strong> Search Results :  </strong>${model.result.total} </span>
+					<span class="span3"> <strong> Selected Option : </strong>${model.option} </span>
+					<span class="span3"> <strong> Text : </strong> ${model.text} </span>
+				</p>
 				<ul>
 				<c:forEach var="debate" items="${model.result.topicList}">
 					<li>
@@ -63,36 +66,36 @@
 					</li>
 				</c:forEach>	
 				</ul>
-			</div>
-			<div class="pagination pagination-centered" id="pagenation">
-				<ul>
-					<c:if test="${model.result.currentPage != 1}">
-					    <li>
-						    <a href="/Akropolis/main.ap?option=${model.option}&page=${model.result.currentPage-1}&text=${model.text}">
-						    	<i class="icon-chevron-left"></i>
-						    </a>
-					    </li>
-				    </c:if>
-				    <c:forEach var="i" begin="${model.result.startPage}"  end="${model.result.endPage}">
-					    <c:if test="${i == model.result.currentPage}">
-				        	<li class="active">
-				        		<a href="/Akropolis/main.ap?option=${model.option}&page=${i}&text=${model.text}">${i}</a>
-				        	</li>
-				      	</c:if>
-				     	<c:if test="${i != model.result.currentPage}">
-          					<li>
-          						<a href="/Akropolis/main.ap?option=${model.option}&page=${i}&text=${model.text}">${i}</a>
-          					</li>
-	      				</c:if>
-				   	</c:forEach>
-				   	<c:if test="${model.result.currentPage != model.result.maxPage}">
-				   		<li>
-				   			<a href="/Akropolis/main.ap?option=${model.option}&page=${model.result.currentPage+1}&text=${model.text}">
-				   				<i class="icon-chevron-right"></i>
-				   			</a>
-				   		</li>
-				   	</c:if>
-				</ul>
+				<div class="pagination pagination-centered span12">
+					<ul>
+						<c:if test="${model.result.currentPage != 1}">
+						    <li>
+							    <a href="/Akropolis/main.ap?option=${model.option}&page=${model.result.currentPage-1}&text=${model.text}">
+							    	<i class="icon-chevron-left"></i>
+							    </a>
+						    </li>
+					    </c:if>
+					    <c:forEach var="i" begin="${model.result.startPage}"  end="${model.result.endPage}">
+						    <c:if test="${i == model.result.currentPage}">
+					        	<li class="active">
+					        		<a href="/Akropolis/main.ap?option=${model.option}&page=${i}&text=${model.text}">${i}</a>
+					        	</li>
+					      	</c:if>
+					     	<c:if test="${i != model.result.currentPage}">
+	          					<li>
+	          						<a href="/Akropolis/main.ap?option=${model.option}&page=${i}&text=${model.text}">${i}</a>
+	          					</li>
+		      				</c:if>
+					   	</c:forEach>
+					   	<c:if test="${model.result.maxPage != 0 and model.result.currentPage != model.result.maxPage}">
+					   		<li>
+					   			<a href="/Akropolis/main.ap?option=${model.option}&page=${model.result.currentPage+1}&text=${model.text}">
+					   				<i class="icon-chevron-right"></i>
+					   			</a>
+					   		</li>
+					   	</c:if>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>

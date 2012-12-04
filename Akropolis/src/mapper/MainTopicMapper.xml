@@ -25,10 +25,16 @@
 		LIMIT #{to}, #{number}
 	</select>
 		
-	<select id="getSearchTotal" parameterType="String" resultType="int">
+	<select id="getTitleSearchTotal" parameterType="String" resultType="int">
 		SELECT COUNT(*) FROM MainTopic
 		<!-- WHERE mt_title LIKE '%'#{searchText}'%' -->
 		WHERE mt_title LIKE CONCAT('%',#{searchText},'%')
+	</select>
+	
+	<select id="getTagSearchTotal" parameterType="String" resultType="int">
+		SELECT COUNT(DISTINCT mt_id)
+		FROM MainTopic natural join MainTopic_TopicTag natural join TopicTag
+		WHERE tag LIKE CONCAT('%',#{searchText},'%')
 	</select>
 	
 	<select id="getTitleSearchTopics" resultType="MainTopic">
@@ -36,6 +42,12 @@
 		WHERE mt_title LIKE CONCAT('%',#{searchText},'%')
 		LIMIT #{to}, #{number}
 	</select>
-
+	
+	<select id="getTagSearchTopics" resultType="MainTopic">
+		SELECT DISTINCT mt_title,agree,disagree,date,m_close,mt_id,e_mail 
+		FROM MainTopic natural join MainTopic_TopicTag natural join TopicTag
+		WHERE tag LIKE CONCAT('%',#{searchText},'%')
+		LIMIT #{to}, #{number}
+	</select>
 	
 </mapper>
