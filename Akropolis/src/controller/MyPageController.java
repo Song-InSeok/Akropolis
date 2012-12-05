@@ -1,11 +1,12 @@
 package controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import hello.annotation.Mapping;
 import hello.annotation.RootURL;
 import hello.mv.ModelView;
+
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,7 +14,9 @@ import javax.servlet.http.HttpSession;
 
 import bean.BeanTest;
 import bean.Interest;
+import bean.NewDebate;
 import bean.User;
+import bean.tagList;
 import dao.InterestDAO;
 import dao.UserDAO;
 
@@ -64,18 +67,89 @@ public class MyPageController {
 		return mv;
 	}
 	
-	@Mapping(url="/newDebate.ap",bean="bean.BeanTest") //bean 사용 안할시 bean 빼면됨
-	ModelView newDebate(HttpServletRequest request,HttpServletResponse response,Object bean){ // bean 사용 안할시 Object bean 빼면됨
+	@Mapping(url="/nowDebate.ap",bean="bean.BeanTest" ) //bean 사용 안할시 bean 빼면됨
+	ModelView nowDebate(HttpServletRequest request,HttpServletResponse response,Object bean){ // bean 사용 안할시 Object bean 빼면됨
 		//Model(Bean)
 		BeanTest bt = (BeanTest)bean; //캐스팅해서 적절히 사용
-		ModelView mv = new ModelView("/mypage/newDebate");
+		ModelView mv = new ModelView("/mypage/nowDebate");
 		
 		//request.setAttribute("model",mv); 가 자동으로 등록됨
 		//따라서 꺼낼시에  ((ModelView)request.getAttribute("model")).getModel("id"); 로 꺼낸다
 		mv.setModel("id", "younghak");
 		return mv;
 	}
-	
+	@Mapping(url="/pastDebate.ap",bean="bean.BeanTest") //bean 사용 안할시 bean 빼면됨
+	ModelView pastDebate(HttpServletRequest request,HttpServletResponse response,Object bean){ // bean 사용 안할시 Object bean 빼면됨
+		//Model(Bean)
+		BeanTest bt = (BeanTest)bean; //캐스팅해서 적절히 사용
+		ModelView mv = new ModelView("/mypage/pastDebate");
+		
+		//request.setAttribute("model",mv); 가 자동으로 등록됨
+		//따라서 꺼낼시에  ((ModelView)request.getAttribute("model")).getModel("id"); 로 꺼낸다
+		mv.setModel("id", "younghak");
+		return mv;
+	}
+	@Mapping(url="/newDebate.ap",bean="bean.NewDebate") //bean 사용 안할시 bean 빼면됨
+	ModelView newDebate(HttpServletRequest request,HttpServletResponse response,Object bean){ // bean 사용 안할시 Object bean 빼면됨
+		//Model(Bean)
+		
+		ModelView mv = new ModelView("/mypage/newDebate");
+
+		//request.setAttribute("model",mv); 가 자동으로 등록됨
+		//따라서 꺼낼시에  ((ModelView)request.getAttribute("model")).getModel("id"); 로 꺼낸다
+		mv.setModel("id", "younghak");
+		return mv;
+	}
+	@Mapping(url="/newDebate.ap",bean="bean.NewDebate",method="POST") //bean 사용 안할시 bean 빼면됨
+	ModelView newPostDebate(HttpServletRequest request,HttpServletResponse response,Object bean){ // bean 사용 안할시 Object bean 빼면됨
+		//Model(Bean)
+		System.out.printf("success0");
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("user");
+		
+		System.out.printf("success1");
+		String email = user.getEmail();   //로그인된유저로 넘오온 이메일
+		String mT = request.getParameter("mTopic");   //메인토픽
+		String tagL[] = request.getParameterValues("tag");  //토픽리스트
+		String spL[] = request.getParameterValues("subtopic");
+		String sDate = request.getParameter("sDate");
+		String eDate = request.getParameter("eDate");
+		String sHour = request.getParameter("sHour");
+		String sMin = request.getParameter("sMin");
+		String eHour = request.getParameter("eHour");
+		String eMin = request.getParameter("eMin");
+		String invite = request.getParameter("invite");  //사용은 isinvite로
+		
+		System.out.printf("success2");
+		NewDebate newDebate = new NewDebate();
+
+		//sets attribute
+		newDebate.setEmail(email);
+		newDebate.setMt(mT);
+		
+		//tag처리
+		 List<tagList> tagList = new ArrayList<tagList>();
+		for(String tag : tagL){  //태그수만큼
+			tagList tags = new tagList();  //태그리스트객체를만들고
+			tags.setTag(tag);  // 추가하고 (아이디는 자동카운팅이라니까신경안써도됨)
+			tagList.add(tags);  //tagListArray에 계속 넣기
+		}
+		//태그입력테스트
+		for(tagList tag : tagList){
+			System.out.println(tag.getTag());
+		}
+		newDebate.setTag(tagList); // 최종어레이를 newdebate bean에다가 줌
+		
+//여기수정하는중		
+		
+
+		ModelView mv = new ModelView("/mypage/adminDebate");
+		System.out.printf("success");
+		//request.setAttribute("model",mv); 가 자동으로 등록됨
+		//따라서 꺼낼시에  ((ModelView)request.getAttribute("model")).getModel("id"); 로 꺼낸다
+		mv.setModel("id", "younghak");
+		return mv;
+	}
 	@Mapping(url="/profile.ap",bean="bean.User")
 	ModelView getProfile(HttpServletRequest request,HttpServletResponse response,Object bean){	
 		
@@ -87,6 +161,8 @@ public class MyPageController {
 		String education = user.getEducation();
 		
 		UserDAO userDao = new UserDAO();
+		interestList = new ArrayList<Interest>();
+		user.setInterestList(interestList);
 		user = userDao.getUser(email);
 		user.setEducation(education);
 		
@@ -111,7 +187,11 @@ public class MyPageController {
 	
 	@Mapping(url="/profile.ap", bean="bean.User", method="POST")
 	ModelView postProfile(HttpServletRequest request,HttpServletResponse response,Object bean){
-
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 		String say;
 		List<Interest> interestList;		// user interestList
 		
@@ -127,7 +207,7 @@ public class MyPageController {
 		interests[0] = request.getParameter("interest1");
 		interests[1] = request.getParameter("interest2");
 		interests[2] = request.getParameter("interest3");
-		
+		System.out.println(say);
 		interestList = new ArrayList<Interest>();
 		
 		for(int i=0;i<3;i++){

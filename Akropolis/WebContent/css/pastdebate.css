@@ -1,0 +1,31 @@
+@CHARSET "UTF-8";
+
+#contents {
+	margin-left: 3%;
+}
+
+label.name {
+	margin : 4px;
+	display:inline-block;
+	
+	font-size:14px;font-weight:bold;line-height:20px;
+}
+
+#debate_list{
+	width : 400px;
+}
+#debate_list ul {
+	list-style: none;
+	text-decoration: none;
+}
+
+#debate_list ul li {
+	display: block;
+	margin: 5px;
+	padding: 3px;
+}
+
+a:hover {
+	color: #BDBDBD;
+	text-decoration: none;
+}

@@ -4,6 +4,7 @@ import hello.annotation.Mapping;
 import hello.annotation.RootURL;
 import hello.mv.ModelView;
 
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -29,15 +30,15 @@ import dao.UserDAO;
 
 @RootURL("/")
 public class RootController {
-
-	@Mapping(url="/main.ap")
-	ModelView main(HttpServletRequest request,HttpServletResponse response){
+	
+	@Mapping(url="/main.ap", method="GET")
+	ModelView getMain(HttpServletRequest request,HttpServletResponse response){
 
 		int page;
 		PageResult<MainTopic> result=null;
 		String option = request.getParameter("option");
+		String text = request.getParameter("text");
 		MainTopicDAO mainTopicDao = new MainTopicDAO();
-		
 		if(request.getParameter("page")!=null){
 			page = Integer.parseInt((request.getParameter("page")));
 		}
@@ -48,14 +49,43 @@ public class RootController {
 			
 		} else if (option.equals("lately")) {
 			result = mainTopicDao.getLately(page);
-		}	
+		} else if(option.equals("Title")){
+			result = mainTopicDao.getTitleSearch(page, text);
+		}
 		
 		ModelView mv = new ModelView("/main");
 		mv.setModel("option", option);
+		mv.setModel("text", text);
 		mv.setModel("result", result);
 		return mv;
 	}
 	
+	@Mapping(url="/main.ap", method="POST")
+	ModelView getPost(HttpServletRequest request,HttpServletResponse response){
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		int page = 1;
+		PageResult<MainTopic> result=null;
+		MainTopicDAO mainTopicDao = new MainTopicDAO();
+		String searchOption = request.getParameter("searchOption");
+		String searchText = request.getParameter("searchText");
+
+		if(searchOption.equals("Title")){
+			result = mainTopicDao.getTitleSearch(page, searchText);
+		}else if(searchOption.equals("Tag")){
+			result = mainTopicDao.getTagSearch(page, searchText);
+		}
+		ModelView mv = new ModelView("/main");
+		mv.setModel("option", searchOption);
+		mv.setModel("text", searchText);
+		mv.setModel("result", result);
+		return mv;
+	}
+
 	@Mapping(url="/login.ap",bean="bean.FaceBook")
 	ModelView login(HttpServletRequest request,HttpServletResponse response,Object bean){
 		ModelView mv = new ModelView("/close");

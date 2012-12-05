@@ -10,64 +10,51 @@
 	<link href="/Akropolis/css/profile.css" rel="stylesheet" type="text/css">
 	<script type="text/javascript">
 		$(function() {
-			$("#left").find(".concern").eq(0).val("${model.user.interestList.get(0).interest}");
-			$("#left").find(".concern").eq(1).val("${model.user.interestList.get(1).interest}");
-			$("#left").find(".concern").eq(2).val("${model.user.interestList.get(2).interest}");
-			$("#left").find(".concern").eq(3).hide();
-			$("#left").find(".concern").eq(4).hide();
-			$("#left").find(".concern").eq(5).hide();
+			
+			$(".concern1").attr("disabled",true);
+			$(".concern2").hide();
 			$("#saveBtn").hide();
 			$("#left>form>textarea").attr("disabled",true);
-			$(".concern").attr("disabled",true);
 			
 			$("#modifyBtn").click(function() {
-				$("#left").find(".concern").eq(0).hide();
-				$("#left").find(".concern").eq(1).hide();
-				$("#left").find(".concern").eq(2).hide();
-				$("#left").find(".concern").eq(3).show();
-				$("#left").find(".concern").eq(4).show();
-				$("#left").find(".concern").eq(5).show();
+				$(".concern1").hide();
+				$(".concern2").show();
 				$("#modifyBtn").hide();
 				$("#saveBtn").show();
 				$("#left>form>textarea").attr("disabled",false);
 				$(".concern").attr("disabled",false);
 			});
 		});
-</script>
+	</script>
 </head>
 <body>
 	<div class="container">
 		<div id="profile">
+		${modle.user.interestList.size}
 			<div id="left">
 				<form method="POST" action="profile.ap">
 					<input type="submit" class="btn" id="saveBtn" value="저장">
 					<input type="button" class="btn" id="modifyBtn" value="수정">
 					<h1>${model.user.name}</h1>
-					<span>( ${model.user.email} )</span><br /> 
-					<span>학력</span> ${model.user.education} <br /> 
+					<p><span>( ${model.user.email} )</span></p>
+					<span>학력</span> ${model.user.education} <br/> 
 					<span>관심사</span>
-					<input type="text" class="concern span3">
-					<input type="text" class="concern span3">
-					<input type="text" class="concern span3">
-					<select name="interest1" class="concern span3">
+					<c:forEach var="interest" items="${model.user.interestList}">
+						<input type="text" class="concern1 span3" value="${interest.interest}">
+					</c:forEach>
+					<select name="interest1" class="concern2 span3">
 						<c:forEach var="interest" items="${model.interestList}">
-							<option>
-								${interest.interest}
-							</option>
+							<option> ${interest.interest} </option>
 						</c:forEach>
 					</select>
-					<select name="interest2" class="concern span3">
+					<select name="interest2" class="concern2 span3">
 						<c:forEach var="interest" items="${model.interestList}">
-							<option>
-								${interest.interest}
-							</option>
+							<option> ${interest.interest} </option>
 						</c:forEach>
 					</select>
-					<select name="interest3" class="concern span3">
+					<select name="interest3" class="concern2 span3">
 						<c:forEach var="interest" items="${model.interestList}">
-							<option>
-								${interest.interest}
-							</option>
+							<option> ${interest.interest} </option>
 						</c:forEach>
 					</select> <br /> 
 					<span>하고 싶은 말</span> <br/>
