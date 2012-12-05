@@ -2,6 +2,7 @@ package util;
 
 import hello.mv.ModelView;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,14 @@ public class DebatePageManager {
 	public DebatePageManager(){
 		
 	}
+	
+	public static boolean submitPage(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException{
+		request.setCharacterEncoding("utf-8");
+		System.out.println(request.getParameter("chatarea1"));
+		
+		return true;
+	}
+	
 	public static boolean makePage(HttpServletRequest request,HttpServletResponse response){
 		User loginUser;
 		MainTopicDAO mdao = new MainTopicDAO();
@@ -75,4 +84,6 @@ public class DebatePageManager {
 		request.setAttribute("debatemanager", dm);
 		return true;
 	}
+	
+	
 }

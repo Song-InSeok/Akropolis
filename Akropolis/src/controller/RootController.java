@@ -119,7 +119,23 @@ public class RootController {
 		ModelView mv = new ModelView("/error");
 		return mv;
 	}
-	
+	@Mapping(url="/debate.ap",method="POST")
+	ModelView debatePost(HttpServletRequest request,HttpServletResponse response){
+		ModelView mv=null;
+	try{
+		boolean isSuccess=DebatePageManager.submitPage(request, response);
+		mv = new ModelView("/debate");
+		//else mv = new ModelView("/error");
+		System.out.println("debate post");
+		return mv;
+	}catch(Exception e){
+		e.printStackTrace();
+		mv = new ModelView("/error");
+	}finally{
+		
+	}
+	return mv;
+}
 	@Mapping(url="/debate.ap",method="GET")
 	ModelView debate(HttpServletRequest request,HttpServletResponse response){
 //		User loginUser;

@@ -161,7 +161,8 @@
 .opinion{
 	float: left;
 	overflow: auto;
-	width: 520px;
+	width: 510px;
+	padding-top: 10px;
 	padding-left: 10px;
 	text-align: left;	
 }
@@ -177,12 +178,12 @@
 	
 }
 .blue_opinion>.opinion>.id{
-	color: #ccc;
+	color: #aaa;
 	padding-left: 10px;
 	float: left;
 }
 .red_opinion>.opinion>.id{
-	color: #ccc;
+	color: #aaa;
 	padding-right: 10px;
 	float: right;
 	
@@ -198,17 +199,48 @@
 	color: #111;
 	
 }
+.mid_opinion>.name{
+	color: #0f0;
+	float:inherit;
+	text-align:center;
+}
+.mid_opinion>.id{
+	color: #aaa;
+	float:inherit;
+	text-align:center;
+}
+.mid_opinion>a{
+	color: #000;
+	float:inherit;
+	text-align:center;	
+}
 .op_prof{
 	float: left;
 	width: 70px;
 	min-height: 80px;
-		overflow: auto;
+	overflow: auto;
+	
+}
+.op_photo{
+	width:50px;
+	margin-left: 12px;
+	background-color: #fff;
+	padding: 3px 3px 3px 3px;
+	margin-top: 7px;
+	border-radius: 5px;
+	float: left;
 	
 }
 .prof_btn{
-	width: 70px;
-	height: 20px;
+	padding-top: 3px;
+	padding-left: 5px;
+	min-width: 65px;
+	min-height: 27px;
 	float: left;
+}
+.prof_btn>a{
+	color:#111;
+	font-size: 0.8em;
 }
 .prof_mini{
 	width : 70px;

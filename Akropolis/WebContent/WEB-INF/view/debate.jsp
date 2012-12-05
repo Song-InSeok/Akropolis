@@ -10,7 +10,7 @@
 	<script type="text/javascript">
 		$(function() {
 			$(".progess").find(".bar").eq(0).click(function(){
-				alert("");
+				alert("찬");
 			});
 			$(".progress").find(".bar").eq(1).click(function(){
 				alert("반");
@@ -25,8 +25,8 @@
 		<div id="main_topic_top"><h3>${debatemanager.mt.mt_title }</h3></div>
 		<div id="main_topic_bot">
 			<div class="progress">
-				<div class="bar progress-info flag_bar1" style="width: ${100*debatemanager.mt.agree/(debatemanager.mt.agree+debatemanager.mt.disagree)}%;"></div>
-				<div class="bar bar-danger flag_bar2" style="width: ${100*debatemanager.mt.disagree/(debatemanager.mt.agree+debatemanager.mt.disagree)}%;"></div>
+				<div class="bar progress-info flag_bar1" style="width: ${100*debatemanager.mt.agree/(debatemanager.mt.agree+debatemanager.mt.disagree)}%;">${debatemanager.mt.agree }</div>
+				<div class="bar bar-danger flag_bar2" style="width: ${100*debatemanager.mt.disagree/(debatemanager.mt.agree+debatemanager.mt.disagree)}%;">${debatemanager.mt.disagree }</div>
 			</div>
 		</div>
 	</div>
@@ -64,17 +64,43 @@
 				</div>
 				<div id="opinions">
 					<ul>
-						<li class="alert-error red_opinion">
-						<div class="opinion"><a class="name">USER</a><a class="id">@asdf.com</a></br><a>red Opinion</a></div>
-						<div class="op_prof"></div></li>
-						<li><div class="alert-error red_opinion"><div class="opinion"><a class="name">USER</a><a class="id">@asdf.com</a></br><a>red Opinion</a></div>
+						<c:forEach var="opi" items="${debatemanager.opList }">
+							<c:choose>
+								<c:when test="${opi.flag=='Y'}"><li>
+									<div class="alert-info blue_opinion">
+									<div class="op_prof"><img class = "op_photo" src="${opi.photo }">
+									<div class="prof_btn"><i class="icon-thumbs-up"></i><i class="icon-thumbs-down"></i></div></div>
+									<div class="opinion"><a class="name">${opi.name }</a>
+									<a class="id">${opi.e_mail }</a><br>
+									<a>${opi.content }</a></div></div>
+								</li></c:when>
+								
+								<c:when test="${opi.flag=='N'}"><li>
+									<div class="alert-error red_opinion">
+									<div class="opinion"><a class="name">${opi.name }</a>
+									<a class="id">${opi.e_mail }</a><br>
+									<a>${opi.content }</a></div>
+									<div class="op_prof"><img class = "op_photo" src="${opi.photo }">
+									<div class="prof_btn">
+									<i class="icon-thumbs-up"></i><a>${opi.honor }</a>
+									<i class="icon-thumbs-down"></i><a>x</a>
+									</div></div></div>
+								</li></c:when>
+								
+								<c:when test="${opi.flag=='C'}"><li>C</li></c:when>
+							</c:choose>
+						</c:forEach>
+						<li><div class="alert-error red_opinion"><div class="opinion"><a class="name">USER</a><a class="id">@asdf.com</a><br><a>red Opinion</a></div>
 						<div class="op_prof"></div>
 						</div></li>
 						<li><div class="alert-info blue_opinion"><div class="op_prof"></div>
 						<div class="opinion"><a class="name">USER</a>
-						<a class="id">@asdf.com</a></br><a>Blue Opinion</a></div></div>
+						<a class="id">@asdf.com</a><br><a>Blue Opinion</a></div></div>
 						</li>
-						<li class="alert-info blue_opinion">blue opinion</li>
+						<li><div class="alert-success mid_opinion"><a class="name">USER</a><a class="id">@asdf.com</a>
+						<br><a>MID OPINION</a>
+						</div>
+						</li>
 						<li class="alert-success mid_opinion">mid opinion</li>
 						<li class="alert-error red_opinion">red opinion</li>
 						<li class="alert-info blue_opinion">blue opinion</li>
@@ -101,9 +127,9 @@
 						<li><a href="#">red</a></li>
 					</ul></div>
 				<div id="chat_bot" class="back_red">
-					<form class="navbart-form pull-left">
-						<textarea class="input-xxlarge marg_left" rows="2" name="chatarea"></textarea>
-						<button id = "submit_button"type="submit" class="btn btn-primary btn-large submit_btn">OK</button>
+					<form class="navbart-form pull-left" method="POST" action="debate.ap">
+						<textarea id="submit_content"class="input-xxlarge marg_left" rows="2" name="chatarea1"></textarea>
+						<button id="submit_button" type="submit" class="btn btn-primary btn-large submitBtn" value="ok">OK</button>
 					</form>
 				</div>
 			</div>
