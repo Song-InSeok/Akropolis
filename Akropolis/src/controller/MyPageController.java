@@ -12,12 +12,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
+
 import bean.BeanTest;
 import bean.Interest;
+import bean.MainTopic;
 import bean.NewDebate;
 import bean.User;
 import bean.tagList;
 import dao.InterestDAO;
+import dao.MainTopicDAO;
 import dao.UserDAO;
 
 
@@ -70,14 +74,21 @@ public class MyPageController {
 	@Mapping(url="/nowDebate.ap",bean="bean.BeanTest" ) //bean 사용 안할시 bean 빼면됨
 	ModelView nowDebate(HttpServletRequest request,HttpServletResponse response,Object bean){ // bean 사용 안할시 Object bean 빼면됨
 		//Model(Bean)
-		BeanTest bt = (BeanTest)bean; //캐스팅해서 적절히 사용
+		
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("user");
+		List<MainTopic> mainTopic;
+		
+		MainTopicDAO maintopicdao = new MainTopicDAO();
+		System.out.println(user.getEmail());
+		mainTopic = maintopicdao.getNowTopic(user.getEmail());
+		
 		ModelView mv = new ModelView("/mypage/nowDebate");
 		
-		//request.setAttribute("model",mv); 가 자동으로 등록됨
-		//따라서 꺼낼시에  ((ModelView)request.getAttribute("model")).getModel("id"); 로 꺼낸다
-		mv.setModel("id", "younghak");
+		mv.setModel("topic", mainTopic);
 		return mv;
 	}
+	
 	@Mapping(url="/pastDebate.ap",bean="bean.BeanTest") //bean 사용 안할시 bean 빼면됨
 	ModelView pastDebate(HttpServletRequest request,HttpServletResponse response,Object bean){ // bean 사용 안할시 Object bean 빼면됨
 		//Model(Bean)
@@ -89,7 +100,7 @@ public class MyPageController {
 		mv.setModel("id", "younghak");
 		return mv;
 	}
-	@Mapping(url="/newDebate.ap",bean="bean.NewDebate") //bean 사용 안할시 bean 빼면됨
+	@Mapping(url="/newDebate.ap",bean="bean.BeanTest") //bean 사용 안할시 bean 빼면됨
 	ModelView newDebate(HttpServletRequest request,HttpServletResponse response,Object bean){ // bean 사용 안할시 Object bean 빼면됨
 		//Model(Bean)
 		
@@ -101,13 +112,13 @@ public class MyPageController {
 		return mv;
 	}
 	@Mapping(url="/newDebate.ap",bean="bean.NewDebate",method="POST") //bean 사용 안할시 bean 빼면됨
-	ModelView newPostDebate(HttpServletRequest request,HttpServletResponse response,Object bean){ // bean 사용 안할시 Object bean 빼면됨
+	ModelView getPostDebate(HttpServletRequest request,HttpServletResponse response,Object bean){ // bean 사용 안할시 Object bean 빼면됨
 		//Model(Bean)
-		System.out.printf("success0");
+		System.out.println("success0");
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute("user");
 		
-		System.out.printf("success1");
+		System.out.println("success1");
 		String email = user.getEmail();   //로그인된유저로 넘오온 이메일
 		String mT = request.getParameter("mTopic");   //메인토픽
 		String tagL[] = request.getParameterValues("tag");  //토픽리스트
@@ -120,7 +131,7 @@ public class MyPageController {
 		String eMin = request.getParameter("eMin");
 		String invite = request.getParameter("invite");  //사용은 isinvite로
 		
-		System.out.printf("success2");
+		System.out.println("success2");
 		NewDebate newDebate = new NewDebate();
 
 		//sets attribute
@@ -147,7 +158,7 @@ public class MyPageController {
 		System.out.printf("success");
 		//request.setAttribute("model",mv); 가 자동으로 등록됨
 		//따라서 꺼낼시에  ((ModelView)request.getAttribute("model")).getModel("id"); 로 꺼낸다
-		mv.setModel("id", "younghak");
+		mv.setModel("User", "younghak");
 		return mv;
 	}
 	@Mapping(url="/profile.ap",bean="bean.User")

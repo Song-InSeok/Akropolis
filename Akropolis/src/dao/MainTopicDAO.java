@@ -2,6 +2,7 @@ package dao;
 
 import java.util.List;
 import mapper.MainTopicMapper;
+import mapper.UserMapper;
 import mybatis.config.MyBatisManager;
 
 import org.apache.ibatis.session.SqlSession;
@@ -132,5 +133,20 @@ public class MainTopicDAO {
 			session.close();
 		}
 		return result;
+	}
+//	수정중
+	public List<MainTopic> getNowTopic(String email){
+		SqlSession session = sqlSessionFactory.openSession();
+		List<MainTopic> nowMainTopic = null;
+		try{
+			UserMapper mapper = session.getMapper(UserMapper.class);
+			
+			nowMainTopic = mapper.getNowTopic(email);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return nowMainTopic;
 	}
 }
