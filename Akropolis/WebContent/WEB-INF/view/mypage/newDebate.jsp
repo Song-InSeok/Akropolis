@@ -16,7 +16,7 @@
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
-<%int count=1; %>
+<%int count=-1; %>
 <script language="javascript" type="text/javascript">
 	$(document)
 			.ready(
@@ -29,26 +29,34 @@
 											$("body").find("#hidetag").html());
 								});
 						
+						var num=-1;
+						var fDate = "fDate";
+						var tDate = "tDate";
 						$("body")
 								.find("#ok")
 								.click(
+										
 										function() {
-											$("#real").find("#last").find(
-											"input[id='fDate']")
-											.attr("id", 'old');
-											$("#real").find("#last").find(
-											"input[id='tDate']")
-											.attr("id", 'old');
-											$("#real").find("#last").find(
-											"tr[id='last']")
-											.attr("id", 'oldTr');
 											
-											$("#real [class='date']").css("display",'none');
+											++num;
 											
+											
+											
+											$("#real").find(".date").hide();
+											
+											$("#real").find(".last").attr("class", 'old');
+										
 											$("#real").find("tbody").append(
 													$("#secret").find("tbody")
 															.html());
+											$("#real").find(".index:last").text(num+1);
 											
+											$("#real").find(".last").find("#fDate").attr("id", fDate+num);
+											$("#real").find(".last").find("#tDate").attr("id", tDate+num);
+											
+											$(".last").find(".edit").click(function(){
+												$(this).parents("tr").find(".date").toggle();
+											});
 
 											//******************************************************************************
 											// 상세검색 달력 스크립트
@@ -72,22 +80,48 @@
 												showOn : "both", //엘리먼트와 이미지 동시 사용(both,button)
 												yearRange : '1990:2020' //1990년부터 2020년까지
 											};
-											$("#fDate").datepicker(
+											
+											switch(num){
+											case 0 :
+											$("#fDate0").datepicker(
 													clareCalendar);
-											$("#tDate").datepicker(
+											$("#tDate0").datepicker(
 													clareCalendar);
+												break;
+											case 1:
+											$("#fDate1").datepicker(
+													clareCalendar);
+											$("#tDate1").datepicker(
+													clareCalendar);
+												break;
+											case 2:
+												$("#fDate2").datepicker(
+														clareCalendar);
+												$("#tDate2").datepicker(
+														clareCalendar);
+												break;
+											case 3:
+												$("#fDate3").datepicker(
+														clareCalendar);
+												$("#tDate3").datepicker(
+														clareCalendar);
+												break;
+											}
+											
 											$("img.ui-datepicker-trigger")
 													.attr("style",
 															"margin-left:5px; vertical-align:middle; cursor:pointer;"); //이미지버튼 style적용
 
 											$("#ui-datepicker-div").hide(); //자동으로 생성되는 div객체 숨김  
 											//****************************************  끝  ***********************************
+											
 										});
-						$("#ok").click();
 						
-						$("#real").find("#edit").click(function(){
-							$(this).parents("tr").find("[class='date']").toggle();
-						});
+						$("#ok").click();
+						function update() {
+						      var n=0;
+						      n + 1;
+						    }
 					});
 </script>
 </head>
@@ -126,7 +160,7 @@
 						<tfoot id="add">
 						</tfoot>
 					</table>
-					<input type="button" id="ok" class="btn" value="OK">
+					<input type="button" id="ok" class="btn" value="Add">
 					<hr>
 				</div>
 
@@ -144,16 +178,13 @@
 	<table id="secret" style="display: none;">
 		<tbody>
 			<tr>
-				<th> 1.</th>
+				<th class="index"> </th>
 				<td><input type='text' name="subtopic" size='50' class='sub'
-					placeholder=" Write to SubTopics.."></td>
+					placeholder=" Write to SubTopics.."></td><td></td>
 			</tr>
-			<tr id="last">
+			<tr class="last">
 			
-			<td><button type="button" style="margin-bottom : 10px;" id="edit">
-										<img src="/Akropolis/img/penIcon.png"  width="80%" height="80%" class="img-rounded "
-											alt="편집">
-									</button></td>
+				<td></td>
 				<td>
 					<div class="date">
 						시작 : <input name="sDate" class="short" type="text" size="10"
@@ -187,6 +218,10 @@
 						</select>
 					</div>
 				</td>
+				<td><button type="button" style="margin-bottom : 10px;" class="edit">
+										<img src="/Akropolis/img/penIcon.png"  width="80%" height="80%" class="img-rounded "
+											alt="편집">
+									</button></td>
 			</tr>
 		</tbody>
 	</table>

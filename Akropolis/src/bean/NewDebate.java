@@ -7,14 +7,10 @@ import java.util.List;
 public class NewDebate implements Serializable {
 
 	private String email;
-	private String mt;
-	private int st;
-	private List<tagList> tag;
+	private String mTopic;
+	private List<tagList> tags;
+	private List<SubTopic>  subtopics;
 	private List<SubTopic> stList;
-	private Date sDate;
-	private Date eDate;
-	private String invite;
-	private boolean isinvite; 
 
 	public NewDebate() {
 
@@ -28,23 +24,30 @@ public class NewDebate implements Serializable {
 		this.email = email;
 	}
 
-	public String getMt() {
-		return mt;
+	
+	public String getmTopic() {
+		return mTopic;
 	}
 
-	public void setMt(String mTopic) {
-		this.mt = mTopic;
+	public void setmTopic(String mTopic) {
+		this.mTopic = mTopic;
 	}
 
-	public int getSt() {
-		return st;
+	public List<tagList> getTags() {
+		return tags;
 	}
 
-	public void setSt(int st) {
-		this.st = st;
+	public void setTags(List<tagList> tags) {
+		this.tags = tags;
 	}
 
-		
+	public List<SubTopic> getSubtopics() {
+		return subtopics;
+	}
+
+	public void setSubtopics(List<SubTopic> subtopics) {
+		this.subtopics = subtopics;
+	}
 
 	public List<SubTopic> getStList() {
 		return stList;
@@ -53,52 +56,4 @@ public class NewDebate implements Serializable {
 	public void setStList(List<SubTopic> stList) {
 		this.stList = stList;
 	}
-
-	public Date getsDate() {
-		return sDate;
-	}
-
-	public void setsDate(Date sDate) {
-		this.sDate = sDate;
-	}
-
-	public Date geteDate() {
-		return eDate;
-	}
-
-	public void seteDate(Date eDate) {
-		this.eDate = eDate;
-	}
-
-
-	public void setInvite(String invite) {
-		this.invite = invite;
-		this.setIsinvite(invite);
-	}
-
-	
-	public String getInvite() {
-		return invite;
-	}
-
-	public boolean isIsinvite() {
-		return isinvite;
-	}
-
-	public void setIsinvite(String invite) {
-		if(invite.equals("yes")){
-			this.isinvite = true;
-		}else{
-			this.isinvite = false;
-		}
-	}
-
-	public List<tagList> getTag() {
-		return tag;
-	}
-
-	public void setTag(List<tagList> tag) {
-		this.tag = tag;
-	}
-
 }
