@@ -233,4 +233,6 @@ ADD FOREIGN KEY R_31 (e_mail) REFERENCES User (e_mail);
 ALTER TABLE User_Interest_list
 ADD FOREIGN KEY R_39 (interest_id) REFERENCES Interest_list (interest_id);
 
+ALTER TABLE Participant ADD p_date TIMESTAMP DEFAULT now();
+
 

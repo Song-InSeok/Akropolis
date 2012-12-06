@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import bean.MainTopic;
 import bean.PageResult;
+import bean.Timeline;
 
 public class MainTopicDAO {
 	public static SqlSessionFactory sqlSessionFactory = MyBatisManager.getInstance();
@@ -133,6 +134,19 @@ public class MainTopicDAO {
 			session.close();
 		}
 		return result;
+	}
+	public List<Timeline> getTimeline(String email){
+		SqlSession session = sqlSessionFactory.openSession();
+		List<Timeline> timeline = null;
+		try{
+			MainTopicMapper mapper = session.getMapper(MainTopicMapper.class);		
+			timeline = mapper.getTimeline(email);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return timeline;
 	}
 //	수정중
 	public List<MainTopic> getNowTopic(String email){

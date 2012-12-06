@@ -8,6 +8,7 @@ public class Participant implements Serializable {
 	private int mt_id;
 	private String e_mail;
 	private String flag;
+	private String p_date;
 	public Participant(){
 		
 	}
@@ -41,4 +42,11 @@ public class Participant implements Serializable {
 	public void setFlag(String flag) {
 		this.flag = flag;
 	}
+	public String getP_date() {
+		return p_date;
+	}
+	public void setP_date(String p_date) {
+		this.p_date = p_date;
+	}
+	
 }

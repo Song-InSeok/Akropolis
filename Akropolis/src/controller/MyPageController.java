@@ -12,12 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
-
 import bean.BeanTest;
 import bean.Interest;
 import bean.MainTopic;
 import bean.NewDebate;
+import bean.Timeline;
 import bean.User;
 import bean.tagList;
 import dao.InterestDAO;
@@ -197,7 +196,7 @@ public class MyPageController {
 	}
 	
 	@Mapping(url="/profile.ap", bean="bean.User", method="POST")
-	ModelView postProfile(HttpServletRequest request,HttpServletResponse response,Object bean){
+	ModelView postProfile(HttpServletRequest request,HttpServletResponse response, Object bean){
 		try {
 			request.setCharacterEncoding("utf-8");
 		} catch (UnsupportedEncodingException e) {
@@ -209,10 +208,8 @@ public class MyPageController {
 		User user = (User)bean;
 		UserDAO userDao = new UserDAO();
 		InterestDAO interestDao = new InterestDAO();
-		
 		HttpSession session = request.getSession();
 		user = (User)session.getAttribute("user");
-		
 		say=request.getParameter("say");
 		String interests[] = new String[3];
 		interests[0] = request.getParameter("interest1");
@@ -220,6 +217,7 @@ public class MyPageController {
 		interests[2] = request.getParameter("interest3");
 		System.out.println(say);
 		interestList = new ArrayList<Interest>();
+		System.out.println("test" +user.getSay());
 		
 		for(int i=0;i<3;i++){
 			boolean flag=true;
@@ -270,10 +268,26 @@ public class MyPageController {
 		mv.setModel("msg", msg);
 		return mv;
 	}
-	@Mapping(url="/timeline.ap")
-	ModelView timeline(HttpServletRequest request,HttpServletResponse response){
-		//Model(Bean)
+	
+	@Mapping(url="/timeline.ap",  bean="bean.User")
+	ModelView timeline(HttpServletRequest request,HttpServletResponse response,Object bean){
+
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("user");
+		String email = user.getEmail();
+		
+		UserDAO userDao = new UserDAO();
+		user = userDao.getUser(email);
+		
+		MainTopicDAO mainTopicDao = new MainTopicDAO();
+		List<Timeline> timeline = new ArrayList<Timeline>();
+		
+		timeline=mainTopicDao.getTimeline(email);
+		
 		ModelView mv = new ModelView("/mypage/timeline");
+		mv.setModel("timeline", timeline);
+		mv.setModel("user", user);
+		
 		return mv;
 	}
 	

@@ -50,4 +50,10 @@
 		LIMIT #{to}, #{number}
 	</select>
 	
+	<select id="getTimeline" parameterType="String" resultType="Timeline">
+		SELECT m.*, p.request, p.flag, p.p_date FROM Participant p, MainTopic m
+		WHERE m.mt_id = p.mt_id and p.e_mail=#{email}
+		ORDER BY p_date DESC;
+	</select>
+	
 </mapper>

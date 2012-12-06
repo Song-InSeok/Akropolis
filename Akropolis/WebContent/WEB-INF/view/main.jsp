@@ -47,7 +47,7 @@ System.out.println(option);
 			</div>
 			<div id="searchResult">
 				<p class="alert alert-info pull-right span10">
-					<span class="span3"> <strong> Search Results :  </strong>${model.result.total} </span>
+					<span class="span3"> <strong> Total :  </strong>${model.result.total} </span>
 					<span class="span3"> <strong> Selected Option : </strong>${model.option} </span>
 					<span class="span3"> <strong> Text : </strong> ${model.text} </span>
 				</p>

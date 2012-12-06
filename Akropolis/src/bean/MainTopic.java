@@ -13,6 +13,7 @@ public class MainTopic implements Serializable{
 	private int agree;
 	private int disagree;
 	private boolean close;
+	
 	public MainTopic(){
 		
 	}
