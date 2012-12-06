@@ -135,7 +135,7 @@ public class MainTopicDAO {
 		}
 		return result;
 	}
-<<<<<<< HEAD
+
 	public List<Timeline> getTimeline(String email){
 		SqlSession session = sqlSessionFactory.openSession();
 		List<Timeline> timeline = null;
@@ -150,20 +150,19 @@ public class MainTopicDAO {
 		return timeline;
 	}
 //	수정중
-	public List<MainTopic> getNowTopic(String email){
-		SqlSession session = sqlSessionFactory.openSession();
-		List<MainTopic> nowMainTopic = null;
-		try{
-			UserMapper mapper = session.getMapper(UserMapper.class);
-			
-			nowMainTopic = mapper.getNowTopic(email);
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally{
-			session.close();
-		}
-		return nowMainTopic;
-	}
-=======
->>>>>>> 38b1670cbf4f407d348084e512f5859698bd5cac
+//	public List<MainTopic> getNowTopic(String email){
+//		SqlSession session = sqlSessionFactory.openSession();
+//		List<MainTopic> nowMainTopic = null;
+//		try{
+//			UserMapper mapper = session.getMapper(UserMapper.class);
+//			
+//			nowMainTopic = mapper.getNowTopic(email);
+//		}catch(Exception e){
+//			e.printStackTrace();
+//		}finally{
+//			session.close();
+//		}
+//		return nowMainTopic;
+//	}
+
 }

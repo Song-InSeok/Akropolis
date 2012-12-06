@@ -20,6 +20,7 @@ import bean.User;
 import bean.tagList;
 import dao.CreateTopicDAO;
 import dao.InterestDAO;
+import dao.MainTopicDAO;
 import dao.UserDAO;
 
 
