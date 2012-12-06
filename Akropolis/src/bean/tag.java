@@ -3,12 +3,12 @@ package bean;
 import java.io.Serializable;
 import java.util.List;
 
-public class tagList implements Serializable{
+public class tag implements Serializable{
 	
 	private int id;
 	private String tag;
 	
-	public tagList(){
+	public tag(){
 		id=-1;
 		tag=null;
 	}
