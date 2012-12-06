@@ -6,11 +6,11 @@ import java.util.List;
 
 public class NewDebate implements Serializable {
 
-	private String email;
-	private String mTopic;
-	private List<tagList> tags;
-	private List<SubTopic>  subtopics;
-	private List<SubTopic> stList;
+	private String email;  //자동으로빈
+	private String mTopic;  //자동으로빈
+	
+	private List<tag> tags;  //컨트롤러에서 넣어줌
+	private List<SubTopic>  subtopics;  
 
 	public NewDebate() {
 
@@ -33,13 +33,6 @@ public class NewDebate implements Serializable {
 		this.mTopic = mTopic;
 	}
 
-	public List<tagList> getTags() {
-		return tags;
-	}
-
-	public void setTags(List<tagList> tags) {
-		this.tags = tags;
-	}
 
 	public List<SubTopic> getSubtopics() {
 		return subtopics;
@@ -49,11 +42,12 @@ public class NewDebate implements Serializable {
 		this.subtopics = subtopics;
 	}
 
-	public List<SubTopic> getStList() {
-		return stList;
+
+	public List<tag> getTags() {
+		return tags;
 	}
 
-	public void setStList(List<SubTopic> stList) {
-		this.stList = stList;
+	public void setTags(List<tag> tags) {
+		this.tags = tags;
 	}
 }

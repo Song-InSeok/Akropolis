@@ -177,7 +177,7 @@
 		<tbody>
 			<tr>
 				<th class="index"> </th>
-				<td><input type='text' name="subtopic" size='50' class='sub'
+				<td><input type='text' name="subTopic" size='50' class='sub'
 					placeholder=" Write to SubTopics.."></td><td></td>
 			</tr>
 			<tr class="last">
