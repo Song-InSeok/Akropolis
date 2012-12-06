@@ -12,16 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
-
 import bean.BeanTest;
 import bean.Interest;
-import bean.MainTopic;
 import bean.NewDebate;
 import bean.User;
 import bean.tagList;
+import dao.CreateTopicDAO;
 import dao.InterestDAO;
-import dao.MainTopicDAO;
 import dao.UserDAO;
 
 
@@ -79,7 +76,7 @@ public class MyPageController {
 		User user = (User)session.getAttribute("user");
 		List<String> mainTopic;
 		
-		MainTopicDAO maintopicdao = new MainTopicDAO();
+		CreateTopicDAO maintopicdao = new CreateTopicDAO();
 		System.out.println(user.getEmail());
 		mainTopic = maintopicdao.getNowTopic(user.getEmail());
 		
