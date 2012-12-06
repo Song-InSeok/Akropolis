@@ -122,7 +122,7 @@ public class MyPageController {
 		User user = (User)session.getAttribute("user");
 		
 		NewDebate newDebate = (NewDebate) bean;
-		System.out.println("메인토픽 : "+newDebate.getmTopic());
+		System.out.println("메인토픽 : "+newDebate.getMTopic());
 		
 		String email = user.getEmail();   //로그인된유저로 넘오온 이메일
 		//sets attribute
