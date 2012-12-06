@@ -18,8 +18,8 @@
 				<label class="name">목 록</label>
 				<div id="debate_list">
 					<ul>
-						<c:forEach var="top" items="${model.topic}">
-							<li>${top}</li>
+						<c:forEach var="topic" items="${model.topic}">
+							<li>${topic}</li>
 						</c:forEach>
 					</ul>
 				</div>

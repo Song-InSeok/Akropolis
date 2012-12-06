@@ -135,9 +135,9 @@ public class MainTopicDAO {
 		return result;
 	}
 //	수정중
-	public List<MainTopic> getNowTopic(String email){
+	public List<String> getNowTopic(String email){
 		SqlSession session = sqlSessionFactory.openSession();
-		List<MainTopic> nowMainTopic = null;
+		List<String> nowMainTopic = null;
 		try{
 			UserMapper mapper = session.getMapper(UserMapper.class);
 			

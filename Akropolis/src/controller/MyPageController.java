@@ -77,7 +77,7 @@ public class MyPageController {
 		
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute("user");
-		List<MainTopic> mainTopic;
+		List<String> mainTopic;
 		
 		MainTopicDAO maintopicdao = new MainTopicDAO();
 		System.out.println(user.getEmail());
@@ -100,8 +100,8 @@ public class MyPageController {
 		mv.setModel("id", "younghak");
 		return mv;
 	}
-	@Mapping(url="/newDebate.ap",bean="bean.BeanTest") //bean 사용 안할시 bean 빼면됨
-	ModelView newDebate(HttpServletRequest request,HttpServletResponse response,Object bean){ // bean 사용 안할시 Object bean 빼면됨
+	@Mapping(url="/newDebate.ap") //bean 사용 안할시 bean 빼면됨
+	ModelView newDebate(HttpServletRequest request,HttpServletResponse response){ // bean 사용 안할시 Object bean 빼면됨
 		//Model(Bean)
 		
 		ModelView mv = new ModelView("/mypage/newDebate");
@@ -111,8 +111,8 @@ public class MyPageController {
 		mv.setModel("id", "younghak");
 		return mv;
 	}
-	@Mapping(url="/newDebate.ap",bean="bean.NewDebate",method="POST") //bean 사용 안할시 bean 빼면됨
-	ModelView getPostDebate(HttpServletRequest request,HttpServletResponse response,Object bean){ // bean 사용 안할시 Object bean 빼면됨
+	@Mapping(url="/newDebate.ap",method="POST") //bean 사용 안할시 bean 빼면됨
+	ModelView getPostDebate(HttpServletRequest request,HttpServletResponse response){ // bean 사용 안할시 Object bean 빼면됨
 		//Model(Bean)
 		System.out.println("success0");
 		HttpSession session = request.getSession();
@@ -154,7 +154,7 @@ public class MyPageController {
 //여기수정하는중		
 		
 
-		ModelView mv = new ModelView("/mypage/adminDebate");
+		ModelView mv = new ModelView("redirect:/Akropolis/mypage/adminDebate.ap");
 		System.out.printf("success");
 		//request.setAttribute("model",mv); 가 자동으로 등록됨
 		//따라서 꺼낼시에  ((ModelView)request.getAttribute("model")).getModel("id"); 로 꺼낸다
