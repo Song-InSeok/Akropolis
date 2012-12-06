@@ -178,16 +178,13 @@
 	<table id="secret" style="display: none;">
 		<tbody>
 			<tr>
-				<th class="index"> 1.</th>
+				<th class="index"> </th>
 				<td><input type='text' name="subtopic" size='50' class='sub'
-					placeholder=" Write to SubTopics.."></td>
+					placeholder=" Write to SubTopics.."></td><td></td>
 			</tr>
 			<tr class="last">
 			
-			<td><button type="button" style="margin-bottom : 10px;" class="edit">
-										<img src="/Akropolis/img/penIcon.png"  width="80%" height="80%" class="img-rounded "
-											alt="편집">
-									</button></td>
+				<td></td>
 				<td>
 					<div class="date">
 						시작 : <input name="sDate" class="short" type="text" size="10"
@@ -221,6 +218,10 @@
 						</select>
 					</div>
 				</td>
+				<td><button type="button" style="margin-bottom : 10px;" class="edit">
+										<img src="/Akropolis/img/penIcon.png"  width="80%" height="80%" class="img-rounded "
+											alt="편집">
+									</button></td>
 			</tr>
 		</tbody>
 	</table>
