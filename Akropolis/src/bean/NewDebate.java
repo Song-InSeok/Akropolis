@@ -25,11 +25,11 @@ public class NewDebate implements Serializable {
 	}
 
 	
-	public String getmTopic() {
+	public String getMTopic() {
 		return mTopic;
 	}
 
-	public void setmTopic(String mTopic) {
+	public void setMTopic(String mTopic) {
 		this.mTopic = mTopic;
 	}
 
