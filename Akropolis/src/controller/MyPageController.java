@@ -14,13 +14,12 @@ import javax.servlet.http.HttpSession;
 
 import bean.BeanTest;
 import bean.Interest;
-import bean.MainTopic;
 import bean.NewDebate;
 import bean.Timeline;
 import bean.User;
 import bean.tagList;
+import dao.CreateTopicDAO;
 import dao.InterestDAO;
-import dao.MainTopicDAO;
 import dao.UserDAO;
 
 
@@ -76,9 +75,9 @@ public class MyPageController {
 		
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute("user");
-		List<MainTopic> mainTopic;
+		List<String> mainTopic;
 		
-		MainTopicDAO maintopicdao = new MainTopicDAO();
+		CreateTopicDAO maintopicdao = new CreateTopicDAO();
 		System.out.println(user.getEmail());
 		mainTopic = maintopicdao.getNowTopic(user.getEmail());
 		
@@ -99,8 +98,8 @@ public class MyPageController {
 		mv.setModel("id", "younghak");
 		return mv;
 	}
-	@Mapping(url="/newDebate.ap",bean="bean.BeanTest") //bean 사용 안할시 bean 빼면됨
-	ModelView newDebate(HttpServletRequest request,HttpServletResponse response,Object bean){ // bean 사용 안할시 Object bean 빼면됨
+	@Mapping(url="/newDebate.ap") //bean 사용 안할시 bean 빼면됨
+	ModelView newDebate(HttpServletRequest request,HttpServletResponse response){ // bean 사용 안할시 Object bean 빼면됨
 		//Model(Bean)
 		
 		ModelView mv = new ModelView("/mypage/newDebate");
@@ -110,33 +109,28 @@ public class MyPageController {
 		mv.setModel("id", "younghak");
 		return mv;
 	}
-	@Mapping(url="/newDebate.ap",bean="bean.NewDebate",method="POST") //bean 사용 안할시 bean 빼면됨
-	ModelView getPostDebate(HttpServletRequest request,HttpServletResponse response,Object bean){ // bean 사용 안할시 Object bean 빼면됨
+	@Mapping(url="/newDebate.ap",method="POST",bean="bean.NewDebate")
+	ModelView getPostDebate(HttpServletRequest request,HttpServletResponse response,Object bean){ 
 		//Model(Bean)
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 		System.out.println("success0");
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute("user");
 		
-		System.out.println("success1");
-		String email = user.getEmail();   //로그인된유저로 넘오온 이메일
-		String mT = request.getParameter("mTopic");   //메인토픽
-		String tagL[] = request.getParameterValues("tag");  //토픽리스트
-		String spL[] = request.getParameterValues("subtopic");
-		String sDate = request.getParameter("sDate");
-		String eDate = request.getParameter("eDate");
-		String sHour = request.getParameter("sHour");
-		String sMin = request.getParameter("sMin");
-		String eHour = request.getParameter("eHour");
-		String eMin = request.getParameter("eMin");
-		String invite = request.getParameter("invite");  //사용은 isinvite로
+		NewDebate newDebate = (NewDebate) bean;
+		System.out.println("메인토픽 : "+newDebate.getmTopic());
 		
-		System.out.println("success2");
-		NewDebate newDebate = new NewDebate();
-
+		String email = user.getEmail();   //로그인된유저로 넘오온 이메일
 		//sets attribute
 		newDebate.setEmail(email);
-		newDebate.setMt(mT);
 		
+		
+		
+		String tagL[] = request.getParameterValues("tag");  //토픽리스트
 		//tag처리
 		 List<tagList> tagList = new ArrayList<tagList>();
 		for(String tag : tagL){  //태그수만큼
@@ -148,12 +142,10 @@ public class MyPageController {
 		for(tagList tag : tagList){
 			System.out.println(tag.getTag());
 		}
-		newDebate.setTag(tagList); // 최종어레이를 newdebate bean에다가 줌
 		
-//여기수정하는중		
 		
 
-		ModelView mv = new ModelView("/mypage/adminDebate");
+		ModelView mv = new ModelView("redirect:/Akropolis/mypage/adminDebate.ap");
 		System.out.printf("success");
 		//request.setAttribute("model",mv); 가 자동으로 등록됨
 		//따라서 꺼낼시에  ((ModelView)request.getAttribute("model")).getModel("id"); 로 꺼낸다

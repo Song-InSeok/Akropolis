@@ -28,6 +28,9 @@ label.name {
 	padding-left : 10px;
 	display: inline-block;
 }
+.index{
+	width: 40px;
+}
 .tags {
 	width: 500px;
 }

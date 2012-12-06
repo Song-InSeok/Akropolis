@@ -135,6 +135,7 @@ public class MainTopicDAO {
 		}
 		return result;
 	}
+<<<<<<< HEAD
 	public List<Timeline> getTimeline(String email){
 		SqlSession session = sqlSessionFactory.openSession();
 		List<Timeline> timeline = null;
@@ -163,4 +164,6 @@ public class MainTopicDAO {
 		}
 		return nowMainTopic;
 	}
+=======
+>>>>>>> 38b1670cbf4f407d348084e512f5859698bd5cac
 }
