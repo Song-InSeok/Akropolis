@@ -7,14 +7,59 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link href="/Akropolis/css/debate.css" rel="stylesheet" type="text/css">
+	<c:set value="${debatemanager.logPt.request }" var="req"></c:set>
+	<c:set value="${debatemanager.isPt }" var="ispt"/>
+	<c:set value="${debatemanager.isLogin }" var = "islog"/>
 	<script type="text/javascript">
 		$(function() {
+			$("#message_btn").append("asdf");
+			
+			$("#submit_button").click(function(){
+				if(confirm("content")){
+					$("#chat_form").submit();
+				}
+			});
+			
+			if('${req}'=='Y'){
+				alert('${req}');
+				$("#chat_bot").addClass("back_blue");
+				$("#submit_button").addClass("btn-primary");
+				$("#message_bot").hide();
+			}else if('${req}'=='N'){
+				$("#chat_bot").addClass("back_red");
+				$("#submit_button").addClass("btn-danger");
+				$("#message_bot").hide();
+
+			}else if('${req}'=='C'){
+				$("#chat_bot").addClass("back_green");
+				$("#submit_button").addClass("btn-success");
+				$("#message_bot").hide();
+
+			}else if('${req}'=='D'){
+				$("#chat_bot").hide();
+				$("#message_bot").hide();
+				$("#message_btn").addClass("btn-primary");
+				$("#message_btn").addClass("disabled");
+				$("#message_btn").append("참가 요청이 진행중입니다");
+				
+			}else if('${req}'=='X'){
+				$("#chat_bot").hide();
+				$("#message_btn").addClass("btn-danger");
+				$("#message_btn").addClass("disabled");
+				$("#message_btn").appent("토론에서 추방당하셨습니다.");
+			}else if('${req}'=='R'){
+				$("#chat_bot").hide();	
+				$("#message_btn").addClass("btn-success");
+				$("#message_btn").appent("사회자로부터 초대된 토론입니다.");
+			}else{
+				$("#chat_bot").hide();	
+			}
 			
 			$(".progess").find(".bar").eq(0).click(function(){
 				alert();
 			});
 			$(".progress").find(".bar").eq(1).click(function(){
-				alert($(req));
+				alert('${req}');
 			});
 		});
 	</script>
@@ -103,6 +148,7 @@
 								</c:when>
 							</c:choose>
 						</c:forEach>
+						<%--
 						<li><div class="alert-error red_opinion"><div class="opinion"><a class="name">USER</a><a class="id">@asdf.com</a><br><a>red Opinion</a></div>
 						<div class="op_prof"></div>
 						</div></li>
@@ -114,6 +160,7 @@
 						<br><a>MID OPINION</a>
 						</div>
 						</li>
+						
 						<li class="alert-success mid_opinion">mid opinion</li>
 						<li class="alert-error red_opinion">red opinion</li>
 						<li class="alert-info blue_opinion">blue opinion</li>
@@ -130,15 +177,15 @@
 						<li class="alert-error red_opinion">red opinion</li>
 						<li class="alert-info blue_opinion">blue opinion</li>
 						<li class="alert-success mid_opinion">mid opinion</li>
+						 --%>
 					</ul>
 				</div>
 			</div>
-			
 			<%--여기부터 채탱윈도우 --%>
 			<c:set value="${debatemanager.logPt.request }" var="req"/>
 			<div id="chat_window" >
-			<a>${debatemanager.isLogin } ${debatemanager.isPt } ${debatemanager.logPt.request }</a>
-			
+			<%-- <a>${debatemanager.subTopic.sub_close } ${debatemanager.isLogin } ${debatemanager.isPt } ${debatemanager.logPt.request }</a>
+			--%>
 				<%--<div id="chat_top">
 					<ul class="nav nav-tabs">
 						<li class="active"><a href="#">blue</a></li>
@@ -147,42 +194,33 @@
 			<c:if test="${debatemanager.subTopic.sub_close=='O' }">
 				<c:if test="${debatemanager.isLogin==1 }">
 					<c:if test="${debatemanager.isPt==1 }">
-						<c:choose>
-							<c:when test="${debatemanager.logPt.request=='Y' }">
-								<div id="chat_bot" class="back_blue">
-								<form class="navbart-form pull-left" method="POST" action="debate.ap">
-								<textarea id="submit_content"class="input-xxlarge chat_area" rows="5" name="chatarea1"></textarea>
-								<button id="submit_button" type="submit" class="btn btn-primary btn-large submit_btn" value="ok">OK</button>
-								</form></div>
-							</c:when>
-							
-							<c:when test="${debatemanager.logPt.request=='N' }">
-								<div id="chat_bot" class="back_red">
-								<form class="navbart-form pull-left" method="POST" action="debate.ap">
-								<textarea id="submit_content"class="input-xxlarge chat_area" rows="5" name="chatarea1"></textarea>
-								<button id="submit_button" type="submit" class="btn btn-danger btn-large submit_btn" value="ok">OK</button>
-								</form></div>
-							</c:when>
-							
-							<c:when test="${debatemanager.logPt.request=='C' }">
-								<div id="chat_bot" class="back_green">
-								<form class="navbart-form pull-left" method="POST" action="debate.ap">
-								<textarea id="submit_content"class="input-xxlarge chat_area" rows="5" name="chatarea1"></textarea>
-								<button id="submit_button" type="submit" class="btn btn-success btn-large submit_btn" value="ok">OK</button>
-								</form></div>
-							</c:when>
-							
-							<c:when test="${debatemanager.logPt.request=='D' }">
-							</c:when>
-							<c:when test="${debatemanager.logPt.request=='R' }">
-							</c:when>
-							<c:when test="${debatemanager.logPt.request=='X' }">
-							</c:when>				
-						</c:choose>
+						<div id="chat_bot" >
+							<form id="chat_form" class="navbart-form pull-left" method="POST" action="debate.ap">
+							<input type="hidden" name = "mtmt" value="${debatemanager.mt.mt_id }"/>
+							<input type="hidden" name = "stst" value="${debatemanager.st }"/>
+							<textarea id="submit_content"class="input-xxlarge chat_area" rows="5" name="chatarea1"></textarea>
+							<button id="submit_button" type="submit" class="btn btn-large submit_btn" value="ok">OK</button>
+							</form></div>
+						<div id="message_bot" class = "back_grey">
+							<button id="message_btn" type="button" class="btn btn-large msg_btn" value="mesbtn"></button>
+						</div>
 					</c:if>
+					<c:if test="${debatemanager.isPt==0 }">
+						<div id="message_bot" class = "back_grey">
+							<button id="message_btn" type="button" class="btn btn-large btn-info msg_btn" value="mesbtn"></button>
+						</div>
+					</c:if>
+				</c:if>
+				<c:if test="${debatemanager.isLogin==0 }">
+					<div id="message_bot" class = "back_grey">
+					<button id="message_btn" type="button" class="btn btn-large msg_btn " value="mesbtn"></button>
+					</div>
 				</c:if>
 			</c:if>
 			<c:if test="${debatemanager.subTopic.sub_close=='C' }">
+				<div id="message_bot" class = "back_grey">
+					<button id="message_btn" type="button" class="btn btn-large msg_btn disabled" value="mesbtn"></button>
+				</div>
 				<a>close</a>
 			</c:if>	
 			</div>

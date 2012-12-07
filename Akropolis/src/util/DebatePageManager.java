@@ -25,6 +25,9 @@ public class DebatePageManager {
 	public static boolean submitPage(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException{
 		request.setCharacterEncoding("utf-8");
 		System.out.println(request.getParameter("chatarea1"));
+		System.out.println(request.getParameter("mtmt"));
+		System.out.println(request.getParameter("stst"));
+
 		
 		return true;
 	}

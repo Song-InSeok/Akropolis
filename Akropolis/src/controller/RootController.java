@@ -154,7 +154,10 @@ public class RootController {
 		ModelView mv=null;
 	try{
 		boolean isSuccess=DebatePageManager.submitPage(request, response);
-		mv = new ModelView("/debate");
+		String st,mt;
+		mt=request.getParameter("mtmt");
+		st=request.getParameter("stst");
+		mv = new ModelView("redirect:/Akropolis/debate.ap?mt="+mt+"&st="+st);
 		//else mv = new ModelView("/error");
 		System.out.println("debate post");
 		return mv;
