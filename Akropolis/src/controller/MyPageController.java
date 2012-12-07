@@ -16,6 +16,7 @@ import bean.BeanTest;
 import bean.Interest;
 import bean.NewDebate;
 import bean.SubTopic;
+import bean.Timeline;
 import bean.User;
 import bean.TagTag;
 import dao.CreateTopicDAO;
@@ -321,8 +322,22 @@ public class MyPageController {
 	}
 	@Mapping(url="/timeline.ap")
 	ModelView timeline(HttpServletRequest request,HttpServletResponse response){
-		//Model(Bean)
+		
+		HttpSession session = request.getSession();
+		User user=(User)session.getAttribute("user");
+		String email = user.getEmail();
+		
+		UserDAO userDao=new UserDAO();
+		user=userDao.getUser(email);
+		
+		MainTopicDAO mainTopicDao = new MainTopicDAO();
+		List<Timeline> timeline = new ArrayList<Timeline>();
+		
+		timeline = mainTopicDao.getTimeline(email);
+		
 		ModelView mv = new ModelView("/mypage/timeline");
+		mv.setModel("timeline", timeline);
+		mv.setModel("user", user);
 		return mv;
 	}
 	

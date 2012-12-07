@@ -9,4 +9,8 @@
   <select id="getSubTopics" parameterType="int" resultType="SubTopic">
     select * from SubTopic where mt_id = #{mt_id} order by sub_id asc
   </select>
+  <select id="getSubTopic" parameterType="SubTopic" resultType="SubTopic">
+      select * from SubTopic where mt_id = #{mt_id} and sub_id = #{sub_id}
+      
+  </select>
 </mapper>

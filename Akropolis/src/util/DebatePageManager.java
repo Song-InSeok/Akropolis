@@ -13,6 +13,7 @@ import bean.SubTopic;
 import bean.User;
 import dao.MainTopicDAO;
 import dao.OpinionDAO;
+import dao.ParticipantDAO;
 import dao.SubTopicDAO;
 import dao.UserDAO;
 
@@ -24,6 +25,9 @@ public class DebatePageManager {
 	public static boolean submitPage(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException{
 		request.setCharacterEncoding("utf-8");
 		System.out.println(request.getParameter("chatarea1"));
+		System.out.println(request.getParameter("mtmt"));
+		System.out.println(request.getParameter("stst"));
+
 		
 		return true;
 	}
@@ -34,6 +38,7 @@ public class DebatePageManager {
 		SubTopicDAO sdao = new SubTopicDAO();
 		OpinionDAO odao = new OpinionDAO();
 		UserDAO udao = new UserDAO();
+		ParticipantDAO pdao = new ParticipantDAO();
 		int mt_id,st_id,st_O,st_L;
 		boolean flag=false;
 		ModelView mv = null;
@@ -43,9 +48,8 @@ public class DebatePageManager {
 		if(request.getParameter("st")!=null) st_id = Integer.parseInt(request.getParameter("st"));
 		loginUser = (User)request.getSession().getAttribute("user");
 		System.out.println(mt_id+" "+st_id+" "+loginUser);
-		
 		if(mt_id==0){
-			if((loginUser=(User)request.getSession().getAttribute("user"))==null){
+			if(loginUser==null){
 				return false;
 			}else{
 				mt_id = new UserDAO().getUsersDebate(loginUser.getEmail());
@@ -57,7 +61,17 @@ public class DebatePageManager {
 		dm.setStList(sdao.getSubTopics(mt_id));
 		dm.setUserList(udao.getDebateUsers(mt_id));
 		
-		
+		if(loginUser==null){ 
+			dm.setIsLogin(0);
+			dm.setLogUser(loginUser);
+		}else{ 
+			dm.setIsLogin(1);
+			dm.setLogUser(loginUser);
+			dm.setLogPt(pdao.getParticipant(loginUser.getEmail(), mt_id));
+			if(dm.getLogPt()==null) dm.setIsPt(0);
+			else dm.setIsPt(1);
+		}
+
 		List<SubTopic> slist = dm.getStList();
 		for(int i=0;i<slist.size();i++){
 			if((st_L=slist.get(i).getSub_id())==st_id) flag=true;
@@ -67,10 +81,13 @@ public class DebatePageManager {
 		else if(!flag&&st_O!=0) dm.setSt(st_O);
 		else dm.setSt(st_L);
 		
+		dm.setSubTopic(sdao.getSubTopic(mt_id, dm.getSt()));
+		System.out.println("subtopic = "+dm.getSubTopic());
+		System.out.println("login = "+loginUser);
 		
 		dm.setOpList(odao.getOPs(mt_id, dm.getSt()));
 		
-		System.out.println(dm.getSt()+" "+st_O+" "+st_L+" "+dm.getSt()+" flag = "+dm.getUserList().get(0).getFlag());
+//		System.out.println(dm.getSt()+" "+st_O+" "+st_L+" "+dm.getSt()+" flag = "+dm.getUserList().get(0).getFlag());
 		if(dm.getOpList().size()>0){
 			System.out.println(dm.getOpList().get(0).getFlag()+" " +dm.getOpList().get(0).getPhoto()+" " +dm.getOpList().get(0).getE_mail());
 		}else{
