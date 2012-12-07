@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.List;
+
 import mapper.MainTopicMapper;
 import mapper.UserMapper;
 import mybatis.config.MyBatisManager;
@@ -135,7 +136,6 @@ public class MainTopicDAO {
 		}
 		return result;
 	}
-
 	public List<Timeline> getTimeline(String email){
 		SqlSession session = sqlSessionFactory.openSession();
 		List<Timeline> timeline = null;
@@ -149,4 +149,8 @@ public class MainTopicDAO {
 		}
 		return timeline;
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> fbda915d99ec58dd649ff1ef5ff779cbab1c61dd
