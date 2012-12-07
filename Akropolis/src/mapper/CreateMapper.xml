@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.CreateMapper">
+
+	<insert id="insertMaintopic" parameterType="NewDebate">
+		insert into MainTopic(mt_title,m_close,e_mail) 
+		values(#{mTopic},'O',#{email})
+	</insert>
+	
+	<insert  id="insertSubtopic" parameterType="SubTopic">
+		insert into SubTopic(sub_title,start_time,end_time,sub_close,mt_id) 
+		values(#{sub_title},#{start_time},#{end_time},'O',#{mt_id})
+	</insert>
+	<select id="getMt_id" parameterType="NewDebate" resultType="int">
+		SELECT mt_id FROM MainTopic
+		WHERE  mt_title = #{mTopic} 
+	</select>
+	
+	<insert id="insertTag" parameterType="TagTag">
+		insert into TopicTag(tag)
+		values(#{tag})
+	</insert>
+	
+	<select id="getTagId" parameterType="TagTag" resultType="int">
+		SELECT tag_id FROM TopicTag
+		WHERE tag = #{tag} 
+	</select>
+	
+	<insert id="connectTag" parameterType="TagTag">
+		insert into MainTopic_TopicTag(mt_id,tag_id)
+		values(#{mt_id},#{tag_id})
+	</insert>
+</mapper>

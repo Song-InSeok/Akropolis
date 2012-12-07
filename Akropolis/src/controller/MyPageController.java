@@ -18,7 +18,7 @@ import bean.NewDebate;
 import bean.SubTopic;
 import bean.Timeline;
 import bean.User;
-import bean.tag;
+import bean.TagTag;
 import dao.CreateTopicDAO;
 import dao.InterestDAO;
 import dao.MainTopicDAO;
@@ -130,24 +130,15 @@ public class MyPageController {
 		String email = user.getEmail();   //로그인된유저로 넘오온 이메일
 		//sets attribute
 		newDebate.setEmail(email);
+		System.out.println(email);
 		
 		
 		
 		String tagL[] = request.getParameterValues("tag");  //토픽리스트
-		//tag처리
-		 List<tag> tagList = new ArrayList<tag>();
-		for(String tag : tagL){  //태그수만큼
-			tag tags = new tag();  //태그리스트객체를만들고
-			tags.setTag(tag);  // 추가하고 (아이디는 자동카운팅이라니까신경안써도됨)
-			tagList.add(tags);  //tagListArray에 계속 넣기
-		}
-		newDebate.setTags(tagList);
-		//태그입력테스트
-		for(tag tag : newDebate.getTags()){
-			System.out.println(tag.getTag());
-		}
+		
 		
 		String subTopic[] = request.getParameterValues("subTopic");
+		int mt_id=-1;
 		
 		//시간 설정부분
 		String sDateL[] = request.getParameterValues("sDate");
@@ -171,22 +162,53 @@ public class MyPageController {
 			System.out.println(time);
 		}
 
-		List<SubTopic> subTopicList = new ArrayList<SubTopic>();
 		
+		
+		CreateTopicDAO createTopicDao = new CreateTopicDAO();
+		//mt_id까지 다오로 설정
+		createTopicDao.setMainTopic(newDebate);
+		mt_id=createTopicDao.getMt_id(newDebate);
+		System.out.println("mt_id : "+mt_id);
+		newDebate.setMt_id(mt_id);
+
+		//위에꺼랑순서바꾸면안됨
+		List<SubTopic> subTopicList = new ArrayList<SubTopic>();
 		//subtopicList에 서브토픽정보들 set
 		for(int i=0;i<subTopic.length;i++){
 			SubTopic subtopic = new SubTopic();
 			subtopic.setSub_title(subTopic[i]);
 			subtopic.setStart_time(start_time.get(i));
 			subtopic.setEnd_time(end_time.get(i));
+			subtopic.setMt_id(mt_id);
 			subTopicList.add(subtopic);
 		}
+		newDebate.setSubtopics(subTopicList);
+		for(SubTopic subtopic: newDebate.getSubtopics()){
+			System.out.println("서브토픽들: "+subtopic.getSub_title());
+		}
+		createTopicDao.setSubTopic(newDebate);
 
+		List<TagTag> tagList = new ArrayList<TagTag>();
+		for(String tag : tagL){  //태그수만큼
+			TagTag tags = new TagTag();  //태그리스트객체를만들고
+			tags.setTag(tag);  // 추가하고 (아이디는 자동카운팅이라니까신경안써도됨)
+			tags.setMt_id(mt_id);
+			tagList.add(tags);  //tagListArray에 계속 넣기
+		}
+		newDebate.setTags(tagList);
+		//태그입력테스트
+		for(TagTag tag : newDebate.getTags()){
+			System.out.println(tag.getTag());
+		}
+
+		createTopicDao.insertANDconnetTag(newDebate);
 		ModelView mv = new ModelView("redirect:/Akropolis/mypage/adminDebate.ap");
+		mv.setModel("newDebate", newDebate);  
+		
+
 		System.out.printf("All_success");
 		//request.setAttribute("model",mv); 가 자동으로 등록됨
 		//따라서 꺼낼시에  ((ModelView)request.getAttribute("model")).getModel("id"); 로 꺼낸다
-		mv.setModel("User", "younghak");
 		return mv;
 	}
 	@Mapping(url="/profile.ap",bean="bean.User")
