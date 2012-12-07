@@ -149,8 +149,4 @@ public class MainTopicDAO {
 		}
 		return timeline;
 	}
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> fbda915d99ec58dd649ff1ef5ff779cbab1c61dd
