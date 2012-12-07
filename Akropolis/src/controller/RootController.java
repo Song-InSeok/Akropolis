@@ -151,12 +151,32 @@ public class RootController {
 	}
 	@Mapping(url="/debate.ap",method="POST")
 	ModelView debatePost(HttpServletRequest request,HttpServletResponse response){
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
 		ModelView mv=null;
+		String post_type = request.getParameter("post_type");
+		System.out.println("post_type : "+post_type);
 	try{
-		boolean isSuccess=DebatePageManager.submitPage(request, response);
+//		boolean isSuccess=DebatePageManager.submitPage(request, response);
 		String st,mt;
 		mt=request.getParameter("mtmt");
 		st=request.getParameter("stst");
+		
+		if(post_type.equals("add_opinion")){
+			DebatePageManager.insertOP(request, response);
+		}else if(post_type.equals("no_btn")){
+			DebatePageManager.vote(request, response, "N");
+		}else if(post_type.equals("yes_btn")){
+			DebatePageManager.vote(request, response, "Y");
+		}else if(post_type.equals("request_join")){
+			DebatePageManager.changeReq(request, response, "D");
+		}else if(post_type.equals("access_join")){
+			DebatePageManager.changeReq(request, response, "Y");
+		}
 		mv = new ModelView("redirect:/Akropolis/debate.ap?mt="+mt+"&st="+st);
 		//else mv = new ModelView("/error");
 		System.out.println("debate post");
