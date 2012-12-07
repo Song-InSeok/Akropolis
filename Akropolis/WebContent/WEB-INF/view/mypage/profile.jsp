@@ -30,7 +30,6 @@
 <body>
 	<div class="container">
 		<div id="profile">
-		${modle.user.interestList.size}
 			<div id="left">
 				<form method="POST" action="profile.ap">
 					<input type="submit" class="btn" id="saveBtn" value="저장">

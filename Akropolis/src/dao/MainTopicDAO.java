@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.List;
+
 import mapper.MainTopicMapper;
 import mapper.UserMapper;
 import mybatis.config.MyBatisManager;
@@ -10,6 +11,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import bean.MainTopic;
 import bean.PageResult;
+import bean.Timeline;
 
 public class MainTopicDAO {
 	public static SqlSessionFactory sqlSessionFactory = MyBatisManager.getInstance();
@@ -134,19 +136,21 @@ public class MainTopicDAO {
 		}
 		return result;
 	}
-//	수정중
-	public List<String> getNowTopic(String email){
+	public List<Timeline> getTimeline(String email){
 		SqlSession session = sqlSessionFactory.openSession();
-		List<String> nowMainTopic = null;
+		List<Timeline> timeline = null;
 		try{
-			UserMapper mapper = session.getMapper(UserMapper.class);
-			
-			nowMainTopic = mapper.getNowTopic(email);
+			MainTopicMapper mapper = session.getMapper(MainTopicMapper.class);		
+			timeline = mapper.getTimeline(email);
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
 			session.close();
 		}
-		return nowMainTopic;
+		return timeline;
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> fbda915d99ec58dd649ff1ef5ff779cbab1c61dd

@@ -32,6 +32,11 @@
 						var num=-1;
 						var fDate = "fDate";
 						var tDate = "tDate";
+						$("#go").click(
+								function() {
+									$("#secret").find("tbody").html("");
+									$("#hidetag").html("");
+								});
 						$("body")
 								.find("#ok")
 								.click(
@@ -118,10 +123,6 @@
 										});
 						
 						$("#ok").click();
-						function update() {
-						      var n=0;
-						      n + 1;
-						    }
 					});
 </script>
 </head>
@@ -156,9 +157,6 @@
 
 						<tbody>
 						</tbody>
-
-						<tfoot id="add">
-						</tfoot>
 					</table>
 					<input type="button" id="ok" class="btn" value="Add">
 					<hr>
@@ -170,7 +168,7 @@
 				</label>
 				<div id="regist">
 					<button type="reset" class="btn">Reset</button>
-					<button type="submit" class="btn btn-primary">Register</button>
+					<button type="submit" id="go" class="btn btn-primary">Register</button>
 				</div>
 			</fieldset>
 		</form>
@@ -179,7 +177,7 @@
 		<tbody>
 			<tr>
 				<th class="index"> </th>
-				<td><input type='text' name="subtopic" size='50' class='sub'
+				<td><input type='text' name="subTopic" size='50' class='sub'
 					placeholder=" Write to SubTopics.."></td><td></td>
 			</tr>
 			<tr class="last">

@@ -1,6 +1,5 @@
 package dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import mapper.UserMapper;
@@ -43,7 +42,6 @@ public class UserDAO {
 		}
 		return row; 
 	}
-
 	
 	public int getUsersDebate(String email){
 		int ret = 0;

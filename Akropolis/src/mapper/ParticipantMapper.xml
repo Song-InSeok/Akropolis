@@ -6,8 +6,13 @@
   <resultMap type="Participant" id="ParticipantMap">
   	
   </resultMap>
+  
+  <select id="selectParticipant" parameterType="String" resultType="Participant">
+		SELECT * FROM Participant WHERE e_mail = #{e_mail}
+  </select>
+  
   <select id="getParticipants" parameterType="int" resultType="Participant">
-		select * from Participant where mt_id = #{mt_id};
+		select * from Participant where mt_id = #{mt_id}
   </select>
   <select id="getParticipant" parameterType="Participant" resultType="Participant">
       select * from User join Participant on User.e_mail = Participant.e_mail and mt_id = #{mt_id} and User.e_mail = #{e_mail};

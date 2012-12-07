@@ -7,37 +7,37 @@
 	width:700px;
 }
 
-#left{
+#profile #left{
 	float:left;
 	width:500px;
 	height:300px;
 	padding:5px 10px;
 	border:1px solid #ddd;
 }
-#left textarea {
+#profile #left textarea {
 	width:470px;
 	height:70px;
 	margin:5px;
 }
-#left .concern1 {
+#profile #left .concern1 {
 	margin-top:15px;
 	width:135px;
 }
-#left .concern2 {
+#profile #left .concern2 {
 	margin-top:15px;
 	width:135px;
 }
-#left span{
+#profile #left span{
 	font-weight:bold;
 	margin-right:10px;
 }
 
-#left .btn{
+#profile #left .btn{
 	float : right;
 	margin: 15px 10px 5px 5px;
 }
 
-#right{
+#profile #right{
 	float : left;
 	width:150px;
 	height:300px;
@@ -45,15 +45,20 @@
 	margin-left:5px;
 	border:1px solid #ddd;
 }
-#right span{
+#profile #right span{
 	font-weight:bold;
 }
 
-#right h5{
+#profile #right h5{
 	margin:30px;
 }
 
-#bottom{
+#profile #right img{
+	border:1px solid #ddd;
+	witdh:135px;
+	height:135px;
+}
+#profile #bottom{
 	margin-top:10px;
 	padding:25px;
 	float:left;
@@ -61,36 +66,36 @@
 	border:1px solid #ddd;
 }
 
-#bottom span{
+#profile #bottom span{
 	margin-bottom:10px,5px;
 	font-size:15px;
 	line-height:25px;
 	font-weight:bold;
 }
-#Follower{
+#profile #Follower{
 	float:left;
 	margin-top:20px;
 	width:100%;
 }
-#Follower #information{
+#profile #Follower #information{
 	float:left;
 	margin-top:30px;
 	width:100%;
 	height:50px;
 }
-#Follower .miniPorofile{
+#profile #Follower .miniPorofile{
 	float:left;
 	margin:5px;
 	width:310px;
 	height:50px;
 	border:1px solid #d7e9f9;
 }
-#Follower .miniPorofile .miniPhoto{
+#profile #Follower .miniPorofile .miniPhoto{
 	float : left;
 	width:50px;
 	height:50px;
 }
-#Follower .miniPorofile .inform{
+#profile #Follower .miniPorofile .inform{
 	float : left;
 	margin-left:15px;
 	height:50px;

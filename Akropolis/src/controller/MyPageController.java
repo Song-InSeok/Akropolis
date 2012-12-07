@@ -12,14 +12,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
-
 import bean.BeanTest;
 import bean.Interest;
-import bean.MainTopic;
 import bean.NewDebate;
+import bean.SubTopic;
+import bean.Timeline;
 import bean.User;
-import bean.tagList;
+import bean.tag;
+import dao.CreateTopicDAO;
 import dao.InterestDAO;
 import dao.MainTopicDAO;
 import dao.UserDAO;
@@ -79,7 +79,7 @@ public class MyPageController {
 		User user = (User)session.getAttribute("user");
 		List<String> mainTopic;
 		
-		MainTopicDAO maintopicdao = new MainTopicDAO();
+		CreateTopicDAO maintopicdao = new CreateTopicDAO();
 		System.out.println(user.getEmail());
 		mainTopic = maintopicdao.getNowTopic(user.getEmail());
 		
@@ -111,6 +111,7 @@ public class MyPageController {
 		mv.setModel("id", "younghak");
 		return mv;
 	}
+	
 	@Mapping(url="/newDebate.ap",method="POST",bean="bean.NewDebate")
 	ModelView getPostDebate(HttpServletRequest request,HttpServletResponse response,Object bean){ 
 		//Model(Bean)
@@ -124,7 +125,7 @@ public class MyPageController {
 		User user = (User)session.getAttribute("user");
 		
 		NewDebate newDebate = (NewDebate) bean;
-		System.out.println("메인토픽 : "+newDebate.getmTopic());
+		System.out.println("메인토픽 : "+newDebate.getMTopic());
 		
 		String email = user.getEmail();   //로그인된유저로 넘오온 이메일
 		//sets attribute
@@ -134,21 +135,55 @@ public class MyPageController {
 		
 		String tagL[] = request.getParameterValues("tag");  //토픽리스트
 		//tag처리
-		 List<tagList> tagList = new ArrayList<tagList>();
+		 List<tag> tagList = new ArrayList<tag>();
 		for(String tag : tagL){  //태그수만큼
-			tagList tags = new tagList();  //태그리스트객체를만들고
+			tag tags = new tag();  //태그리스트객체를만들고
 			tags.setTag(tag);  // 추가하고 (아이디는 자동카운팅이라니까신경안써도됨)
 			tagList.add(tags);  //tagListArray에 계속 넣기
 		}
+		newDebate.setTags(tagList);
 		//태그입력테스트
-		for(tagList tag : tagList){
+		for(tag tag : newDebate.getTags()){
 			System.out.println(tag.getTag());
 		}
 		
+		String subTopic[] = request.getParameterValues("subTopic");
 		
+		//시간 설정부분
+		String sDateL[] = request.getParameterValues("sDate");
+		String sHour[] = request.getParameterValues("sHour");
+		String sMin[] = request.getParameterValues("sMin");
+		
+		String eDateL[] = request.getParameterValues("eDate");
+		String eHour[] = request.getParameterValues("eHour");
+		String eMin[] = request.getParameterValues("eMin");
+		
+		List<String> start_time= new ArrayList<String>();
+		List<String> end_time= new ArrayList<String>();
+
+		//시작시간, 종료시간 다합쳐서 스트링만들기
+		for(int i=0;i<subTopic.length;i++){
+			start_time.add(i, sDateL[i]+" "+sHour[i]+":"+sMin[i]+":00");
+			end_time.add(i, eDateL[i]+" "+eHour[i]+":"+eMin[i]+":00");
+		}
+		//시간입력테스트
+		for(String time : start_time){
+			System.out.println(time);
+		}
+
+		List<SubTopic> subTopicList = new ArrayList<SubTopic>();
+		
+		//subtopicList에 서브토픽정보들 set
+		for(int i=0;i<subTopic.length;i++){
+			SubTopic subtopic = new SubTopic();
+			subtopic.setSub_title(subTopic[i]);
+			subtopic.setStart_time(start_time.get(i));
+			subtopic.setEnd_time(end_time.get(i));
+			subTopicList.add(subtopic);
+		}
 
 		ModelView mv = new ModelView("redirect:/Akropolis/mypage/adminDebate.ap");
-		System.out.printf("success");
+		System.out.printf("All_success");
 		//request.setAttribute("model",mv); 가 자동으로 등록됨
 		//따라서 꺼낼시에  ((ModelView)request.getAttribute("model")).getModel("id"); 로 꺼낸다
 		mv.setModel("User", "younghak");
@@ -265,8 +300,22 @@ public class MyPageController {
 	}
 	@Mapping(url="/timeline.ap")
 	ModelView timeline(HttpServletRequest request,HttpServletResponse response){
-		//Model(Bean)
+		
+		HttpSession session = request.getSession();
+		User user=(User)session.getAttribute("user");
+		String email = user.getEmail();
+		
+		UserDAO userDao=new UserDAO();
+		user=userDao.getUser(email);
+		
+		MainTopicDAO mainTopicDao = new MainTopicDAO();
+		List<Timeline> timeline = new ArrayList<Timeline>();
+		
+		timeline = mainTopicDao.getTimeline(email);
+		
 		ModelView mv = new ModelView("/mypage/timeline");
+		mv.setModel("timeline", timeline);
+		mv.setModel("user", user);
 		return mv;
 	}
 	

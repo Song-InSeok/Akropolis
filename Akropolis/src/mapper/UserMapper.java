@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import bean.Interest;
 import bean.MainTopic;
+import bean.Timeline;
 import bean.User;
 
 public interface UserMapper {

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import bean.MainTopic;
 import bean.PageResult;
+import bean.Timeline;
 
 public interface MainTopicMapper {
 	MainTopic getMainTopic(int t_id);
@@ -18,4 +19,5 @@ public interface MainTopicMapper {
 			@Param("to") int to, @Param("number") int number, @Param("searchText") String searchText);
 	List<MainTopic> getTagSearchTopics(
 			@Param("to") int to, @Param("number") int number, @Param("searchText") String searchText);
+	List<Timeline> getTimeline(String email);
 }

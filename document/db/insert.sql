@@ -90,3 +90,11 @@ FROM MainTopic;
 
 SELECT *
 FROM MainTopic;
+
+SELECT m.*, p.request, p.flag FROM Participant p, MainTopic m
+WHERE m.mt_id = p.mt_id and p.e_mail="pooingx2@gmail.com"
+ORDER BY date DESC;
+
+SELECT * FROM Participant;
+SELECT * FROM MainTopic;
+
