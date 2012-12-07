@@ -1,11 +1,18 @@
 package dao;
+<<<<<<< HEAD
 
 import mapper.InterestMapper;
+=======
+>>>>>>> 23386101fd655422b6bf2aeec0e0bbb80cab6487
 import mapper.ParticipantMapper;
 import mybatis.config.MyBatisManager;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 23386101fd655422b6bf2aeec0e0bbb80cab6487
 
 import bean.Participant;
 
@@ -28,6 +35,7 @@ public class ParticipantDAO {
 		}
 		return pt;
 	}
+<<<<<<< HEAD
 	public Participant getParticipant(String email){
 		SqlSession session = sqlSessionFactory.openSession();
 		Participant participant = new Participant();
@@ -42,3 +50,7 @@ public class ParticipantDAO {
 		return participant;
 	}
 }
+=======
+}
+
+>>>>>>> 23386101fd655422b6bf2aeec0e0bbb80cab6487

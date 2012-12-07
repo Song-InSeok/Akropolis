@@ -3,27 +3,30 @@
 #main_topic{
 	height: 180px;
 	width: 940px;
+	background : url('/Akropolis/img/debateLogo2.png') no-repeat left top;
+	background-size:100% 100%;
+	margin-bottom:30px;
+	padding-top:20px;
 }
 
 #main_topic_top{
-	height: 120px;
 	width: 940px;
 	text-align: center;
-	text-decoration: underline;
 	text-shadow: gray;
-	vertical-align: middle;
+	height: 50px;
 }
-#main_topic_top>h3{
-	text-indent: 1em;
-	font-size: 2.5em;
+#main_topic_top>p{
+	margin-top:30px;
+	font-size: 3em;
 }
 #main_topic_bot{
-	height: 60px;
-	width: 940px;
+	width:800px;
+	padding:5px 30px 5px 30px;
+	margin:20px 0px 10px 50px;
 }
-#main_topic_bot>.progress{
+#main_topic_bot .progress{
+	width:600px;
 }
-
 #debate_border{
 	height: 800px;
 	width: 940px;
@@ -31,7 +34,7 @@
 }
 
 #debate_border_left{
-	background-color: #cccccc;
+	background-color: #eee;
 	height: 800px;
 	width: 300px;
 	float: left;
@@ -51,7 +54,7 @@
 	list-style:none;
 }
 #sub_topics>ul>li{
-	border-radius: 10px;
+	font-size: 1.2em;
 }
 #similer_topics{
 	height: 370px;
@@ -62,6 +65,7 @@
 	list-style:none;
 }
 #similer_topics>ul>li{
+	font-size: 1.2em;
 }
 
 #ing_debate{

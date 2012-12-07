@@ -19,7 +19,7 @@
 	<div class="container-fluid">
 		<div class="row-fluid">
 			<div id="leftMenu" class="span2">
-				<ul class="nav nav-tabs nav-stacked affix">
+				<ul class="nav nav-tabs nav-stacked">
 					<li class="${pageId == 'profile'?'active':'' }"><a href="profile.ap">프로필</a></li>
 					<li class=""><a href="#">참여중인 토론</a></li>
 					<li class="${pageId == 'adminDebate'?'active':'' }"><a href="adminDebate.ap">주제 관리</a></li>

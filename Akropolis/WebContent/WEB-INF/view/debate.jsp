@@ -68,7 +68,7 @@
 <body>
 	 
 	<div id="main_topic">
-		<div id="main_topic_top"><h3>${debatemanager.mt.mt_title }</h3></div>
+		<div id="main_topic_top"><p class="lead"><strong>${debatemanager.mt.mt_title }</strong></p></div>
 		<div id="main_topic_bot">
 			<button id="y_btn" type="button" class="btn btn-primary yn_btn" value="YES">찬성</button>
 			<div class="progress yn_bar">
