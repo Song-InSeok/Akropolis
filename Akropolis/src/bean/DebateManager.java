@@ -10,7 +10,12 @@ public class DebateManager implements Serializable {
 	private List<Opinion>	opList;
 	private List<User>	userList;
 	private List<Participant>	ptList;
+	private SubTopic subTopic;
 	private String flag;
+	private User logUser;
+	private int isLogin;
+	private int isPt;
+	private Participant logPt;
 	public DebateManager(){
 		
 	}
@@ -69,5 +74,45 @@ public class DebateManager implements Serializable {
 
 	public void setFlag(String flag) {
 		this.flag = flag;
+	}
+
+	public int getIsLogin() {
+		return isLogin;
+	}
+
+	public void setIsLogin(int isLogin) {
+		this.isLogin = isLogin;
+	}
+
+	public User getLogUser() {
+		return logUser;
+	}
+
+	public void setLogUser(User logUser) {
+		this.logUser = logUser;
+	}
+
+	public Participant getLogPt() {
+		return logPt;
+	}
+
+	public void setLogPt(Participant logPt) {
+		this.logPt = logPt;
+	}
+
+	public int getIsPt() {
+		return isPt;
+	}
+
+	public void setIsPt(int isPt) {
+		this.isPt = isPt;
+	}
+
+	public SubTopic getSubTopic() {
+		return subTopic;
+	}
+
+	public void setSubTopic(SubTopic subTopic) {
+		this.subTopic = subTopic;
 	}
 }

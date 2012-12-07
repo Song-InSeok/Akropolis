@@ -225,6 +225,7 @@ public class RootController {
 //			request.setAttribute("debatemanager", dm);
 			if(DebatePageManager.makePage(request, response)) mv = new ModelView("/debate");
 			else mv = new ModelView("/error");
+			System.out.println("debate servlet complete");
 			return mv;
 		}catch(Exception e){
 			e.printStackTrace();

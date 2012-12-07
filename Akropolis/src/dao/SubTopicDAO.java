@@ -27,4 +27,19 @@ public class SubTopicDAO {
 		}
 		return list;
 	}
+	public SubTopic getSubTopic(int mt_id,int st_id){
+		SqlSession session = sqlSessionFactory.openSession();
+		SubTopic st = new SubTopic();
+		st.setMt_id(mt_id);
+		st.setSub_id(st_id);
+		try{
+			SubTopicMapper mapper = session.getMapper(SubTopicMapper.class);
+			st = mapper.getSubTopic(st);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return st;
+	}
 }

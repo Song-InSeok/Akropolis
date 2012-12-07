@@ -6,5 +6,6 @@ import bean.Participant;
 
 public interface ParticipantMapper {
 	List<Participant> getParticipants(int mt_id);
+	Participant getParticipant(Participant par);
 
 }
