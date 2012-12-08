@@ -13,6 +13,10 @@
 	<resultMap type="User" id="followerResultMap">
 		<id column="e_mail" property="email" />
 	</resultMap>
+	
+	<resultMap type="NewDebate" id="nowDebates">
+		<id column="mt_title" property="mTopic" />
+	</resultMap>
 
 	<select id="selectUser" parameterType="String" resultMap="userResultMap">
 		SELECT * FROM User 
@@ -37,10 +41,16 @@
 		MainTopic.m_close = "O" and MainTopic.e_mail =
 		#{e_mail}
 	</select>
-	
-	<select id="getNowTopic" parameterType="String" resultType="String">
-		select mt_title, mt_id from MainTopic where e_mail=#{email} AND m_close="O";
+
+	<select id="getNowTopic" parameterType="String" resultMap="nowDebates">
+		select DISTINCT mt.mt_title, mt.mt_id from MainTopic mt, Participant
+		pt where mt.mt_id = pt.mt_id AND mt.m_close='O'AND pt.e_mail=#{email}
+		AND pt.request='Y';
 	</select>
+	
+	<select id="getPastTopic" parameterType="String" resultMap="nowDebates">
+		select DISTINCT mt.mt_title, mt.mt_id from MainTopic mt, Participant pt where mt.mt_id = pt.mt_id AND mt.m_close='C'AND pt.e_mail=#{email} AND pt.request='Y'; 
+		</select>
 	
 	<select id="getDebateUsers" parameterType="int" resultMap="userResultMap">
 		select * from User join Participant on User.e_mail =

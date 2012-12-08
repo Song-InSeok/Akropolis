@@ -41,6 +41,7 @@
 						<li><a href="">About</a></li>
 					</ul>
 					<ul class="nav pull-right header-right">
+					<!-- 
 						<li>
 							<form action="" method="post"
 								class="form-search nav-search pull-right">
@@ -53,6 +54,7 @@
 								</div>
 							</form>
 						</li>
+					-->
 						<c:choose>
 							<c:when test="${empty user}">
 								<li>

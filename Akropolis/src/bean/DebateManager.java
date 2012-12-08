@@ -10,6 +10,7 @@ public class DebateManager implements Serializable {
 	private List<Opinion>	opList;
 	private List<User>	userList;
 	private List<Participant>	ptList;
+	private List<MainTopic> simList;
 	private SubTopic subTopic;
 	private String flag;
 	private User logUser;
@@ -17,7 +18,7 @@ public class DebateManager implements Serializable {
 	private int isPt;
 	private Participant logPt;
 	public DebateManager(){
-		
+
 	}
 
 	public MainTopic getMt() {
@@ -114,5 +115,13 @@ public class DebateManager implements Serializable {
 
 	public void setSubTopic(SubTopic subTopic) {
 		this.subTopic = subTopic;
+	}
+
+	public List<MainTopic> getSimList() {
+		return simList;
+	}
+
+	public void setSimList(List<MainTopic> simList) {
+		this.simList = simList;
 	}
 }

@@ -1,9 +1,10 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import mapper.MainTopicMapper;
-import mapper.UserMapper;
+import mapper.ParticipantMapper;
 import mybatis.config.MyBatisManager;
 
 import org.apache.ibatis.session.SqlSession;
@@ -15,7 +16,46 @@ import bean.Timeline;
 
 public class MainTopicDAO {
 	public static SqlSessionFactory sqlSessionFactory = MyBatisManager.getInstance();
+	
+	public static boolean isOpen(String email){
+		SqlSession session = sqlSessionFactory.openSession();
+		boolean flag = false;
+		try{
+			MainTopicMapper mapper = session.getMapper(MainTopicMapper.class);
+			flag = mapper.isOpen(email);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return flag;
+	}
+	
+	public void updateFlag(int mt_id){
+		SqlSession session = sqlSessionFactory.openSession();
+		System.out.println("MainTopicDAO updateFlag Start");
+		MainTopic main = new MainTopic();
+		try{
+			MainTopicMapper mapper = session.getMapper(MainTopicMapper.class);
+			ParticipantMapper pmapper = session.getMapper(ParticipantMapper.class);
+			int agree,disagree;
+			agree = pmapper.yesNum(mt_id);
+			disagree = pmapper.noNum(mt_id);
+			main.setAgree(agree);
+			main.setDisagree(disagree);
+			main.setMt_id(mt_id);
+			mapper.updateFlag(main);
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		System.out.println("MainTopicDAO updateFlag FIN");
 
+		return;
+	}
+	
 	public MainTopic getMainTopic(int t_id){
 		SqlSession session = sqlSessionFactory.openSession();
 		MainTopic main = null;
@@ -84,6 +124,37 @@ public class MainTopicDAO {
 		return result;	
 	}
 	
+	public List<String> getTitleAuto(String searchText) {
+
+		SqlSession session = sqlSessionFactory.openSession();
+		List<String> list = null;
+		try{
+			MainTopicMapper mapper = session.getMapper(MainTopicMapper.class);
+			list = mapper.getTitleAuto(searchText);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return list;
+	}
+
+	public List<String> getTagAuto(String searchText) {
+
+		SqlSession session = sqlSessionFactory.openSession();
+		List<String> list = null;
+		try{
+			MainTopicMapper mapper = session.getMapper(MainTopicMapper.class);
+			list = mapper.getTagAuto(searchText);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return list;
+	}
+	
+	
 	public PageResult<MainTopic> getTitleSearch(int page, String searchText) {
 
 		SqlSession session = sqlSessionFactory.openSession();
@@ -148,5 +219,23 @@ public class MainTopicDAO {
 			session.close();
 		}
 		return timeline;
+	}
+	
+	public List<MainTopic> getSimTopics(MainTopic topic) {
+		SqlSession session = sqlSessionFactory.openSession();
+		List<MainTopic> list = new ArrayList<MainTopic>();
+		List<String> tags = null;
+		try{
+			MainTopicMapper mapper = session.getMapper(MainTopicMapper.class);
+			tags=mapper.getTags(topic.getMt_id());
+			for(String tag : tags) {
+				list.add(mapper.getSimTopics(tag));
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return list;
 	}
 }

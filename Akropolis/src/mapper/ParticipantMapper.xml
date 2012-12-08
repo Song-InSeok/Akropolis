@@ -17,4 +17,24 @@
   <select id="getParticipant" parameterType="Participant" resultType="Participant">
       select * from User join Participant on User.e_mail = Participant.e_mail and mt_id = #{mt_id} and User.e_mail = #{e_mail};
   </select>
-</mapper>
+  
+  <update id="updateFlag" parameterType="Participant">
+      UPDATE `akropolis`.`Participant` SET flag= #{flag} 
+      WHERE mt_id = #{mt_id} and e_mail =#{e_mail}
+  </update>
+  <update id="updateRequest" parameterType="Participant">
+      UPDATE `akropolis`.`Participant` SET request=#{request} 
+      WHERE mt_id = #{mt_id} and e_mail =#{e_mail}
+  </update>
+  <insert id="insertParticipant" parameterType="Participant">
+      insert into `akropolis`.`Participant` 
+      (`request`, `report`, `mt_id`, `e_mail`, `flag`) values
+      (#{request}, 0, #{mt_id} , #{e_mail}, #{flag})      
+  </insert>
+  <select id="yesNum" parameterType="int" resultType="int">
+      select count(*) from Participant where mt_id=#{mt_id} and flag='Y'
+  </select>
+  <select id="noNum" parameterType="int" resultType="int">
+      select count(*) from Participant where mt_id=#{mt_id} and flag='N'
+  </select>
+  </mapper>

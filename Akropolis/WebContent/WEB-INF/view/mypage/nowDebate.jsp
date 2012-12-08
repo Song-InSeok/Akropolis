@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="page" content="adminDebate" />
+<meta name="page" content="nowDebate" />
 <meta charset="UTF-8">
 <title>참여중인토론</title>
 <link href="/Akropolis/css/nowdebate.css" rel="stylesheet"
@@ -19,7 +19,8 @@
 				<div id="debate_list">
 					<ul>
 						<c:forEach var="topic" items="${model.topic}">
-							<li>${topic}</li>
+						<li><a href="/Akropolis/debate.ap?mt=${topic.getMt_id()}">${topic.getMTopic()}
+									(mt_id :${topic.getMt_id()})</a></li>
 						</c:forEach>
 					</ul>
 				</div>

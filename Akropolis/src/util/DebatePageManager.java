@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bean.DebateManager;
+import bean.Opinion;
+import bean.Participant;
 import bean.SubTopic;
 import bean.User;
 import dao.MainTopicDAO;
@@ -21,14 +23,77 @@ public class DebatePageManager {
 	public DebatePageManager(){
 		
 	}
-	
+	public static boolean changeReq(HttpServletRequest request,HttpServletResponse response,String req) throws UnsupportedEncodingException{
+		ParticipantDAO pdao = new ParticipantDAO();
+		User loginUser = (User)request.getSession().getAttribute("user");
+		String email = loginUser.getEmail(); 
+		int mt = Integer.parseInt(request.getParameter("mtmt"));
+		Participant pt = pdao.getParticipant(email, mt);
+		if(pt!=null){
+			System.out.println("pt != null");
+			pt.setRequest(req);
+//			pdao.changeReq(pt);
+			pdao.updateRequest(pt);
+		}else{
+			System.out.println("pt == null");
+			pt = new Participant();
+			pt.setE_mail(email);
+			pt.setMt_id(mt);
+			pt.setReport(0);
+			pt.setFlag(null);
+			pt.setRequest(req);
+			pdao.insertParticipant(pt);
+		}
+		System.out.println("change req end");
+
+		return true;
+	}
 	public static boolean submitPage(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException{
 		request.setCharacterEncoding("utf-8");
 		System.out.println(request.getParameter("chatarea1"));
 		System.out.println(request.getParameter("mtmt"));
 		System.out.println(request.getParameter("stst"));
-
+		System.out.println(request.getParameter("post_type"));
 		
+		return true;
+	}
+	public static boolean insertOP(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException{
+		Opinion op = new Opinion();
+		OpinionDAO odao = new OpinionDAO();
+
+		User loginUser = (User)request.getSession().getAttribute("user");
+		op.setContent(request.getParameter("chatarea1"));
+		op.setMt_id(Integer.parseInt(request.getParameter("mtmt")));
+		op.setSub_id(Integer.parseInt(request.getParameter("stst")));
+		op.setE_mail(loginUser.getEmail());
+		System.out.println("넣겠음 "+op.getE_mail()+" "+op.getContent()+" "+op.getMt_id()+" "+op.getSub_id());
+		if(odao.insertOP(op)<1) System.out.println("insert fail");
+		else System.out.println("insert success"); 
+		
+		return true;
+	}
+	public static boolean vote(HttpServletRequest request,HttpServletResponse response,String flag) throws UnsupportedEncodingException{
+		ParticipantDAO pdao = new ParticipantDAO();
+		MainTopicDAO mdao = new MainTopicDAO();
+		User loginUser = (User)request.getSession().getAttribute("user");
+		int res=0;
+		Participant pt = null;
+		Participant pt2 = new Participant();
+		pt2.setE_mail(loginUser.getEmail());
+		pt2.setMt_id(Integer.parseInt(request.getParameter("mtmt")));
+		pt2.setFlag(flag);
+		pt2.setRequest("B");
+		pt = pdao.getParticipant(pt2.getE_mail(), pt2.getMt_id());
+		if(pt==null){
+			System.out.println("insert ");
+			if(pdao.insertParticipant(pt2)==0) System.out.println("insert fail");
+			else System.out.println("insert success");
+		}else{
+			System.out.println("update");
+			if(pdao.updateFlag(pt2)==0) System.out.println("update fail");
+			else System.out.println("update Success");
+		}
+		mdao.updateFlag(pt2.getMt_id());
 		return true;
 	}
 	
@@ -60,7 +125,6 @@ public class DebatePageManager {
 		dm.setMt(mdao.getMainTopic(mt_id));
 		dm.setStList(sdao.getSubTopics(mt_id));
 		dm.setUserList(udao.getDebateUsers(mt_id));
-		
 		if(loginUser==null){ 
 			dm.setIsLogin(0);
 			dm.setLogUser(loginUser);
