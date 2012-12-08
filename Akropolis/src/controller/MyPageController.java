@@ -170,6 +170,7 @@ public class MyPageController {
 		mt_id=createTopicDao.getMt_id(newDebate);
 		System.out.println("mt_id : "+mt_id);
 		newDebate.setMt_id(mt_id);
+		createTopicDao.setParticipan(newDebate);
 
 		//위에꺼랑순서바꾸면안됨
 		List<SubTopic> subTopicList = new ArrayList<SubTopic>();
@@ -202,7 +203,7 @@ public class MyPageController {
 		}
 
 		createTopicDao.insertANDconnetTag(newDebate);
-		ModelView mv = new ModelView("redirect:/Akropolis/mypage/adminDebate.ap");
+		ModelView mv = new ModelView("redirect:/Akropolis/mypage/timeline.ap");
 		mv.setModel("newDebate", newDebate);  
 		
 

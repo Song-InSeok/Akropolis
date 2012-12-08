@@ -90,4 +90,18 @@ public class CreateTopicDAO {
 		}
 		return mt_id;
 	}
+	
+	public void setParticipan(NewDebate newdebate){
+		SqlSession session = sqlSessionFactory.openSession();
+		try{
+			CreateMapper mapper = session.getMapper(CreateMapper.class);
+			mapper.setParticipate(newdebate);
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return;
+	}
 }

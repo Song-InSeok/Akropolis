@@ -32,4 +32,10 @@
 		insert into MainTopic_TopicTag(mt_id,tag_id)
 		values(#{mt_id},#{tag_id})
 	</insert>
+	
+	<insert id="setParticipate" parameterType="NewDebate">
+		insert into Participant(request,mt_id,e_mail,flag)
+		values('Y', #{mt_id}, #{email}, 'C');
+
+	</insert>
 </mapper>

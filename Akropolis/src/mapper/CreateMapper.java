@@ -13,4 +13,5 @@ public interface CreateMapper {
 	void insertTag(TagTag tag);
 	int getTagId(TagTag tag);
 	void connectTag(TagTag tag);
+	void setParticipate(NewDebate newdebate);
 }
