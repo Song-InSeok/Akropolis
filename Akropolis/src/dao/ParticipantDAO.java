@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import mapper.MainTopicMapper;
 import mapper.ParticipantMapper;
 import mybatis.config.MyBatisManager;
@@ -106,5 +108,21 @@ public class ParticipantDAO {
 				session.close();
 			}
 		return participant;
+	}
+	
+	List<String> getParticipantAuto(int mt_id,String searchText){
+		SqlSession session = sqlSessionFactory.openSession();
+		List<String> list = null;
+
+		try{
+			ParticipantMapper mapper = session.getMapper(ParticipantMapper.class);
+			list = mapper.getParticipantAuto(mt_id, searchText);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+
+		return list;
 	}
 }

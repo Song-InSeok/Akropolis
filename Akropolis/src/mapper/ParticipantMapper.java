@@ -2,6 +2,8 @@ package mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import bean.Participant;
 
 public interface ParticipantMapper {
@@ -13,4 +15,5 @@ public interface ParticipantMapper {
 	int updateRequest(Participant par);
 	int yesNum(int mt_id);
 	int noNum(int mt_id);
+	List<String> getParticipantAuto(@Param("mt_id") int mt_id,@Param("searchText") String searchText);
 }

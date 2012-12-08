@@ -5,7 +5,6 @@ import hello.annotation.RootURL;
 import hello.mv.ModelView;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
