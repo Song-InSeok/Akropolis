@@ -61,10 +61,21 @@
 		LIMIT #{to}, #{number}
 	</select>
 	
+	<select id="getTagTopics" resultType="MainTopic">
+		SELECT DISTINCT mt_title,agree,disagree,date,m_close,mt_id,e_mail 
+		FROM MainTopic natural join MainTopic_TopicTag natural join TopicTag
+		WHERE mt_id = #{id} and m_close='O'
+		LIMIT #{to},#{number};
+	</select>
+	
 	<select id="getTimeline" parameterType="String" resultType="Timeline">
 		SELECT m.*, p.request, p.flag, p.p_date FROM Participant p, MainTopic m
 		WHERE m.mt_id = p.mt_id and p.e_mail=#{email}
 		ORDER BY p_date DESC;
 	</select>
+	<update id="updateFlag" parameterType="MainTopic">
+		UPDATE `akropolis`.`MainTopic` SET agree=#{agree}, disagree=#{disagree} 
+		WHERE mt_id=#{mt_id};
+	</update>
 	
 </mapper>

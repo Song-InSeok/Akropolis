@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import bean.MainTopic;
-import bean.PageResult;
 import bean.Timeline;
 
 public interface MainTopicMapper {
@@ -19,7 +18,10 @@ public interface MainTopicMapper {
 			@Param("to") int to, @Param("number") int number, @Param("searchText") String searchText);
 	List<MainTopic> getTagSearchTopics(
 			@Param("to") int to, @Param("number") int number, @Param("searchText") String searchText);
+	List<MainTopic> getTagTopics(
+			@Param("to") int to, @Param("number") int number, @Param("id") int id);
 	List<Timeline> getTimeline(String email);
 	List<String> getTitleAuto(@Param("searchText") String searchText);
 	List<String> getTagAuto(@Param("searchText") String searchText);
+	int updateFlag(MainTopic mt);
 }

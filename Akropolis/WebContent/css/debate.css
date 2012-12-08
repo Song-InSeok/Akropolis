@@ -1,11 +1,9 @@
 @CHARSET "UTF-8";
 
 #main_topic{
-	height: 180px;
+	min-height: 180px;
 	width: 940px;
-	background : url('/Akropolis/img/debateLogo2.png') no-repeat left top;
 	background-size:100% 100%;
-	margin-bottom:30px;
 	padding-top:20px;
 }
 
@@ -13,16 +11,17 @@
 	width: 940px;
 	text-align: center;
 	text-shadow: gray;
-	height: 50px;
+	min-height: 50px;
 }
 #main_topic_top>p{
 	margin-top:30px;
 	font-size: 3em;
 }
 #main_topic_bot{
-	width:800px;
+	height : 30px;
+	width: 800px;
 	padding:5px 30px 5px 30px;
-	margin:20px 0px 10px 50px;
+	margin:30px 0px 0px 50px;
 }
 #main_topic_bot .progress{
 	width:600px;
@@ -34,49 +33,56 @@
 }
 
 #debate_border_left{
-	background-color: #eee;
-	height: 800px;
+	background-color: #fff;
+	min-height: 100px;
 	width: 300px;
 	float: left;
 }
 
 #debate_border_right{
-	width: 640px;
+	margin-left : 5px;
+	width: 635px;
 	height: 800px;
 	float: left;
 }
 
 #sub_topics{
-	height: 370px;
-	width: 300px;
-	overflow: auto;
+	padding-top : 10px;
+	padding-bottom : 10px;
+	min-height: 100px;
+	max-height : 500px;
+	width: 280px;
 }
 #sub_topics>ul{
 	list-style:none;
 }
 #sub_topics>ul>li{
-	font-size: 1.2em;
+	font-size: 1em;
 }
 #similer_topics{
-	height: 370px;
-	width: 300px;
+	margin-top : 30px;
+	min-height: 100px;
+	max-height : 400px;
+	width: 280px;
 	overflow: auto;
 }
 #similer_topics>ul{
 	list-style:none;
 }
 #similer_topics>ul>li{
-	font-size: 1.2em;
+	font-size: 1em;
 }
 
 #ing_debate{
 	width: 640px;
-	height: 650px;
+	min-height : 100px;
+	max-height: 850px;
 }
 #opinions{
-	padding-left: 5px;
-	padding-right: 5px;
-	height: 600px;
+	margin-top : 5px;
+	padding : 0px 5px 5px 5px;
+	min-height: 100px;
+	max-height : 800px;
 	width: 640px;
 	overflow: auto;
 }
@@ -87,7 +93,10 @@
 
 }
 #opinions>ul>li{
+	margin-top : 5px;
+	margin-bottom : 5px;
 	padding-left:0px;
+	vertical-align:middle;
 	height: 50px;
 }
 #chat_window{
@@ -97,6 +106,13 @@
 	width: 640px;
 }
 #chat_bot{
+	height: 140px;
+	width: 640px;
+	padding-top: 10px;
+	margin : 5px 0px 0px 5px;
+	border-radius : 5px;
+}
+#message_bot{
 	height: 140px;
 	width: 640px;
 	padding-top: 10px;
@@ -135,7 +151,7 @@
 	/*border: 3px #ff0000 solid;*/
 	margin-left: 20px;
 	float: left;
-	
+	margin-top:2px;
 	width: 600px;
 	/*max-width: 620px;
 	min-width: 400px;*/
@@ -144,7 +160,7 @@
 	 
 }
 .blue_opinion{
-	margin-top-10px;
+	margin-top:2px;
 	float: left;
 	/*border: 3px #00f solid;*/
 	width: 600px;
@@ -155,7 +171,7 @@
 	
 }
 .mid_opinion{
-	padding-top : 10px;
+	margin-top:2px;
 	padding : 10px 10px 10px 10px;
 	float: left;
 	/*border: 3px #f0f solid;*/
@@ -270,9 +286,24 @@
 .back_green{
 	background-color: #dff0d8;
 }
+.back_grey{
+	background-color : #fff;
+}
 .chat_area{
 	margin-left : 10px;
 	width : 550px;
+}
+#no_form{
+	margin: 0px 0px 0px 0px;
+	float : left;
+	width : 70px;
+	height : 30px;
+}
+#yes_form{
+	margin: 0px 0px 0px 0px;
+	float : left;
+	width : 70px;
+	height : 30px;
 }
 .yn_btn{
 	float : left;
@@ -284,4 +315,10 @@
 	margin : 5px 10px 0px 10px;
 	height : 20px;
 	float : left;
+}
+.msg_btn{
+	width : 580px;
+	height : 120px;
+	margin : 5px 30px 0px 30px;
+	paddimg : 10px 20px 10px 20px;
 }

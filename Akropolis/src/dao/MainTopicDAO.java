@@ -3,7 +3,7 @@ package dao;
 import java.util.List;
 
 import mapper.MainTopicMapper;
-import mapper.UserMapper;
+import mapper.ParticipantMapper;
 import mybatis.config.MyBatisManager;
 
 import org.apache.ibatis.session.SqlSession;
@@ -15,7 +15,32 @@ import bean.Timeline;
 
 public class MainTopicDAO {
 	public static SqlSessionFactory sqlSessionFactory = MyBatisManager.getInstance();
+	
+	public void updateFlag(int mt_id){
+		SqlSession session = sqlSessionFactory.openSession();
+		System.out.println("MainTopicDAO updateFlag Start");
+		MainTopic main = new MainTopic();
+		try{
+			MainTopicMapper mapper = session.getMapper(MainTopicMapper.class);
+			ParticipantMapper pmapper = session.getMapper(ParticipantMapper.class);
+			int agree,disagree;
+			agree = pmapper.yesNum(mt_id);
+			disagree = pmapper.noNum(mt_id);
+			main.setAgree(agree);
+			main.setDisagree(disagree);
+			main.setMt_id(mt_id);
+			mapper.updateFlag(main);
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		System.out.println("MainTopicDAO updateFlag FIN");
 
+		return;
+	}
+	
 	public MainTopic getMainTopic(int t_id){
 		SqlSession session = sqlSessionFactory.openSession();
 		MainTopic main = null;
