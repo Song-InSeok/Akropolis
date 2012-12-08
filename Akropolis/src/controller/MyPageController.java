@@ -203,7 +203,8 @@ public class MyPageController {
 		}
 
 		createTopicDao.insertANDconnetTag(newDebate);
-		ModelView mv = new ModelView("redirect:/Akropolis/mypage/timeline.ap");
+		ModelView mv = new ModelView("redirect:/Akropolis/debate.ap?mt="+newDebate.getMt_id());
+		
 		mv.setModel("newDebate", newDebate);  
 		
 
