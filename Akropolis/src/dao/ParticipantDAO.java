@@ -109,20 +109,4 @@ public class ParticipantDAO {
 			}
 		return participant;
 	}
-	
-	List<String> getParticipantAuto(int mt_id,String searchText){
-		SqlSession session = sqlSessionFactory.openSession();
-		List<String> list = null;
-
-		try{
-			ParticipantMapper mapper = session.getMapper(ParticipantMapper.class);
-			list = mapper.getParticipantAuto(mt_id, searchText);
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally{
-			session.close();
-		}
-
-		return list;
-	}
 }
