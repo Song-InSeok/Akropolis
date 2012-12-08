@@ -4,9 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import bean.Interest;
-import bean.MainTopic;
-import bean.Timeline;
+import bean.NewDebate;
 import bean.User;
 
 public interface UserMapper {
@@ -21,9 +19,9 @@ public interface UserMapper {
 	List<User> getFollowerList(String email);
 	void insertFollower(@Param("e_mail")String follower, @Param("following")String following);
 	void deleteFollower(@Param("e_mail")String follower, @Param("following")String following);
-	List<String> getNowTopic(String email);
-	
 	int disPP(String e_mail);
 	int honorPP(String e_mail);
 	int honorMM(String e_mail);
+	List<NewDebate> getNowTopic(String email);
+	List<NewDebate> getPastTopic(String email);
 }

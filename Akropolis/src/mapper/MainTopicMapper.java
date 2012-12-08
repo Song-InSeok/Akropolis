@@ -24,4 +24,7 @@ public interface MainTopicMapper {
 	List<String> getTitleAuto(@Param("searchText") String searchText);
 	List<String> getTagAuto(@Param("searchText") String searchText);
 	int updateFlag(MainTopic mt);
+	boolean isOpen(@Param("e_mail") String email);
+	List<String> getTags(@Param("mt_id") int mt_id);
+	MainTopic getSimTopics(@Param("tag") String tag);
 }

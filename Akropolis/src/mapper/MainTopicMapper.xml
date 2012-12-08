@@ -19,6 +19,11 @@
 		LIMIT #{to}, #{number}
 	</select>
 	
+	<select id="isOpen" resultType="_boolean">
+		SELECT (count(*) != 0) FROM MainTopic
+		WHERE e_mail = #{e_mail} and m_close = 'O'
+	</select>
+	
 	<select id="getLatelyTopics" resultType="MainTopic">
 		SELECT * FROM MainTopic 
 		ORDER BY date DESC
@@ -49,8 +54,8 @@
 	</select>
 	
 	<select id="getTagAuto" resultType="String">
-		SELECT mt_title
-		FROM MainTopic natural join MainTopic_TopicTag natural join TopicTag
+		SELECT tag
+		FROM TopicTag
 		WHERE tag LIKE CONCAT('%',#{searchText},'%')
 	</select>
 	
@@ -77,5 +82,17 @@
 		UPDATE `akropolis`.`MainTopic` SET agree=#{agree}, disagree=#{disagree} 
 		WHERE mt_id=#{mt_id};
 	</update>
+	
+	<select id="getTags" resultType="String">
+		SELECT tag
+		FROM MainTopic natural join MainTopic_TopicTag natural join TopicTag
+		WHERE mt_id=#{mt_id}
+	</select>
+	
+	<select id="getSimTopics" resultType="MainTopic">
+		SELECT DISTINCT mt_title,agree,disagree,date,m_close,mt_id,e_mail 
+		FROM MainTopic natural join MainTopic_TopicTag natural join TopicTag
+		WHERE tag LIKE CONCAT('%',#{tag},'%') AND AND m_close="O"
+	</select>
 	
 </mapper>
