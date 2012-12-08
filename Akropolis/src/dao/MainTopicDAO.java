@@ -224,18 +224,24 @@ public class MainTopicDAO {
 	public List<MainTopic> getSimTopics(MainTopic topic) {
 		SqlSession session = sqlSessionFactory.openSession();
 		List<MainTopic> list = new ArrayList<MainTopic>();
+		List<MainTopic> result = new ArrayList<MainTopic>();
 		List<String> tags = null;
 		try{
 			MainTopicMapper mapper = session.getMapper(MainTopicMapper.class);
 			tags=mapper.getTags(topic.getMt_id());
 			for(String tag : tags) {
-				list.add(mapper.getSimTopics(tag));
+				list = mapper.getSimTopics(tag);
+				for(MainTopic mt : list){
+					if(!(result.contains(mt))){
+						result.add(mt);
+					}
+				}
 			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
 			session.close();
 		}
-		return list;
+		return result;
 	}
 }
