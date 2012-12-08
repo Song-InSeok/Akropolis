@@ -7,12 +7,56 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link href="/Akropolis/css/debate.css" rel="stylesheet" type="text/css">
+	<c:set var="users">
+		[
+		<c:forEach items="${debatemanager.userList }" var="item">
+			"${item.name }",
+		</c:forEach>
+		""]
+	</c:set>
 	<c:set value="${debatemanager.logPt.request }" var="req"></c:set>
 	<c:set value="${debatemanager.isPt }" var="ispt"/>
 	<c:set value="${debatemanager.isLogin }" var = "islog"/>
 	<c:set value="${debatemanager.logPt.flag }" var = "loguserflag"/>
 	<script type="text/javascript">
 		$(function() {
+			var users = eval(${users});
+			$("#submit_content").typeahead({
+				source:users,
+				minLength: 2,
+				matcher: function(item){
+					item = item.toLowerCase();
+			        var usernames = (this.query.toLowerCase()).match(/@[가-힣a-zA-Z]+/g);
+			        if(!!usernames){
+			            for(var i=0; i<usernames.length; i++){
+			                var username = (usernames[i].substring(1)).toLowerCase();
+			                var matched = item.indexOf(username);
+
+			                var re = new RegExp("@"+item,"g");
+			                var used = ((this.query.toLowerCase()).match(re));
+
+			                if(item.indexOf(username)!=-1 && used==null){
+			                    return true;
+			                }
+			            }
+			        }
+				},
+				updater: function(item){
+			        var data = this.query;
+			        var caratPos = this.$element[0].selectionStart;
+
+			        for(i=caratPos; i>=0; i--){
+			            if(data[i]=="@"){
+			                break;                
+			            }                
+			        }
+
+			        var replace = data.substring(i, caratPos);
+			        data = data.replace(replace, '@'+item);
+
+			        return data;
+			    }
+			});
 			voteAlready = function(){
 				alert("이미 투표 하셨습니다");
 			};

@@ -8,8 +8,25 @@ System.out.println(option);
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<link href="/Akropolis/css/main.css" rel="stylesheet" type="text/css">
+	<meta charset="UTF-8"/>
+	<link href="/Akropolis/css/main.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript">
+		$(function(){
+			$(".typeahead2").typeahead({
+				source:function(query,process){
+					return $.get('autocomplete.ap',{searchText:query,type:$("#test3 option:selected").val()},function(data){
+						return process(data);
+					});
+				},
+				minLength: 2,
+				matcher: function(item){
+					var pattern = "^"+this.query;
+					var regexp = new RegExp(pattern,"gi");
+					return regexp.test(item);
+				}
+			});
+		});
+	</script>
 </head>
 <body>
 	<div class="container">
@@ -38,7 +55,7 @@ System.out.println(option);
 									<option value="Title">Title</option>
 									<option value="Tag">Tag</option>
 								</select>
-								<input type="text" name="searchText" class="span5"placeholder="Input topic">
+								<input type="text" name="searchText" class="span5 typeahead2" placeholder="Input topic">
 							<input type="submit" class="btn" value="Search">
 						  </div>
 						</form>

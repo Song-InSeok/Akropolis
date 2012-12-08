@@ -21,5 +21,7 @@ public interface MainTopicMapper {
 	List<MainTopic> getTagTopics(
 			@Param("to") int to, @Param("number") int number, @Param("id") int id);
 	List<Timeline> getTimeline(String email);
+	List<String> getTitleAuto(@Param("searchText") String searchText);
+	List<String> getTagAuto(@Param("searchText") String searchText);
 	int updateFlag(MainTopic mt);
 }

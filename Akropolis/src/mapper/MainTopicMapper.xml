@@ -43,6 +43,17 @@
 		LIMIT #{to}, #{number}
 	</select>
 	
+	<select id="getTitleAuto" resultType="String">
+		SELECT mt_title FROM MainTopic
+		WHERE mt_title LIKE CONCAT('%',#{searchText},'%')
+	</select>
+	
+	<select id="getTagAuto" resultType="String">
+		SELECT mt_title
+		FROM MainTopic natural join MainTopic_TopicTag natural join TopicTag
+		WHERE tag LIKE CONCAT('%',#{searchText},'%')
+	</select>
+	
 	<select id="getTagSearchTopics" resultType="MainTopic">
 		SELECT DISTINCT mt_title,agree,disagree,date,m_close,mt_id,e_mail 
 		FROM MainTopic natural join MainTopic_TopicTag natural join TopicTag
