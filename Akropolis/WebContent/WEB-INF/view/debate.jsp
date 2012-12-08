@@ -249,6 +249,9 @@
 				<ul class="nav nav-list">
 					<li class="nav-header">RECOMMEND</li>
 					<li class="divider"></li>
+					<c:forEach var="sim" items="${debatemanager.simList }">
+						<li><a href="debate.ap?mt=${sim.mt_id }">${sim.mt_title }</a></li>
+					</c:forEach>
 					<li class="active"><a href="#">sim topic 1</a></li>
 					<li><a href="#">sim topic 2</a></li>
 					<li><a href="#">sim topic 3</a></li>
@@ -296,8 +299,10 @@
 									<input type="hidden" name = "mtmt" value="${debatemanager.mt.mt_id }"/>
 									<input type="hidden" name = "stst" value="${debatemanager.st }"/>
 									<input type="hidden" name = "post_type" value="thumbs_up"/>
-									<button type="submit" name="opop" value="${opi.opinion_id }" id="up${opi.opinion_id }" class="icon-thumbs-up thumbsup"></button></form>
-									<a href="#myModal${opi.opinion_id }" role="button" data-toggle="modal" class="icon-thumbs-down"></a></div></div>
+									<button type="submit" name="opop" value="${opi.opinion_id }" id="up${opi.opinion_id }" class="icon-thumbs-up disabled thumbsup"></button>
+									<a> ${opi.honor }</a>
+									<a href="#myModal${opi.opinion_id }" role="button" data-toggle="modal" class="icon-thumbs-down"></a>
+									</form></div></div>
 									<div class="opinion"><a class="name">${opi.name }</a>
 									<a class="id">${opi.e_mail }</a><br>
 									<a>${opi.content }</a></div></div>
@@ -314,9 +319,9 @@
 									<input type="hidden" name = "mtmt" value="${debatemanager.mt.mt_id }"/>
 									<input type="hidden" name = "stst" value="${debatemanager.st }"/>
 									<input type="hidden" name = "post_type" value="thumbs_up"/>
-									<button type="submit" name="opop" value="${opi.opinion_id }" id="up${opi.opinion_id }" class="icon-thumbs-up"></button></form>
+									<button type="submit" name="opop" value="${opi.opinion_id }" id="up${opi.opinion_id }" class="icon-thumbs-up thumbsup"></button>
 									<a>${opi.honor }</a>
-									<a href="#myModal${opi.opinion_id }" role="button" data-toggle="modal" class="icon-thumbs-down"></a><a>x</a>
+									<a href="#myModal${opi.opinion_id }" role="button" data-toggle="modal" class="icon-thumbs-down"></a></form>
 									</div></div></div>
 								</li></c:when>
 								

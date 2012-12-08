@@ -92,7 +92,7 @@
 	<select id="getSimTopics" resultType="MainTopic">
 		SELECT DISTINCT mt_title,agree,disagree,date,m_close,mt_id,e_mail 
 		FROM MainTopic natural join MainTopic_TopicTag natural join TopicTag
-		WHERE tag LIKE CONCAT('%',#{tag},'%') AND AND m_close="O"
+		WHERE tag LIKE CONCAT('%',#{tag},'%') AND m_close='O'
 	</select>
 	
 </mapper>

@@ -209,6 +209,8 @@ public class DebatePageManager {
 		
 		dm.setOpList(odao.getOPs(mt_id, dm.getSt()));
 		dm.setAlert(request.getParameter("err"));
+		dm.setSimList(mdao.getSimTopics(dm.getMt()));
+		System.out.println("simlist "+dm.getSimList().size()+" ");
 //		System.out.println(dm.getSt()+" "+st_O+" "+st_L+" "+dm.getSt()+" flag = "+dm.getUserList().get(0).getFlag());
 		if(dm.getOpList().size()>0){
 			System.out.println(dm.getOpList().get(0).getFlag()+" " +dm.getOpList().get(0).getPhoto()+" " +dm.getOpList().get(0).getE_mail());

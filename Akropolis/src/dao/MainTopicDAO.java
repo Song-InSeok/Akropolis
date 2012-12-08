@@ -229,7 +229,9 @@ public class MainTopicDAO {
 			MainTopicMapper mapper = session.getMapper(MainTopicMapper.class);
 			tags=mapper.getTags(topic.getMt_id());
 			for(String tag : tags) {
-				list.add(mapper.getSimTopics(tag));
+				if(mapper.getSimTopics(tag).getMt_id()!=topic.getMt_id()){
+					list.add(mapper.getSimTopics(tag));
+				}
 			}
 		}catch(Exception e){
 			e.printStackTrace();
