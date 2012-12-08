@@ -91,5 +91,14 @@
 		DELETE FROM Following_list 
 		WHERE e_mail = #{e_mail} and following = #{following}
 	</delete>
+	<update id="disPP" parameterType="String">
+	    update User set dishonor=dishonor+1 where e_mail=#{e_mail}
+	</update>
+	<update id="honorPP" parameterType="String">
+	    update User set honor=honor+1 where e_mail=#{e_mail}
+	</update>
+	<update id="honorMM" parameterType="String"> 
+	    update User set honor=honor-1 where e_mail=#{e_mail}
+	</update>
 	
 </mapper>

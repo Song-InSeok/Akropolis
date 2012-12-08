@@ -11,8 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import bean.DebateManager;
 import bean.Opinion;
 import bean.Participant;
+import bean.Report;
 import bean.SubTopic;
+import bean.Thumbsup;
 import bean.User;
+import dao.EtcDAO;
 import dao.MainTopicDAO;
 import dao.OpinionDAO;
 import dao.ParticipantDAO;
@@ -22,7 +25,62 @@ import dao.UserDAO;
 public class DebatePageManager {
 	public DebatePageManager(){
 		
+	}	
+	public static boolean thumbsUp(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException{
+		EtcDAO edao = new EtcDAO();
+		OpinionDAO odao = new OpinionDAO();
+		UserDAO udao = new UserDAO();
+		Opinion newopinion,preopinion;
+		User loginUser = (User)request.getSession().getAttribute("user");
+		String email=loginUser.getEmail();
+		int op = Integer.parseInt(request.getParameter("opop"));
+		int mt = Integer.parseInt(request.getParameter("mtmt"));
+		int st =  Integer.parseInt(request.getParameter("stst"));
+		Thumbsup t = new Thumbsup();
+		Thumbsup tup=null;
+		newopinion = odao.getOP(op);
+		
+		t.setE_mail(email);
+		t.setSub_id(st);
+		t.setOpinion_id(op);
+		tup = edao.getThumbsup(t);
+		if(tup==null){
+			edao.insertThumbsup(t);
+			udao.honorPP(newopinion.getE_mail());
+			odao.changeHonor(0, op);
+		}else{
+			preopinion = odao.getOP(tup.getOpinion_id());
+			edao.updateThumbsup(t);
+			udao.honorPP(newopinion.getE_mail());
+			udao.honorMM(preopinion.getE_mail());
+			odao.changeHonor(preopinion.getOpinion_id(), op);
+		}
+		System.out.println("thumbs up end");
+		return true;
 	}
+
+	public static boolean insertReport(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException{
+		EtcDAO edao = new EtcDAO();
+		OpinionDAO odao = new OpinionDAO();
+		UserDAO udao = new UserDAO();
+		Opinion opinion;
+		User loginUser = (User)request.getSession().getAttribute("user");
+		String email=loginUser.getEmail();
+		int op = Integer.parseInt(request.getParameter("opop"));
+		String content = request.getParameter("reportarea");
+		Report report = new Report();
+		report.setContent(content);
+		report.setE_mail(email);
+		report.setOpinion_id(op);
+		if(edao.insertReport(report)<=0) return false;
+		else{
+			opinion = odao.getOP(op);
+			udao.disPP(opinion.getE_mail());
+		}
+		System.out.println("insertReport");
+		return true;
+	}
+	
 	public static boolean changeReq(HttpServletRequest request,HttpServletResponse response,String req) throws UnsupportedEncodingException{
 		ParticipantDAO pdao = new ParticipantDAO();
 		User loginUser = (User)request.getSession().getAttribute("user");
@@ -110,7 +168,7 @@ public class DebatePageManager {
 		mt_id=st_id=st_O=st_L=0;
 		
 		if(request.getParameter("mt")!=null) 	mt_id = Integer.parseInt(request.getParameter("mt"));
-		if(request.getParameter("st")!=null) st_id = Integer.parseInt(request.getParameter("st"));
+		if(request.getParameter("st")!=null&&!request.getParameter("st").equals("")) st_id = Integer.parseInt(request.getParameter("st"));
 		loginUser = (User)request.getSession().getAttribute("user");
 		System.out.println(mt_id+" "+st_id+" "+loginUser);
 		if(mt_id==0){
@@ -150,7 +208,9 @@ public class DebatePageManager {
 		System.out.println("login = "+loginUser);
 		
 		dm.setOpList(odao.getOPs(mt_id, dm.getSt()));
-		
+		dm.setAlert(request.getParameter("err"));
+		dm.setSimList(mdao.getSimTopics(dm.getMt()));
+		System.out.println("simlist "+dm.getSimList().size()+" ");
 //		System.out.println(dm.getSt()+" "+st_O+" "+st_L+" "+dm.getSt()+" flag = "+dm.getUserList().get(0).getFlag());
 		if(dm.getOpList().size()>0){
 			System.out.println(dm.getOpList().get(0).getFlag()+" " +dm.getOpList().get(0).getPhoto()+" " +dm.getOpList().get(0).getE_mail());

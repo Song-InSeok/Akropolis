@@ -19,6 +19,9 @@ public interface UserMapper {
 	List<User> getFollowerList(String email);
 	void insertFollower(@Param("e_mail")String follower, @Param("following")String following);
 	void deleteFollower(@Param("e_mail")String follower, @Param("following")String following);
+	int disPP(String e_mail);
+	int honorPP(String e_mail);
+	int honorMM(String e_mail);
 	List<NewDebate> getNowTopic(String email);
 	List<NewDebate> getPastTopic(String email);
 }

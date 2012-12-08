@@ -49,9 +49,10 @@
 #sub_topics{
 	padding-top : 10px;
 	padding-bottom : 10px;
-	min-height: 100px;
+	min-height: 10px;
 	max-height : 500px;
 	width: 280px;
+	border : #aaa 1px inset;
 }
 #sub_topics>ul{
 	list-style:none;
@@ -59,12 +60,19 @@
 #sub_topics>ul>li{
 	font-size: 1em;
 }
+.nav-list > .sub_active > a{
+	border-right : #aaa 1px outset;
+	border-bottom : #aaa 2px outset;
+}
 #similer_topics{
+	padding-top : 10px;
+	padding-bottom : 10px;
 	margin-top : 30px;
-	min-height: 100px;
+	min-height: 10px;
 	max-height : 400px;
 	width: 280px;
 	overflow: auto;
+	border : #aaa 1px inset;
 }
 #similer_topics>ul{
 	list-style:none;
@@ -79,7 +87,7 @@
 	max-height: 850px;
 }
 #opinions{
-	margin-top : 5px;
+	margin-top : 2px;
 	padding : 0px 5px 5px 5px;
 	min-height: 100px;
 	max-height : 800px;
@@ -104,12 +112,14 @@
 	outline-color: #000;
 	height: 150px;
 	width: 640px;
+	margin-top: 10px;
+	margin-left: 5px;
 }
 #chat_bot{
 	height: 140px;
 	width: 640px;
 	padding-top: 10px;
-	margin : 5px 0px 0px 5px;
+	margin :10px 5px 0px 0px;
 	border-radius : 5px;
 }
 #message_bot{
@@ -131,6 +141,8 @@
 	text-align: center;
 	vertical-align: middle;
 	line-height: 50px;
+	border-right : #fff 2px outset;
+	border-bottom : #fff 2px outset;
 }
 #sub_title>a{
 	margin-top: 10px;
@@ -149,6 +161,7 @@
 
 .red_opinion{
 	/*border: 3px #ff0000 solid;*/
+	/*#F2DEDE*/
 	margin-left: 20px;
 	float: left;
 	margin-top:2px;
@@ -157,9 +170,12 @@
 	min-width: 400px;*/
 	overflow: auto;
 	border-radius: 5px;
+	border-bottom : #F2DEDE 1px outset;
+	border-right : #F2DEDE 1px outset;
 	 
 }
 .blue_opinion{
+	/*#D9EDF7*/
 	margin-top:2px;
 	float: left;
 	/*border: 3px #00f solid;*/
@@ -168,9 +184,12 @@
 	max-width: 620px;*/
 	overflow: auto;
 	border-radius: 5px;
+	border-bottom : #D9EDF7 1px outset;
+	border-right : #D9EDF7 1px outset;	
 	
 }
 .mid_opinion{
+	/*#DFF0D8*/
 	margin-top:2px;
 	padding : 10px 10px 10px 10px;
 	float: left;
@@ -180,12 +199,14 @@
 	vertical-align: middle;
 	text-align: center;
 	border-radius: 5px;
+	border-bottom : #DFF0D8 1px outset;
+	border-right : #DFF0D8 1px outset;	
 }
 .opinion{
 	float: left;
 	overflow: auto;
-	width: 510px;
-	padding-top: 10px;
+	width: 500px;
+	padding-top: 15px;
 	padding-left: 10px;
 	text-align: left;	
 }
@@ -236,7 +257,7 @@
 }
 .op_prof{
 	float: left;
-	width: 70px;
+	width: 80px;
 	min-height: 80px;
 	overflow: auto;
 	
@@ -254,8 +275,8 @@
 .prof_btn{
 	padding-top: 3px;
 	padding-left: 5px;
-	min-width: 65px;
-	min-height: 27px;
+	min-width: 70px;
+	min-height: 20px;
 	float: left;
 }
 .prof_btn>a{
@@ -321,4 +342,14 @@
 	height : 120px;
 	margin : 5px 30px 0px 30px;
 	paddimg : 10px 20px 10px 20px;
+}
+.inmodal{
+	width : 575px;
+}
+.thumbsup{
+	float: left;
+	margin-left:5px;
+	margin-right:5px;
+	height : 20px;
+	width : 20px;
 }
