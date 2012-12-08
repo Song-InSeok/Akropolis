@@ -16,4 +16,15 @@
       (content, mt_id, sub_id, e_mail, honor) 
       values (#{content}, #{mt_id}, #{sub_id}, #{e_mail}, 0)
   </insert>
-</mapper>
+  <select id="getOP" parameterType="int" resultType="Opinion">
+      select * from Opinion where opinion_id = #{opinion_id}
+  </select>
+  
+  <update id="honorPP" parameterType="int">
+      update Opinion set honor=honor+1 where opinion_id=#{opinion_id}
+  </update>
+  <update id="honorMM" parameterType="int">
+      update Opinion set honor=honor-1 where opinion_id=#{opinion_id}
+  </update>
+
+  </mapper>

@@ -13,6 +13,51 @@ import bean.User;
 
 public class UserDAO {
 	public static SqlSessionFactory sqlSessionFactory = MyBatisManager.getInstance();
+	public int disPP(String e_mail){
+		int i=0;
+		SqlSession session = sqlSessionFactory.openSession();
+		User user = new User();
+		try{
+			UserMapper mapper = session.getMapper(UserMapper.class);
+			i = mapper.disPP(e_mail);
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return i;
+	}
+	public int honorPP(String e_mail){
+		int i=0;
+		SqlSession session = sqlSessionFactory.openSession();
+		User user = new User();
+		try{
+			UserMapper mapper = session.getMapper(UserMapper.class);
+			i = mapper.honorPP(e_mail);
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return i;
+	}
+	public int honorMM(String e_mail){
+		int i=0;
+		SqlSession session = sqlSessionFactory.openSession();
+		User user = new User();
+		try{
+			UserMapper mapper = session.getMapper(UserMapper.class);
+			i = mapper.honorMM(e_mail);
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return i;
+	}
 	
 	public User getUser(String email){
 		SqlSession session = sqlSessionFactory.openSession();
