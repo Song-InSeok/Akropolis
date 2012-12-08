@@ -22,4 +22,8 @@ public interface UserMapper {
 	void insertFollower(@Param("e_mail")String follower, @Param("following")String following);
 	void deleteFollower(@Param("e_mail")String follower, @Param("following")String following);
 	List<String> getNowTopic(String email);
+	
+	int disPP(String e_mail);
+	int honorPP(String e_mail);
+	int honorMM(String e_mail);
 }

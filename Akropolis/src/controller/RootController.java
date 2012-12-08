@@ -175,8 +175,14 @@ public class RootController {
 //		boolean isSuccess=DebatePageManager.submitPage(request, response);
 		String st,mt;
 		mt=request.getParameter("mtmt");
-		st=request.getParameter("stst");
-		
+		st=request.getParameter("stst");		
+
+		User loginUser = (User)request.getSession().getAttribute("user");
+		if(loginUser==null){
+			mv = new ModelView("redirect:/Akropolis/debate.ap?mt="+mt+"&st="+st+"&err=L");
+			return mv;
+		}
+
 		if(post_type.equals("add_opinion")){
 			DebatePageManager.insertOP(request, response);
 		}else if(post_type.equals("no_btn")){
@@ -187,10 +193,16 @@ public class RootController {
 			DebatePageManager.changeReq(request, response, "D");
 		}else if(post_type.equals("access_join")){
 			DebatePageManager.changeReq(request, response, "Y");
+		}else if(post_type.equals("thumbs_up")){
+			DebatePageManager.thumbsUp(request, response);
+		}else if(post_type.equals("report")){
+			DebatePageManager.insertReport(request,response);
+			System.out.println("report op id : "+request.getParameter("opop")+"\n신고내용 : "+request.getParameter("reportarea"));
 		}
-		mv = new ModelView("redirect:/Akropolis/debate.ap?mt="+mt+"&st="+st);
 		//else mv = new ModelView("/error");
 		System.out.println("debate post");
+		
+		mv = new ModelView("redirect:/Akropolis/debate.ap?mt="+mt+"&st="+st);
 		return mv;
 	}catch(Exception e){
 		e.printStackTrace();
@@ -258,7 +270,7 @@ public class RootController {
 //			System.out.println(dm.getOpList().size());
 //			request.setAttribute("debatemanager", dm);
 			if(DebatePageManager.makePage(request, response)) mv = new ModelView("/debate");
-			else mv = new ModelView("/error");
+			else mv = new ModelView("/debate");
 			System.out.println("debate servlet complete");
 			return mv;
 		}catch(Exception e){

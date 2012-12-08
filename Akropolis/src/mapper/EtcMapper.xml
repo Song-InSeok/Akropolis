@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.EtcMapper">
+  <insert id="insertThumbsup" parameterType="Thumbsup">
+      INSERT INTO `akropolis`.`Thumbsup` (`opinion_id`, `e_mail`, `sub_id`) 
+      VALUES (#{opinion_id}, #{e_mail}, #{sub_id});
+  </insert>
+  
+  <insert id="insertReport" parameterType="Report">
+      INSERT INTO `akropolis`.`Report` (`opinion_id`, `e_mail`, `content`) 
+      VALUES (#{opinion_id}, #{e_mail},#{content})
+  </insert>
+  
+  <update id="updateThumbsup" parameterType="Thumbsup">
+      update Thumbsup set opinion_id=#{opinion_id} where e_mail=#{e_mail} and sub_id=#{sub_id}
+  </update>
+
+  <select id="getThumbsup" parameterType="Thumbsup" resultType="Thumbsup">
+      select * from Thumbsup where e_mail=#{e_mail} and sub_id=#{sub_id}
+  </select>
+</mapper>

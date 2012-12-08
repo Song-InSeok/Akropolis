@@ -17,6 +17,7 @@ public class DebateManager implements Serializable {
 	private int isLogin;
 	private int isPt;
 	private Participant logPt;
+	private String alert;
 	public DebateManager(){
 
 	}
@@ -123,5 +124,13 @@ public class DebateManager implements Serializable {
 
 	public void setSimList(List<MainTopic> simList) {
 		this.simList = simList;
+	}
+
+	public String getAlert() {
+		return alert;
+	}
+
+	public void setAlert(String alert) {
+		this.alert = alert;
 	}
 }

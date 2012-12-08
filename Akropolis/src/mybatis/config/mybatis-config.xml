@@ -26,5 +26,6 @@
 		<mapper resource="mapper/SubTopicMapper.xml"/>
 		<mapper resource="mapper/ParticipantMapper.xml"/>
 		<mapper resource="mapper/CreateMapper.xml" />
+		<mapper resource="mapper/EtcMapper.xml"/>
 	</mappers>
 </configuration>

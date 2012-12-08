@@ -14,13 +14,37 @@
 		</c:forEach>
 		""]
 	</c:set>
+	<c:set var="ops">
+		[
+		<c:forEach items="${debatemanager.opList }" var="item">${item.opinion_id },</c:forEach>
+		]
+	</c:set>
+	
 	<c:set value="${debatemanager.logPt.request }" var="req"></c:set>
 	<c:set value="${debatemanager.isPt }" var="ispt"/>
 	<c:set value="${debatemanager.isLogin }" var = "islog"/>
 	<c:set value="${debatemanager.logPt.flag }" var = "loguserflag"/>
+	<c:set value="${debatemanager.alert }" var = "alert"/>
 	<script type="text/javascript">
 		$(function() {
 			var users = eval(${users});
+			var ops = ${ops};
+			var opss = $("31,22");
+			var thumbsup = function(e){
+				alert("you click thumbs up "+e+" "+"\n"+ops);
+			};
+			
+			for(x in ops){
+				var op=$("#op"+ops[x]);
+				$("#op"+ops[x]).submit(function(){
+					if(!confirm("추천하시겠습니까?")){
+						return false;
+					};
+				});
+			}
+			
+			
+		
 			$("#submit_content").typeahead({
 				source:users,
 				minLength: 2,
@@ -57,6 +81,7 @@
 			        return data;
 			    }
 			});
+
 			voteAlready = function(){
 				alert("이미 투표 하셨습니다");
 			};
@@ -71,6 +96,9 @@
 				}
 			};
 			
+			if('${alert}'=='L'){
+				alert("로그인 해주세요");
+			}
 			
 			$("#submit_button").click(function(){
 				if(confirm("의견을 등록하시겠습니까?")){
@@ -207,10 +235,10 @@
 					<c:forEach var="SubTopic" items="${debatemanager.stList }">
 						<c:choose>
 							<c:when test="${debatemanager.st==SubTopic.sub_id }">
-								<li class="active"><a href="http://localhost:8080/Akropolis/debate.ap?mt=${SubTopic.mt_id }&st=${SubTopic.sub_id}">${SubTopic.sub_title}</a></li>
+								<li class="active sub_active"><a href="debate.ap?mt=${SubTopic.mt_id }&st=${SubTopic.sub_id}">${SubTopic.sub_title}</a></li>
 							</c:when>
 							<c:otherwise>
-								<li><a href="http://localhost:8080/Akropolis/debate.ap?mt=${SubTopic.mt_id }&st=${SubTopic.sub_id}">${SubTopic.sub_title}</a></li>
+								<li><a href="debate.ap?mt=${SubTopic.mt_id }&st=${SubTopic.sub_id}">${SubTopic.sub_title}</a></li>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
@@ -237,11 +265,38 @@
 				<div id="opinions">
 					<ul>
 						<c:forEach var="opi" items="${debatemanager.opList }">
+							<div id="myModal${opi.opinion_id }" class="modal hide fade inmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+							<h3 id="myModalLabel">신고하시겠습니까?</h3>
+							</div>
+							<form id="inModal${opi.opinion_id }" method="POST" action="debate.ap">
+							<input type="hidden" name = "mtmt" value="${debatemanager.mt.mt_id }"/>
+							<input type="hidden" name = "stst" value="${debatemanager.st }"/>
+							<input type="hidden" name = "opop" value="${opi.opinion_id }"/>
+							<input type="hidden" name = "post_type" value="report"/>
+							<div class="modal-body">
+							<p>정당한 신고사유를 적어주세요.</p>
+							<textarea id="submit_content"class="input-xxlarge " rows="5" name="reportarea"></textarea>
+							</div>
+							<div class="modal-footer">
+							<button class="btn" data-dismiss="modal" aria-hidden="true">취소</button>
+							<button type="submit" class="btn btn-danger">신고</button>
+							</div>
+							</form>
+							</div>
 							<c:choose>
-								<c:when test="${opi.flag=='Y'}"><li>
+								<c:when test="${opi.flag=='Y'}"><li>								
+									
 									<div class="alert-info blue_opinion">
 									<div class="op_prof"><img class = "op_photo" src="${opi.photo }">
-									<div class="prof_btn"><i class="icon-thumbs-up"></i><i class="icon-thumbs-down"></i></div></div>
+									<div class="prof_btn">
+									<form id="op${opi.opinion_id }" method="POST" action="debate.ap">
+									<input type="hidden" name = "mtmt" value="${debatemanager.mt.mt_id }"/>
+									<input type="hidden" name = "stst" value="${debatemanager.st }"/>
+									<input type="hidden" name = "post_type" value="thumbs_up"/>
+									<button type="submit" name="opop" value="${opi.opinion_id }" id="up${opi.opinion_id }" class="icon-thumbs-up thumbsup"></button></form>
+									<a href="#myModal${opi.opinion_id }" role="button" data-toggle="modal" class="icon-thumbs-down"></a></div></div>
 									<div class="opinion"><a class="name">${opi.name }</a>
 									<a class="id">${opi.e_mail }</a><br>
 									<a>${opi.content }</a></div></div>
@@ -254,8 +309,13 @@
 									<a>${opi.content }</a></div>
 									<div class="op_prof"><img class = "op_photo" src="${opi.photo }">
 									<div class="prof_btn">
-									<i class="icon-thumbs-up"></i><a>${opi.honor }</a>
-									<i class="icon-thumbs-down"></i><a>x</a>
+									<form id="op${opi.opinion_id }" method="POST" action="debate.ap">
+									<input type="hidden" name = "mtmt" value="${debatemanager.mt.mt_id }"/>
+									<input type="hidden" name = "stst" value="${debatemanager.st }"/>
+									<input type="hidden" name = "post_type" value="thumbs_up"/>
+									<button type="submit" name="opop" value="${opi.opinion_id }" id="up${opi.opinion_id }" class="icon-thumbs-up"></button></form>
+									<a>${opi.honor }</a>
+									<a href="#myModal${opi.opinion_id }" role="button" data-toggle="modal" class="icon-thumbs-down"></a><a>x</a>
 									</div></div></div>
 								</li></c:when>
 								
@@ -355,7 +415,7 @@
 				</c:if>
 			</c:if>
 			<c:if test="${debatemanager.subTopic.sub_close=='C' }">
-				<div id="message_bot" class = "back_grey">
+				<div id="message_close" class = "back_grey">
 					<button id="message_btn" type="button" class="btn btn-large msg_btn disabled" value="block_btn">닫혀있는 주제입니다</button>
 				</div>
 				<a>close</a>
