@@ -11,7 +11,7 @@ public interface CreateMapper {
 	int getMt_id(NewDebate newdebate);
 
 	void insertTag(TagTag tag);
-	int getTagId(TagTag tag);
+	Integer getTagId(TagTag tag);
 	void connectTag(TagTag tag);
 	void setParticipate(NewDebate newdebate);
 }

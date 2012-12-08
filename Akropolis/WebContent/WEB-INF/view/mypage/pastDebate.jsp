@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,8 +18,11 @@
 				<label class="name">목 록</label>
 				<div id="debate_list">
 					<ul>
-						<li><a href="#">성형수술해도 된다?</a></li>
-						<li><a href="#">인간복제해도된다?</a></li>
+						<c:forEach var="topic" items="${model.topic}">
+							<li><a href="/Akropolis/debate.ap?mt=${topic.getMt_id()}">${topic.getMTopic()}
+									(mt_id :${topic.getMt_id()})</a></li>
+
+						</c:forEach>
 					</ul>
 				</div>
 			</fieldset>

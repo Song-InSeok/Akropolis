@@ -19,7 +19,8 @@
 				<div id="debate_list">
 					<ul>
 						<c:forEach var="topic" items="${model.topic}">
-							<li>${topic}</li>
+						<li><a href="/Akropolis/debate.ap?mt=${topic.getMt_id()}">${topic.getMTopic()}
+									(mt_id :${topic.getMt_id()})</a></li>
 						</c:forEach>
 					</ul>
 				</div>

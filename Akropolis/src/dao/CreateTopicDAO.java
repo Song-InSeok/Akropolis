@@ -17,13 +17,27 @@ import bean.TagTag;
 public class CreateTopicDAO {
 	public static SqlSessionFactory sqlSessionFactory = MyBatisManager.getInstance();
 
-	public List<String> getNowTopic(String email){
+	public List<NewDebate> getNowTopic(String email){
 		SqlSession session = sqlSessionFactory.openSession();
-		List<String> nowMainTopic = null;
+		List<NewDebate> nowMainTopic = null;
 		try{
 			UserMapper mapper = session.getMapper(UserMapper.class);
 			
 			nowMainTopic = mapper.getNowTopic(email);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return nowMainTopic;
+	}
+	
+	public List<NewDebate> getPastTopic(String email){
+		SqlSession session = sqlSessionFactory.openSession();
+		List<NewDebate> nowMainTopic = null;
+		try{
+			UserMapper mapper = session.getMapper(UserMapper.class);
+			nowMainTopic = mapper.getPastTopic(email);
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
@@ -62,12 +76,20 @@ public class CreateTopicDAO {
 	}
 	public void insertANDconnetTag(NewDebate newdebate){
 		SqlSession session = sqlSessionFactory.openSession();
+		Integer existTag_id = null;
+		
 		try{
 			CreateMapper mapper = session.getMapper(CreateMapper.class);
 			for(TagTag tag : newdebate.getTags()) {
-				mapper.insertTag(tag);
-				tag.setTag_id(mapper.getTagId(tag));
+				existTag_id = mapper.getTagId(tag);
+				if(existTag_id==null){
+					mapper.insertTag(tag);
+					tag.setTag_id((int)mapper.getTagId(tag));
+				}else{
+					tag.setTag_id((int)existTag_id);
+				}
 				mapper.connectTag(tag);
+				existTag_id=null;
 			}
 			session.commit();
 		}catch(Exception e){
