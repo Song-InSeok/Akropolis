@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="page" content="adminDebate" />
+<meta name="page" content="pastDebate" />
 <meta charset="UTF-8">
 <title>지난토론</title>
 <link href="/Akropolis/css/pastdebate.css" rel="stylesheet"

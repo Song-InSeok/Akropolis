@@ -6,6 +6,16 @@
 		<welcome-file>main.ap</welcome-file>
 	</welcome-file-list>
 	
+	<jsp-config>
+		<taglib>
+			<taglib-uri>
+				http://www.alsquare.com/tlds/el_function
+			</taglib-uri>
+			<taglib-location>
+				/WEB-INF/tlds/el_function.tld
+			</taglib-location>
+		</taglib>
+	</jsp-config>
 	
 	<context-param>
 		<param-name>appID</param-name>

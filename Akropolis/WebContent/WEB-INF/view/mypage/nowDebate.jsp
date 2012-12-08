@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="page" content="adminDebate" />
+<meta name="page" content="nowDebate" />
 <meta charset="UTF-8">
 <title>참여중인토론</title>
 <link href="/Akropolis/css/nowdebate.css" rel="stylesheet"

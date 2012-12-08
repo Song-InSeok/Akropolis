@@ -16,6 +16,20 @@ import bean.Timeline;
 public class MainTopicDAO {
 	public static SqlSessionFactory sqlSessionFactory = MyBatisManager.getInstance();
 	
+	public static boolean isOpen(String email){
+		SqlSession session = sqlSessionFactory.openSession();
+		boolean flag = false;
+		try{
+			MainTopicMapper mapper = session.getMapper(MainTopicMapper.class);
+			flag = mapper.isOpen(email);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return flag;
+	}
+	
 	public void updateFlag(int mt_id){
 		SqlSession session = sqlSessionFactory.openSession();
 		System.out.println("MainTopicDAO updateFlag Start");
