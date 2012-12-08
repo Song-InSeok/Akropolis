@@ -5,10 +5,9 @@ import hello.annotation.RootURL;
 import hello.mv.ModelView;
 
 import java.io.UnsupportedEncodingException;
-import java.sql.SQLException;
+import java.net.URLDecoder;
 import java.util.List;
 
-import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -22,7 +21,6 @@ import bean.FaceBook;
 import bean.MainTopic;
 import bean.PageResult;
 import bean.User;
-import dao.InterestDAO;
 import dao.MainTopicDAO;
 import dao.UserDAO;
 
@@ -86,6 +84,20 @@ public class RootController {
 		return mv;
 	}
 
+	@Mapping(url="/autocomplete.ap")
+	ModelView autoComplete(HttpServletRequest request,HttpServletResponse response){
+		ModelView mv = new ModelView("/autocomplete");
+		String searchText = request.getParameter("searchText");
+		String type = request.getParameter("type");
+		MainTopicDAO dao = new MainTopicDAO();
+		if(type.equals("Tag")){
+			mv.setModel("list", dao.getTagAuto(searchText));
+		}else if(type.equals("Title")){
+			mv.setModel("list", dao.getTitleAuto(searchText));
+		}
+		return mv;
+	}
+	
 	@Mapping(url="/login.ap",bean="bean.FaceBook")
 	ModelView login(HttpServletRequest request,HttpServletResponse response,Object bean){
 		ModelView mv = new ModelView("/close");

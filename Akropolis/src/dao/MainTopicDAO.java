@@ -84,6 +84,37 @@ public class MainTopicDAO {
 		return result;	
 	}
 	
+	public List<String> getTitleAuto(String searchText) {
+
+		SqlSession session = sqlSessionFactory.openSession();
+		List<String> list = null;
+		try{
+			MainTopicMapper mapper = session.getMapper(MainTopicMapper.class);
+			list = mapper.getTitleAuto(searchText);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return list;
+	}
+
+	public List<String> getTagAuto(String searchText) {
+
+		SqlSession session = sqlSessionFactory.openSession();
+		List<String> list = null;
+		try{
+			MainTopicMapper mapper = session.getMapper(MainTopicMapper.class);
+			list = mapper.getTagAuto(searchText);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return list;
+	}
+	
+	
 	public PageResult<MainTopic> getTitleSearch(int page, String searchText) {
 
 		SqlSession session = sqlSessionFactory.openSession();

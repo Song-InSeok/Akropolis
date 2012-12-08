@@ -20,4 +20,6 @@ public interface MainTopicMapper {
 	List<MainTopic> getTagSearchTopics(
 			@Param("to") int to, @Param("number") int number, @Param("searchText") String searchText);
 	List<Timeline> getTimeline(String email);
+	List<String> getTitleAuto(@Param("searchText") String searchText);
+	List<String> getTagAuto(@Param("searchText") String searchText);
 }
