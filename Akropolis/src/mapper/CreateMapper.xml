@@ -4,6 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.CreateMapper">
 
+	<resultMap type="NewDebate" id="find">
+		<id column="mt_title" property="mTopic" />
+		<id column="e_mail" property="email" />
+	</resultMap>
+
 	<insert id="insertMaintopic" parameterType="NewDebate">
 		insert into MainTopic(mt_title,m_close,e_mail) 
 		values(#{mTopic},'O',#{email})
@@ -13,11 +18,25 @@
 		insert into SubTopic(sub_title,start_time,end_time,sub_close,mt_id) 
 		values(#{sub_title},#{start_time},#{end_time},'O',#{mt_id})
 	</insert>
-	<select id="getMt_id" parameterType="NewDebate" resultType="int">
+	<select id="getMt_id" parameterType="User" resultType="int">
+		SELECT mt_id FROM MainTopic
+		WHERE  e_mail = #{email} AND m_close='O'
+	</select>
+	
+	<select id="findMt_id" parameterType="String" resultType="int">
 		SELECT mt_id FROM MainTopic
 		WHERE  mt_title = #{mTopic} 
 	</select>
-	
+
+	<select id="findDebate" parameterType="String" resultMap="find">
+		SELECT * FROM MainTopic WHERE e_mail=#{email} AND m_close='O';
+	</select>
+	<select id="findTag" parameterType="int" resultType="TagTag">
+	SELECT
+	tag,mt_id,TopicTag.tag_id FROM TopicTag, MainTopic_TopicTag
+	where
+	TopicTag.tag_id = MainTopic_TopicTag.tag_id ANd mt_id = #{mt_id}
+</select>
 	<insert id="insertTag" parameterType="TagTag">
 		insert into TopicTag(tag)
 		values(#{tag})

@@ -136,7 +136,7 @@
 					placeholder=" Write to Main Topic.."><br /> <label
 					class="name">태그 :</label>
 				<div class="tags">
-					<% for(int i=0; i<3 ; i++){ %>
+					<% for(int i=0; i<1 ; i++){ %>
 					<input type="text" class="tag" name="tag" placeholder=" tags..">
 					<%} %>
 
