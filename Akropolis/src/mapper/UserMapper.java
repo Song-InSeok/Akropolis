@@ -14,6 +14,8 @@ public interface UserMapper {
 	int insertUser(User user);
 	List<User> getDebateUsers(int mt_id);
 	List<User> getJoinUsers(int mt_id);
+	List<User> getBanUsers(int mt_id);
+	List<User> getInviteUsers(int mt_id);
 	void updateUserSay(User user);
 	void deleteInterests(@Param("e_mail")String email);
 	void insertInterest(@Param("e_mail")String email, @Param("interest_id")int id);
