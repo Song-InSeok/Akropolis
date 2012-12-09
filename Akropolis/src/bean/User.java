@@ -11,6 +11,7 @@ public class User implements Serializable{
 	private String photo;
 	private int honor;
 	private int dishonor;
+	private int user_id;
 	
 	private String flag;
 
@@ -76,5 +77,11 @@ public class User implements Serializable{
 	}
 	public void setFlag(String flag) {
 		this.flag = flag;
+	}
+	public int getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
 	}
 }

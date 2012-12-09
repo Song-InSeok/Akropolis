@@ -198,6 +198,11 @@ public class RootController {
 		}else if(post_type.equals("report")){
 			DebatePageManager.insertReport(request,response);
 			System.out.println("report op id : "+request.getParameter("opop")+"\n신고내용 : "+request.getParameter("reportarea"));
+		}else if(post_type.equals("delete_op")){
+			System.out.println("delete op id : "+request.getParameter("opop"));
+			DebatePageManager.deleteOp(request, response);
+		}else if(post_type.equals("following")){
+			DebatePageManager.following(request, response);
 		}
 		//else mv = new ModelView("/error");
 		System.out.println("debate post");

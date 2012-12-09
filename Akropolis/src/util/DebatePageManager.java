@@ -25,7 +25,26 @@ import dao.UserDAO;
 public class DebatePageManager {
 	public DebatePageManager(){
 		
-	}	
+	}
+	public static boolean following(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException{
+		UserDAO udao = new UserDAO();
+		int i=0;
+		User loginUser = (User)request.getSession().getAttribute("user");
+		String following = request.getParameter("following");
+		String follower = loginUser.getEmail();
+		udao.insertFollower(following, follower);
+		System.out.println("following.....");
+		return true;
+	}
+
+	public static boolean deleteOp(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException{
+		OpinionDAO odao = new OpinionDAO();
+		int op = Integer.parseInt(request.getParameter("opop"));
+		int i = odao.deleteOP(op);
+		if(i>0)System.out.println("delete success");
+		else System.out.println("delete fail");
+		return true;
+	}
 	public static boolean thumbsUp(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException{
 		EtcDAO edao = new EtcDAO();
 		OpinionDAO odao = new OpinionDAO();
@@ -185,6 +204,7 @@ public class DebatePageManager {
 		dm.setUserList(udao.getDebateUsers(mt_id));
 		if(loginUser==null){ 
 			dm.setIsLogin(0);
+			dm.setIsMine("N");
 			dm.setLogUser(loginUser);
 		}else{ 
 			dm.setIsLogin(1);
@@ -192,6 +212,8 @@ public class DebatePageManager {
 			dm.setLogPt(pdao.getParticipant(loginUser.getEmail(), mt_id));
 			if(dm.getLogPt()==null) dm.setIsPt(0);
 			else dm.setIsPt(1);
+			if(dm.getMt().getE_mail().equals(loginUser.getEmail())) dm.setIsMine("Y");
+			else dm.setIsMine("N");
 		}
 
 		List<SubTopic> slist = dm.getStList();
@@ -221,7 +243,7 @@ public class DebatePageManager {
 		
 		System.out.println(dm.getMt().getMt_title());
 		System.out.println(dm.getStList().size());
-		System.out.println(dm.getOpList().size());
+		System.out.println(dm.getOpList().size() + "isMine "+dm.getIsMine());
 		request.setAttribute("debatemanager", dm);
 		return true;
 	}

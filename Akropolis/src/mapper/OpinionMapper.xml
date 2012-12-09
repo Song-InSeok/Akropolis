@@ -26,5 +26,7 @@
   <update id="honorMM" parameterType="int">
       update Opinion set honor=honor-1 where opinion_id=#{opinion_id}
   </update>
-
+  <delete id="deleteOP" parameterType="int">
+      delete from Opinion where opinion_id=#{opinion_id}
+  </delete>
   </mapper>

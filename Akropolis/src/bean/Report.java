@@ -5,6 +5,7 @@ public class Report {
 	int report_id;
 	String e_mail;
 	String content;
+	String reported;
 	public Report(){
 		
 	}
@@ -31,5 +32,11 @@ public class Report {
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public String getReported() {
+		return reported;
+	}
+	public void setReported(String reported) {
+		this.reported = reported;
 	}
 }

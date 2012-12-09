@@ -8,6 +8,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link href="/Akropolis/css/debate.css" rel="stylesheet" type="text/css">
+	<link href="/Akropolis/css/profile.css" rel="stylesheet" type="text/css">
 	<c:set var="users">
 		[
 		<c:forEach items="${debatemanager.userList }" var="item">
@@ -39,6 +40,11 @@
 				var op=$("#op"+ops[x]);
 				$("#op"+ops[x]).submit(function(){
 					if(!confirm("추천하시겠습니까?")){
+						return false;
+					};
+				});
+				$("#del"+ops[x]).submit(function(){
+					if(!confirm("삭제하시겠습니까??")){
 						return false;
 					};
 				});
@@ -259,6 +265,11 @@
 				</ul>
 			</div>
 		</div>
+		
+		
+		
+		
+		
 		<div id="debate_border_right">
 			<div id="ing_debate">
 				<div id="sub_title">
@@ -289,92 +300,133 @@
 							</div>
 							</form>
 							</div>
+							
+							<div id="prModal${opi.opinion_id }" class="modal hide fade inmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+							<h3 id="myModalLabel">${opi.e_mail }</h3>
+							</div>
+							<form id="inprModal${opi.opinion_id }" method="POST" action="debate.ap">
+							<input type="hidden" name = "mtmt" value="${debatemanager.mt.mt_id }"/>
+							<input type="hidden" name = "stst" value="${debatemanager.st }"/>
+							<input type="hidden" name = "following" value="${opi.e_mail }"/>
+							<input type="hidden" name = "post_type" value="following"/>
+							<div class="modal-body">
+							<c:forEach var="usr" items="${debatemanager.userList }">
+								<c:if test="${usr.email==opi.e_mail }">
+									<div id="left">
+											<div class="pop-up-left">
+												<h1>${usr.name}</h1>
+												<p><span>( ${usr.email} )</span></p>
+												<span>학력</span> <a>${usr.education}</a> <br/> 
+												<span>하고 싶은 말</span> <br/>
+												<textarea disabled="disabled" rows="2" name="say">${usr.say}</textarea>
+												<br/>
+											</div>
+											<div class="pop-up-right">
+												<h5>프로필사진</h5>
+												<img src="${usr.photo}" class="img-polaroid" width="135" height="135" alt="profile photo"  >
+											</div>
+											<div class="pop-bottom">
+												<span>명예 지수 </span> <i class="icon-thumbs-up"></i>${usr.honor}
+												<div class="progress progress-success progress-striped"> 
+													<div class="bar" style="width: ${usr.honor}%;"></div>
+												</div>
+												<span>불명예 지수 </span><i class="icon-thumbs-down"></i>${usr.dishonor}
+												<div class="progress progress-warning progress-striped">
+													<div class="bar" style="width: ${usr.dishonor}%;"></div>
+												</div>
+											</div>
+									</div>
+								</c:if>
+							</c:forEach>
+							</div>
+							<div class="modal-footer">
+							<button class="btn btn-warning" data-dismiss="modal" aria-hidden="true">close</button>
+							<button type="submit" class="btn btn-info">following</button>
+							</div>
+							</form>
+							</div>
 							<c:choose>
 								<c:when test="${opi.flag=='Y'}"><li>								
 									
 									<div class="alert-info blue_opinion">
-									<div class="op_prof"><img class = "op_photo" src="${opi.photo }">
+									<div class="op_prof"><a href="#prModal${opi.opinion_id }" role="button" data-toggle="modal"><img  class = "op_photo" src="${opi.photo }"></a>
 									<div class="prof_btn">
 									<form id="op${opi.opinion_id }" method="POST" action="debate.ap">
 									<input type="hidden" name = "mtmt" value="${debatemanager.mt.mt_id }"/>
 									<input type="hidden" name = "stst" value="${debatemanager.st }"/>
 									<input type="hidden" name = "post_type" value="thumbs_up"/>
-									<button type="submit" name="opop" value="${opi.opinion_id }" id="up${opi.opinion_id }" class="icon-thumbs-up disabled thumbsup"></button>
-									<a> ${opi.honor }</a>
-									<a href="#myModal${opi.opinion_id }" role="button" data-toggle="modal" class="icon-thumbs-down"></a>
+									<button type="submit" name="opop" value="${opi.opinion_id }" id="up${opi.opinion_id }" class="btn btn-mini btn-link thumbsup"><a class="icon-thumbs-up icon-white thum_icon"></a></button>
+									<a class="thum_text">${opi.honor }</a>
+									<button href="#myModal${opi.opinion_id }" role="button" data-toggle="modal" class="btn btn-mini btn-link thumbsup"><a class="icon-thumbs-down icon-white thum_icon"></a></button>
 									</form></div></div>
 									<div class="opinion"><a class="name">${opi.name }</a>
 									<a class="id">${opi.e_mail }</a><br>
-									<a>${opi.content }</a></div></div>
+									<a>${opi.content }</a>
+									<c:if test="${debatemanager.isMine=='Y' || opi.e_mail==debatemanager.logUser.email}">
+										<form id="del${opi.opinion_id }" method="POST" action="debate.ap">
+										<input type="hidden" name = "mtmt" value="${debatemanager.mt.mt_id }"/>
+										<input type="hidden" name = "stst" value="${debatemanager.st }"/>
+										<input type="hidden" name = "post_type" value="delete_op"/>
+										<button type="submit" name="opop" value="${opi.opinion_id }" id="del${opi.opinion_id }" class="btn btn-mini btn-danger delete_btn disabled">
+										<a class="icon-remove icon-white remove_icon"></a></button>
+										</form>
+									</c:if>
+									</div></div>
 								</li></c:when>
 								
 								<c:when test="${opi.flag=='N'}"><li>
 									<div class="alert-error red_opinion">
 									<div class="opinion"><a class="name">${opi.name }</a>
-									<a class="id">${opi.e_mail }</a><br>
-									<a>${opi.content }</a></div>
-									<div class="op_prof"><img class = "op_photo" src="${opi.photo }">
+									<a class="id">${opi.e_mail }</a><br/>
+									<a>${opi.content }</a>
+									<c:if test="${debatemanager.isMine=='Y' || opi.e_mail==debatemanager.logUser.email}">
+										<form id="del${opi.opinion_id }" method="POST" action="debate.ap">
+										<input type="hidden" name = "mtmt" value="${debatemanager.mt.mt_id }"/>
+										<input type="hidden" name = "stst" value="${debatemanager.st }"/>
+										<input type="hidden" name = "post_type" value="delete_op"/>
+										<button type="submit" name="opop" value="${opi.opinion_id }" id="del${opi.opinion_id }" class="btn btn-mini btn-danger delete_btnR disabled">
+										<a class="icon-remove icon-white remove_icon"></a></button>
+										</form>
+									</c:if>
+									</div>
+									<div class="op_prof"><a href="#prModal${opi.opinion_id }" role="button" data-toggle="modal"><img class = "op_photo" src="${opi.photo }"></a>
 									<div class="prof_btn">
 									<form id="op${opi.opinion_id }" method="POST" action="debate.ap">
 									<input type="hidden" name = "mtmt" value="${debatemanager.mt.mt_id }"/>
 									<input type="hidden" name = "stst" value="${debatemanager.st }"/>
 									<input type="hidden" name = "post_type" value="thumbs_up"/>
-									<button type="submit" name="opop" value="${opi.opinion_id }" id="up${opi.opinion_id }" class="icon-thumbs-up thumbsup"></button>
-									<a>${opi.honor }</a>
-									<a href="#myModal${opi.opinion_id }" role="button" data-toggle="modal" class="icon-thumbs-down"></a></form>
+									<button type="submit" name="opop" value="${opi.opinion_id }" id="up${opi.opinion_id }" class="btn btn-mini btn-link thumbsup"><a class="icon-thumbs-up icon-white thum_icon"></a></button>
+									<a class="thum_text">${opi.honor }</a>
+									<button href="#myModal${opi.opinion_id }" role="button" data-toggle="modal" class="btn btn-mini btn-link thumbsup"><a class="icon-thumbs-down icon-white thum_icon"></a></button>
+									</form>
 									</div></div></div>
 								</li></c:when>
 								
 								<c:when test="${opi.flag=='C'}">
 								<li><div class="alert-success mid_opinion">
-								<a class="name">${opi.name } </a><a class="id">${opi.e_mail }</a><br>
-								<a>${opi.content }</a></div></li>
+								<a href="#prModal${opi.opinion_id }" role="button" data-toggle="modal" class="name">${opi.name } </a><a class="id">${opi.e_mail }</a><br>
+								<a>${opi.content }</a>
+								<c:if test="${debatemanager.isMine=='Y' || opi.e_mail==debatemanager.logUser.email}">
+									<form id="del${opi.opinion_id }" method="POST" action="debate.ap">
+									<input type="hidden" name = "mtmt" value="${debatemanager.mt.mt_id }"/>
+									<input type="hidden" name = "stst" value="${debatemanager.st }"/>
+									<input type="hidden" name = "post_type" value="delete_op"/>
+									<button type="submit" name="opop" value="${opi.opinion_id }" id="del${opi.opinion_id }" class="btn btn-mini btn-danger delete_btn disabled">
+									<a class="icon-remove icon-white remove_icon"></a></button>
+									</form>
+								</c:if>
+								</div></li>
 								</c:when>
 							</c:choose>
 						</c:forEach>
-						<%--
-						<li><div class="alert-error red_opinion"><div class="opinion"><a class="name">USER</a><a class="id">@asdf.com</a><br><a>red Opinion</a></div>
-						<div class="op_prof"></div>
-						</div></li>
-						<li><div class="alert-info blue_opinion"><div class="op_prof"></div>
-						<div class="opinion"><a class="name">USER</a>
-						<a class="id">@asdf.com</a><br><a>Blue Opinion</a></div></div>
-						</li>
-						<li><div class="alert-success mid_opinion"><a class="name">USER</a><a class="id">@asdf.com</a>
-						<br><a>MID OPINION</a>
-						</div>
-						</li>
-						
-						<li class="alert-success mid_opinion">mid opinion</li>
-						<li class="alert-error red_opinion">red opinion</li>
-						<li class="alert-info blue_opinion">blue opinion</li>
-						<li class="alert-success mid_opinion">mid opinion</li>
-						<li class="alert-error red_opinion">red opinion</li>
-						<li class="alert-info blue_opinion">blue opinion</li>
-						<li class="alert-success mid_opinion">mid opinion</li>
-						<li class="alert-error red_opinion">red opinion</li>
-						<li class="alert-info blue_opinion">blue opinion</li>
-						<li class="alert-success mid_opinion">mid opinion</li>
-						<li class="alert-error red_opinion">red opinion</li>
-						<li class="alert-info blue_opinion">blue opinion</li>
-						<li class="alert-success mid_opinion">mid opinion</li>
-						<li class="alert-error red_opinion">red opinion</li>
-						<li class="alert-info blue_opinion">blue opinion</li>
-						<li class="alert-success mid_opinion">mid opinion</li>
-						 --%>
 					</ul>
 				</div>
 			</div>
 			<%--여기부터 채탱윈도우 --%>
 			<div id="chat_window" >
-			<%--
-			<a>sc=${debatemanager.subTopic.sub_close } islogin=${debatemanager.isLogin } ispt=${debatemanager.isPt } req=${debatemanager.logPt.request }</a>
-			--%>
-				<%--<div id="chat_top">
-					<ul class="nav nav-tabs">
-						<li class="active"><a href="#">blue</a></li>
-						<li><a href="#">red</a></li>
-					</ul></div> --%>
+
 			<c:if test="${debatemanager.subTopic.sub_close=='O' }">
 				<c:if test="${debatemanager.isLogin==1 }">
 					<c:if test="${debatemanager.isPt==1 }">
@@ -429,6 +481,7 @@
 			</div>
 		</div>
 	</div>
+	<a>${debatemanager.isMine }</a>
 
 </body>
 </html>

@@ -18,6 +18,7 @@ public class DebateManager implements Serializable {
 	private int isPt;
 	private Participant logPt;
 	private String alert;
+	private String isMine;
 	public DebateManager(){
 
 	}
@@ -132,5 +133,13 @@ public class DebateManager implements Serializable {
 
 	public void setAlert(String alert) {
 		this.alert = alert;
+	}
+
+	public String getIsMine() {
+		return isMine;
+	}
+
+	public void setIsMine(String isMine) {
+		this.isMine = isMine;
 	}
 }

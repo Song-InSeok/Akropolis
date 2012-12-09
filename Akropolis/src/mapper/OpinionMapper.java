@@ -11,4 +11,5 @@ public interface OpinionMapper {
 	Opinion getOP(int opinion_id);
 	int honorPP(int opinion_id);
 	int honorMM(int opinion_id);
+	int deleteOP(int opinion_id);
 }

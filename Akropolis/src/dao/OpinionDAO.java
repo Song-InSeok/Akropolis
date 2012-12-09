@@ -12,6 +12,20 @@ import bean.Opinion;
 
 public class OpinionDAO {
 	public static SqlSessionFactory sqlSessionFactory = MyBatisManager.getInstance();
+	public int deleteOP(int op){
+		SqlSession session = sqlSessionFactory.openSession();
+		int i=0;
+		try{
+			OpinionMapper mapper = session.getMapper(OpinionMapper.class);
+			i = mapper.deleteOP(op);
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return i;
+	}
 	public int changeHonor(int preop,int newop){
 		SqlSession session = sqlSessionFactory.openSession();
 		int i=0;

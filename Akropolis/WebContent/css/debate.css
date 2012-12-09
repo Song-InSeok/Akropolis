@@ -4,7 +4,7 @@
 	min-height: 180px;
 	width: 940px;
 	background-size:100% 100%;
-	padding-top:20px;
+	padding-top:10px;
 }
 
 #main_topic_top{
@@ -14,14 +14,14 @@
 	min-height: 50px;
 }
 #main_topic_top>p{
-	margin-top:30px;
+	margin-top:0px;
 	font-size: 3em;
 }
 #main_topic_bot{
 	height : 30px;
 	width: 800px;
 	padding:5px 30px 5px 30px;
-	margin:30px 0px 0px 50px;
+	margin:15px 0px 0px 50px;
 }
 #main_topic_bot .progress{
 	width:600px;
@@ -134,7 +134,7 @@
 	margin-bottom: 0px;
 }
 #sub_title{
-	background-color: #ffe540;
+	background-color: #ffbf40;
 	height: 50px;
 	width: 640px;
 	border-radius: 5px;
@@ -211,13 +211,13 @@
 	text-align: left;	
 }
 .blue_opinion>.opinion>.name{
-	color: #00f;
+	color: #1856bd;
 	float: left;
 	padding-left: 20px;
 }
 .red_opinion>.opinion>.name{
 	padding-right: 20px;
-	color: #f00;
+	color: #bf3030;
 	float: right;
 	
 }
@@ -244,7 +244,7 @@
 	
 }
 .mid_opinion>.name{
-	color: #0f0;
+	color: #4b8def;
 	text-align:center;
 }
 .mid_opinion>.id{
@@ -275,13 +275,15 @@
 .prof_btn{
 	padding-top: 3px;
 	padding-left: 5px;
+	padding-bottom : 5px;
 	min-width: 70px;
 	min-height: 20px;
 	float: left;
 }
-.prof_btn>a{
+.honor{
 	color:#111;
 	font-size: 0.8em;
+	float : left;
 }
 .prof_mini{
 	width : 70px;
@@ -348,8 +350,59 @@
 }
 .thumbsup{
 	float: left;
-	margin-left:5px;
-	margin-right:5px;
+	margin-left:2px;
+	margin-right:0px;
 	height : 20px;
-	width : 20px;
+	width : 25px;
 }
+.thum_icon{
+	margin-top:-2px;
+	color : #f0f0f0;
+}
+.thum_text{
+	float:left;
+	margin-left : -2px;
+	margin-right : -2px;
+	width : 17px;
+}
+
+.delete_btn{
+	margin-left:5px;
+	width : 16px;
+	height : 10px;
+	margin-left : 10px;
+	font-size : 0.5em;
+	padding-bottom : 15px;
+}
+.delete_btnR{
+	float:right;
+	margin-right:5px;
+	width : 16px;
+	height : 10px;
+	margin-left : 10px;
+	font-size : 0.5em;
+	padding-bottom : 15px;
+}
+.remove_icon{
+	margin-top:-4px;
+}
+.pop-up-left{
+	float:left;
+	min-height : 200px;
+	width : 370px;
+}
+.pop-up-right{
+	float:left;
+	height : 200px;
+	width : 140px;
+}
+.pop-bottom{
+	float:left;	
+	width : 545px;
+}
+.lead{
+	width : 900px;
+	margin-top:0px;
+	margin-left:12px;
+	line-height: 40px;
+	}
