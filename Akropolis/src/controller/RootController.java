@@ -59,27 +59,28 @@ public class RootController {
 	
 	@Mapping(url="/main.ap", method="POST")
 	ModelView getPost(HttpServletRequest request,HttpServletResponse response){
+		ModelView mv = new ModelView("/main");
 		try {
 			request.setCharacterEncoding("utf-8");
+		
+		
+			int page = 1;
+			PageResult<MainTopic> result=null;
+			MainTopicDAO mainTopicDao = new MainTopicDAO();
+			String searchOption = request.getParameter("searchOption");
+			String searchText = request.getParameter("searchText");
+	
+			if(searchOption.equals("Title")){
+				result = mainTopicDao.getTitleSearch(page, searchText);
+			}else if(searchOption.equals("Tag")){
+				result = mainTopicDao.getTagSearch(page, searchText);
+			}
+			mv.setModel("option", searchOption);
+			mv.setModel("text", searchText);
+			mv.setModel("result", result);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		
-		int page = 1;
-		PageResult<MainTopic> result=null;
-		MainTopicDAO mainTopicDao = new MainTopicDAO();
-		String searchOption = request.getParameter("searchOption");
-		String searchText = request.getParameter("searchText");
-
-		if(searchOption.equals("Title")){
-			result = mainTopicDao.getTitleSearch(page, searchText);
-		}else if(searchOption.equals("Tag")){
-			result = mainTopicDao.getTagSearch(page, searchText);
-		}
-		ModelView mv = new ModelView("/main");
-		mv.setModel("option", searchOption);
-		mv.setModel("text", searchText);
-		mv.setModel("result", result);
 		return mv;
 	}
 

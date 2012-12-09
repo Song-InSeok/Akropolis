@@ -12,17 +12,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bean.AdminManager;
 import bean.BeanTest;
 import bean.Interest;
+import bean.MainTopic;
 import bean.NewDebate;
+import bean.Participant;
+import bean.Report;
 import bean.SubTopic;
+import bean.TagTag;
 import bean.Timeline;
 import bean.User;
-import bean.TagTag;
 import dao.CreateTopicDAO;
+import dao.EtcDAO;
 import dao.InterestDAO;
 import dao.MainTopicDAO;
-import dao.SubTopicDAO;
+import dao.OpinionDAO;
+import dao.ParticipantDAO;
 import dao.UserDAO;
 
 
@@ -48,40 +54,114 @@ public class MyPageController {
 		return mv;
 	}
 	
-	@Mapping(url="/adminDebate.ap") 
+	@Mapping(url="/adminDebate.ap",method="GET") 
 	ModelView adminDebate(HttpServletRequest request,HttpServletResponse response){ 
 		//Model(Bean)
-
-		HttpSession session = request.getSession();
-		User user = (User)session.getAttribute("user");
-		
-		NewDebate nowDebate=null;
-		CreateTopicDAO nowtopicDao = new CreateTopicDAO();
-		nowDebate = nowtopicDao.findDebate(user.getEmail());
-		
-		// subtopic세팅
-		SubTopicDAO subtopicDao = new SubTopicDAO();
-		List<SubTopic> subtopics = null;
-		subtopics = subtopicDao.getSubTopics(nowDebate.getMt_id());
-		nowDebate.setSubtopics(subtopics);
-		
-		//태그가져오기
-		List<TagTag> taglist = null;
-		taglist = nowtopicDao.getTags(nowDebate.getMt_id());
-		nowDebate.setTags(taglist);
-		
-		System.out.println(nowDebate.getSubtopics().get(0).getStart_time());
 		ModelView mv = new ModelView("/mypage/adminDebate");
-		
-		mv.setModel("nowDebate", nowDebate);
+
 		return mv;
 	}
-	
-	@Mapping(url="/adminPerson.ap",bean="bean.BeanTest") //bean 사용 안할시 bean 빼면됨
+	@Mapping(url="/adminPerson.ap",bean="bean.BeanTest",method="POST") //bean 사용 안할시 bean 빼면됨
+	ModelView adminPersonPost(HttpServletRequest request,HttpServletResponse response,Object bean){ // bean 사용 안할시 Object bean 빼면됨
+		
+		ModelView mv = new ModelView("redirect:/Akropolis/mypage/adminPerson.ap");
+		try{
+			ParticipantDAO pdao = new ParticipantDAO();
+			EtcDAO edao = new EtcDAO();
+			request.setCharacterEncoding("utf-8");
+			String post_type = request.getParameter("post_type");
+			System.out.println("post_type : "+post_type);
+			if(post_type.equals("ban")){
+				int mt_id = Integer.parseInt(request.getParameter("mtmt"));
+				int rep_id = Integer.parseInt(request.getParameter("rep_id"));
+				String e_mail = request.getParameter("e_mail");
+				Participant pt = new Participant();
+				pt.setMt_id(mt_id);
+				pt.setE_mail(e_mail);
+				pt.setRequest("X");
+				if(pdao.changeReq(pt)>0){
+					System.out.println(post_type+" "+mt_id+" "+e_mail+" 추방 성공 ");
+					if(edao.deleteReport(rep_id)>0) System.out.println("신고 삭제 성공 "+rep_id);
+					else System.out.println("신고 삭제 실패 "+rep_id);
+				}else{
+					System.out.println(post_type+" "+mt_id+" "+e_mail+" 추방 실패");
+				}
+			}else if(post_type.equals("access")){
+				int mt_id = Integer.parseInt(request.getParameter("mtmt"));
+				String e_mail = request.getParameter("e_mail");
+				Participant pt = new Participant();
+				pt.setMt_id(mt_id);
+				pt.setE_mail(e_mail);
+				pt.setRequest("Y");
+				if(pdao.changeReq(pt)>0){
+					System.out.println(post_type+" "+mt_id+" "+e_mail+" 토론요청 수락 성공");
+				}else{
+					System.out.println(post_type+" "+mt_id+" "+e_mail+" 토론요청 수락 실패");
+				}
+			}
+			
+		}catch(Exception e){
+			
+		}finally{
+			
+		}
+		return mv;
+
+	}
+
+	@Mapping(url="/adminPerson.ap",bean="bean.BeanTest",method="GET") //bean 사용 안할시 bean 빼면됨
 	ModelView adminPerson(HttpServletRequest request,HttpServletResponse response,Object bean){ // bean 사용 안할시 Object bean 빼면됨
 		//Model(Bean)
 		BeanTest bt = (BeanTest)bean; //캐스팅해서 적절히 사용
 		ModelView mv = new ModelView("/mypage/adminPerson");
+//		ModelView mv;
+		try{
+			UserDAO udao = new UserDAO();
+			ParticipantDAO pdao = new ParticipantDAO();
+			EtcDAO edao = new EtcDAO();
+			MainTopicDAO mdao = new MainTopicDAO();
+			OpinionDAO odao = new OpinionDAO();
+			
+			AdminManager adm = new AdminManager();
+			HttpSession session = request.getSession();
+			User user = (User)session.getAttribute("user");
+			System.out.println("asdfasdf");
+			MainTopic mt=null;
+			if(user==null) return mv;
+			
+			adm.setLoginUser(user);
+			mt = mdao.getOpenUserTopic(user);
+			
+			if(mt==null){
+				System.out.println("asdf");
+				adm.setIsOpen("N");
+				request.setAttribute("adminmanager", adm);
+				return mv;
+			}
+			adm.setMt_id(mt.getMt_id());
+			adm.setUserList(udao.getJoinUsers(mt.getMt_id()));
+			System.out.println("userList size : "+adm.getUserList().size());
+			adm.setPartList(pdao.getJoiner(mt.getMt_id()));
+			System.out.println("partList size : "+adm.getPartList().size());
+			List<Report> rl =null;
+			rl = edao.getReports(mt.getMt_id());
+			adm.setReportList(rl);
+			System.out.println("zxcv1");
+
+			if(rl.size()>0){
+				for(Report rep : rl){
+					rep.setReported(odao.getEmail(rep.getOpinion_id()));
+				}
+				if(rl!=null)System.out.println("Repots size : "+adm.getReportList().size()+"email email"+adm.getReportList().get(0).getE_mail()+adm.getReportList().get(0).getReported());
+			}
+			System.out.println("zxcv");
+			request.setAttribute("adminmanager", adm);
+			
+		}catch(Exception e){
+			
+		}finally{
+			
+		}
 		
 		//request.setAttribute("model",mv); 가 자동으로 등록됨
 		//따라서 꺼낼시에  ((ModelView)request.getAttribute("model")).getModel("id"); 로 꺼낸다

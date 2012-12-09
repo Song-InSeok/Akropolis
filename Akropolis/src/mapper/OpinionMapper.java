@@ -12,4 +12,5 @@ public interface OpinionMapper {
 	int honorPP(int opinion_id);
 	int honorMM(int opinion_id);
 	int deleteOP(int opinion_id);
+	String getEmail(int opinion_id);
 }

@@ -5,6 +5,9 @@
 <mapper namespace="mapper.MainTopicMapper">
 	<resultMap type="MainTopic" id="mtResultMap">
 	</resultMap>
+	<select id="getOpenUserTopic" parameterType="String" resultType="MainTopic">
+	    select * from MainTopic where e_mail=#{e_mail} and m_close='O'
+	</select>
 	<select id="getMainTopic" parameterType="int" resultType="MainTopic">
 		select * from MainTopic where mt_id = #{mt_id}
 	</select>

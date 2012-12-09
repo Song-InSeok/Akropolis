@@ -9,6 +9,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link href="/Akropolis/css/debate.css" rel="stylesheet" type="text/css">
 	<link href="/Akropolis/css/profile.css" rel="stylesheet" type="text/css">
+	
 	<c:set var="users">
 		[
 		<c:forEach items="${debatemanager.userList }" var="item">
@@ -16,6 +17,7 @@
 		</c:forEach>
 		""]
 	</c:set>
+	
 	<c:set var="ops">
 		[
 		<c:forEach items="${debatemanager.opList }" var="item">${item.opinion_id },</c:forEach>

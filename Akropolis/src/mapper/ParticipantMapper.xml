@@ -11,7 +11,7 @@
 		SELECT * FROM Participant WHERE e_mail = #{e_mail}
   </select>
   <select id="getJoiner" parameterType="int" resultType="Participant">
-		SELECT * FROM Participant WHERE mt_id=#{mt_id} and request='Y'
+		SELECT * FROM Participant WHERE mt_id=#{mt_id} and request='D'
   </select>
   
   <select id="getParticipants" parameterType="int" resultType="Participant">

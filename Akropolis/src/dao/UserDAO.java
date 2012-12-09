@@ -130,6 +130,19 @@ public class UserDAO {
 		}
 		return ret;
 	}
+	public List<User> getJoinUsers(int mt_id){
+		List<User> ret=null;
+		SqlSession session = sqlSessionFactory.openSession();
+		try{
+			UserMapper mapper = session.getMapper(UserMapper.class);
+			ret = mapper.getJoinUsers(mt_id);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return ret;
+	}
 
 	public void setInterest(User user) {
 		SqlSession session = sqlSessionFactory.openSession();
