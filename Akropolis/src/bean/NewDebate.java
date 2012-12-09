@@ -14,6 +14,9 @@ public class NewDebate implements Serializable {
 	
 	private List<TagTag> tags;  //컨트롤러에서 넣어줌
 	private List<SubTopic>  subtopics;  //이것도 컨트롤러에서
+	
+	private String finish_ment;
+	private boolean isFinish=false;
 
 	public NewDebate() {
 
@@ -78,5 +81,21 @@ public class NewDebate implements Serializable {
 	}
 	public boolean getIsinvite(){
 		return isInvite;
+	}
+
+	public String getFinish_ment() {
+		return finish_ment;
+	}
+
+	public void setFinish_ment(String finish_ment) {
+		this.finish_ment = finish_ment;
+	}
+
+	public boolean isFinish() {
+		return isFinish;
+	}
+
+	public void setFinish(boolean isFinish) {
+		this.isFinish = isFinish;
 	}
 }
