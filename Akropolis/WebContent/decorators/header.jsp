@@ -3,6 +3,7 @@
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator" %>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/page" prefix="page" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="func"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +21,7 @@
 	<script type="text/javascript">
 		$(function(){
 			$("img[alt=Facebook]").click(function(e){
-				window.open("${login_url}","LoginWindow","location=1,scrollbars=1,width="+popupWidth+",height="+popupHeight+",left="+xPosition+",top="+yPosition);
+				window.open("${func:escapeXml(login_url)}","LoginWindow","location=1,scrollbars=1,width="+popupWidth+",height="+popupHeight+",left="+xPosition+",top="+yPosition);
 				e.preventDefault();
 			});
 		});
@@ -58,7 +59,7 @@
 						<c:choose>
 							<c:when test="${empty user}">
 								<li>
-									<a href="${login_url }" target="_blank"><img src="/Akropolis/img/facebook-logo.png" alt="Facebook" /></a>
+									<a href="${func:escapeXml(login_url) }" target="_blank"><img src="/Akropolis/img/facebook-logo.png" alt="Facebook" /></a>
 								</li>
 							</c:when>
 							<c:otherwise>
