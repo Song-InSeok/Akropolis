@@ -12,6 +12,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import bean.NewDebate;
 import bean.SubTopic;
 import bean.TagTag;
+import bean.User;
 
 
 public class CreateTopicDAO {
@@ -44,6 +45,19 @@ public class CreateTopicDAO {
 			session.close();
 		}
 		return nowMainTopic;
+	}
+	public List<TagTag> getTags(int mt_id){
+		SqlSession session = sqlSessionFactory.openSession();
+		List<TagTag> taglist =null;
+		try{
+			CreateMapper mapper = session.getMapper(CreateMapper.class);
+			taglist = mapper.findTag(mt_id);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return taglist;
 	}
 	
 	public void setMainTopic(NewDebate newdebate){
@@ -99,6 +113,7 @@ public class CreateTopicDAO {
 		}
 		return;
 	}
+	
 	public int getMt_id(NewDebate newdebate){
 		SqlSession session = sqlSessionFactory.openSession();
 		int mt_id=-1;
@@ -111,6 +126,33 @@ public class CreateTopicDAO {
 			session.close();
 		}
 		return mt_id;
+	}
+	
+	public int findMt_id(User user){
+		SqlSession session = sqlSessionFactory.openSession();
+		int mt_id=-1;
+		try{
+			CreateMapper mapper = session.getMapper(CreateMapper.class);
+			mt_id = mapper.findMt_id(user);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return mt_id;
+	}
+	public NewDebate findDebate(String email){
+		SqlSession session = sqlSessionFactory.openSession();
+		NewDebate nowdeDebate=null;
+		try{
+			CreateMapper mapper = session.getMapper(CreateMapper.class);
+			nowdeDebate =  mapper.findDebate(email);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return nowdeDebate;
 	}
 	
 	public void setParticipan(NewDebate newdebate){

@@ -13,9 +13,11 @@ label.name {
 .order {
 	width : 10px;
 }
-#inform p{
+#contents p{
 display: inline-block;
 color: red;
+font-size: 30px;
+font-weight: bold;
 }
 #add {
 	margin-left: 5px;
@@ -50,14 +52,9 @@ color: red;
 #sub_subject th{
 	width : 30px; height: 30px;
 }
+
 .date{
-	margin-right : 10px;
-	padding-left : 10px;
-	float :right;
-	display: inline-block;
-}
-.short{
-	width: 100px;
+	width: 140px;
 	text-align: center;
 }
 #sub_subject a {
@@ -69,4 +66,14 @@ color: red;
 a:hover {
 	color: #BDBDBD;
 	text-decoration: none;
+}
+.tag{
+	width: 70px;
+}
+.input-append{
+	display: inline-block;
+}
+#tags{
+	width:500px;
+	margin-left: 30px;
 }

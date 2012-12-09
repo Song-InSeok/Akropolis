@@ -22,6 +22,7 @@ import bean.TagTag;
 import dao.CreateTopicDAO;
 import dao.InterestDAO;
 import dao.MainTopicDAO;
+import dao.SubTopicDAO;
 import dao.UserDAO;
 
 
@@ -47,15 +48,32 @@ public class MyPageController {
 		return mv;
 	}
 	
-	@Mapping(url="/adminDebate.ap",bean="bean.BeanTest") //bean 사용 안할시 bean 빼면됨
-	ModelView adminDebate(HttpServletRequest request,HttpServletResponse response,Object bean){ // bean 사용 안할시 Object bean 빼면됨
+	@Mapping(url="/adminDebate.ap") 
+	ModelView adminDebate(HttpServletRequest request,HttpServletResponse response){ 
 		//Model(Bean)
-		BeanTest bt = (BeanTest)bean; //캐스팅해서 적절히 사용
+
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("user");
+		
+		NewDebate nowDebate=null;
+		CreateTopicDAO nowtopicDao = new CreateTopicDAO();
+		nowDebate = nowtopicDao.findDebate(user.getEmail());
+		
+		// subtopic세팅
+		SubTopicDAO subtopicDao = new SubTopicDAO();
+		List<SubTopic> subtopics = null;
+		subtopics = subtopicDao.getSubTopics(nowDebate.getMt_id());
+		nowDebate.setSubtopics(subtopics);
+		
+		//태그가져오기
+		List<TagTag> taglist = null;
+		taglist = nowtopicDao.getTags(nowDebate.getMt_id());
+		nowDebate.setTags(taglist);
+		
+		System.out.println(nowDebate.getSubtopics().get(0).getStart_time());
 		ModelView mv = new ModelView("/mypage/adminDebate");
 		
-		//request.setAttribute("model",mv); 가 자동으로 등록됨
-		//따라서 꺼낼시에  ((ModelView)request.getAttribute("model")).getModel("id"); 로 꺼낸다
-		mv.setModel("id", "younghak");
+		mv.setModel("nowDebate", nowDebate);
 		return mv;
 	}
 	
@@ -108,13 +126,21 @@ public class MyPageController {
 	@Mapping(url="/newDebate.ap") //bean 사용 안할시 bean 빼면됨
 	ModelView newDebate(HttpServletRequest request,HttpServletResponse response){ // bean 사용 안할시 Object bean 빼면됨
 		//Model(Bean)
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("user");
 		
-		ModelView mv = new ModelView("/mypage/newDebate");
+//		url접근방지   일단 주석
+//		if(MainTopicDAO.isOpen(user.getEmail())){
+//			ModelView mv = new ModelView("redirect:/Akropolis/mypage/adminDebate.ap");
+//			return mv;
+//		}else{
+			ModelView mv = new ModelView("/mypage/newDebate");
+			return mv;
+//		}
 
 		//request.setAttribute("model",mv); 가 자동으로 등록됨
 		//따라서 꺼낼시에  ((ModelView)request.getAttribute("model")).getModel("id"); 로 꺼낸다
-		mv.setModel("id", "younghak");
-		return mv;
+		
 	}
 	
 	@Mapping(url="/newDebate.ap",method="POST",bean="bean.NewDebate")

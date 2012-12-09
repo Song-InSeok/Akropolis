@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class BeanTest implements Serializable{
 	private String id;
 	private String pwd;
+	private String error;
 	public String getId() {
 		return id;
 	}
@@ -16,6 +17,12 @@ public class BeanTest implements Serializable{
 	}
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
+	}
+	public String getError() {
+		return error;
+	}
+	public void setError(String error) {
+		this.error = error;
 	}
 	
 }
