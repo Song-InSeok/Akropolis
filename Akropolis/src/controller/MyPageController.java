@@ -30,6 +30,7 @@ import dao.InterestDAO;
 import dao.MainTopicDAO;
 import dao.OpinionDAO;
 import dao.ParticipantDAO;
+import dao.SubTopicDAO;
 import dao.UserDAO;
 
 
@@ -55,13 +56,6 @@ public class MyPageController {
 		return mv;
 	}
 	
-	@Mapping(url="/adminDebate.ap",method="GET") 
-	ModelView adminDebate(HttpServletRequest request,HttpServletResponse response){ 
-		//Model(Bean)
-		ModelView mv = new ModelView("/mypage/adminDebate");
-
-		return mv;
-	}
 	@Mapping(url="/adminPerson.ap",bean="bean.BeanTest",method="POST") //bean 사용 안할시 bean 빼면됨
 	ModelView adminPersonPost(HttpServletRequest request,HttpServletResponse response,Object bean){ // bean 사용 안할시 Object bean 빼면됨
 		
@@ -108,6 +102,69 @@ public class MyPageController {
 		}
 		return mv;
 
+	}
+	@Mapping(url="/adminDebate.ap") 
+	ModelView adminDebate(HttpServletRequest request,HttpServletResponse response){ 
+		//Model(Bean)
+
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("user");
+		
+		NewDebate nowDebate=null;
+		CreateTopicDAO nowtopicDao = new CreateTopicDAO();
+		nowDebate = nowtopicDao.findDebate(user.getEmail());
+		
+		// subtopic세팅
+		SubTopicDAO subtopicDao = new SubTopicDAO();
+		List<SubTopic> subtopics = null;
+		subtopics = subtopicDao.getSubTopics(nowDebate.getMt_id());
+		nowDebate.setSubtopics(subtopics);
+		
+		//태그가져오기
+		List<TagTag> taglist = null;
+		taglist = nowtopicDao.getTags(nowDebate.getMt_id());
+		nowDebate.setTags(taglist);
+		
+		System.out.println(nowDebate.getSubtopics().get(0).getStart_time());
+		ModelView mv = new ModelView("/mypage/adminDebate");
+		
+		mv.setModel("nowDebate", nowDebate);
+		mv.setModel("user", user);
+		return mv;
+	}
+	@Mapping(url="/adminDebate.ap", method="POST") 
+	ModelView adminDebatePost(HttpServletRequest request,HttpServletResponse response){ 
+		//Model(Bean)
+
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("user");
+		
+		String tagCount=request.getParameter("tagCount");
+		String subCount=request.getParameter("subCount");
+		
+		System.out.println("태그카운트수 : " +  tagCount);
+		System.out.println("소주제 카운트수 : " + subCount);
+		
+		NewDebate nowDebate=null;
+		CreateTopicDAO nowtopicDao = new CreateTopicDAO();
+		nowDebate = nowtopicDao.findDebate(user.getEmail());
+		
+		// subtopic세팅
+		SubTopicDAO subtopicDao = new SubTopicDAO();
+		List<SubTopic> subtopics = null;
+		subtopics = subtopicDao.getSubTopics(nowDebate.getMt_id());
+		nowDebate.setSubtopics(subtopics);
+		
+		//태그가져오기
+		List<TagTag> taglist = null;
+		taglist = nowtopicDao.getTags(nowDebate.getMt_id());
+		nowDebate.setTags(taglist);
+		
+		System.out.println(nowDebate.getSubtopics().get(0).getStart_time());
+		ModelView mv = new ModelView("/mypage/adminDebate");
+		
+		mv.setModel("nowDebate", nowDebate);
+		return mv;
 	}
 
 	@Mapping(url="/adminPerson.ap",bean="bean.BeanTest",method="GET") //bean 사용 안할시 bean 빼면됨

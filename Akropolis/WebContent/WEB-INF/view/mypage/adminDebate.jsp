@@ -20,7 +20,17 @@
 	var num = 2;
 	var fDate = "fDate";
 	var tDate = "tDate";
+	<%int tagCount=0;
+		int subCount=0;%>
+
 	$(function() {
+		$("#save").click(
+				function() {
+					$("#tagSecret").html("");
+					$("#subSecret").html("");
+					$("#count").find("#tagCount").attr("value",<%=tagCount%>);
+					$("#count").find("#subCount").attr("value",subCount);
+				});
 
 		$("#contents input").attr("disabled", true);
 
@@ -34,29 +44,20 @@
 					$(this).parents(".input-append").find("input").attr(
 							"disabled", true);
 				});
-		$("#addTag").click(
-				function() {
-					$("#tags").append($("#tagSecret").html());
-					$(".input-append").find(".btn:first").click(
-							function() {
-								$(this).parents(".input-append").find("input")
-										.attr("disabled", false);
-							});
-					$(".input-append").find(".btn:last").click(
-							function() {
-								$(this).parents(".input-append").find("input")
-										.attr("disabled", true);
-							});
-				});
 
 		$("#addSub")
 				.click(
+						<% subCount++;%>
 						function() {
 							
+							$("#secretT").find(".dates").find(".date:first").attr("id","fDate");
+							$("#secretT").find(".dates").find(".date:last").attr("id","tDate");
 							$("#contents").find("tfoot").append(
 									$("#secretT").html());
-							$("#contents").find(".dates").find("#tDate").attr("id",tDate+num);
-							$("#contents").find(".dates").find("#fDate").attr("id",fDate+num);
+							$("#contents").find(".dates").find("#tDate").attr(
+									"id", tDate + num);
+							$("#contents").find(".dates").find("#fDate").attr(
+									"id", fDate + num);
 							num++;
 							//////////////////////////////////////////////
 							var clareCalendar = {
@@ -79,21 +80,15 @@
 							};
 
 							switch (num) {
-							case 3:
-								$("#fDate2").datepicker(clareCalendar);
-								$("#tDate2").datepicker(clareCalendar);
+							<% for(int num=3;num<13;num++){%>
+							case <%=num%>:
+								$("#fDate<%=num-1%>").datepicker(clareCalendar);
+								$("#tDate<%=num-1%>").datepicker(clareCalendar);
 								break;
-							case 4:
-								$("#fDate3").datepicker(clareCalendar);
-								$("#tDate3").datepicker(clareCalendar);
-								break;
-							case 5:
-								$("#fDate4").datepicker(clareCalendar);
-								$("#tDate4").datepicker(clareCalendar);
-								break;
-							case 6:
-								$("#fDate5").datepicker(clareCalendar);
-								$("#tDate5").datepicker(clareCalendar);
+							<%}%>
+							default:
+								$("#fDate").datepicker(clareCalendar);
+								$("#tDate").datepicker(clareCalendar);
 								break;
 							}
 
@@ -103,16 +98,40 @@
 
 							$("#ui-datepicker-div").hide(); //자동으로 생성되는 div객체 숨김  
 							/////////////////////////////
-							
-							$("#secretT").find("th:first").text(num);
+
+							//$("#secretT").find("th:first").text(num);
+							$("#secretT").find(".dates").find(".date:first").attr("id","fDate");
+							$("#secretT").find(".dates").find(".date:last").attr("id","tDate");
+
 						});
+		$(function() {
+
+			$("#addTag").click(
+					<% tagCount++; %>
+					function() {
+						$("#tags").append($("#tagSecret").html());
+						$(".input-append").find(".btn:first").click(
+								function() {
+									$(this).parents(".input-append").find(
+											"input").attr("disabled", false);
+								});
+						$(".input-append").find(".btn:last").click(
+								function() {
+									$(this).parents(".input-append").find(
+											"input").attr("disabled", true);
+								});
+						$("#secretT").find(".dates").find(".date:first").attr("id","fDate");
+						$("#secretT").find(".dates").find(".date:last").attr("id","tDate");
+					});
+
+		});
 	});
 </script>
 </head>
 
 <body>
 	<div id="contents">
-		<form>
+		<form action="adminDebate.ap" method="POST">
 			<fieldset>
 				<legend>토론관리</legend>
 				<label class="name">주제 :</label>
@@ -169,18 +188,34 @@
 							class="btn btn-success">
 							<i class="icon-plus"></i>
 						</button>
-
 						<hr />
+
 					</div>
 				</div>
-
+				<div style="margin-left: 250px;">
+					<button type="submit" id="save" style="width: 86px;"
+						class="btn btn-success">Save</button>
+				</div>
+				
+				
+				<div id="count" style="display: none;">
+					<input type="text" id="tagCount" name="tagCount"> <input type="text" id="subCount"
+						name="subCount">
+				</div>
+				
+				
+			</fieldset>
+		</form>
+		<form action="finish.ap" method="POST">
+			<fieldset>
 				<div id="finish">
 					<label class="name">토론끝내기</label> <br />
-					<textarea rows="5" id="finish_ment" placeholder="Write to Ment for Finish Debate"></textarea>
-					<span style="margin-left: 180px;">
-						<button type="submit" id="save" style="width: 86px;"
-							class="btn btn-success">Save</button>
-						<button type="submit" class="btn btn-danger">토론종료</button>
+					<textarea rows="5" id="finish_ment" name="finish_ment"
+						placeholder="Write to Ment for Finish Debate"></textarea>
+						<br/>
+					<span style="margin-left: 250px;">
+						<button type="submit" id="finishT" name="finish"
+							class="btn btn-danger">토론종료</button>
 					</span>
 				</div>
 			</fieldset>
@@ -194,12 +229,13 @@
 			<button class="btn" style="width: 40px; padding: 4px;" type="button">수정</button>
 			<button class="btn" style="width: 40px; padding: 4px;" type="button">OK</button>
 		</div>
+	</div>
 
-		<div id="subSecret" style="display: none;">
+	<div id="subSecret" style="display: none;">
 			<table>
 				<tbody id="secretT">
 					<tr>
-						<th class="index">2</th>
+						<th class="index"></th>
 						<td><input type="text" name="sub_title" class="input-large"
 							placeholder="wirte to SubTopic"></td>
 					</tr>
@@ -240,6 +276,6 @@
 			</table>
 		</div>
 
-	</div>
+		
 </body>
 </html>
