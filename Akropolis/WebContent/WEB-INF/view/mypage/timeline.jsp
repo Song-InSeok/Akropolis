@@ -28,30 +28,32 @@
 							</p>
 							<!-- request 'Y' 참여중 'D' 요청중 "I" 는 초대중 'X'강퇴 'N'은 거절
 							flag 'Y' 찬 'N' 반 'C' 중립(사회), 'NULL' -->
-							<c:if test="${item.flag=='C'}">
-								<span class = "alert alert-success" >토론을 개설했습니다.</span>
-							</c:if>
-							<c:if test="${item.request=='Y' and item.flag!='C'}">
-								<span class = "alert alert-success" >토론에 참여했습니다.</span>
-							</c:if>
-							<c:if test="${item.request=='N'}">
-								<span class = "alert alert-error" >토론 참여를 거절당했습니다.</span>
-							</c:if>
-							<c:if test="${item.request=='I'}">
-								<span class = "alert alert-info" >${item.e_mail} 님이  초대했습니다.</span>
-							</c:if>
-							<c:if test="${item.request=='D'}">
-								<span class = "alert alert-info" >토론 참여를 요청했습니다.</span>
-							</c:if>
-							<c:if test="${item.request=='X'}">
-								<span class = "alert alert-error" >토론에서 추방되었습니다.</span>
-							</c:if>
-							<c:if test="${item.request=='X'}">
-								<span class = "alert alert-error" >토론에서 추방되었습니다.</span>
-							</c:if>
-							<c:if test="${item.close=='C'}">
-								<span class = "alert alert-error" >토론이 종료되었습니다.</span>
-							</c:if>
+							<c:choose>
+								<c:when test="${item.m_close=='O'}">
+									<c:if test="${item.flag=='C'}">
+										<span class = "alert alert-success" >토론을 개설했습니다.</span>
+									</c:if>
+									<c:if test="${item.request=='Y' and item.flag!='C'}">
+										<span class = "alert alert-success" >토론에 참여했습니다.</span>
+									</c:if>
+									<c:if test="${item.request=='N'}">
+										<span class = "alert alert-error" >토론 참여를 거절당했습니다.</span>
+									</c:if>
+									<c:if test="${item.request=='I'}">
+										<span class = "alert alert-info" >${item.e_mail} 님이  초대했습니다.</span>
+									</c:if>
+									<c:if test="${item.request=='D'}">
+										<span class = "alert alert-info" >토론 참여를 요청했습니다.</span>
+									</c:if>
+									<c:if test="${item.request=='X'}">
+										<span class = "alert alert-error" >토론에서 추방되었습니다.</span>
+									</c:if>
+								</c:when>
+								<c:otherwise>
+									<span class="alert alert-error">토론이 종료되었습니다.</span>
+								</c:otherwise>
+							</c:choose>
+
 							<span class="label pull-right"><i class="icon-calendar"></i> ${item.p_date} </span>
 						</li>
 					</c:forEach>
