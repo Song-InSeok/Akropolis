@@ -21,7 +21,7 @@
 	<script type="text/javascript">
 		$(function(){
 			$("img[alt=Facebook]").click(function(e){
-				window.open("${func:escapeXml(login_url)}","LoginWindow","location=1,scrollbars=1,width="+popupWidth+",height="+popupHeight+",left="+xPosition+",top="+yPosition);
+				window.open("${login_url}","LoginWindow","location=1,scrollbars=1,width="+popupWidth+",height="+popupHeight+",left="+xPosition+",top="+yPosition);
 				e.preventDefault();
 			});
 		});
