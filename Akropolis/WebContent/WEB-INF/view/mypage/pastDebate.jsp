@@ -15,15 +15,26 @@
 		<form>
 			<fieldset>
 				<legend>지난토론</legend>
-				<label class="name">목 록</label>
 				<div id="debate_list">
-					<ul>
-						<c:forEach var="topic" items="${model.topic}">
-							<li><a href="/Akropolis/debate.ap?mt=${topic.getMt_id()}">${topic.getMTopic()}
-									(mt_id :${topic.getMt_id()})</a></li>
+					<c:forEach var="topic" items="${model.topic}">
 
-						</c:forEach>
-					</ul>
+						<div class="alert alert-block" style="width: 500px;">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<h4>
+								<a href="/Akropolis/debate.ap?mt=${topic.getMt_id()}">${topic.getMTopic()}
+									(Topic_No. ${topic.getMt_id()})</a>
+								<c:choose>
+									<c:when test="${topic.getEmail() eq model.user.getEmail()}">
+										<span class="label label-important">myDebate</span>
+									</c:when>
+									<c:otherwise>
+										<span class="label label-success">participate</span>
+									</c:otherwise>
+								</c:choose>
+							</h4>
+							개설자 : ${topic.getEmail()}
+						</div>
+					</c:forEach>
 				</div>
 			</fieldset>
 		</form>

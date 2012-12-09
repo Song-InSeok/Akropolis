@@ -105,6 +105,7 @@ public class MyPageController {
 		ModelView mv = new ModelView("/mypage/nowDebate");
 		
 		mv.setModel("topic", mainTopic);
+		mv.setModel("user", user);
 		return mv;
 	}
 	
@@ -122,6 +123,7 @@ public class MyPageController {
 		ModelView mv = new ModelView("/mypage/pastDebate");
 		
 		mv.setModel("topic", mainTopic);
+		mv.setModel("user", user);
 		return mv;
 	}
 	@Mapping(url="/newDebate.ap") //bean 사용 안할시 bean 빼면됨
