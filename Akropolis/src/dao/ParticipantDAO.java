@@ -1,14 +1,31 @@
 package dao;
 
+import java.util.List;
+
 import mapper.ParticipantMapper;
 import mybatis.config.MyBatisManager;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+
 import bean.Participant;
 
 public class ParticipantDAO {
 	public static SqlSessionFactory sqlSessionFactory = MyBatisManager.getInstance();
-
+	
+	public List<Participant> getJoine(int mt_id){
+		SqlSession session = sqlSessionFactory.openSession();
+		List<Participant> ptlist=null;
+		try{
+			ParticipantMapper mapper = session.getMapper(ParticipantMapper.class);
+			ptlist = mapper.getJoiner(mt_id);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return ptlist;
+	}
 	public int changeReq(Participant pt){
 		SqlSession session = sqlSessionFactory.openSession();
 		System.out.println("ParticipantDAO changeReq Start");
