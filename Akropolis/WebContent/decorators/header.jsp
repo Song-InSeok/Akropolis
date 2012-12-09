@@ -39,7 +39,7 @@
 					<ul class="nav">
 						<li><a href="/Akropolis/main.ap">Home</a></li>
 						<li><a href="/Akropolis/mypage/profile.ap">My Page</a></li>
-						<li><a href="">About</a></li>
+						<!--li><a href="">About</a></li-->
 					</ul>
 					<ul class="nav pull-right header-right">
 					<!-- 
