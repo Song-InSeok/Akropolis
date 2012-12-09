@@ -12,7 +12,7 @@ public class MainTopic implements Serializable{
 	private String date;
 	private int agree;
 	private int disagree;
-	private boolean close;
+	private String close;
 	
 	public MainTopic(){
 		
@@ -59,10 +59,10 @@ public class MainTopic implements Serializable{
 	public void setDisagree(int disagree) {
 		this.disagree = disagree;
 	}
-	public boolean isClose() {
+	public String isClose() {
 		return close;
 	}
-	public void setClose(boolean close) {
+	public void setClose(String close) {
 		this.close = close;
 	}
 }

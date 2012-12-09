@@ -73,7 +73,7 @@ System.out.println(option);
 					<li>
 						<c:set var="agree" value="${debate.agree/(debate.disagree+debate.agree)*100}"></c:set> 
 						<c:set var="disagree" value="${debate.disagree/(debate.disagree+debate.agree)*100}"></c:set> 
-						<p class="lead" id="topic"><a href="/Akropolis/debate.ap?mt=${debate.mt_id}">${debate.mt_title}</a></p>
+						<p class="lead"><a href="/Akropolis/debate.ap?mt=${debate.mt_id}">${debate.mt_title}</a></p>
 						<div class="progress">
 							<div class="bar" style="width: ${agree}%;">${debate.agree}</div>
 							<div class="bar bar-danger" style="width: ${disagree}%;">${debate.disagree}</div>

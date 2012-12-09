@@ -46,6 +46,12 @@
 							<c:if test="${item.request=='X'}">
 								<span class = "alert alert-error" >토론에서 추방되었습니다.</span>
 							</c:if>
+							<c:if test="${item.request=='X'}">
+								<span class = "alert alert-error" >토론에서 추방되었습니다.</span>
+							</c:if>
+							<c:if test="${item.close=='C'}">
+								<span class = "alert alert-error" >토론이 종료되었습니다.</span>
+							</c:if>
 							<span class="label pull-right"><i class="icon-calendar"></i> ${item.p_date} </span>
 						</li>
 					</c:forEach>
