@@ -1,19 +1,14 @@
 package dao;
 
-import java.util.List;
-
-import mapper.MainTopicMapper;
 import mapper.ParticipantMapper;
 import mybatis.config.MyBatisManager;
-
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-
-import bean.MainTopic;
 import bean.Participant;
 
 public class ParticipantDAO {
 	public static SqlSessionFactory sqlSessionFactory = MyBatisManager.getInstance();
+
 	public int changeReq(Participant pt){
 		SqlSession session = sqlSessionFactory.openSession();
 		System.out.println("ParticipantDAO changeReq Start");
@@ -96,6 +91,7 @@ public class ParticipantDAO {
 		}
 		return pt;
 	}
+
 	public Participant getParticipant(String email){
 		SqlSession session = sqlSessionFactory.openSession();
 		Participant participant = new Participant();

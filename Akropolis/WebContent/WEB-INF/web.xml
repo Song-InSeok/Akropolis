@@ -1,55 +1,46 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
-	<welcome-file-list>
-		<welcome-file>main.ap</welcome-file>
-	</welcome-file-list>
-	
-	<jsp-config>
-		<taglib>
-			<taglib-uri>
-				/WEB-INF/tlds/el_function.tld
-			</taglib-uri>
-			<taglib-location>
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:jsp="http://java.sun.com/xml/ns/javaee/jsp" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <welcome-file-list>
+    <welcome-file>main.ap</welcome-file>
+  </welcome-file-list>
+  <jsp-config>
+    <taglib>
+      <taglib-uri>/WEB-INF/tlds/el_function.tld</taglib-uri>
+      <taglib-location>
 				/WEB-INF/tlds/el_function.tld
 			</taglib-location>
-		</taglib>
-	</jsp-config>
-	
-	<context-param>
-		<param-name>appID</param-name>
-		<param-value>300000683435344</param-value>
-	</context-param>
-	<context-param>
-		<param-name>scope</param-name>
-		<param-value>user_education_history,email</param-value>
-	</context-param>
-	<context-param>
-		<param-name>appSecret</param-name>
-		<param-value>9f3316ad5903d5caaabcea39a432c26f</param-value>
-	</context-param>
-	<context-param>
-		<param-name>callback</param-name>
-		<param-value>http://localhost:8080/Akropolis/login.ap</param-value>
-	</context-param>
-	
-	<filter>
-		<filter-name>sitemesh</filter-name>
-		<filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>sitemesh</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-
-	<servlet>
-		<servlet-name>dispatcher</servlet-name>
-		<servlet-class>hello.dispatcher.HelloDispatcher</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>dispatcher</servlet-name>
-		<url-pattern>*.ap</url-pattern>
-	</servlet-mapping>
+    </taglib>
+  </jsp-config>
+  <context-param>
+    <param-name>appID</param-name>
+    <param-value>300000683435344</param-value>
+  </context-param>
+  <context-param>
+    <param-name>scope</param-name>
+    <param-value>user_education_history,email</param-value>
+  </context-param>
+  <context-param>
+    <param-name>appSecret</param-name>
+    <param-value>9f3316ad5903d5caaabcea39a432c26f</param-value>
+  </context-param>
+  <context-param>
+    <param-name>callback</param-name>
+    <param-value>http://localhost:8080/Akropolis/login.ap</param-value>
+  </context-param>
+  <filter>
+    <filter-name>sitemesh</filter-name>
+    <filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>sitemesh</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <servlet>
+    <servlet-name>dispatcher</servlet-name>
+    <servlet-class>hello.dispatcher.HelloDispatcher</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <url-pattern>*.ap</url-pattern>
+  </servlet-mapping>
 </web-app>
