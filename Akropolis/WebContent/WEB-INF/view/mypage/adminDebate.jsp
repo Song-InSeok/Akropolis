@@ -28,7 +28,7 @@
 				function() {
 					$("#tagSecret").html("");
 					$("#subSecret").html("");
-					$("#count").find("#tagCount").attr("value",tagCount);
+					$("#count").find("#tagCount").attr("value",<%=tagCount%>);
 					$("#count").find("#subCount").attr("value",subCount);
 				});
 
