@@ -258,10 +258,6 @@
 					<c:forEach var="sim" items="${debatemanager.simList }">
 						<li><a href="debate.ap?mt=${sim.mt_id }">${sim.mt_title }</a></li>
 					</c:forEach>
-					<li class="active"><a href="#">sim topic 1</a></li>
-					<li><a href="#">sim topic 2</a></li>
-					<li><a href="#">sim topic 3</a></li>
-					<li><a href="#">${debatemanager.stList[param.st-1].sub_title }</a></li>
 				</ul>
 			</div>
 		</div>
@@ -476,12 +472,10 @@
 				<div id="message_close" class = "back_grey">
 					<button id="message_btn" type="button" class="btn btn-large msg_btn disabled" value="block_btn">닫혀있는 주제입니다</button>
 				</div>
-				<a>close</a>
 			</c:if>	
 			</div>
 		</div>
 	</div>
-	<a>${debatemanager.isMine }</a>
 
 </body>
 </html>

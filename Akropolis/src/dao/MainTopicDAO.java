@@ -1,6 +1,8 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 
 import mapper.MainTopicMapper;
@@ -226,17 +228,31 @@ public class MainTopicDAO {
 		List<MainTopic> list = new ArrayList<MainTopic>();
 		List<MainTopic> result = new ArrayList<MainTopic>();
 		List<String> tags = null;
+		boolean flag = true;
 		try{
 			MainTopicMapper mapper = session.getMapper(MainTopicMapper.class);
 			tags=mapper.getTags(topic.getMt_id());
+
 			for(String tag : tags) {
 				list = mapper.getSimTopics(tag);
 				for(MainTopic mt : list){
 					if(!(result.contains(mt))){
-						result.add(mt);
+						flag=true;
+						for(int i=0 ; i<result.size(); i++){
+							if(result.get(i).getMt_id() == mt.getMt_id()){
+								flag = false;
+								break;
+							}
+						}
+						if(flag){
+							result.add(mt);
+						}
 					}
 				}
 			}
+//			while(itList.hasNext()) {
+//				result.add((MainTopic) itList.next());
+//			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
