@@ -16,6 +16,7 @@
 	
 	<resultMap type="NewDebate" id="nowDebates">
 		<id column="mt_title" property="mTopic" />
+		<id column="e_mail" property="email" />
 	</resultMap>
 
 	<select id="selectUser" parameterType="String" resultMap="userResultMap">
@@ -43,13 +44,13 @@
 	</select>
 
 	<select id="getNowTopic" parameterType="String" resultMap="nowDebates">
-		select DISTINCT mt.mt_title, mt.mt_id from MainTopic mt, Participant
+		select DISTINCT mt.mt_title, mt.mt_id, mt.e_mail from MainTopic mt, Participant
 		pt where mt.mt_id = pt.mt_id AND mt.m_close='O'AND pt.e_mail=#{email}
 		AND pt.request='Y';
 	</select>
 	
 	<select id="getPastTopic" parameterType="String" resultMap="nowDebates">
-		select DISTINCT mt.mt_title, mt.mt_id from MainTopic mt, Participant pt where mt.mt_id = pt.mt_id AND mt.m_close='C'AND pt.e_mail=#{email} AND pt.request='Y'; 
+		select DISTINCT mt.mt_title, mt.mt_id, mt.e_mail from MainTopic mt, Participant pt where mt.mt_id = pt.mt_id AND mt.m_close='C'AND pt.e_mail=#{email} AND pt.request='Y'; 
 		</select>
 	
 	<select id="getDebateUsers" parameterType="int" resultMap="userResultMap">

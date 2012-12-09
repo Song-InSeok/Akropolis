@@ -7,6 +7,7 @@ public class Timeline extends MainTopic implements Serializable{
 	String request;
 	String flag;
 	String p_date;
+	
 	public Timeline(){
 		super();
 	}
@@ -25,8 +26,4 @@ public class Timeline extends MainTopic implements Serializable{
 	public String getP_date() {
 		return p_date;
 	}
-	public void setP_date(String p_date) {
-		this.p_date = p_date;
-	}
-	
 }

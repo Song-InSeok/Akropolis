@@ -6,6 +6,7 @@ import java.util.List;
 import bean.NewDebate;
 import bean.SubTopic;
 import bean.TagTag;
+import bean.Follower;
 import bean.User;
 
 public interface CreateMapper {
@@ -21,5 +22,7 @@ public interface CreateMapper {
 	
 	NewDebate findDebate(String email);
 	List<TagTag> findTag(int mt_id);
+	List<Follower> findFollower(String email); 
+	void setFollower(Follower follower);
 	
 }

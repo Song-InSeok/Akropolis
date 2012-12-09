@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import bean.AdminManager;
 import bean.BeanTest;
+import bean.Follower;
 import bean.Interest;
 import bean.MainTopic;
 import bean.NewDebate;
@@ -184,6 +185,7 @@ public class MyPageController {
 		ModelView mv = new ModelView("/mypage/nowDebate");
 		
 		mv.setModel("topic", mainTopic);
+		mv.setModel("user", user);
 		return mv;
 	}
 	
@@ -201,6 +203,7 @@ public class MyPageController {
 		ModelView mv = new ModelView("/mypage/pastDebate");
 		
 		mv.setModel("topic", mainTopic);
+		mv.setModel("user", user);
 		return mv;
 	}
 	@Mapping(url="/newDebate.ap") //bean 사용 안할시 bean 빼면됨
@@ -209,14 +212,13 @@ public class MyPageController {
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute("user");
 		
-//		url접근방지   일단 주석
-//		if(MainTopicDAO.isOpen(user.getEmail())){
-//			ModelView mv = new ModelView("redirect:/Akropolis/mypage/adminDebate.ap");
-//			return mv;
-//		}else{
+		if(MainTopicDAO.isOpen(user.getEmail())){
+			ModelView mv = new ModelView("redirect:/Akropolis/mypage/adminDebate.ap");
+			return mv;
+		}else{
 			ModelView mv = new ModelView("/mypage/newDebate");
 			return mv;
-//		}
+		}
 
 		//request.setAttribute("model",mv); 가 자동으로 등록됨
 		//따라서 꺼낼시에  ((ModelView)request.getAttribute("model")).getModel("id"); 로 꺼낸다
@@ -246,7 +248,8 @@ public class MyPageController {
 		
 		
 		String tagL[] = request.getParameterValues("tag");  //토픽리스트
-		
+		String check = request.getParameter("invite");
+		System.out.println("invite= "+check);
 		
 		String subTopic[] = request.getParameterValues("subTopic");
 		int mt_id=-1;
@@ -281,7 +284,19 @@ public class MyPageController {
 		mt_id=createTopicDao.getMt_id(newDebate);
 		System.out.println("mt_id : "+mt_id);
 		newDebate.setMt_id(mt_id);
-		createTopicDao.setParticipan(newDebate);
+		createTopicDao.setParticipant(newDebate);
+		
+		newDebate.setIsinvite(newDebate.getInvite());
+		
+		List<Follower> followerList =null;
+		if(newDebate.getIsinvite()){
+			followerList = createTopicDao.findFolower(email); 
+		}
+		for(Follower follow : followerList){
+			follow.setMt_id(mt_id);
+			createTopicDao.setFollower(follow);
+		}
+		
 
 		//위에꺼랑순서바꾸면안됨
 		List<SubTopic> subTopicList = new ArrayList<SubTopic>();
@@ -324,6 +339,7 @@ public class MyPageController {
 		//따라서 꺼낼시에  ((ModelView)request.getAttribute("model")).getModel("id"); 로 꺼낸다
 		return mv;
 	}
+	
 	@Mapping(url="/profile.ap",bean="bean.User")
 	ModelView getProfile(HttpServletRequest request,HttpServletResponse response,Object bean){	
 		

@@ -9,6 +9,7 @@ import mybatis.config.MyBatisManager;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import bean.Follower;
 import bean.NewDebate;
 import bean.SubTopic;
 import bean.TagTag;
@@ -155,11 +156,51 @@ public class CreateTopicDAO {
 		return nowdeDebate;
 	}
 	
+	public List<Follower> findFolower(String email){
+		SqlSession session = sqlSessionFactory.openSession();
+		List<Follower> folowerList = null;
+		try{
+			CreateMapper mapper = session.getMapper(CreateMapper.class);
+			folowerList= mapper.findFollower(email);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return folowerList;
+	}
+	
 	public void setParticipan(NewDebate newdebate){
 		SqlSession session = sqlSessionFactory.openSession();
 		try{
 			CreateMapper mapper = session.getMapper(CreateMapper.class);
 			mapper.setParticipate(newdebate);
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return;
+	}
+	public void setParticipant(NewDebate newdebate){
+		SqlSession session = sqlSessionFactory.openSession();
+		try{
+			CreateMapper mapper = session.getMapper(CreateMapper.class);
+			mapper.setParticipate(newdebate);
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return;
+	}
+	public void setFollower(Follower follower){
+		SqlSession session = sqlSessionFactory.openSession();
+		try{
+			CreateMapper mapper = session.getMapper(CreateMapper.class);
+			mapper.setFollower(follower);
 			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
