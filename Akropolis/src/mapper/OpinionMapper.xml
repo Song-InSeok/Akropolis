@@ -5,6 +5,9 @@
   <resultMap type="Opinion" id="opResultMap">
   	
   </resultMap>
+  <select id="getEmail" parameterType="int" resultType="String">
+      select e_mail from Opinion where opinion_id = #{opinion_id}
+  </select>
   <select id="getOpinions" parameterType="Opinion" resultType="Opinion">
     select * from Opinion where sub_id = #{sub_id} and mt_id = #{mt_id} order by opinion_id asc;
   </select>

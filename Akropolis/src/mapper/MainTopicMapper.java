@@ -27,4 +27,5 @@ public interface MainTopicMapper {
 	boolean isOpen(@Param("e_mail") String email);
 	List<String> getTags(@Param("mt_id") int mt_id);
 	List<MainTopic> getSimTopics(@Param("tag") String tag);
+	MainTopic getOpenUserTopic(String e_mail);
 }

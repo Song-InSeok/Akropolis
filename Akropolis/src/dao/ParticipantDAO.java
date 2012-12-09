@@ -13,7 +13,7 @@ import bean.Participant;
 public class ParticipantDAO {
 	public static SqlSessionFactory sqlSessionFactory = MyBatisManager.getInstance();
 	
-	public List<Participant> getJoine(int mt_id){
+	public List<Participant> getJoiner(int mt_id){
 		SqlSession session = sqlSessionFactory.openSession();
 		List<Participant> ptlist=null;
 		try{

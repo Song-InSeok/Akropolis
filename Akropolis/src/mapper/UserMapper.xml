@@ -57,6 +57,12 @@
 		select * from User join Participant on User.e_mail =
 		Participant.e_mail and Participant.mt_id = #{mt_id}
 	</select>
+	
+	<select id="getJoinUsers" parameterType="int" resultMap="userResultMap">
+		select * from User join Participant on User.e_mail =
+		Participant.e_mail and Participant.mt_id = #{mt_id} 
+		and Participant.request = 'Y'
+	</select>
 
 	<insert id="insertUser" parameterType="User">
 		insert into

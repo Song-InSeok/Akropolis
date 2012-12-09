@@ -5,21 +5,36 @@
 }
 
 #Request{
-	float:left;
-	width:650px;
-	min-height : 100px;
-	border : 1px soloid #ddd;
+
 	
 }
 #Participant{
-	float:left;
-	width:650px;
-	min-height : 100px;
-	border : 1px soloid #ddd;
+
 }
 #Report{
+
+}
+#accessReq{
+	margin-top : 0px;
+	margin-bottom : 10px;
+	min-width:5px;
+	float : left;
+}
+.access_button{
+	float : left;
+	margin-right : 10px;
+}
+.rep_top_label{
+	float : left;
+	margin-right : 10px;
+}
+.rep_top_btn{
+	float : right;
+}
+.report_top{
 	float:left;
-	width:650px;
-	min-height : 100px;
-	border : 1px soloid #ddd;
+	width : 580px;
+}
+.report_ban{
+	min-height : 30px;
 }

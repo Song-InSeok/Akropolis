@@ -1,8 +1,6 @@
 package dao;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 
 import mapper.MainTopicMapper;
@@ -15,10 +13,24 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import bean.MainTopic;
 import bean.PageResult;
 import bean.Timeline;
+import bean.User;
 
 public class MainTopicDAO {
 	public static SqlSessionFactory sqlSessionFactory = MyBatisManager.getInstance();
 	
+	public MainTopic getOpenUserTopic(User usr){
+		SqlSession session = sqlSessionFactory.openSession();
+		MainTopic mt=null;
+		try{
+			MainTopicMapper mapper = session.getMapper(MainTopicMapper.class);
+			mt=mapper.getOpenUserTopic(usr.getEmail());
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return mt;
+	}
 	public static boolean isOpen(String email){
 		SqlSession session = sqlSessionFactory.openSession();
 		boolean flag = false;
