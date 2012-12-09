@@ -262,6 +262,11 @@
 					</c:forEach>
 				</ul>
 			</div>
+			<br/>
+			<c:if test="${debatemanager.isMine=='Y'}">
+			<a href="/Akropolis/mypage/adminDebate.ap" class="btn btn-primary">토론 관리</a>
+			<a href="/Akropolis/mypage/adminPerson.ap" class="btn btn-warning">참가자 관리</a>
+			</c:if>
 		</div>
 		
 		

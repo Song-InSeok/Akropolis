@@ -144,6 +144,9 @@ public class MyPageController {
 			System.out.println("userList size : "+adm.getUserList().size());
 			adm.setPartList(pdao.getJoiner(mt.getMt_id()));
 			System.out.println("partList size : "+adm.getPartList().size());
+			adm.setBanList(udao.getMyUsers(mt.getMt_id(), "B"));
+			adm.setInviteList(udao.getMyUsers(mt.getMt_id(), "I"));
+			
 			List<Report> rl =null;
 			rl = edao.getReports(mt.getMt_id());
 			adm.setReportList(rl);

@@ -13,6 +13,20 @@ import bean.User;
 
 public class UserDAO {
 	public static SqlSessionFactory sqlSessionFactory = MyBatisManager.getInstance();
+	public List<User> getMyUsers(int mt_id,String a){
+		List<User> ret=null;
+		SqlSession session = sqlSessionFactory.openSession();
+		try{
+			UserMapper mapper = session.getMapper(UserMapper.class);
+			if(a.equals("B")) 	ret = mapper.getBanUsers(mt_id);
+			else if(a.equals("I")) ret = mapper.getInviteUsers(mt_id);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return ret;
+	}
 	public int disPP(String e_mail){
 		int i=0;
 		SqlSession session = sqlSessionFactory.openSession();

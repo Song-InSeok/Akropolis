@@ -38,3 +38,11 @@
 .report_ban{
 	min-height : 30px;
 }
+.cancelBan{
+	margin : 0px 2px 10px 2px;
+	float : left;
+}
+.usrbtn{
+	margin : 0px 2px 10px 2px;
+	float : left;
+}

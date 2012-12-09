@@ -39,8 +39,19 @@
 				<div id="Request" class="accordion-body collapse in">
 					<div class="accordion-inner">
 						<c:forEach items="${adminmanager.userList }" var="usr">
-								<button id="y_btn" type="button" class="btn btn-primary disabled">${usr.name }</button>
+								<button id="y_btn" type="button" class="btn btn-primary disabled usrbtn">${usr.name }</button>
 						</c:forEach>
+						<c:forEach items="${adminmanager.inviteList }" var="usr">
+								<button id="y_btn" type="button" class="btn btn-success disabled usrbtn">${usr.name }</button>
+						</c:forEach>
+						<c:forEach items="${adminmanager.banList }" var="usr">
+							<form class="cancelBan" method="POST">
+								<input type="hidden" name = "mtmt" value="${adminmanager.mt_id}"/>
+								<input type="hidden" name = "e_mail" value="${usr.email }"/>
+								<button id="accessbtn" type="submit" class="btn btn-danger access_button" name="post_type" value="access">${usr.name }</button>
+							</form>
+						</c:forEach>
+						
 						
 					</div>
 				</div>
@@ -94,6 +105,7 @@
 				</div>
 			</div>
 		</div>
+		<a href="/Akropolis/debate.ap?mt=${adminmanager.mt_id }" type="button" class="btn btn-big btn-primary" >내 토론 가기</a>
 	</div>
 </body>
 </html>

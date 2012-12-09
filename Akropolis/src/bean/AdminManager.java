@@ -6,6 +6,8 @@ public class AdminManager {
 	List<User> userList;
 	List<Participant> partList;
 	List<Report>	reportList;
+	List<User> banList;
+	List<User> inviteList;
 	String isOpen;
 	User loginUser;
 	int mt_id;
@@ -44,5 +46,17 @@ public class AdminManager {
 	}
 	public void setMt_id(int mt_id) {
 		this.mt_id = mt_id;
+	}
+	public List<User> getBanList() {
+		return banList;
+	}
+	public void setBanList(List<User> banList) {
+		this.banList = banList;
+	}
+	public List<User> getInviteList() {
+		return inviteList;
+	}
+	public void setInviteList(List<User> inviteList) {
+		this.inviteList = inviteList;
 	}
 }
