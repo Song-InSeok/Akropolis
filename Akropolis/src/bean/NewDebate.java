@@ -9,6 +9,8 @@ public class NewDebate implements Serializable {
 	private int mt_id;
 	private String email;  //넣었음
 	private String mTopic;  //자동으로빈
+	private String invite;
+	private boolean isInvite=false;
 	
 	private List<TagTag> tags;  //컨트롤러에서 넣어줌
 	private List<SubTopic>  subtopics;  //이것도 컨트롤러에서
@@ -58,5 +60,23 @@ public class NewDebate implements Serializable {
 
 	public void setMt_id(int mt_id) {
 		this.mt_id = mt_id;
+	}
+
+	public String getInvite() {
+		return invite;
+	}
+
+	public void setInvite(String invite) {
+		this.invite = invite;
+	}
+	public void setIsinvite(String invite){
+		if(invite.equals("Yes")){
+			this.isInvite=true;
+		}else{
+			this.isInvite=false;
+		}
+	}
+	public boolean getIsinvite(){
+		return isInvite;
 	}
 }

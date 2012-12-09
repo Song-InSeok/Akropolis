@@ -46,6 +46,10 @@
 		SELECT tag_id FROM TopicTag
 		WHERE tag = #{tag} 
 	</select>
+
+	<select id="findFollower" parameterType="String" resultType="Follower">
+		SELECT e_mail from Following_list where following=#{email}
+	</select>
 	
 	<insert id="connectTag" parameterType="TagTag">
 		insert into MainTopic_TopicTag(mt_id,tag_id)
@@ -55,6 +59,10 @@
 	<insert id="setParticipate" parameterType="NewDebate">
 		insert into Participant(request,mt_id,e_mail,flag)
 		values('Y', #{mt_id}, #{email}, 'C');
-
+	</insert>
+	
+	<insert id="setFollower" parameterType="Follower">
+		insert into Participant(request,mt_id,e_mail)
+		values('I', #{mt_id}, #{e_mail});
 	</insert>
 </mapper>
