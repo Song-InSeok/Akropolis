@@ -3,6 +3,7 @@
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator" %>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/page" prefix="page" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="func"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,7 +39,7 @@
 					<ul class="nav">
 						<li><a href="/Akropolis/main.ap">Home</a></li>
 						<li><a href="/Akropolis/mypage/profile.ap">My Page</a></li>
-						<li><a href="">About</a></li>
+						<!--li><a href="">About</a></li-->
 					</ul>
 					<ul class="nav pull-right header-right">
 					<!-- 
@@ -58,7 +59,7 @@
 						<c:choose>
 							<c:when test="${empty user}">
 								<li>
-									<a href="${login_url }" target="_blank"><img src="/Akropolis/img/facebook-logo.png" alt="Facebook" /></a>
+									<a href="${func:escapeXml(login_url) }" target="_blank"><img src="/Akropolis/img/facebook-logo.png" alt="Facebook" /></a>
 								</li>
 							</c:when>
 							<c:otherwise>

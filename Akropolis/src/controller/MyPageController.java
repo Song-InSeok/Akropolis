@@ -11,6 +11,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.plaf.synth.SynthOptionPaneUI;
 
 import bean.AdminManager;
 import bean.BeanTest;
@@ -132,6 +133,7 @@ public class MyPageController {
 		mv.setModel("user", user);
 		return mv;
 	}
+	
 	@Mapping(url="/adminDebate.ap", method="POST") 
 	ModelView adminDebatePost(HttpServletRequest request,HttpServletResponse response){ 
 		//Model(Bean)
@@ -139,11 +141,9 @@ public class MyPageController {
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute("user");
 		
-		String tagCount=request.getParameter("tagCount");
-		String subCount=request.getParameter("subCount");
-		
-		System.out.println("태그카운트수 : " +  tagCount);
-		System.out.println("소주제 카운트수 : " + subCount);
+		String subCount = request.getParameter("subCount");
+		String tagCount =request.getParameter("tagCount");
+		System.out.println(request.getParameter("mTopic"));
 		
 		NewDebate nowDebate=null;
 		CreateTopicDAO nowtopicDao = new CreateTopicDAO();
@@ -154,15 +154,89 @@ public class MyPageController {
 		List<SubTopic> subtopics = null;
 		subtopics = subtopicDao.getSubTopics(nowDebate.getMt_id());
 		nowDebate.setSubtopics(subtopics);
-		
 		//태그가져오기
 		List<TagTag> taglist = null;
 		taglist = nowtopicDao.getTags(nowDebate.getMt_id());
 		nowDebate.setTags(taglist);
+		//////////////////////////////////////////////////////밑은 새로받을꺼
 		
-		System.out.println(nowDebate.getSubtopics().get(0).getStart_time());
+		
+		
+//		String tagL[] = request.getParameterValues("tag");
+		String subTopic[] = request.getParameterValues("sub_title");
+		int mt_id=nowDebate.getMt_id();
+		//시간 설정부분
+		String sDateL[] = request.getParameterValues("sDate");
+		String sHour[] = request.getParameterValues("sHour");
+		String sMin[] = request.getParameterValues("sMin");
+
+		String eDateL[] = request.getParameterValues("eDate");
+		String eHour[] = request.getParameterValues("eHour");
+		String eMin[] = request.getParameterValues("eMin");
+
+		
+		List<String> start_time= new ArrayList<String>();
+		List<String> end_time= new ArrayList<String>();
+
+		//시작시간, 종료시간 다합쳐서 스트링만들기
+		if(subTopic!=null){
+			for(int i=0;i<subTopic.length;i++){
+				start_time.add(i, sDateL[i]+" "+sHour[i]+":"+sMin[i]+":00");
+				end_time.add(i, eDateL[i]+" "+eHour[i]+":"+eMin[i]+":00");
+			}
+			//시간입력테스트
+			for(String time : start_time){
+				System.out.println(time);
+			}
+
+			List<SubTopic> subTopicList = new ArrayList<SubTopic>();
+
+			//subtopicList에 서브토픽정보들 set
+
+			for(int i=0;i<subTopic.length;i++){
+				SubTopic subtopic = new SubTopic();
+				subtopic.setSub_title(subTopic[i]);
+				subtopic.setStart_time(start_time.get(i));
+				subtopic.setEnd_time(end_time.get(i));
+				subtopic.setMt_id(mt_id);
+				subTopicList.add(subtopic);
+			}
+			nowDebate.setSubtopics(subTopicList);
+			for(SubTopic subtopic: nowDebate.getSubtopics()){
+				System.out.println("서브토픽들: "+subtopic.getSub_title());
+			}
+		}
+
+		//태그추가하기
+//		System.out.println(taglist.size()); 
+//		List<TagTag> tagList = new ArrayList<TagTag>();
+//		for(String tag : tagL){  //태그수만큼
+//			TagTag tags = new TagTag();  //태그리스트객체를만들고
+//			tags.setTag(tag);  // 추가하고 (아이디는 자동카운팅이라니까신경안써도됨)
+//			tags.setMt_id(mt_id);
+//			tagList.add(tags);  //tagListArray에 계속 넣기
+//		}
+//		nowDebate.setTags(tagList);
+		//태그입력테스트
+//		for(TagTag tag : nowDebate.getTags()){
+//			System.out.println(tag.getTag());
+//		}
+//		nowtopicDao.insertANDconnetTag(nowDebate);
+		
+
+		CreateTopicDAO changeTopic = new CreateTopicDAO();
+
+		//토론추가
+		changeTopic.setSubTopic(nowDebate);
+
+		//추가된거 추가
+		List<SubTopic> nowsubtopics = subtopicDao.getSubTopics(mt_id);
+		nowDebate.setSubtopics(nowsubtopics);
+//		//		System.out.println("추가된거확인 : "+ nowDebate.getSubtopics().get(0).getSub_title());
+		////////있다가 수정하자
+
+
 		ModelView mv = new ModelView("/mypage/adminDebate");
-		
 		mv.setModel("nowDebate", nowDebate);
 		return mv;
 	}
@@ -172,14 +246,14 @@ public class MyPageController {
 		//Model(Bean)
 		BeanTest bt = (BeanTest)bean; //캐스팅해서 적절히 사용
 		ModelView mv = new ModelView("/mypage/adminPerson");
-//		ModelView mv;
+		//		ModelView mv;
 		try{
 			UserDAO udao = new UserDAO();
 			ParticipantDAO pdao = new ParticipantDAO();
 			EtcDAO edao = new EtcDAO();
 			MainTopicDAO mdao = new MainTopicDAO();
 			OpinionDAO odao = new OpinionDAO();
-			
+
 			AdminManager adm = new AdminManager();
 			HttpSession session = request.getSession();
 			User user = (User)session.getAttribute("user");
@@ -360,6 +434,7 @@ public class MyPageController {
 
 		//위에꺼랑순서바꾸면안됨
 		List<SubTopic> subTopicList = new ArrayList<SubTopic>();
+		
 		//subtopicList에 서브토픽정보들 set
 		for(int i=0;i<subTopic.length;i++){
 			SubTopic subtopic = new SubTopic();

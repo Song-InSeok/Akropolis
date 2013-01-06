@@ -20,16 +20,21 @@
 	var num = 2;
 	var fDate = "fDate";
 	var tDate = "tDate";
-	<%int tagCount=0;
-		int subCount=0;%>
+
 
 	$(function() {
+		<%int tagCount=0;
+		int subCount=0;%>
+		$("#count").find("#tagCount").attr("value",0);
+		$("#count").find("#subCount").attr("value",0);
+		
 		$("#save").click(
 				function() {
 					$("#tagSecret").html("");
 					$("#subSecret").html("");
-					$("#count").find("#tagCount").attr("value",<%=tagCount%>);
-					$("#count").find("#subCount").attr("value",subCount);
+					
+					$("html input").attr("disabled", false);
+					
 				});
 
 		$("#contents input").attr("disabled", true);
@@ -44,12 +49,15 @@
 					$(this).parents(".input-append").find("input").attr(
 							"disabled", true);
 				});
+		var subCount =0;
+		var tagCount =0;
 
 		$("#addSub")
 				.click(
-						<% subCount++;%>
 						function() {
+							subCount++;
 							
+							$("#count").find("#subCount").attr("value",subCount);
 							$("#secretT").find(".dates").find(".date:first").attr("id","fDate");
 							$("#secretT").find(".dates").find(".date:last").attr("id","tDate");
 							$("#contents").find("tfoot").append(
@@ -107,8 +115,9 @@
 		$(function() {
 
 			$("#addTag").click(
-					<% tagCount++; %>
 					function() {
+						tagCount++;
+						$("#count").find("#tagCount").attr("value",tagCount);
 						$("#tags").append($("#tagSecret").html());
 						$(".input-append").find(".btn:first").click(
 								function() {
@@ -135,12 +144,13 @@
 			<fieldset>
 				<legend>토론관리</legend>
 				<label class="name">주제 :</label>
-				<p id="subject">${model.nowDebate.getMTopic()}</p>
-				<br /> <label class="name">태그 :</label>
+				<input type="text" name="mTopic" id="subject" value="${model.nowDebate.getMTopic()}">
+				<br /><!-- <label class="name">태그 :</label>
 				<button type="button" name="tag" id="addTag">
 					<i class="icon-plus"></i>
 				</button>
 				<br />
+				
 				<div id="tags">
 					<c:forEach var="tag" items="${model.nowDebate.getTags()}">
 						<div class="input-append">
@@ -154,6 +164,7 @@
 					</c:forEach>
 
 				</div>
+				-->
 
 
 				<div id="sub_subject">
@@ -198,11 +209,11 @@
 				</div>
 				
 				
-				<div id="count" style="display: none;">
-					<input type="text" id="tagCount" name="tagCount"> <input type="text" id="subCount"
+				<div id="count"  style="display: none;">
+					<input type="text" id="tagCount" name="tagCount">
+					<input type="text" id="subCount"
 						name="subCount">
 				</div>
-				
 				
 			</fieldset>
 		</form>
