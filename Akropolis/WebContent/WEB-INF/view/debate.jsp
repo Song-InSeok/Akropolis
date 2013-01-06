@@ -372,7 +372,7 @@
 										<input type="hidden" name = "mtmt" value="${debatemanager.mt.mt_id }"/>
 										<input type="hidden" name = "stst" value="${debatemanager.st }"/>
 										<input type="hidden" name = "post_type" value="delete_op"/>
-										<button type="submit" name="opop" value="${opi.opinion_id }" id="del${opi.opinion_id }" class="btn btn-mini btn-danger delete_btn disabled">
+										<button type="submit" name="opop" value="${opi.opinion_id }" id="del${opi.opinion_id }" class="btn btn-mini btn-danger delete_btnR disabled">
 										<a class="icon-remove icon-white remove_icon"></a></button>
 										</form>
 									</c:if>
